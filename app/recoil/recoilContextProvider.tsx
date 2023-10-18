@@ -1,0 +1,12 @@
+"use client";
+
+import { RecoilRoot, atom } from "recoil";
+
+export default function RecoidContextProvider({ children }: { children: React.ReactNode }) {
+  return <RecoilRoot>{children}</RecoilRoot>;
+}
+
+export const textState = atom({
+  key: 'textState',
+  default: ''
+})
