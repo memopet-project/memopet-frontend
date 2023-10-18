@@ -1,0 +1,11 @@
+name: cosy pet workflow
+on:
+  push:
+    branches: 
+      - main
+      - develop
+  pull_request: 
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    
