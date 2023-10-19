@@ -1,0 +1,27 @@
+name: cosy pet workflow
+on:
+  pull_request:  
+    branches: 
+      - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout #git 명령어들 한번에 처리 ex)init, config, fetch ...
+        uses: actions/checkout@v4
+
+      - name: Install and Build
+        uses: actions/setup-node@v1
+      - run: npm install
+      - run: npm build
+
+  docker:
+    needs: build-and-deploy #build-and-deploy가 끝난 후 진행됨
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Docker setting
+        run: docker build -t cosy-pet .
