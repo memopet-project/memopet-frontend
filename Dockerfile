@@ -8,10 +8,10 @@ FROM node:20-alpine AS base
 WORKDIR /app
 
 #의존성 설치를 위해 package.json을 담음
-COPY package.json ./
+COPY package.json package-lock.json ./
 
 #npm install
-RUN npm install
+RUN npm ci
 
 #이미지를 빌드한 디렉토리의 모든 파일들을 app 디렉토리(컨테이너)로 복사
 COPY . .
