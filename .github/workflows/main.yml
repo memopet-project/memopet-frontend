@@ -6,16 +6,24 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest #가상 컴퓨터 사양
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout 
+      - name: Checkout #git 명령어들 한번에 처리 ex)init, config, fetch ...
         uses: actions/checkout@v4
-      
+
       - name: Install and Build
         uses: actions/setup-node@v1
-      - run : npm cache clean --force
-      - run : rm -rf node_modules package-lock.json
       - run: npm install
       - run: npm build
       
       # - name: Deploy
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Docker setting
+        run: docker-compose up --build
+
