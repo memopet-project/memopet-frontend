@@ -1,4 +1,4 @@
-#명령어: docker-compose up --build
+#명령어: docker-compose up
 services:
   app:
     build:
