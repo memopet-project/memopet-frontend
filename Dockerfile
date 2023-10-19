@@ -1,4 +1,5 @@
 #도커파일 시작 - 위에서부터 순서대로 진행됨
+#명령어: docker build -t cosy-pet .
 
 #이미지에 쓰일 노드 버전 in 도커서버
 FROM node:20-alpine AS base

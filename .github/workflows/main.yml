@@ -15,11 +15,9 @@ jobs:
         uses: actions/setup-node@v1
       - run: npm install
       - run: npm build
-      
-      # - name: Deploy
 
   docker:
-    needs: build-and-deploy
+    needs: build-and-deploy #build-and-deploy가 끝난 후 진행됨
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,5 +25,3 @@ jobs:
 
       - name: Docker setting
         run: docker build -t cosy-pet .
-
-
