@@ -24,6 +24,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@storybook/addon-designs": "^7.0.5",
     "@storybook/addon-essentials": "^7.5.0",
     "@storybook/addon-interactions": "^7.5.0",
     "@storybook/addon-links": "^7.5.0",
