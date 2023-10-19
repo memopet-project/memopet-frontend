@@ -19,12 +19,13 @@ jobs:
       # - name: Deploy
 
   docker:
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Docker setting
-        run: docker-compose up --build
-        
+        run: docker-compose up
+
 
