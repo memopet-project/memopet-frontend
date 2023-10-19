@@ -1,5 +1,5 @@
 import './globals.css'
-import RecoidContextProvider from './recoil/recoilContextProvider'
+import RecoilContextProvider from './recoil/recoilContextProvider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,9 +14,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <RecoidContextProvider>
+        <RecoilContextProvider>
           {children}
-        </RecoidContextProvider>
+        </RecoilContextProvider>
       </body>
     </html>
   )
