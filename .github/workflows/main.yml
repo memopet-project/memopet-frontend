@@ -1,11 +1,19 @@
 name: cosy pet workflow
 on:
-  push:
+  push: 
     branches: 
-      - main
-      - develop
-  pull_request: 
+      - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
+
 jobs:
-  echo:
-    runs-on: ubuntu-latest
-    
+  build-and-deploy:
+    runs-on: ubuntu-latest #가상 컴퓨터 사양
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+      
+      - name: Install and Build
+        uses: actions/setup-node@v1
+      - run: npm install
+      - run: npm run build
+      
+      # - name: Deploy
