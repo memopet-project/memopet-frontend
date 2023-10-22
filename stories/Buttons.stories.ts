@@ -24,7 +24,7 @@ export const Warning:Story = {
 }
 
 /** 
- * figma 대신 figspec이라는 타입을 사용했습니다! css 속성이 더 세밀하게 보여요!
+ * figma 대신 figspec이라는 타입을 사용했습니다! css 속성이 더 세밀하게 보여요
  * url은 1.figma에서 컴포넌트 클릭 2. share 버튼 클릭 3. copy link에서 가지고 오시면 됩니다
  * https://www.figma.com/developers/api#access-tokens 에서 토큰 받아서 사용하시면 됩니다
  *  */
