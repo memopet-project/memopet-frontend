@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_972b75f4ac5b46d"
   },
   "dependencies": {
     "@types/node": "20.8.6",
@@ -34,5 +35,7 @@
     "@storybook/react": "^7.5.0",
     "@storybook/testing-library": "^0.2.2",
     "storybook": "^7.5.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "cosy-animal@0.1.0"
 }
