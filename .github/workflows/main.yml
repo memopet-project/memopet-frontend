@@ -1,8 +1,9 @@
 name: cosy pet workflow
-on:
+on: 
+  # push
   pull_request:  
-    branches: 
-      - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
+   branches: 
+     - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
 
 jobs:
   build-and-deploy:
@@ -13,8 +14,17 @@ jobs:
 
       - name: Install and Build
         uses: actions/setup-node@v1
-      - run: npm install
-      - run: npm build
+      - name: 의존성 설치
+        run: npm install
+      - name: 빌드
+        run: npm build
+      - name: 테스트
+        run: npm test
+      - name: 머지유무
+        run: if [npm test === false]; then
+              echo "테스트 도중 오류가 발생했습니다"
+              exit 1
+            fi
 
   docker:
     needs: build-and-deploy #build-and-deploy가 끝난 후 진행됨

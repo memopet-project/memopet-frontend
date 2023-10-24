@@ -3,7 +3,7 @@ import { textState } from '@/app/recoil/recoilContextProvider'
 import { useRecoilState } from 'recoil'
 
 /** 리코일은 클라이언트 컴포넌트일때만 동작함 */
-const page = () => {
+const Page = () => {
   const [text, setText] = useRecoilState(textState)
   const onChangeText = (e:React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
@@ -19,4 +19,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
