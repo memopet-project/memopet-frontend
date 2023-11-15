@@ -21,7 +21,7 @@ jobs:
           NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         run: |
-          echo 무야호!
+          echo 토큰값 : $NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
           echo $NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN >> .env
           echo projectToken=$CHROMATIC_PROJECT_TOKEN >> .env
 
