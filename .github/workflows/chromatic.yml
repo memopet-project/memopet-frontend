@@ -1,18 +1,14 @@
 # Workflow name
 name: 'Chromatic Deployment'
 
-# Event for the workflow
 on: 
   push:   
     branches: 
       - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
 
-# List of jobs
 jobs:
   test:
-    # Operating System
     runs-on: ubuntu-latest
-    # Job steps
     steps:
       - uses: actions/checkout@v1
 
@@ -27,7 +23,6 @@ jobs:
         run: yarn
       - uses: chromaui/action@v1
         name: deploy chromatic
-        # Options required for Chromatic's GitHub Action
         with:
           #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
