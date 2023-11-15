@@ -33,7 +33,7 @@ Primary.parameters = {
   design: {
     type: 'figspec',
     url: 'https://www.figma.com/file/ZYSDCk1qmBQ8CFhHZBYPLG/JS-Project?type=design&node-id=11%3A7&mode=design&t=iNtpjRcL7BhD0gRd-1',
-    accessToken: "figd_AkjabgaEZDojm4_r3JaRjGB4gp2hpXLcdcMXk073"
+    accessToken: "figd_DxC8x8Hzd-1c2nj7fQ8w1mOEAPm-Zp5kn9lKBczN"
   }
 }
 Warning.parameters = {
