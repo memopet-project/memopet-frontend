@@ -18,7 +18,7 @@ jobs:
 
       - name: Generate Environment Variables
         run: |
-          echo NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN=$NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
+          echo $NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN >> .env
           echo projectToken=$CHROMATIC_PROJECT_TOKEN
         env: 
           NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN }}
