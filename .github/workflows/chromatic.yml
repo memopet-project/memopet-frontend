@@ -19,15 +19,16 @@ jobs:
       - name: Generate Environment Variables
         run: |
           echo NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN=$NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
+          echo projectToken=$CHROMATIC_PROJECT_TOKEN
         env: 
           NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN }}
 
-      - name: install library
-        run: yarn
-      - uses: chromaui/action@v1
-        name: deploy chromatic
-        # Options required for Chromatic's GitHub Action
-        with:
-          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: install library
+      #   run: yarn
+      # - uses: chromaui/action@v1
+      #   name: deploy chromatic
+      #   # Options required for Chromatic's GitHub Action
+      #   with:
+      #     #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
