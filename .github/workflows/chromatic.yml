@@ -3,7 +3,7 @@ name: 'Chromatic Deployment'
 
 # Event for the workflow
 on: 
-  pull_request:  
+  push:   
     branches: 
       - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
 
