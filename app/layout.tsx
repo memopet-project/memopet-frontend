@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className='bg-surface'>
         <RecoilContextProvider>
           {children}
         </RecoilContextProvider>
