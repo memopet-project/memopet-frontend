@@ -9,7 +9,7 @@ const Page = () => {
     setText(e.target.value)
   }
   return (
-    <div>
+    <div className='font-sans'>
       리코일테스트
       <div>
         <input type='text' value={text} onChange={onChangeText} className='bg-slate-300'/>

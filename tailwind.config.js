@@ -12,6 +12,19 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        pretendard: [
+          'Pretendard'
+        ],
+        header: [
+          'Newake'
+        ]
+      },
+      colors: {
+        'mainRed': '#F15139',
+        'subRed' : '#FFEDEA',
+        'surface': '#F7F5F1'
+      }
     },
   },
   plugins: [],

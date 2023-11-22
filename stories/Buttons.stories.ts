@@ -31,9 +31,9 @@ export const Warning:Story = {
 
 Primary.parameters = {
   design: {
-    type: 'figspec',
-    url: 'https://www.figma.com/file/ZYSDCk1qmBQ8CFhHZBYPLG/JS-Project?type=design&node-id=11%3A7&mode=design&t=iNtpjRcL7BhD0gRd-1',
-    accessToken: "figd_DxC8x8Hzd-1c2nj7fQ8w1mOEAPm-Zp5kn9lKBczN"
+    type: 'figma',
+    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=672%3A1411&mode=design&t=7g9LbMOjRZg8x5bV-1',
+    accessToken: process.env.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
   }
 }
 Warning.parameters = {
