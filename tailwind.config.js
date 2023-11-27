@@ -23,7 +23,11 @@ module.exports = {
       colors: {
         'mainRed': '#F15139',
         'subRed' : '#FFEDEA',
-        'surface': '#F7F5F1'
+        'surface': '#F7F5F1',
+        'maingray' : '#D4D4D4',
+        'textGray' : '#A3A3A3',
+        'textBlack' : '#171717',
+        'borderBlack' : '#404040',
       }
     },
   },
