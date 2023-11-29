@@ -29,6 +29,7 @@ module.exports = {
         'textGray' : '#A3A3A3',
         'textBlack' : '#171717',
         'borderBlack' : '#404040',
+        'borderGray': '#E5E5E5',
         'textdarkgray': '#737373',
       }
     },

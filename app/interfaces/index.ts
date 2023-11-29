@@ -4,3 +4,8 @@ export interface ResponseData {
   error?: string
   message?: string
 }
+
+export interface commentInfoType {
+  commentor: string,
+  comment: string
+}

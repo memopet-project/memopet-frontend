@@ -1,19 +1,16 @@
-import ReplyComponent from '../../app/components/comment/reply'
+import CommentAll from '../../app/components/modal/commentAll'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof ReplyComponent> = {
-  title: '요소/답안',
-  component: ReplyComponent,
+const meta: Meta<typeof CommentAll> = {
+  title: '모달/코멘트',
+  component: CommentAll,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof ReplyComponent>
+type Story = StoryObj<typeof CommentAll>
 
 export const Reply:Story = {
-  // args: {
-  //   inputValue:'안녕 코코야 ^_^'
-  // }
 }
 
 /** 
@@ -25,7 +22,7 @@ export const Reply:Story = {
 Reply.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=672%3A1861&mode=design&t=aCudXqfFgyflH6ix-1',
+    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=672%3A1411&mode=dev',
     accessToken: process.env.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
   }
 }
