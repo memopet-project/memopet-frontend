@@ -1,7 +1,7 @@
 type ButtonProps = {
   text: string
   bgColor: "white" | "gray" | "red"
-  marginRight?: string
+  marginRight?: boolean
 }
 const RoundedBtn = ({
   text,
@@ -10,7 +10,7 @@ const RoundedBtn = ({
 }:ButtonProps) => {
   return (
     <div>
-      <button className={`px-4 py-0 rounded-full border border-solid text-sm font-medium h-8 font-pretendard mr-[${marginRight}]
+      <button className={`px-4 py-0 rounded-full border border-solid text-sm font-medium h-8 font-pretendard ${marginRight ? 'mr-1' : ''}
         ${
           bgColor==='red' ? 
             'bg-mainRed text-white' :

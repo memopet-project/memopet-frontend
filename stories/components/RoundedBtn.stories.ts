@@ -1,8 +1,8 @@
-import RoundedBtn from '@/app/components/button/roundedBtn'
+import RoundedBtn from '../../app/components/button/roundedBtn'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof RoundedBtn> = {
-  title: '둥근 버튼',
+  title: '요소/둥근 버튼',
   component: RoundedBtn,
   tags: ['autodocs'],
 }
