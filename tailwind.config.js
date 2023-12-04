@@ -31,6 +31,8 @@ module.exports = {
         'borderBlack' : '#404040',
         'borderGray': '#E5E5E5',
         'textdarkgray': '#737373',
+        'hashTag': '#F5F5F5',
+        
       }
     },
   },
