@@ -1,5 +1,6 @@
 import './globals.css'
 import RecoilContextProvider from './recoil/recoilContextProvider'
+import "../public/font/style.css"
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className='bg-surface'>
         <RecoilContextProvider>
           {children}
         </RecoilContextProvider>

@@ -12,6 +12,28 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        pretendard: [
+          'Pretendard'
+        ],
+        header: [
+          'Newake'
+        ]
+      },
+      colors: {
+        'mainRed': '#F15139',
+        'subRed' : '#FFEDEA',
+        'surface': '#F7F5F1',
+        'surfaceComment' : '#FAFAFA',
+        'maingray' : '#D4D4D4',
+        'textGray' : '#A3A3A3',
+        'textBlack' : '#171717',
+        'borderBlack' : '#404040',
+        'borderGray': '#E5E5E5',
+        'textdarkgray': '#737373',
+        'hashTag': '#F5F5F5',
+        
+      }
     },
   },
   plugins: [],

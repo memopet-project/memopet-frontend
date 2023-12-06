@@ -1,0 +1,31 @@
+# Workflow name
+name: 'Chromatic Deployment'
+
+on: 
+  #push:   
+  pull_request:
+    branches: 
+      - temp # 임시로 yml 비활성화
+      # - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: .env setting
+        env: 
+          NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: |
+          echo NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN=$NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN >> .env
+
+      - name: install library
+        run: yarn
+      - uses: chromaui/action@v1
+        name: deploy chromatic
+        with:
+          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
