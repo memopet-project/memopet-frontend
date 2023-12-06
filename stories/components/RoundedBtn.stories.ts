@@ -1,4 +1,4 @@
-import RoundedBtn from '../../app/components/button/roundedBtn'
+import RoundedBtn from '@/app/components/button/roundedBtn'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof RoundedBtn> = {

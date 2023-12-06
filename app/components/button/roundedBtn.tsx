@@ -1,25 +1,26 @@
-type ButtonProps = {
+type buttonProps = {
   text: string
   bgColor: "white" | "gray" | "red"
   marginRight?: boolean
   onClick?: ()=>void
 }
+
 const RoundedBtn = ({
   text,
   bgColor,
   marginRight,
   onClick
-}:ButtonProps) => {
+}:buttonProps) => {
   return (
     <div>
       <button 
         className={`px-4 py-0 rounded-full border border-solid text-sm font-medium h-8 font-pretendard ${marginRight ? 'mr-1' : ''}
           ${
             bgColor==='red' ? 
-              'bg-mainRed text-white' :
+              'bg-red05 text-white' :
             bgColor==='gray' ? 
-              'bg-maingray text-white' 
-            : 'bg-white text-[#404040] border-maingray'} `
+              'bg-gray03 text-white' 
+            : 'bg-white text-[#404040] border-gray03'} `
           }
         onClick={onClick}
       >

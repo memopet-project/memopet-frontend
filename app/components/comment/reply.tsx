@@ -43,7 +43,7 @@ const ReplyComponent = ({
   return (
     <div className="w-full font-pretendard">
       <input 
-        className="border border-solid border-maingray py-[14px] px-3 w-full bg-white outline-none font-pretendard" 
+        className="border border-solid border-gray03 py-[14px] px-3 w-full bg-white outline-none font-pretendard" 
         placeholder="따뜻한 한마디를 남겨주세요" 
         onChange={handleChangeInput}
         value={inputVal}
@@ -53,7 +53,7 @@ const ReplyComponent = ({
         <RoundedBtn text="취소" bgColor="white" marginRight={true} />
         <RoundedBtn text="남기기" bgColor={isInput ? "red" : 'gray' } onClick={submitReply} />
       </div>
-      <div className="font-normal text-[12px] text-textGray mt-4 tracking-[-0.25px] leading-6">비방·비하·욕설이 담긴 글은 통보 없이 삭제될 수 있습니다.</div>
+      <div className="font-normal text-[12px] text-gray04 mt-4 tracking-[-0.25px] leading-6">비방·비하·욕설이 담긴 글은 통보 없이 삭제될 수 있습니다.</div>
     </div>
   )
 }

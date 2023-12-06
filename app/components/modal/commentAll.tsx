@@ -22,10 +22,10 @@ const CommentAll = () => {
   return (
     <div className="border border-solid px-6 py-8 flex flex-col gap-6 bg-white">
       <div className="items-center text-2xl font-bold">
-        <span className="text-borderBlack">따뜻한 한마디</span>
-        <span className="text-mainRed ml-2">{commentInfo.length}</span>
+        <span className="text-gray07">따뜻한 한마디</span>
+        <span className="text-red05 ml-2">{commentInfo.length}</span>
       </div>
-      <section className="p-6 w-full gap-6 bg-surfaceComment flex flex-col max-h-[480px] overflow-y-scroll">
+      <section className="p-6 w-full gap-6 bg-grayBlur flex flex-col max-h-[480px] overflow-y-scroll">
         {
           commentInfo.map((commentInfo, i)=>{
            return (
