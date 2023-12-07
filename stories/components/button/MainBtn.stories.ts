@@ -13,6 +13,7 @@ type Story = StoryObj<typeof MainBtn>
 export const Example:Story = {
   args: {
     text:'메인 버튼',
+    buttonType: 'gray01' || 'gray02' || 'lightRed01' || 'lightRed02' || 'red01' || 'red02'
   }
 }
 
