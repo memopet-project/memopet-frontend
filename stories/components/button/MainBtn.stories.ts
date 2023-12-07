@@ -5,6 +5,13 @@ const meta: Meta<typeof MainBtn> = {
   title: '버튼/메인 버튼',
   component: MainBtn,
   tags: ['autodocs'],
+  argTypes: {
+    buttonType: {
+      description: '버튼',
+      control: 'radio',
+      options: ['gray01' , 'gray02' , 'lightRed01' , 'lightRed02' , 'red01' , 'red02']
+    }
+  }
 }
 
 export default meta
@@ -13,7 +20,7 @@ type Story = StoryObj<typeof MainBtn>
 export const Example:Story = {
   args: {
     text:'메인 버튼',
-    buttonType: 'gray01' || 'gray02' || 'lightRed01' || 'lightRed02' || 'red01' || 'red02'
+    buttonType: 'gray01'
   }
 }
 
