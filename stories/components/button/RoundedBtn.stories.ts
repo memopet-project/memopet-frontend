@@ -5,6 +5,12 @@ const meta: Meta<typeof RoundedBtn> = {
   title: '버튼/둥근 버튼',
   component: RoundedBtn,
   tags: ['autodocs'],
+  argTypes: {
+    buttonType: {
+      control: 'select',
+      options: ['red01', 'red02', 'gray01','gray02', 'white01', 'white02']
+    }
+  }
 }
 
 export default meta

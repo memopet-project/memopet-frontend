@@ -8,7 +8,7 @@ const meta: Meta<typeof MainBtn> = {
   argTypes: {
     buttonType: {
       description: '버튼',
-      control: 'radio',
+      control: 'select',
       options: ['gray01' , 'gray02' , 'lightRed01' , 'lightRed02' , 'red01' , 'red02']
     }
   }

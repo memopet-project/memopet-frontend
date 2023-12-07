@@ -5,12 +5,21 @@ const meta: Meta<typeof CheckBtn> = {
   title: '버튼/체크 버튼',
   component: CheckBtn,
   tags: ['autodocs'],
+  argTypes: {
+    buttonType: {
+      control: 'radio',
+      options: ['checked', 'default', 'disabled']
+    }
+  }
 }
 
 export default meta
 type Story = StoryObj<typeof CheckBtn>
 
 export const Example:Story = {
+  args:{
+    buttonType: 'checked'
+  }
 }
 
 

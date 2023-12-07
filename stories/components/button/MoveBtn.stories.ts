@@ -5,6 +5,16 @@ const meta: Meta<typeof ProfileMove> = {
   title: '버튼/이동',
   component: ProfileMove,
   tags: ['autodocs'],
+  argTypes: {
+    direction: {
+      control: 'radio',
+      options: ['prev', 'forward']
+    },
+    filled: {
+      control: 'select',
+      options: ['white' , 'gray' , 'lightRed' , 'red' , 'darkRed']
+    }
+  }
 }
 
 export default meta
@@ -13,6 +23,8 @@ type Story = StoryObj<typeof ProfileMove>
 export const Example:Story = {
   args: {
     text:'이동 버튼',
+    direction:'prev',
+
   }
 }
 

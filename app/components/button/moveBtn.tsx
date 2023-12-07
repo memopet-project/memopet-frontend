@@ -1,7 +1,7 @@
 type buttonProps = {
   text: string
   direction: 'prev' | 'forward'
-  filled : 'white' | 'lightGray' | 'gray' | 'darkGray' | 'lightRed' | 'red' | 'darkRed'
+  filled : 'white' |  'gray' | 'lightRed' | 'red' | 'darkRed'
   textColor: 'gray' | 'black' | 'red' | 'white'
   border?: boolean
   onClick?: ()=>void
@@ -30,11 +30,7 @@ const MoveBtn = ({
     switch(filled){
       case 'white':
         return "";
-      case 'lightGray' :
-        return 'bg-gray0.5';
       case 'gray' :
-        return 'bg-gray0.5';
-      case 'darkGray' :
         return 'bg-gray0.5';
       case 'lightRed':
         return 'bg-redBlur';
