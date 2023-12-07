@@ -13,6 +13,13 @@ const meta: Meta<typeof ProfileMove> = {
     filled: {
       control: 'select',
       options: ['white' , 'gray' , 'lightRed' , 'red' , 'darkRed']
+    },
+    textColor: {
+      control: 'select',
+      options:  ['gray' , 'black' , 'red' , 'white']
+    },
+    border: {
+      control: 'boolean',
     }
   }
 }
@@ -22,9 +29,10 @@ type Story = StoryObj<typeof ProfileMove>
 
 export const Example:Story = {
   args: {
-    text:'이동 버튼',
-    direction:'prev',
-
+    text: '이동 버튼',
+    direction: 'prev',
+    filled: 'lightRed',
+    textColor: 'red',
   }
 }
 
