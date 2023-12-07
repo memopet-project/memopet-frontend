@@ -14,3 +14,35 @@ body{
 *::-webkit-scrollbar{
   display:none;
 }
+
+/* Newake */
+@font-face {
+  font-family: 'Newake';
+  src: url('../public/font/Newake-Font.otf') format('opentype');
+  font-weight: 400;
+}
+
+/* Pretendard */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-Regular.woff') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-Medium.woff') format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-SemiBold.woff') format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-Bold.woff') format('opentype');
+  font-weight: 700;
+}

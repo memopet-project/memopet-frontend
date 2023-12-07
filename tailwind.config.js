@@ -14,7 +14,7 @@ module.exports = {
       },
       fontFamily: {
         pretendard: [
-          'Pretendard'
+          'pretendard'
         ],
         header: [
           'Newake'
@@ -22,6 +22,7 @@ module.exports = {
       },
       colors: {
         'redBlur' : '#FFEDEA',
+        'redDark': '#DB4B35',
         'red01' : '#FCDCD7',
         'red02' : '#FAB9B1',
         'red03' : '#F69888',
@@ -31,7 +32,7 @@ module.exports = {
         'red07' : '#913121',
         'red08' : '#612017',
         'red09' : '#30100A',
-
+        
         'blueBlur': '#E9EDF8',
         'blue01' : '#D3D9F0',
         'blue02' : '#A7B4E1',
@@ -44,6 +45,7 @@ module.exports = {
         'blue09' : '#070D24',
 
         'grayBlur': '#FAFAFA',
+        'gray0.5': '#F3F3F3',
         'gray01': '#F5F5F5',
         'gray02': '#E5E5E5',
         'gray03': '#D4D4D4',

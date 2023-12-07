@@ -50,8 +50,8 @@ const ReplyComponent = ({
         onKeyDown={handleKeyDown}
       />
       <div className="pt-2 flex items-center justify-end">
-        <RoundedBtn text="취소" bgColor="white" marginRight={true} />
-        <RoundedBtn text="남기기" bgColor={isInput ? "red" : 'gray' } onClick={submitReply} />
+        <RoundedBtn text="취소" buttonType="red01" marginRight={true} />
+        <RoundedBtn text="남기기" buttonType={isInput ? "red01" : 'gray01' } onClick={submitReply} />
       </div>
       <div className="font-normal text-[12px] text-gray04 mt-4 tracking-[-0.25px] leading-6">비방·비하·욕설이 담긴 글은 통보 없이 삭제될 수 있습니다.</div>
     </div>

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import CommentEach from "../comment/commentEach"
 import ReplyComponent from "../comment/reply"
@@ -20,7 +22,7 @@ const CommentAll = () => {
     setCommentInfo([...commentInfo, newComment])
   }
   return (
-    <div className="border border-solid px-6 py-8 flex flex-col gap-6 bg-white">
+    <div className="border border-solid px-6 py-8 flex flex-col gap-6 bg-white font-pretendard">
       <div className="items-center text-2xl font-bold">
         <span className="text-gray07">따뜻한 한마디</span>
         <span className="text-red05 ml-2">{commentInfo.length}</span>

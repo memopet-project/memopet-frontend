@@ -14,13 +14,13 @@ const CommentInput = () => {
     <div>
       <input className="mb-2" onChange={handleChangeInput}/>
       <div className="flex justify-end">
-        <RoundedBtn bgColor="white" text="취소" marginRight={true}/>
+        <RoundedBtn buttonType="white01" text="취소" marginRight={true}/>
         {
          inputVal.length === 0 
          ?
-         <RoundedBtn bgColor="gray" text="등록" />
+         <RoundedBtn buttonType="gray01" text="등록" />
          :
-         <RoundedBtn bgColor="red" text="등록" />
+         <RoundedBtn buttonType="red01" text="등록" />
         }
       </div>
     </div>
