@@ -15,6 +15,34 @@ body{
   display:none;
 }
 
+/* photo carousel */
+.swiper-button-next {
+  display: none;
+}
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-prev {
+  display: none;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
+.swiper-slide {
+  display:flex !important;
+  align-items: center;
+}
+.swiper-pagination-bullet {
+  background: #e5e5e5 !important;
+  opacity: 0.5 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #e5e5e5 !important;
+  opacity: 1 !important;
+}
+
 /* Newake */
 @font-face {
   font-family: 'Newake';
@@ -46,3 +74,4 @@ body{
   src: url('../public/font/Pretendard-Bold.woff') format('opentype');
   font-weight: 700;
 }
+
