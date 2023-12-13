@@ -28,7 +28,7 @@ const ReplyComponent = ({
     if(inputVal.length === 0){
       alert('댓글이 비어있습니다.')
     } else {
-      commentChange({commentor:'글쓴이', comment:inputVal})
+      commentChange({id:113, commentor:'글쓴이', comment:inputVal})
       setInputVal('')
     }
   };

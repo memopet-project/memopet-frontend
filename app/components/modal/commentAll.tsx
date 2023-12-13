@@ -9,12 +9,12 @@ import { commentInfoType } from "@/app/interfaces"
 const CommentAll = () => {
 
   let tempCommentInfo:commentInfoType[] = [
-    {'commentor': '콜리', 'comment': '안녕 코코야 ^_^'},
-    {'commentor': '소금이', 'comment': '안녕 코코야 :)'},
-    {'commentor': '몽구', 'comment': '저희 강아지도 올해 봄에 강아지별로 떠나갔어요. 마음 잘 추스리시길 바랍니다.. 위로의 말씀 전해요...'},
-    {'commentor': '코코', 'comment': '나랑 같은 이름이구나!'},
-    {'commentor': '후니', 'comment': '코코야 그곳에서 행복하렴!'},
-    {'commentor': '모래', 'comment': '우리 모래도 코코랑 꼭 닮은 왤시코기였는데,, 코코 사진 보면서 많이 생각나네요...'},
+    {id:1, 'commentor': '콜리', 'comment': '안녕 코코야 ^_^'},
+    {id:1, 'commentor': '소금이', 'comment': '안녕 코코야 :)'},
+    {id:1, 'commentor': '몽구', 'comment': '저희 강아지도 올해 봄에 강아지별로 떠나갔어요. 마음 잘 추스리시길 바랍니다.. 위로의 말씀 전해요...'},
+    {id:1, 'commentor': '코코', 'comment': '나랑 같은 이름이구나!'},
+    {id:1, 'commentor': '후니', 'comment': '코코야 그곳에서 행복하렴!'},
+    {id:1, 'commentor': '모래', 'comment': '우리 모래도 코코랑 꼭 닮은 왤시코기였는데,, 코코 사진 보면서 많이 생각나네요...'},
   ]
 
   const [commentInfo, setCommentInfo] = useState<commentInfoType[]>(tempCommentInfo)

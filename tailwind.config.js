@@ -62,6 +62,11 @@ module.exports = {
         'statusBlue' : '#36AAEB',
         'statusGreen': '#6BBB5D',
         'statusRed' : '#E73324'
+      },
+      transitionProperty: {
+        'height': 'height',
+        'maxHeight': 'maxHeight',
+        'padding': 'padding',
       }
     },
   },

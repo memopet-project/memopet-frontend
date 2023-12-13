@@ -6,8 +6,10 @@ export interface ResponseData {
 }
 
 export interface commentInfoType {
+  id:number,
   commentor: string,
-  comment: string
+  comment: string,
+  imgUrl?: string,
 }
 
 export interface commentActionStatus {
@@ -19,4 +21,10 @@ export interface buttonProps {
   bgColor: "white" | "gray" | "red"
   marginRight?: boolean
   onClick?: ()=>void
+}
+
+export interface userInfoType {
+  id:number,
+  nickname: string,
+  profileImg: string,
 }

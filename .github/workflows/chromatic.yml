@@ -2,11 +2,11 @@
 name: 'Chromatic Deployment'
 
 on: 
-  # push:   
-  pull_request:
+  push:   
+  # pull_request:
     branches: 
-      - temp # 임시로 yml 비활성화
-      # - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
+      # - temp # 임시로 yml 비활성화
+      - main #메인 브랜치에 푸시될 때마다 깃 action 활성화
 
 jobs:
   test:

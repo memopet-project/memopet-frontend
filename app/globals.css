@@ -30,10 +30,6 @@ body{
 .swiper-button-prev::after {
   display: none;
 }
-.swiper-slide {
-  display:flex !important;
-  align-items: center;
-}
 .swiper-pagination-bullet {
   background: #e5e5e5 !important;
   opacity: 0.5 !important;
@@ -42,6 +38,16 @@ body{
   background-color: #e5e5e5 !important;
   opacity: 1 !important;
 }
+
+.swiper-wrapper{
+  align-items: center;
+}
+
+.swiper-slide {
+  display: flex !important;
+  align-items: center;
+}
+
 
 /* Newake */
 @font-face {
