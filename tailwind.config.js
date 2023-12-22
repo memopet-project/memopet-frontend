@@ -61,7 +61,9 @@ module.exports = {
         'statusYellow' : '#F1B419',
         'statusBlue' : '#36AAEB',
         'statusGreen': '#6BBB5D',
-        'statusRed' : '#E73324'
+        'statusRed' : '#E73324',
+
+        'errorRed' : '#E43333',
       },
       transitionProperty: {
         'height': 'height',

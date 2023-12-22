@@ -5,6 +5,14 @@ const meta: Meta<typeof CommentInput> = {
   title: '코멘트/댓글작성',
   component: CommentInput,
   tags: ['autodocs'],
+  argTypes: {
+    inputType: {
+      control: {
+        type: 'select',
+        options: ['댓글', '게시판']
+      }
+    }
+  }
 }
 
 export default meta
@@ -12,7 +20,7 @@ type Story = StoryObj<typeof CommentInput>
 
 export const Example:Story = {
   args: {
-    status: '내글'
+    inputType: '댓글'
   }
 }
 
