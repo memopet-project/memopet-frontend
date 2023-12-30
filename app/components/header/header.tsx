@@ -29,7 +29,7 @@ const Header = () => {
           <div className="h-10 w-10 flex items-center justify-center">
             <CiSearch style={{'color':'black', ...iconStyle}}/>
           </div>
-          <button className="flex font-pretendard font-semibold text-white bg-mainRed px-5 py-1 w-36 rounded-full items-center justify-between">
+          <button className="flex font-pretendard font-semibold text-white bg-red05 px-5 py-1 w-36 rounded-full items-center justify-between">
             <GoArrowRight style={iconStyle}/> 추억 올리기
           </button>
           <div className="h-10 w-10 bg-black rounded-full"></div>

@@ -14,25 +14,61 @@ module.exports = {
       },
       fontFamily: {
         pretendard: [
-          'Pretendard'
+          'pretendard'
         ],
         header: [
           'Newake'
         ]
       },
       colors: {
-        'mainRed': '#F15139',
-        'subRed' : '#FFEDEA',
-        'surface': '#F7F5F1',
-        'surfaceComment' : '#FAFAFA',
-        'maingray' : '#D4D4D4',
-        'textGray' : '#A3A3A3',
-        'textBlack' : '#171717',
-        'borderBlack' : '#404040',
-        'borderGray': '#E5E5E5',
-        'textdarkgray': '#737373',
-        'hashTag': '#F5F5F5',
+        'redBlur' : '#FFEDEA',
+        'redDark': '#DB4B35',
+        'red01' : '#FCDCD7',
+        'red02' : '#FAB9B1',
+        'red03' : '#F69888',
+        'red04' : '#F47460',
+        'red05' : '#F15139',
+        'red06' : '#C2412E',
+        'red07' : '#913121',
+        'red08' : '#612017',
+        'red09' : '#30100A',
         
+        'blueBlur': '#E9EDF8',
+        'blue01' : '#D3D9F0',
+        'blue02' : '#A7B4E1',
+        'blue03' : '#7A8ED1',
+        'blue04' : '#4E69C2',
+        'blue05' : '#2243B3',
+        'blue06' : '#1B368F',
+        'blue07' : '#14286B',
+        'blue08' : '#0E1B48',
+        'blue09' : '#070D24',
+
+        'grayBlur': '#FAFAFA',
+        'gray0.5': '#F3F3F3',
+        'gray01': '#F5F5F5',
+        'gray02': '#E5E5E5',
+        'gray03': '#D4D4D4',
+        'gray04': '#A3A3A3',
+        'gray05': '#737373',
+        'gray06': '#525252',
+        'gray07': '#404040',
+        'gray08': '#262626',
+        'gray09': '#171717',
+
+        'surface': '#F8F8FB',
+
+        'statusYellow' : '#F1B419',
+        'statusBlue' : '#36AAEB',
+        'statusGreen': '#6BBB5D',
+        'statusRed' : '#E73324',
+
+        'errorRed' : '#E43333',
+      },
+      transitionProperty: {
+        'height': 'height',
+        'maxHeight': 'maxHeight',
+        'padding': 'padding',
       }
     },
   },

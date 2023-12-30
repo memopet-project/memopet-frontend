@@ -1,20 +1,18 @@
-import Article from '../../app/components/modal/article'
+import MovePictureBtn from '@/app/components/button/movePictureBtn'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof Article> = {
-  title: '모달/아티클',
-  component: Article,
+const meta: Meta<typeof MovePictureBtn> = {
+  title: '버튼/사진 이동',
+  component: MovePictureBtn,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof Article>
+type Story = StoryObj<typeof MovePictureBtn>
 
 export const Example:Story = {
-  // args: {
-  //   inputValue:'안녕 코코야 ^_^'
-  // }
 }
+
 
 /** 
  * figma 대신 figspec이라는 타입을 사용했습니다! css 속성이 더 세밀하게 보여요
@@ -25,7 +23,7 @@ export const Example:Story = {
 Example.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=704%3A1187&mode=dev',
+    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=1401%3A5770&mode=dev',
     accessToken: process.env.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
   }
 }

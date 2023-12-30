@@ -14,3 +14,70 @@ body{
 *::-webkit-scrollbar{
   display:none;
 }
+
+/* photo carousel */
+.swiper-button-next {
+  display: none;
+}
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-prev {
+  display: none;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
+.swiper-pagination-bullet {
+  background: #e5e5e5 !important;
+  opacity: 0.5 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #e5e5e5 !important;
+  opacity: 1 !important;
+}
+
+.swiper-wrapper{
+  align-items: center;
+}
+
+.swiper-slide {
+  display: flex !important;
+  align-items: center;
+}
+
+
+/* Newake */
+@font-face {
+  font-family: 'Newake';
+  src: url('../public/font/Newake-Font.otf') format('opentype');
+  font-weight: 400;
+}
+
+/* Pretendard */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-Regular.woff') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-Medium.woff') format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-SemiBold.woff') format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../public/font/Pretendard-Bold.woff') format('opentype');
+  font-weight: 700;
+}
+

@@ -15,9 +15,9 @@ const CommentEach = ({
       <div className="w-full flex flex-col">
         <div className="flex items-center">
           <div className="text-sm font-semibold mr-2">{commentor}</div>
-          <div className="text-xs text-textdarkgray">3분전</div>
+          <div className="text-xs text-gray05">3분전</div>
         </div>
-        <div className="text-textBlack font-normal text-sm">{comment}</div>
+        <div className="text-gray09 font-normal text-sm">{comment}</div>
       </div>
       <div className="flex items-center cursor-pointer">
         <HiOutlineDotsVertical />

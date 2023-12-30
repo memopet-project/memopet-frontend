@@ -1,20 +1,27 @@
-import Article from '../../app/components/modal/article'
+import CheckBtn from '@/app/components/button/checkBtn'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof Article> = {
-  title: '모달/아티클',
-  component: Article,
+const meta: Meta<typeof CheckBtn> = {
+  title: '버튼/체크 버튼',
+  component: CheckBtn,
   tags: ['autodocs'],
+  argTypes: {
+    buttonType: {
+      control: 'radio',
+      options: ['checked', 'default', 'disabled']
+    }
+  }
 }
 
 export default meta
-type Story = StoryObj<typeof Article>
+type Story = StoryObj<typeof CheckBtn>
 
 export const Example:Story = {
-  // args: {
-  //   inputValue:'안녕 코코야 ^_^'
-  // }
+  args:{
+    buttonType: 'checked'
+  }
 }
+
 
 /** 
  * figma 대신 figspec이라는 타입을 사용했습니다! css 속성이 더 세밀하게 보여요
@@ -25,7 +32,7 @@ export const Example:Story = {
 Example.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=704%3A1187&mode=dev',
+    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=1001%3A2986&mode=dev',
     accessToken: process.env.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
   }
 }

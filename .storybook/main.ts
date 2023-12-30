@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/nextjs";
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 
 const config: StorybookConfig = {
@@ -22,6 +21,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  staticDirs: ['../public'],
 
   async webpackFinal(config) {
     const imageRule = config.module?.rules?.find(rule => {
@@ -37,13 +37,16 @@ const config: StorybookConfig = {
     imageRule.exclude = /\.svg$/
 
     /** 절대경로 생성 */
+    if (config.resolve?.alias) {
+      config.resolve.alias['@'] = path.resolve(__dirname, '../');
+      config.resolve.alias['@app'] = path.resolve(__dirname, '../app');
+    }
     // if (config.resolve) {
     //   config.resolve.alias = {
     //     ...config.resolve?.alias,
-    //     '@/*': path.resolve(__dirname, '../*')
+    //     '@app': path.resolve(__dirname, '../../*')
     //   }
     // }
-
     /** svg파일을 storybook에도 적용시킴 */
     config.module?.rules?.push(
       {

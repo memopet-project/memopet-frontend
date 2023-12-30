@@ -1,19 +1,21 @@
-import Article from '../../app/components/modal/article'
+import CommentItem from '@/app/components/comment/item'
 import type { Meta, StoryObj } from '@storybook/react'
+import { commentActionStatus } from '@/app/interfaces'
 
-const meta: Meta<typeof Article> = {
-  title: '모달/아티클',
-  component: Article,
+const meta: Meta<typeof CommentItem> = {
+  title: '코멘트/아이템',
+  component: CommentItem,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof Article>
+type Story = StoryObj<typeof CommentItem>
 
-export const Example:Story = {
-  // args: {
-  //   inputValue:'안녕 코코야 ^_^'
-  // }
+
+export const Item:Story = {
+  args: {
+    status: '내글'
+  }
 }
 
 /** 
@@ -22,10 +24,10 @@ export const Example:Story = {
  * https://www.figma.com/developers/api#access-tokens 에서 토큰 받아서 사용하시면 됩니다.
  *  */
 
-Example.parameters = {
+Item.parameters = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=704%3A1187&mode=dev',
+    url: 'https://www.figma.com/file/75R7nErXHjHLca98qtOdqh/(23-11-22)MEMOPET?type=design&node-id=672%3A1861&mode=design&t=aCudXqfFgyflH6ix-1',
     accessToken: process.env.NEXT_PUBLIC_STORYBOOK_FIGMA_ACCESS_TOKEN
   }
 }

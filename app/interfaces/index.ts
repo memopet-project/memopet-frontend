@@ -6,6 +6,25 @@ export interface ResponseData {
 }
 
 export interface commentInfoType {
+  id:number,
   commentor: string,
-  comment: string
+  comment: string,
+  imgUrl?: string,
+}
+
+export interface commentActionStatus {
+  status : '로그아웃' | '로그인' | '내글'
+}
+
+export interface buttonProps {
+  text: string
+  bgColor: "white" | "gray" | "red"
+  marginRight?: boolean
+  onClick?: ()=>void
+}
+
+export interface userInfoType {
+  id:number,
+  nickname: string,
+  profileImg: string,
 }
