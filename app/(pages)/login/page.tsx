@@ -1,3 +1,4 @@
+import Header from '@/app/components/header/header'
 import Image from 'next/image'
 import React from 'react'
 
@@ -108,6 +109,7 @@ const images = [
 const Login = () => {
   return (
     <section className='w-[187.5rem] h-[87.5rem] bg-white relative'>
+      <Header />
       {images.map((img, idx) => (
         <div className={`${img.width} ${img.height} absolute ${img.top} ${img.left} p-20 overflow-hidden`} key={`login_${idx + 1}`}>
           <Image

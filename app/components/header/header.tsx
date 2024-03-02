@@ -1,12 +1,13 @@
 'use client'
 import { useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import { GoArrowRight } from "react-icons/go";
+import Search from "@/public/svg/search.svg";
+import Login from './login';
+import Logout from './logout';
 
 const Header = () => {
-  let iconStyle = {'width':'24px', 'height': '24px'};
+  let iconContainerClass = 'h-10 w-14 px-2 flex items-center justify-center cursor-pointer';
   const [scrollPosition, setScrollPosition] = useState('bg-transparent')
-  
+  const [login, setLogin] = useState(false)
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -15,25 +16,25 @@ const Header = () => {
         setScrollPosition('bg-transparent');
       }
       else {
-        setScrollPosition('bg-blue-100');
+        setScrollPosition('bg-[#FFFFFFCC]');
       }
     };
     window.addEventListener('scroll', handleScroll);
   },[])
 
+
   return (
-    <header className={`w-screen h-20 flex justify-center fixed left-0 right-0 ${scrollPosition}`}>
-      <div className="w-[1160px] items-center p-6 font-header flex justify-between">
-        memopet
-        <div className="h-10 w-[248px] flex gap-3">
-          <div className="h-10 w-10 flex items-center justify-center">
-            <CiSearch style={{'color':'black', ...iconStyle}}/>
-          </div>
-          <button className="flex font-pretendard font-semibold text-white bg-red05 px-5 py-1 w-36 rounded-full items-center justify-between">
-            <GoArrowRight style={iconStyle}/> 추억 올리기
-          </button>
-          <div className="h-10 w-10 bg-black rounded-full"></div>
-        </div>
+    <header className="w-screen flex justify-center sticky left-0 top-0 z-50">
+      <div className="w-[1160px] items-center px-4 py-5 flex justify-between">
+        <h1 className="text-gray07 font-header font-normal text-xl">
+          memopet
+        </h1>
+        <ul className={`font-pretendard flex items-center justify-end rounded-[99px] ${scrollPosition}`}>
+          <li className={iconContainerClass}>
+            <Search className="text-gray07" />
+          </li>
+          {login ? <Login iconContainerClass={iconContainerClass} /> : <Logout />}
+        </ul>
       </div>
     </header>
   )
