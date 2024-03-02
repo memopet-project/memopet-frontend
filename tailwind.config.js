@@ -16,6 +16,9 @@ module.exports = {
         pretendard: [
           'pretendard'
         ],
+        gothic: [
+          'KBO Dia Gothic'
+        ],
         header: [
           'Newake'
         ]
@@ -60,7 +63,7 @@ module.exports = {
 
         'statusYellow' : '#F1B419',
         'statusBlue' : '#36AAEB',
-        'statusGreen': '#6BBB5D',
+        'statusGreen': '#56BC44',
         'statusRed' : '#E73324',
 
         'errorRed' : '#E43333',
