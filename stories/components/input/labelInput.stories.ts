@@ -1,5 +1,6 @@
 import LabelInput from '@/app/components/input/labelInput'
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 
 const meta: Meta<typeof LabelInput> = {
   title: '팝업/회원가입/input',
@@ -30,16 +31,19 @@ const meta: Meta<typeof LabelInput> = {
 export default meta
 type Story = StoryObj<typeof LabelInput>
 
+let value = ''
+
 export const Example:Story = {
   args: {
     label: '이메일',
     discription: '*내 계정을 찾을 때 필요해요',
     type: 'email',
     placeholder: 'sample@email.com',
-    value: '',
+    value,
     validate: { status: false, msg: 'assistive message' },
     buttonLabel: '확인',
-    name: 'email'
+    name: 'email',
+    onChange: (v) => value = v
   }
 }
 

@@ -30,7 +30,10 @@ const SignUp = ({ handleSignUp }: Props) => {
       onBlur: () => {
         if (checkEmailType(email)) {
           setValidate({ email: { msg: '이메일을 정확히 입력해주세요.', status: false }})
+          return;
         }
+        
+        setValidate({ email: { msg: '', status: true }})
       }
     }
   ]
