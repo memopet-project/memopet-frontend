@@ -1,6 +1,6 @@
 import RoundedBtn from '../button/roundedBtn'
 
-import CloseSVG from '@/public/svg/close.svg'
+import CloseSVG from '@/public/svg/close_24.svg'
 import LinkSVG from '@/public/svg/link.svg'
 import TrashSVG from '@/public/svg/trash.svg'
 import { useState } from 'react'
@@ -37,7 +37,7 @@ const Popup = ({
   } else if (popupType==='삭제완료') {
     return (
       <div className='w-[320px] h-[160px] p-5 rounded-2xl font-pretendard border border-gray04'>
-        <div className='cursor-pointer flex justify-end'><CloseSVG /></div>
+        <div className='cursor-pointer flex justify-end'><CloseSVG className='text-gray09' /></div>
         <div className='flex justify-center mt-4 mb-2'><TrashSVG className='stroke-red05'/></div>
         <div className='flex justify-center text-gray07 font-normal text-base'>댓글이 삭제되었습니다.</div>
       </div>
