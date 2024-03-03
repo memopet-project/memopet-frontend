@@ -8,19 +8,21 @@ import { ChangeEvent, useEffect, useState } from 'react'
 
 type Props = {
   label: string;
-  discription?: string;
-  validate?: { msg: string; status: boolean | null };
   placeholder: string;
   type: HTMLInputElement['type'];
   value: HTMLInputElement['value'];
-  buttonLabel?: string;
   name: string;
+  validate: { msg: string; status: boolean | null };
+  labelClass?: string;
+  description?: string;
+  buttonLabel?: string;
+  hide?: boolean;
+  onChange: (value: ChangeEvent<HTMLInputElement>['target']['value']) => void;
   onClick?: () => void;
   onBlur?: () => void;
-  onChange: (value: ChangeEvent<HTMLInputElement>['target']['value']) => void;
 }
 
-const LabelInput = ({ label, validate, type, discription, value, placeholder, buttonLabel, onClick, name, onChange, onBlur }: Props) => {
+const LabelInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
   const textClass = 'font-pretendard text-[13px] font-normal'
   const iconClass = 'mr-1 w-4 h-4'
 
@@ -30,6 +32,8 @@ const LabelInput = ({ label, validate, type, discription, value, placeholder, bu
   const [colors, setColors] = useState('text-statusGreen')
   const [borders, setBorders] = useState('border-gray07')
   const [useSideSlot, setUseSideSlot] = useState(false)
+  
+  const initValidate = { msg: '', status: null }
 
   function handleClick() {
     if (type === 'password') {
@@ -37,15 +41,22 @@ const LabelInput = ({ label, validate, type, discription, value, placeholder, bu
       return;
     }
 
-    if (onClick) {
-      onClick
+    if (props.onClick) {
+      props.onClick()
     }
+  }
+
+  function handleChange(val: ChangeEvent<HTMLInputElement>['target']['value']) {
+    onChange(val)
+    setValidation(structuredClone(initValidate))
+    setColors('text-statusGreen')
+    setBorders('border-gray07')
   }
 
   useEffect(() => {
     setValidation(validate)
 
-    if (validate?.status === false) {
+    if (validate?.status === false) { // 유효성 검사 통과 실패 시, ui class 핸들링
       setColors('text-red05')
       setBorders('border-red05')
       return;
@@ -56,42 +67,36 @@ const LabelInput = ({ label, validate, type, discription, value, placeholder, bu
   }, [validate])
 
   useEffect(() => {
-    setUseSideSlot(!!buttonLabel || type === 'password')
+    setUseSideSlot(!!props.buttonLabel || type === 'password')
 
-  }, [buttonLabel, type])
-
-  function handleChange(val: ChangeEvent<HTMLInputElement>['target']['value']) {
-    onChange(val)
-    setValidation({ msg: '', status: null })
-    setColors('text-statusGreen')
-    setBorders('border-gray07')
-  }
+  }, [props.buttonLabel, type])
 
   useEffect(() => {
     setInputValue(value)
   }, [value])
 
   return (
-    <>
+    (props.hide === undefined || props.hide) && <fieldset>
       <p className='flex row flex-nowrap justify-between items-center mb-1'>
-        <span className='text-sm text-gray09 leading-[21px]'>
+        <span className={`text-sm text-gray09 leading-[21px] ${props.labelClass}`}>
           {label}
         </span>
-        {discription && <span className={`${textClass} text-gray05`}>
-          {discription}
+        {props.description && <span className={`${textClass} text-gray05`}>
+          {props.description}
         </span>}
       </p>
 
-      <div className={`justify-between rounded-md border py-[9.5px] px-3 flex w-full ${borders}`}>
+      <label className={`justify-between rounded-md border px-3 ${props.buttonLabel ? 'py-[9.5px]' : 'py-[13px]'} flex w-full ${borders}`}>
         <input
           placeholder={placeholder}
           type={inputType}
           value={inputValue}
           onChange={(e) => handleChange(e.target.value)}
-          onBlur={onBlur}
+          onBlur={props.onBlur}
           name={name}
           className='focus:border-none border-none focus:outline-none w-full'
         />
+        {((type !== 'password' && inputValue) || useSideSlot) && 
         <div className='flex items-center ml-2'>
           {
             (type !== 'password' && inputValue) && 
@@ -117,15 +122,16 @@ const LabelInput = ({ label, validate, type, discription, value, placeholder, bu
               {
                 type === 'password' 
                   ? (inputType === 'password' ? <VisibilityOff /> : <Visibility />) 
-                  : buttonLabel
+                  : props.buttonLabel
               }
             </button>
           }
         </div>
-      </div>
+        }
+      </label>
 
       {
-        (validation?.status !== null && validation !== undefined) &&
+        validation?.status !== null &&
         <p className={`flex row flex-nowrap items-center justify-start mt-1 text-[13px] ${colors}`}>
           {validation?.status === false
             ? <Error className={`${textClass} ${iconClass}`} />
@@ -133,7 +139,7 @@ const LabelInput = ({ label, validate, type, discription, value, placeholder, bu
           {validation.msg}
         </p>
       }
-    </>
+    </fieldset>
   )
 }
 
