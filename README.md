@@ -1,4 +1,4 @@
-# TODO LIST
+# 메모펫
 
 ![React](https://img.shields.io/badge/react-18.2.0-1E99FF.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-13.5.5-1E99FF.svg)
