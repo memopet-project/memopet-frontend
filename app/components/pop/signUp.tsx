@@ -1,9 +1,8 @@
-import ClipSVG from '@/public/svg/clipTop.svg'
-import Close from '@/public/svg/close_24.svg'
 import LabelInput from '../input/labelInput'
 import { ChangeEvent, useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
+import ClipPopupLayout from './clipPopupLayout'
 
 type Validate = {
   email: { msg: string, status: null | boolean },
@@ -142,9 +141,9 @@ const SignUp = ({ handleSignUp }: Props) => {
     },
   ]
 
-  const isConfirmed = useMemo(() => 
-    !!email && !!validate.email.status && !!authCode && !!validate.authCode.status, 
-  [email, authCode, validate.email.status, validate.authCode.status])
+  const isConfirmed = useMemo(() =>
+    !!email && !!validate.email.status && !!authCode && !!validate.authCode.status,
+    [email, authCode, validate.email.status, validate.authCode.status])
 
   const authEmail = async () => {
     console.log('인증요청');
@@ -154,12 +153,12 @@ const SignUp = ({ handleSignUp }: Props) => {
     }
 
     if (email === 'memopet@naver.com') { // test
-      setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false }}))
+      setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
       return
     }
 
-    setValidate((prev) => ({ 
-      ...prev, 
+    setValidate((prev) => ({
+      ...prev,
       email: { msg: '', status: true },
       authCode: { msg: '', status: null },
     }))
@@ -169,74 +168,67 @@ const SignUp = ({ handleSignUp }: Props) => {
   const checkAuthCode = async () => {
     console.log('인증확인');
     if (authCode === '1234') { // test
-      setValidate((prev) => ({ ...prev, authCode: { msg: '인증코드가 일치하지 않습니다.', status: false }}))
+      setValidate((prev) => ({ ...prev, authCode: { msg: '인증코드가 일치하지 않습니다.', status: false } }))
       return
     }
 
-    setValidate((prev) => ({ ...prev, authCode: { msg: '이메일이 인증되었습니다.', status: true }}))
+    setValidate((prev) => ({ ...prev, authCode: { msg: '이메일이 인증되었습니다.', status: true } }))
   }
 
   return (
-    <section className='fixed bg-[#0000004D] flex justify-center items-center top-0 left-0 w-full h-full z-50'>
-      <aside className='relative bg-white w-full max-w-[480px] h-fit max-h-[905px] min-h-fit rounded-2xl p-10 border border-gray07 shadow-[0px_4px_4px_0px_#00000040]'>
-        <ClipSVG className='absolute -top-[17px] -left-[14px]' />
-        <button className='absolute w-6 h-6 top-4 right-4' onClick={() => handleSignUp(false)}>
-          <Close className='text-gray09' />
-        </button>
-        <h1 className='text-gray09 text-[28px] font-medium leading-9 font-gothic mb-8'>회원가입</h1>
-        <form className='flex flex-col gap-6'>
-          {inputs.map((input) => (
-            <LabelInput
-              key={input.name}
-              label={input.label}
-              value={input.value}
-              placeholder={input.placeholder}
-              name={input.name}
-              type={input.type}
-              validate={input.validate}
-              labelClass={input?.labelClass}
-              hide={input?.hide}
-              description={input?.description}
-              onChange={input.onChange}
-              onBlur={input?.onBlur}
-            >
-              {input.name === 'email' && 
-                <button 
-                  type='button' 
-                  disabled={!input.value}
-                  className={buttonClass}
-                  onClick={authEmail}
-                >
-                  {
-                    isConfirmed
-                      ? '이메일 변경'
-                      : email && validate.email.status && validate.authCode.status === false
-                        ? '다시 요청'
-                        : '인증 요청'
-                  }
-                </button>}
-              {input.name === 'authCode' &&
-                <button 
-                  type='button'
-                  disabled={!input.value || isConfirmed}
-                  className={buttonClass}
-                  onClick={checkAuthCode}
-                >
-                  확인
-                </button>
-              }
-            </LabelInput>
-          ))}
-          <fieldset className='py-2'>
-            <label className='block text-gray09 text-base h-6 font-normal'>
-              <input type='checkbox'/>
-              <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
-            </label>
-          </fieldset>
-          <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
-        </form>
-      </aside>
-    </section>
+    <ClipPopupLayout handleClose={handleSignUp} title='회원가입'>
+      <form className='flex flex-col gap-6'>
+        {inputs.map((input) => (
+          <LabelInput
+            key={input.name}
+            label={input.label}
+            value={input.value}
+            placeholder={input.placeholder}
+            name={input.name}
+            type={input.type}
+            validate={input.validate}
+            labelClass={input?.labelClass}
+            hide={input?.hide}
+            description={input?.description}
+            onChange={input.onChange}
+            onBlur={input?.onBlur}
+          >
+            {input.name === 'email' &&
+              <button
+                type='button'
+                disabled={!input.value}
+                className={buttonClass}
+                onClick={authEmail}
+              >
+                {
+                  isConfirmed
+                    ? '이메일 변경'
+                    : email && validate.email.status && validate.authCode.status === false
+                      ? '다시 요청'
+                      : '인증 요청'
+                }
+              </button>}
+            {input.name === 'authCode' &&
+              <button
+                type='button'
+                disabled={!input.value || isConfirmed}
+                className={buttonClass}
+                onClick={checkAuthCode}
+              >
+                확인
+              </button>
+            }
+          </LabelInput>
+        ))}
+        <fieldset className='py-2'>
+          <label className='block text-gray09 text-base h-6 font-normal'>
+            <input type='checkbox' />
+            <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
+          </label>
+        </fieldset>
+        <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
+      </form>
+    </ClipPopupLayout>
   )
 }
 
