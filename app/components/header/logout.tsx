@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import SignUp from '../pop/signUp'
-import Login from '../pop/login'
+import EmailLogin from '../pop/emailLogin'
 
 const Logout = () => {
   const textClass="text-base leading-4 px-5 py-3"
@@ -28,7 +28,7 @@ const Logout = () => {
         </button>
       </li>
       {openSignup && <SignUp handleSignUp={handleSignUp} />}
-      {openLogin && <Login handleLogin={handleLogin} />}
+      {openLogin && <EmailLogin handleLogin={handleLogin} />}
     </>
   )
 }
