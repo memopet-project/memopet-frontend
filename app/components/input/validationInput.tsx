@@ -8,12 +8,12 @@ import Close from '@/public/svg/close_12.svg'
 import { type ChangeEvent, type ReactNode, useEffect, useState } from 'react'
 
 type Props = {
-  label: string;
   placeholder: string;
   type: HTMLInputElement['type'];
   value: HTMLInputElement['value'];
   name: string;
   validate: { msg: string; status: boolean | null };
+  label?: string;
   labelClass?: string;
   description?: string;
   hide?: boolean;
@@ -22,7 +22,7 @@ type Props = {
   children?: ReactNode;
 }
 
-const LabelInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
+const ValidationInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
   const textClass = 'font-pretendard text-[13px] font-normal'
   const iconClass = 'mr-1 w-4 h-4'
 
@@ -65,14 +65,14 @@ const LabelInput = ({ label, placeholder, validate, type, value, name, onChange,
 
   return (
     (props.hide === undefined || props.hide) && <fieldset>
-      <p className='flex row flex-nowrap justify-between items-center mb-1'>
+      {label && <p className='flex row flex-nowrap justify-between items-center mb-1'>
         <span className={`text-sm text-gray09 leading-[21px] ${props.labelClass}`}>
           {label}
         </span>
         {props.description && <span className={`${textClass} text-gray05`}>
           {props.description}
         </span>}
-      </p>
+      </p>}
 
       <label className={`justify-between rounded-md border px-3 ${props.children ? 'py-[9.5px]' : 'py-[13px]'} flex w-full ${borders} focus-within:!border-red05`}>
         <input
@@ -121,4 +121,4 @@ const LabelInput = ({ label, placeholder, validate, type, value, name, onChange,
   )
 }
 
-export default LabelInput
+export default ValidationInput

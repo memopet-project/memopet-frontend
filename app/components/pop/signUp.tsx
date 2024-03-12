@@ -1,4 +1,4 @@
-import LabelInput from '../input/labelInput'
+import ValidationInput from '../input/validationInput'
 import { ChangeEvent, useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
@@ -179,7 +179,7 @@ const SignUp = ({ handleSignUp }: Props) => {
     <ClipPopupLayout handleClose={handleSignUp} title='회원가입'>
       <form className='flex flex-col gap-6'>
         {inputs.map((input) => (
-          <LabelInput
+          <ValidationInput
             key={input.name}
             label={input.label}
             value={input.value}
@@ -218,7 +218,7 @@ const SignUp = ({ handleSignUp }: Props) => {
                 확인
               </button>
             }
-          </LabelInput>
+          </ValidationInput>
         ))}
         <fieldset className='py-2'>
           <label className='block text-gray09 text-base h-6 font-normal'>
