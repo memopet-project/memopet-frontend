@@ -106,6 +106,7 @@ const images = [
     height: 'h-[440px]',
   },
 ]
+
 const Login = () => {
   return (
     <section className='w-[187.5rem] h-[87.5rem] bg-white relative'>
