@@ -1,10 +1,11 @@
 'use client'
+
 import Error from '@/public/svg/error.svg'
 import Pass from '@/public/svg/pass.svg'
 import Visibility from '@/public/svg/visibility.svg'
 import VisibilityOff from '@/public/svg/visibility_off.svg'
 import Close from '@/public/svg/close_12.svg'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { type ChangeEvent, type ReactNode, useEffect, useState } from 'react'
 
 type Props = {
   label: string;
@@ -15,11 +16,10 @@ type Props = {
   validate: { msg: string; status: boolean | null };
   labelClass?: string;
   description?: string;
-  buttonLabel?: string;
   hide?: boolean;
   onChange: (value: ChangeEvent<HTMLInputElement>['target']['value']) => void;
-  onClick?: () => void;
   onBlur?: () => void;
+  children?: ReactNode;
 }
 
 const LabelInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
@@ -31,19 +31,12 @@ const LabelInput = ({ label, placeholder, validate, type, value, name, onChange,
   const [validation, setValidation] = useState(validate)
   const [colors, setColors] = useState('text-statusGreen')
   const [borders, setBorders] = useState('border-gray07')
-  const [useSideSlot, setUseSideSlot] = useState(false)
   
   const initValidate = { msg: '', status: null }
 
   function handleClick() {
-    if (type === 'password') {
-      setInputType((val: string) => val === 'password' ? 'text' : 'password')
-      return;
-    }
-
-    if (props.onClick) {
-      props.onClick()
-    }
+    setInputType((val: string) => val === 'password' ? 'text' : 'password')
+    return;
   }
 
   function handleChange(val: ChangeEvent<HTMLInputElement>['target']['value']) {
@@ -67,11 +60,6 @@ const LabelInput = ({ label, placeholder, validate, type, value, name, onChange,
   }, [validate])
 
   useEffect(() => {
-    setUseSideSlot(!!props.buttonLabel || type === 'password')
-
-  }, [props.buttonLabel, type])
-
-  useEffect(() => {
     setInputValue(value)
   }, [value])
 
@@ -86,7 +74,7 @@ const LabelInput = ({ label, placeholder, validate, type, value, name, onChange,
         </span>}
       </p>
 
-      <label className={`justify-between rounded-md border px-3 ${props.buttonLabel ? 'py-[9.5px]' : 'py-[13px]'} flex w-full ${borders}`}>
+      <label className={`justify-between rounded-md border px-3 ${props.children ? 'py-[9.5px]' : 'py-[13px]'} flex w-full ${borders} focus-within:!border-red05`}>
         <input
           placeholder={placeholder}
           type={inputType}
@@ -94,48 +82,38 @@ const LabelInput = ({ label, placeholder, validate, type, value, name, onChange,
           onChange={(e) => handleChange(e.target.value)}
           onBlur={props.onBlur}
           name={name}
-          className='focus:border-none border-none focus:outline-none w-full'
+          className='focus:border-none border-none focus:outline-none w-full disabled:text-gray04'
         />
-        {((type !== 'password' && inputValue) || useSideSlot) && 
-        <div className='flex items-center ml-2'>
+        <div className='flex items-center'>
           {
-            (type !== 'password' && inputValue) && 
+            type !== 'password' && inputValue &&
             <button 
               type='button'
               onClick={() => handleChange('')} 
-              className='bg-gray02 rounded-full w-6 h-6 p-[6px]'
+              className='bg-gray02 rounded-full w-6 h-6 p-[6px] ml-2'
             >
               <Close className='text-gray05 w-3 h-3' />
             </button>
           }
+          {props.children}
           {
-            useSideSlot &&
+            type === 'password' && inputValue &&
             <button 
               onClick={handleClick}
-              type="button"
-              disabled={type !== 'password' && !validation?.status}
-              className={
-                type !== 'password'
-                  ? 'rounded-[999px] px-4 py-[5.5px] font-medium text-sm font-pretendard text-white whitespace-nowrap ml-2 bg-red05 disabled:bg-gray03'
-                  : 'w-6 h-6'
-              }>
-              {
-                type === 'password' 
-                  ? (inputType === 'password' ? <VisibilityOff /> : <Visibility />) 
-                  : props.buttonLabel
-              }
+              type='button'
+              className='w-6 h-6 ml-2'>
+              {inputType === 'password' ? <VisibilityOff /> : <Visibility />}
             </button>
           }
         </div>
-        }
       </label>
 
       {
-        validation?.status !== null &&
+        validation?.status !== null && validation.msg &&
         <p className={`flex row flex-nowrap items-center justify-start mt-1 text-[13px] ${colors}`}>
           {validation?.status === false
             ? <Error className={`${textClass} ${iconClass}`} />
-            : (validation.msg && <Pass className={`${textClass} ${iconClass}`} />)}
+            : <Pass className={`${textClass} ${iconClass}`} />}
           {validation.msg}
         </p>
       }
