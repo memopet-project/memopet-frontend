@@ -1,5 +1,5 @@
 import ValidationInput from '../input/validationInput'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { type ChangeEvent, useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
 import ClipPopupLayout from './clipPopupLayout'
