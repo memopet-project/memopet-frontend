@@ -1,30 +1,43 @@
+'use client'
+
 import CheckBtnSVB from '@/public/svg/check.svg'
+import { type ChangeEvent, useMemo, useState, useEffect } from 'react';
 
 type buttonProps = {
-  buttonType: 'checked' | 'default' | 'disabled' 
-  onClick?: ()=>void
+  name: string;
+  checked: boolean;
+  onChange: (arg: boolean) => void;
+  disabled?: boolean;
+  text: string;
 }
 
 const CheckBtn = ({
-  buttonType,
-  onClick,
-}:buttonProps) => {
+  disabled,
+  name,
+  text,
+  onChange,
+  checked = false,
+}: buttonProps) => {
+  const [checkValue, setCheckValue] = useState(checked)
 
-  const buttonColor = () => {
-    switch(buttonType){
-      case 'checked':
-        return "fill-red05 stroke-white";
-      case 'default' :
-        return 'fill-white stroke-gray03';
-      case 'disabled' :
-        return 'fill-gray03 stroke-white';
-      default :
-        return '';
-    }
+  const buttonColor = useMemo(() => {
+    return disabled ? 'fill-gray03 stroke-white' : checkValue ? 'fill-red05 stroke-white' : 'fill-white stroke-gray03'
+  }, [checkValue, disabled])
+
+  const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.checked)
   }
 
+  useEffect(() => {
+    setCheckValue(checked)
+  }, [checked])
+
   return (
-    <CheckBtnSVB className={`cursor-pointer ${buttonColor()} `} onClick={onClick}/>
+    <label className={`cursor-pointer flex items-center flex-nowrap gap-2`}>
+      <CheckBtnSVB className={buttonColor} />
+      <input type='checkbox' name={name} className='hidden' checked={checkValue} onChange={handleChange}/>
+      <span className='leading-6 block text-gray09'>{text}</span>
+    </label>
   )
 }
 

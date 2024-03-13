@@ -9,12 +9,14 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily: {
         pretendard: [
           'pretendard'
+        ],
+        gothic: [
+          'KBO Dia Gothic'
         ],
         header: [
           'Newake'
@@ -60,7 +62,7 @@ module.exports = {
 
         'statusYellow' : '#F1B419',
         'statusBlue' : '#36AAEB',
-        'statusGreen': '#6BBB5D',
+        'statusGreen': '#56BC44',
         'statusRed' : '#E73324',
 
         'errorRed' : '#E43333',
