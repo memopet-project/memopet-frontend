@@ -81,3 +81,10 @@ body{
   font-weight: 700;
 }
 
+.error-box {
+  @apply text-[13px] text-center -tracking-[0.25px] leading-[19.5px] text-errorRed py-2 bg-[#E433330D] rounded-md
+}
+
+.other-options-box {
+  @apply flex flex-row gap-2 text-sm w-full bg-gray01 rounded-lg justify-center items-center first-of-type:text-gray09 last-of-type:p-2 last-of-type:leading-[14px] last-of-type:text-gray05 last-of-type:font-semibold
+}

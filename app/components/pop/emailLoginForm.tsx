@@ -1,16 +1,15 @@
 'use client'
 
-import { type ChangeEvent, useState } from 'react'
+import { useState } from 'react'
+import type { ValidateObj, ChangeEvt } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import MainBtn from '../button/mainBtn'
 
 type Validate = {
-  email: { msg: string, status: null | boolean },
-  password: { msg: string, status: null | boolean },
+  email: ValidateObj,
+  password: ValidateObj,
 }
-
-type ChangeEvt = ChangeEvent<HTMLInputElement>['target']['value']
 
 const initValidate = {
   email: { msg: '', status: null },
@@ -21,8 +20,8 @@ const initValidate = {
 const EmailLoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [rememberEmail, setRememberEmail] = useState(false)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
+  const [rememberEmail, setRememberEmail] = useState(false)
   const [count, setCount] = useState(0)
 
   const inputs = [
@@ -50,8 +49,8 @@ const EmailLoginForm = () => {
       onBlur: () => {
       }
     },
-
   ]
+
   const handleSubmit = async () => {
 
   }
@@ -69,7 +68,7 @@ const EmailLoginForm = () => {
           onBlur={input?.onBlur}
         />
       ))}
-      {count > 0 && <div className='text-[13px] text-center -tracking-[0.25px] leading-[19.5px] text-errorRed py-2 bg-[#E433330D] rounded-md'>
+      {count > 0 && <div className='error-box'>
         등록되지 않은 이메일이거나<br />
         이메일 또는 비밀번호를 잘못 입력했습니다. ({count}/5)
       </div>}

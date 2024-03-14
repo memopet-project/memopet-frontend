@@ -1,19 +1,18 @@
 import ValidationInput from '../input/validationInput'
-import { type ChangeEvent, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
-import ClipPopupLayout from './clipPopupLayout'
+import type { ValidateObj, ChangeEvt } from '@/app/types/common'
 
 type Validate = {
-  email: { msg: string, status: null | boolean },
-  authCode: { msg: string, status: null | boolean },
-  password: { msg: string, status: null | boolean },
-  checkPassword: { msg: string, status: null | boolean },
-  name: { msg: string, status: null | boolean },
-  contact: { msg: string, status: null | boolean },
+  email: ValidateObj,
+  authCode: ValidateObj,
+  password: ValidateObj,
+  checkPassword: ValidateObj,
+  name: ValidateObj,
+  contact: ValidateObj,
 }
 
-type ChangeEvt = ChangeEvent<HTMLInputElement>['target']['value']
 
 const initValidate = {
   email: { msg: '', status: null },
@@ -214,7 +213,7 @@ const JoinForm = () => {
           }
         </ValidationInput>
       ))}
-      <fieldset className='py-2'>
+      <fieldset className='pb-2'>
         <label className='block text-gray09 text-base h-6 font-normal'>
           <input type='checkbox' />
           <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.

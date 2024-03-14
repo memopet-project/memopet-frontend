@@ -20,6 +20,7 @@ type Props = {
   onChange: (value: ChangeEvent<HTMLInputElement>['target']['value']) => void;
   onBlur?: () => void;
   children?: ReactNode;
+  fieldClass?: string;
 }
 
 const ValidationInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
@@ -64,7 +65,7 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
   }, [value])
 
   return (
-    (props.hide === undefined || props.hide) && <fieldset>
+    (props.hide === undefined || props.hide) && <fieldset className={props.fieldClass}>
       {label && <p className='flex row flex-nowrap justify-between items-center mb-1'>
         <span className={`text-sm text-gray09 leading-[21px] ${props.labelClass}`}>
           {label}

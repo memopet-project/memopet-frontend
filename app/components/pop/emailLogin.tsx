@@ -1,12 +1,13 @@
 import { useMemo, useState } from 'react'
 import ClipPopupLayout from './clipPopupLayout'
 import EmailLoginForm from './emailLoginForm'
+import FindEmailForm from './findEmailForm'
 
 type Props = {
   handleLogin: (arg: boolean) => void
 }
 
-type Func = '' | 'id' | 'password' | 'join'
+type Func = '' | 'email' | 'password' | 'join'
 type List = { label: string, value: Func }
 
 const EmailLogin = ({ handleLogin }: Props) => {
@@ -15,7 +16,7 @@ const EmailLogin = ({ handleLogin }: Props) => {
   const functionList: List[] = [
     {
       label: '이메일 찾기',
-      value: 'id',
+      value: 'email',
     },
     {
       label: '비밀번호 찾기',
@@ -34,15 +35,20 @@ const EmailLogin = ({ handleLogin }: Props) => {
 
   return (
     <ClipPopupLayout handleClose={handleLogin} title={title} maxWidth='400px'>
-      {<EmailLoginForm />}
-      <ul className='flex row items-center px-[26px] mt-3'>
-        {functionList.map((item, idx) =>
-          <>
-            <li className='p-2 text-gray05 whitespace-nowrap text-sm -tracking-[0.25px] cursor-pointer' onClick={() => handleClick(item)}>{item.label}</li>
-            {idx < (functionList.length - 1) && <div className='h-3 w-[1px] mx-2 bg-gray03'></div>}
-          </>
-        )}
-      </ul>
+      {func === '' && 
+        <>
+          <EmailLoginForm />
+          <ul className='flex row items-center px-[26px] mt-3'>
+            {functionList.map((item, idx) =>
+              <>
+                <li className='p-2 text-gray05 whitespace-nowrap text-sm -tracking-[0.25px] cursor-pointer' onClick={() => handleClick(item)}>{item.label}</li>
+                {idx < (functionList.length - 1) && <div className='h-3 w-[1px] mx-2 bg-gray03'></div>}
+              </>
+            )}
+          </ul>
+        </>
+      }
+      {func === 'email' && <FindEmailForm />}
     </ClipPopupLayout>
   )
 }
