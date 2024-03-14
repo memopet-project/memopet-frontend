@@ -4,6 +4,8 @@ import ValidationInput from '../input/validationInput'
 import Google from '@/public/svg/google.svg'
 import type { ChangeEvt, ValidateObj } from '@/app/types/common'
 import checkEmailType from '@/app/utils/checkEmail'
+import { useSetRecoilState } from 'recoil'
+import { modalStatus } from '@/app/recoil/startModalStatus'
 
 type Validate = {
   email: ValidateObj,
@@ -23,7 +25,7 @@ const FindPasswordForm = () => {
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [result, setResult] = useState<Result>(null)
   const [checkEmail, setCheckEmail] = useState(false)
-
+  const setModalStatus = useSetRecoilState(modalStatus);
 
   const checkValidate = (key: keyof typeof initValidate, condition: boolean, errorMsg = '') => {
     if (condition) {
@@ -68,11 +70,11 @@ const FindPasswordForm = () => {
   ]
 
   const disabled = useMemo(() => !email || !!(email && result?.dsc_code === '0'), [email])
-  const buttonLabel = useMemo(() => result?.dsc_code === '1' ? '재설정 완료' : '비밀번호 재설정하기', [email])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setResult({ dsc_code: '0', confirm_code: '1234' })
+    setModalStatus('resettingPassword')
+    // setResult({ dsc_code: '0', confirm_code: '1234' })
   }
 
   const authEmail = async () => {
@@ -113,14 +115,14 @@ const FindPasswordForm = () => {
           onBlur={input?.onBlur}
         >
           {input.name === 'email' &&
-          <button
-            type='button'
-            className='auth-button'
-            disabled={!input.value}
-            onClick={authEmail}
-          >
-            인증 요청
-          </button>}
+            <button
+              type='button'
+              className='auth-button'
+              disabled={!input.value}
+              onClick={authEmail}
+            >
+              인증 요청
+            </button>}
           {input.name === 'authCode' &&
             <button
               type='button'
@@ -133,7 +135,7 @@ const FindPasswordForm = () => {
         </ValidationInput>
       ))}
       {result?.dsc_code === '0' && <div className='other-options-box mt-4'><span>가입한 이메일이 생각나지 않나요?</span><button>이메일 찾기</button></div>}
-      <MainBtn text={buttonLabel} disabled={disabled} />
+      <MainBtn text='비밀번호 재설정하기' disabled={disabled} />
     </form>
   )
 }

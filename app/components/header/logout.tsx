@@ -1,17 +1,21 @@
 import { useState } from 'react'
 import Join from '../pop/join'
 import EmailLogin from '../pop/emailLogin'
+import { modalStatus } from '@/app/recoil/startModalStatus'
+import { useResetRecoilState } from 'recoil'
 
 const Logout = () => {
   const textClass="text-base leading-4 px-5 py-3"
   const [openSignup, setOpenSignup] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
+  const resetModalStatus = useResetRecoilState(modalStatus);
   
   function handleJoin(state: boolean) {
     setOpenSignup(state)
   }
 
   function handleLogin(state: boolean) {
+    resetModalStatus()
     setOpenLogin(state)
   }
 
