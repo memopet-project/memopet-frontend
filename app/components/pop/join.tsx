@@ -7,7 +7,7 @@ type Props = {
 
 const Join = ({ handleJoin }: Props) => {
   return (
-    <ClipPopupLayout handleClose={handleJoin} title='회원가입' maxWidth='400px'>
+    <ClipPopupLayout handleClose={handleJoin} title='회원가입'>
       {<JoinForm />}
     </ClipPopupLayout>
   )
