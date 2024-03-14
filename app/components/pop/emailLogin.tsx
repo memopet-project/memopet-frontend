@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import ClipPopupLayout from './clipPopupLayout'
 import EmailLoginForm from './emailLoginForm'
 import FindEmailForm from './findEmailForm'
+import FindPasswordForm from './findPasswordForm'
 
 type Props = {
   handleLogin: (arg: boolean) => void
@@ -34,7 +35,7 @@ const EmailLogin = ({ handleLogin }: Props) => {
   }
 
   return (
-    <ClipPopupLayout handleClose={handleLogin} title={title} maxWidth='400px'>
+    <ClipPopupLayout handleClose={handleLogin} title={title} maxWidth={['이메일 찾기', '이메일 로그인'].includes(title) ? '400px' : '480px'}>
       {func === '' && 
         <>
           <EmailLoginForm />
@@ -49,6 +50,7 @@ const EmailLogin = ({ handleLogin }: Props) => {
         </>
       }
       {func === 'email' && <FindEmailForm />}
+      {func === 'password' && <FindPasswordForm />}
     </ClipPopupLayout>
   )
 }

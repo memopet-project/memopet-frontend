@@ -17,7 +17,7 @@ const initValidate = {
 type Result = null | { dsc_code: '0' | '1' | '2', email: string }
 
 const FindEmailForm = () => {
-  const [name, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [contact, setPassword] = useState('')
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [result, setResult] = useState<Result>(null)
@@ -31,7 +31,7 @@ const FindEmailForm = () => {
       value: name,
       name: 'name',
       onChange: (value: ChangeEvt) => {
-        setEmail(value)
+        setName(value)
         setResult(null)
       },
       onBlur: () => {

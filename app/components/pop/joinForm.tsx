@@ -23,7 +23,6 @@ const initValidate = {
   contact: { msg: '', status: null },
 } as const
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
-const buttonClass = 'rounded-[999px] px-4 py-[5.5px] font-medium text-sm font-pretendard text-white whitespace-nowrap ml-2 bg-red05 disabled:bg-gray03'
 
 const JoinForm = () => {
   const [email, setEmail] = useState('')
@@ -63,7 +62,7 @@ const JoinForm = () => {
     {
       label: '입력하신 이메일로 인증코드를 보냈어요!',
       validate: validate.authCode,
-      placeholder: '영문, 숫자, 특수문자 혼합 8자 이상 입력',
+      placeholder: 'ABC123',
       type: 'text',
       value: authCode,
       name: 'authCode',
@@ -190,7 +189,7 @@ const JoinForm = () => {
             <button
               type='button'
               disabled={!input.value}
-              className={buttonClass}
+              className='auth-button'
               onClick={authEmail}
             >
               {
@@ -205,7 +204,7 @@ const JoinForm = () => {
             <button
               type='button'
               disabled={!input.value || isConfirmed}
-              className={buttonClass}
+              className='auth-button'
               onClick={checkAuthCode}
             >
               확인
