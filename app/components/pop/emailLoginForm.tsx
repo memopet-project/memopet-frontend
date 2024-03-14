@@ -23,6 +23,7 @@ const EmailLoginForm = () => {
   const [password, setPassword] = useState('')
   const [rememberEmail, setRememberEmail] = useState(false)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
+  const [count, setCount] = useState(0)
 
   const inputs = [
     {
@@ -52,7 +53,7 @@ const EmailLoginForm = () => {
 
   ]
   const handleSubmit = async () => {
-    
+
   }
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
@@ -68,6 +69,10 @@ const EmailLoginForm = () => {
           onBlur={input?.onBlur}
         />
       ))}
+      {count > 0 && <div className='text-[13px] text-center -tracking-[0.25px] leading-[19.5px] text-errorRed py-2 bg-[#E433330D] rounded-md'>
+        등록되지 않은 이메일이거나<br />
+        이메일 또는 비밀번호를 잘못 입력했습니다. ({count}/5)
+      </div>}
       <fieldset>
         {rememberEmail}
         <CheckBtn

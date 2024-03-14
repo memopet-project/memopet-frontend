@@ -13,10 +13,6 @@ type Validate = {
   contact: { msg: string, status: null | boolean },
 }
 
-type Props = {
-  handleSignUp: (arg: boolean) => void
-}
-
 type ChangeEvt = ChangeEvent<HTMLInputElement>['target']['value']
 
 const initValidate = {
@@ -30,7 +26,7 @@ const initValidate = {
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
 const buttonClass = 'rounded-[999px] px-4 py-[5.5px] font-medium text-sm font-pretendard text-white whitespace-nowrap ml-2 bg-red05 disabled:bg-gray03'
 
-const SignUp = ({ handleSignUp }: Props) => {
+const JoinForm = () => {
   const [email, setEmail] = useState('')
   const [authCode, setAuthCode] = useState('')
   const [checkEmail, setCheckEmail] = useState(false)
@@ -48,7 +44,6 @@ const SignUp = ({ handleSignUp }: Props) => {
 
     setValidate((prev) => ({ ...prev, [key]: { msg: '', status: null } }))
   }
-
 
   const inputs = [
     {
@@ -176,60 +171,58 @@ const SignUp = ({ handleSignUp }: Props) => {
   }
 
   return (
-    <ClipPopupLayout handleClose={handleSignUp} title='회원가입'>
-      <form className='flex flex-col gap-6'>
-        {inputs.map((input) => (
-          <ValidationInput
-            key={input.name}
-            label={input.label}
-            value={input.value}
-            placeholder={input.placeholder}
-            name={input.name}
-            type={input.type}
-            validate={input.validate}
-            labelClass={input?.labelClass}
-            hide={input?.hide}
-            description={input?.description}
-            onChange={input.onChange}
-            onBlur={input?.onBlur}
-          >
-            {input.name === 'email' &&
-              <button
-                type='button'
-                disabled={!input.value}
-                className={buttonClass}
-                onClick={authEmail}
-              >
-                {
-                  isConfirmed
-                    ? '이메일 변경'
-                    : email && validate.email.status && validate.authCode.status === false
-                      ? '다시 요청'
-                      : '인증 요청'
-                }
-              </button>}
-            {input.name === 'authCode' &&
-              <button
-                type='button'
-                disabled={!input.value || isConfirmed}
-                className={buttonClass}
-                onClick={checkAuthCode}
-              >
-                확인
-              </button>
-            }
-          </ValidationInput>
-        ))}
-        <fieldset className='py-2'>
-          <label className='block text-gray09 text-base h-6 font-normal'>
-            <input type='checkbox' />
-            <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
-          </label>
-        </fieldset>
-        <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
-      </form>
-    </ClipPopupLayout>
+    <form className='flex flex-col gap-6'>
+      {inputs.map((input) => (
+        <ValidationInput
+          key={input.name}
+          label={input.label}
+          value={input.value}
+          placeholder={input.placeholder}
+          name={input.name}
+          type={input.type}
+          validate={input.validate}
+          labelClass={input?.labelClass}
+          hide={input?.hide}
+          description={input?.description}
+          onChange={input.onChange}
+          onBlur={input?.onBlur}
+        >
+          {input.name === 'email' &&
+            <button
+              type='button'
+              disabled={!input.value}
+              className={buttonClass}
+              onClick={authEmail}
+            >
+              {
+                isConfirmed
+                  ? '이메일 변경'
+                  : email && validate.email.status && validate.authCode.status === false
+                    ? '다시 요청'
+                    : '인증 요청'
+              }
+            </button>}
+          {input.name === 'authCode' &&
+            <button
+              type='button'
+              disabled={!input.value || isConfirmed}
+              className={buttonClass}
+              onClick={checkAuthCode}
+            >
+              확인
+            </button>
+          }
+        </ValidationInput>
+      ))}
+      <fieldset className='py-2'>
+        <label className='block text-gray09 text-base h-6 font-normal'>
+          <input type='checkbox' />
+          <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
+        </label>
+      </fieldset>
+      <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
+    </form>
   )
 }
 
-export default SignUp
+export default JoinForm

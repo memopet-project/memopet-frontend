@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SignUp from '../pop/signUp'
+import Join from '../pop/join'
 import EmailLogin from '../pop/emailLogin'
 
 const Logout = () => {
@@ -7,7 +7,7 @@ const Logout = () => {
   const [openSignup, setOpenSignup] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
   
-  function handleSignUp(state: boolean) {
+  function handleJoin(state: boolean) {
     setOpenSignup(state)
   }
 
@@ -23,11 +23,11 @@ const Logout = () => {
         </button>
       </li>
       <li>
-        <button className={`text-red05 ${textClass}`} onClick={() => handleSignUp(true)}>
+        <button className={`text-red05 ${textClass}`} onClick={() => handleJoin(true)}>
           회원가입
         </button>
       </li>
-      {openSignup && <SignUp handleSignUp={handleSignUp} />}
+      {openSignup && <Join handleJoin={handleJoin} />}
       {openLogin && <EmailLogin handleLogin={handleLogin} />}
     </>
   )

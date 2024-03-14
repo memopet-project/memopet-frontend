@@ -1,14 +1,14 @@
-import SignUp from '@/app/components/pop/signUp'
+import Join from '@/app/components/pop/join'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof SignUp> = {
+const meta: Meta<typeof Join> = {
   title: '팝업/회원가입',
-  component: SignUp,
+  component: Join,
   tags: ['autodocs'],
 }
 
 export default meta
-type Story = StoryObj<typeof SignUp>
+type Story = StoryObj<typeof Join>
 
 export const Example:Story = {
 
