@@ -83,6 +83,7 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
           onChange={(e) => handleChange(e.target.value)}
           onBlur={props.onBlur}
           name={name}
+          autoComplete={type === 'password' ? 'new-password' : type}
           className='focus:border-none border-none focus:outline-none w-full disabled:text-gray04'
         />
         <div className='flex items-center'>
