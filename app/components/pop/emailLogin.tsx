@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ClipPopupLayout from './clipPopupLayout'
+import ClipModalLayout from './clipModalLayout'
 import EmailLoginForm from './emailLoginForm'
 import FindEmailForm from './findEmailForm'
 import FindPasswordForm from './findPasswordForm'
@@ -42,7 +42,7 @@ const EmailLogin = ({ handleLogin }: Props) => {
   }
 
   return (
-    <ClipPopupLayout handleClose={handleLogin} title={title} maxWidth={['이메일 찾기', '이메일 로그인', '비밀번호 찾기'].includes(title) ? '400px' : '480px'}>
+    <ClipModalLayout handleClose={handleLogin} title={title} maxWidth={['이메일 찾기', '이메일 로그인', '비밀번호 찾기'].includes(title) ? '400px' : '480px'}>
       {modal === 'emailLogin' && 
         <>
           <EmailLoginForm />
@@ -59,7 +59,7 @@ const EmailLogin = ({ handleLogin }: Props) => {
       {modal === 'findEmail' && <FindEmailForm />}
       {modal === 'findPassword' && <FindPasswordForm />}
       {modal === 'resettingPassword' && <ResettingPasswordForm />}
-    </ClipPopupLayout>
+    </ClipModalLayout>
   )
 }
 export default EmailLogin

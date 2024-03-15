@@ -1,4 +1,4 @@
-import ClipPopupLayout from './clipPopupLayout'
+import ClipModalLayout from './clipModalLayout'
 import JoinForm from './joinForm'
 
 type Props = {
@@ -7,9 +7,9 @@ type Props = {
 
 const Join = ({ handleJoin }: Props) => {
   return (
-    <ClipPopupLayout handleClose={handleJoin} title='회원가입'>
+    <ClipModalLayout handleClose={handleJoin} title='회원가입'>
       {<JoinForm />}
-    </ClipPopupLayout>
+    </ClipModalLayout>
   )
 }
 export default Join

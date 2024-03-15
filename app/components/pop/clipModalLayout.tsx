@@ -9,7 +9,7 @@ type Props = {
   maxWidth?: string;
 }
 
-const ClipPopupLayout = ({ handleClose, title, children, maxWidth = '480px' }: Props) => {
+const ClipModalLayout = ({ handleClose, title, children, maxWidth = '480px' }: Props) => {
   const useMaxWidth = useMemo(() => maxWidth === '480px' ? 'max-w-[480px]' : 'max-w-[400px]', [maxWidth])
   
   return (
@@ -26,4 +26,4 @@ const ClipPopupLayout = ({ handleClose, title, children, maxWidth = '480px' }: P
   )
 }
 
-export default ClipPopupLayout
+export default ClipModalLayout
