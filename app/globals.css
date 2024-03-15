@@ -92,3 +92,25 @@ body{
 .auth-button {
   @apply rounded-[999px] px-4 py-[5.5px] font-medium text-sm font-pretendard text-white whitespace-nowrap ml-2 bg-red05 disabled:bg-gray03
 }
+
+@layer components {
+  .function-button__with-divider {
+    display: flex;
+    align-items: center;
+  }
+  .function-button__with-divider > li {
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    letter-spacing: -0.25px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #737373;
+  }
+  .function-button__with-divider > div {
+    height: 12px;
+    width: 1px;
+    background-color: #D4D4D4;
+  }
+}

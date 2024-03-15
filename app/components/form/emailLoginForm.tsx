@@ -5,10 +5,15 @@ import type { ValidateObj, ChangeEvt } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import MainBtn from '../button/mainBtn'
+import type { List } from '../modal/start'
 
 type Validate = {
   email: ValidateObj,
   password: ValidateObj,
+}
+
+type Props = {
+  handleClick: (arg: List) => void
 }
 
 const initValidate = {
@@ -17,7 +22,7 @@ const initValidate = {
 } as const
 
 
-const EmailLoginForm = () => {
+const EmailLoginForm = ({ handleClick }: Props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
@@ -48,6 +53,21 @@ const EmailLoginForm = () => {
       },
       onBlur: () => {
       }
+    },
+  ]
+
+  const functionList: List[] = [
+    {
+      label: '이메일 찾기',
+      value: 'findEmail',
+    },
+    {
+      label: '비밀번호 찾기',
+      value: 'findPassword',
+    },
+    {
+      label: '회원가입',
+      value: 'join',
     },
   ]
 
@@ -82,6 +102,14 @@ const EmailLoginForm = () => {
         />
       </fieldset>
       <MainBtn text='로그인' className='mt-5' />
+      <ul className='function-button__with-divider px-[26px] mt-3'>
+        {functionList.map((item, idx) =>
+          <>
+            <li key={item.value} onClick={() => handleClick(item)}>{item.label}</li>
+            {idx < (functionList.length - 1) && <div className='mx-2'></div>}
+          </>
+        )}
+      </ul>
     </form>
   )
 }

@@ -1,8 +1,9 @@
 import { type FormEvent, useMemo, useState } from 'react'
 import MainBtn from '../button/mainBtn'
 import ValidationInput from '../input/validationInput'
-import Google from '@/public/svg/google.svg'
+import Google from '@/public/images/google.png'
 import type { ChangeEvt, ValidateObj } from '@/app/types/common'
+import Image from 'next/image'
 
 type Validate = {
   name: ValidateObj,
@@ -58,7 +59,7 @@ const FindEmailForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setResult({ dsc_code: '0', email: 'eunjin9639@gmail.com' })
+    setResult({ dsc_code: '2', email: 'eunjin9639@gmail.com' })
   }
 
   return (
@@ -80,14 +81,23 @@ const FindEmailForm = () => {
       {result?.dsc_code && (result?.dsc_code === '0'
         ? <div className='error-box -mb-2'>해당 이름과 휴대폰번호로 가입한 계정을 찾을 수 없습니다.</div>
         : (<div className='mb-2'>
-            <p className='text-sm text-gray09 -tracking-[0.25px] leading-[21px] font-medium'>
-              {result?.dsc_code === '1' ? '이메일' : '소셜 아이디로 가입한 계정입니다.'}
-            </p>
-            <p className='text-gray05 -tracking-[0.5px] leading-6 flex items-center gap-2 border border-[#40404080] rounded-md px-3 py-[14px] mt-4'>
-              {result?.dsc_code === '2' && <span className='p-[6px] border border-gray05 rounded'><Google /></span>}{result?.email}
-            </p>
-            {result?.dsc_code === '1' && <div className='other-options-box mt-4'><span>비밀번호가 생각나지 않나요?</span><button>비밀번호 찾기</button></div>}
-          </div>))
+          <p className='text-sm text-gray09 -tracking-[0.25px] leading-[21px] font-medium'>
+            {result?.dsc_code === '1' ? '이메일' : '소셜 아이디로 가입한 계정입니다.'}
+          </p>
+          <p className='text-gray05 -tracking-[0.5px] leading-6 flex items-center gap-2 border border-[#40404080] rounded-md px-3 py-[14px] mt-4'>
+            {result?.dsc_code === '2' && <span className='p-[6px] border border-gray05 rounded'>
+              <Image
+                src='/images/google.png'
+                sizes='12px'
+                priority
+                width={12}
+                height={12}
+                alt='google'
+              />
+            </span>}{result?.email}
+          </p>
+          {result?.dsc_code === '1' && <div className='other-options-box mt-4'><span>비밀번호가 생각나지 않나요?</span><button>비밀번호 찾기</button></div>}
+        </div>))
       }
       <MainBtn text={buttonLabel} disabled={disabled} />
     </form>

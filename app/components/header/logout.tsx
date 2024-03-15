@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Join from '../modal/join'
-import EmailLogin from '../modal/emailLogin'
 import { modalStatus } from '@/app/recoil/startModalStatus'
 import { useResetRecoilState } from 'recoil'
+import Start from '../modal/start'
 
 const Logout = () => {
   const textClass="text-base leading-4 px-5 py-3"
@@ -32,7 +32,7 @@ const Logout = () => {
         </button>
       </li>
       {openSignup && <Join handleJoin={handleJoin} />}
-      {openLogin && <EmailLogin handleLogin={handleLogin} />}
+      {openLogin && <Start handleStart={handleLogin} />}
     </>
   )
 }
