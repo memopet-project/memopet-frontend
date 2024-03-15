@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import ClipModalLayout from './clipModalLayout'
-import EmailLoginForm from './emailLoginForm'
-import FindEmailForm from './findEmailForm'
-import FindPasswordForm from './findPasswordForm'
+import EmailLoginForm from '../form/emailLoginForm'
+import FindEmailForm from '../form/findEmailForm'
+import FindPasswordForm from '../form/findPasswordForm'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { Status, modalStatus, modalTitle } from '@/app/recoil/startModalStatus'
-import ResettingPasswordForm from './resettingPasswordForm'
+import ResettingPasswordForm from '../form/resettingPasswordForm'
 
 type Props = {
   handleLogin: (arg: boolean) => void

@@ -1,4 +1,4 @@
-import Join from '@/app/components/pop/join'
+import Join from '@/app/components/modal/join'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Join> = {

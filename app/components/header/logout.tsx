@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Join from '../pop/join'
-import EmailLogin from '../pop/emailLogin'
+import Join from '../modal/join'
+import EmailLogin from '../modal/emailLogin'
 import { modalStatus } from '@/app/recoil/startModalStatus'
 import { useResetRecoilState } from 'recoil'
 

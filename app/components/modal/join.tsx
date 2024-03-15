@@ -1,5 +1,5 @@
 import ClipModalLayout from './clipModalLayout'
-import JoinForm from './joinForm'
+import JoinForm from '../form/joinForm'
 
 type Props = {
   handleJoin: (arg: boolean) => void
