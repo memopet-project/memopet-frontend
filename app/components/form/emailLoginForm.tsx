@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import type { ValidateObj, ChangeEvt } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
@@ -104,10 +104,10 @@ const EmailLoginForm = ({ handleClick }: Props) => {
       <MainBtn text='로그인' className='mt-5' />
       <ul className='function-button__with-divider px-[26px] mt-3'>
         {functionList.map((item, idx) =>
-          <>
+          <Fragment key={`${item.value}-email-login`}>
             <li key={item.value} onClick={() => handleClick(item)}>{item.label}</li>
-            {idx < (functionList.length - 1) && <div className='mx-2'></div>}
-          </>
+            {idx < (functionList.length - 1) && <div key={item.label} className='mx-2'></div>}
+          </Fragment>
         )}
       </ul>
     </form>

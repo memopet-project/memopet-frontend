@@ -1,11 +1,15 @@
 import { modalStatus } from '@/app/recoil/startModalStatus';
-import { FormEvent } from 'react';
+import { FormEvent, Fragment } from 'react';
 import { useSetRecoilState } from 'recoil';
-import Google from '@/public/images/google.png'
 import Naver from '@/public/svg/naver.svg'
 import Image from 'next/image';
+import type { List } from '../modal/start';
 
-const StartForm = () => {
+type Props = {
+  handleClick: (arg: List) => void
+}
+
+const StartForm = ({ handleClick }: Props) => {
   const setModalStatus = useSetRecoilState(modalStatus);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -35,7 +39,7 @@ const StartForm = () => {
     },
   ]
 
-  const functionList = [
+  const functionList: List[] = [
     {
       label: '이메일로 로그인',
       value: 'emailLogin',
@@ -53,16 +57,17 @@ const StartForm = () => {
       </p>
       <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
         {snsLogin.map((btn) =>
-          <button className={`inline-flex rounded-lg h-[52px] items-center justify-center gap-2 font-semibold -tracking-[0.25px] ${btn.classes}`}>
+          <button key={btn.value} className={`inline-flex rounded-lg h-[52px] items-center justify-center gap-2 font-semibold -tracking-[0.25px] ${btn.classes}`}>
             {btn.icon}
             {btn.label}
-          </button>)}
+          </button>
+        )}
         <ul className='function-button__with-divider justify-center'>
           {functionList.map((item, idx) =>
-            <>
-              <li>{item.label}</li>
+            <Fragment key={`${item.value}-start`}>
+              <li onClick={() => handleClick(item)}>{item.label}</li>
               {idx < (functionList.length - 1) && <div className='mx-5'></div>}
-            </>
+            </Fragment>
           )}
         </ul>
       </form>

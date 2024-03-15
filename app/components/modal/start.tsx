@@ -26,7 +26,7 @@ const Start = ({handleStart}: Props) => {
   
   return (
     <ClipModalLayout handleClose={handleStart} title={title} maxWidth={maxWidth}>
-      {modal === 'start' && <StartForm />}
+      {modal === 'start' && <StartForm handleClick={(val: List) => handleClick(val)} />}
       {modal === 'findEmail' && <FindEmailForm />}
       {modal === 'findPassword' && <FindPasswordForm />}
       {modal === 'resettingPassword' && <ResettingPasswordForm />}
