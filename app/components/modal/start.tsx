@@ -7,6 +7,7 @@ import FindPasswordForm from '../form/findPasswordForm'
 import ResettingPasswordForm from '../form/resettingPasswordForm'
 import EmailLoginForm from '../form/emailLoginForm';
 import { useMemo } from 'react';
+import JoinForm from '../form/joinForm';
 
 type Props = {
   handleStart: (arg: boolean) => void
@@ -31,6 +32,7 @@ const Start = ({handleStart}: Props) => {
       {modal === 'findPassword' && <FindPasswordForm />}
       {modal === 'resettingPassword' && <ResettingPasswordForm />}
       {modal === 'emailLogin' && <EmailLoginForm handleClick={(val: List) => handleClick(val)} />}
+      {modal === 'join' && <JoinForm />}
     </ClipModalLayout>
   )
 }
