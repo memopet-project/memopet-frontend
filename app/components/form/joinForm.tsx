@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
 import type { ValidateObj, ChangeEvt } from '@/app/types/common'
+import authEmail from '@/app/modules/authEmail'
+import checkDuplicateEmail from '@/app/modules/checkDuplicateEmail'
 
 type Validate = {
   email: ValidateObj,
@@ -12,7 +14,6 @@ type Validate = {
   name: ValidateObj,
   contact: ValidateObj,
 }
-
 
 const initValidate = {
   email: { msg: '', status: null },
@@ -138,24 +139,18 @@ const JoinForm = () => {
     !!email && !!validate.email.status && !!authCode && !!validate.authCode.status,
     [email, authCode, validate.email.status, validate.authCode.status])
 
-  const authEmail = async () => {
+  const checkAuthEmail = async () => {
     console.log('인증요청');
-    if (checkEmailType(email)) {
-      checkValidate('email', true, '이메일을 정확히 입력해주세요.')
-      return;
-    }
-
-    if (email === 'memopet@naver.com') { // test
-      setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
-      return
-    }
-
-    setValidate((prev) => ({
-      ...prev,
-      email: { msg: '', status: true },
-      authCode: { msg: '', status: null },
-    }))
-    setCheckEmail(true)
+    checkDuplicateEmail<Validate>(email, setValidate)
+    // await authEmail<Validate>(email, setValidate).then((res) => {
+    //   console.log(res)
+    // })
+    //   setCheckEmail(true)
+    //   setValidate((prev) => ({
+    //     ...prev,
+    //     email: { msg: '', status: true },
+    //     authCode: { msg: '', status: null },
+    //   }))
   }
 
   const checkAuthCode = async () => {
@@ -190,7 +185,7 @@ const JoinForm = () => {
               type='button'
               disabled={!input.value}
               className='auth-button'
-              onClick={authEmail}
+              onClick={checkAuthEmail}
             >
               {
                 isConfirmed
@@ -205,7 +200,7 @@ const JoinForm = () => {
               type='button'
               disabled={!input.value || isConfirmed}
               className='auth-button'
-              onClick={checkAuthCode}
+              onClick={() => authEmail<Validate>(email, setValidate)}
             >
               확인
             </button>
