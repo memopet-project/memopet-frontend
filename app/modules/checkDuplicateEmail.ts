@@ -1,4 +1,3 @@
-import { SetStateAction } from 'react';
 import { getData } from '../api/api';
 
 type RequestData = { email: string }
