@@ -28,7 +28,7 @@ const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입
 const JoinForm = () => {
   const [email, setEmail] = useState('')
   const [authCode, setAuthCode] = useState('')
-  const [checkEmail, setCheckEmail] = useState(false)
+  const [checkEmail, setCheckEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checkPassword, setCheckPassword] = useState('')
   const [name, setName] = useState('')
@@ -55,7 +55,7 @@ const JoinForm = () => {
       onChange: (value: ChangeEvt) => {
         setEmail(value)
         setAuthCode('')
-        setCheckEmail(false)
+        setCheckEmail('')
       },
       onBlur: () => {
       }
@@ -68,7 +68,7 @@ const JoinForm = () => {
       value: authCode,
       name: 'authCode',
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
-      hide: checkEmail,
+      hide: !!checkEmail,
       onChange: (value: ChangeEvt) => {
         setAuthCode(value)
         if (value) {
@@ -140,22 +140,34 @@ const JoinForm = () => {
     [email, authCode, validate.email.status, validate.authCode.status])
 
   const checkAuthEmail = async () => {
-    console.log('인증요청');
-    checkDuplicateEmail<Validate>(email, setValidate)
-    // await authEmail<Validate>(email, setValidate).then((res) => {
-    //   console.log(res)
-    // })
-    //   setCheckEmail(true)
-    //   setValidate((prev) => ({
-    //     ...prev,
-    //     email: { msg: '', status: true },
-    //     authCode: { msg: '', status: null },
-    //   }))
+    if (checkEmailType(email)) {
+      setValidate((prev) => ({ ...prev, email: { msg: '이메일을 정확히 입력해주세요.', status: false } }))
+      return
+    }
+
+    checkDuplicateEmail(email).then((res) => {
+      if (res.dsc_code !== '1') {
+        setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
+        return
+      }
+  
+      setValidate((prev) => ({ ...prev, email: { msg: '', status: null } }))
+
+      authEmail(email).then((res) => {
+        if (res) {
+          setCheckEmail(res)
+          setValidate((prev) => ({
+            ...prev,
+            email: { msg: '', status: true },
+            authCode: { msg: '', status: null },
+          }))
+        }
+      })
+    })
   }
 
   const checkAuthCode = async () => {
-    console.log('인증확인');
-    if (authCode === '1234') { // test
+    if (authCode !== checkEmail) {
       setValidate((prev) => ({ ...prev, authCode: { msg: '인증코드가 일치하지 않습니다.', status: false } }))
       return
     }
@@ -200,7 +212,7 @@ const JoinForm = () => {
               type='button'
               disabled={!input.value || isConfirmed}
               className='auth-button'
-              onClick={() => authEmail<Validate>(email, setValidate)}
+              onClick={checkAuthCode}
             >
               확인
             </button>

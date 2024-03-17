@@ -11,7 +11,7 @@ export const getData = async <T, D>(url: string, config?: AxiosRequestConfig<D>)
   }
 }
 
-export const postData = async <T, D>(url: string, config?: AxiosRequestConfig<D>) => {
+export const postData = async <T, D>(url: string, config?: AxiosRequestConfig<D> | D) => {
   try {
     const res: AxiosResponse<T> = await api.post(url, config);
     return res.data;
