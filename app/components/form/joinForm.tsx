@@ -44,6 +44,10 @@ const JoinForm = () => {
     setValidate((prev) => ({ ...prev, [key]: { msg: '', status: null } }))
   }
 
+  const isConfirmed = useMemo(() =>
+    !!email && !!validate.email.status && !!authCode && !!validate.authCode.status,
+    [email, authCode, validate.email.status, validate.authCode.status])
+
   const inputs = [
     {
       label: '이메일',
@@ -52,6 +56,8 @@ const JoinForm = () => {
       type: 'email',
       value: email,
       name: 'email',
+      hideButton: isConfirmed,
+      disable: isConfirmed,
       onChange: (value: ChangeEvt) => {
         setEmail(value)
         setAuthCode('')
@@ -67,6 +73,8 @@ const JoinForm = () => {
       type: 'text',
       value: authCode,
       name: 'authCode',
+      hideButton: isConfirmed,
+      disable: isConfirmed,
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
       hide: !!checkEmail,
       onChange: (value: ChangeEvt) => {
@@ -135,10 +143,6 @@ const JoinForm = () => {
     },
   ]
 
-  const isConfirmed = useMemo(() =>
-    !!email && !!validate.email.status && !!authCode && !!validate.authCode.status,
-    [email, authCode, validate.email.status, validate.authCode.status])
-
   const checkAuthEmail = async () => {
     if (checkEmailType(email)) {
       setValidate((prev) => ({ ...prev, email: { msg: '이메일을 정확히 입력해주세요.', status: false } }))
@@ -191,16 +195,18 @@ const JoinForm = () => {
           description={input?.description}
           onChange={input.onChange}
           onBlur={input?.onBlur}
+          hideButton={input?.hideButton}
+          disable={input?.disable}
         >
           {input.name === 'email' &&
             <button
               type='button'
               disabled={!input.value}
-              className='auth-button'
+              className={`auth-button ${isConfirmed && '!border !border-gray04 !bg-white !text-gray07'}`}
               onClick={checkAuthEmail}
             >
               {
-                isConfirmed
+                isConfirmed // TODO: 버튼의 상태에 따라 클릭 이벤트 변경
                   ? '이메일 변경'
                   : email && validate.email.status && validate.authCode.status === false
                     ? '다시 요청'

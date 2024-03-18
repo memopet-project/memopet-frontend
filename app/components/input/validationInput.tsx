@@ -21,6 +21,8 @@ type Props = {
   onBlur?: () => void;
   children?: ReactNode;
   fieldClass?: string;
+  hideButton?: boolean;
+  disable?: boolean;
 }
 
 const ValidationInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
@@ -83,12 +85,13 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
           onChange={(e) => handleChange(e.target.value)}
           onBlur={props.onBlur}
           name={name}
+          disabled={props.disable}
           autoComplete={type === 'password' ? 'new-password' : type}
-          className='focus:border-none border-none focus:outline-none w-full disabled:text-gray04'
+          className='focus:border-none border-none focus:outline-none w-full disabled:text-gray04 disabled:bg-white'
         />
         <div className='flex items-center'>
           {
-            type !== 'password' && inputValue &&
+            type !== 'password' && (inputValue && !props.hideButton) &&
             <button 
               type='button'
               onClick={() => handleChange('')} 
