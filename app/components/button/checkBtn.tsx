@@ -1,14 +1,15 @@
 'use client'
 
 import CheckBtnSVB from '@/public/svg/check.svg'
-import { type ChangeEvent, useMemo, useState, useEffect } from 'react';
+import { type ChangeEvent, useMemo, useState, useEffect, ReactNode } from 'react';
 
 type buttonProps = {
   name: string;
   checked: boolean;
   onChange: (arg: boolean) => void;
   disabled?: boolean;
-  text: string;
+  text?: string;
+  children?: ReactNode;
 }
 
 const CheckBtn = ({
@@ -16,6 +17,7 @@ const CheckBtn = ({
   name,
   text,
   onChange,
+  children,
   checked = false,
 }: buttonProps) => {
   const [checkValue, setCheckValue] = useState(checked)
@@ -33,10 +35,10 @@ const CheckBtn = ({
   }, [checked])
 
   return (
-    <label className={`cursor-pointer flex items-center flex-nowrap gap-2`}>
+    <label className={`cursor-pointer flex items-center flex-nowrap gap-1`}>
       <CheckBtnSVB className={buttonColor} />
       <input type='checkbox' name={name} className='hidden' checked={checkValue} onChange={handleChange}/>
-      <span className='leading-6 block text-gray09'>{text}</span>
+      {children || <span className='leading-6 block text-gray09'>{text}</span>}
     </label>
   )
 }
