@@ -34,8 +34,6 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
   const [validation, setValidation] = useState(validate)
   const [colors, setColors] = useState('text-statusGreen')
   const [borders, setBorders] = useState('border-gray07')
-  
-  const initValidate = { msg: '', status: null }
 
   function handleClick() {
     setInputType((val: string) => val === 'password' ? 'text' : 'password')
@@ -44,7 +42,7 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
 
   function handleChange(val: ChangeEvent<HTMLInputElement>['target']['value']) {
     onChange(val)
-    setValidation(structuredClone(initValidate))
+    setInputValue(val)
     setColors('text-statusGreen')
     setBorders('border-gray07')
   }
@@ -61,10 +59,6 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
     setColors('text-statusGreen')
     setBorders('border-gray07')
   }, [validate])
-
-  useEffect(() => {
-    setInputValue(value)
-  }, [value])
 
   return (
     (props.hide === undefined || props.hide) && <fieldset className={props.fieldClass}>
