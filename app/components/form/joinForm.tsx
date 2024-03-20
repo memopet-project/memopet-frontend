@@ -228,12 +228,32 @@ const JoinForm = () => {
 
   // 인증코드 인증
   const checkAuthCode = async () => {
-    if (authCode !== checkEmail) {
-      failValidate('authCode', '인증코드가 일치하지 않습니다.')
-      return
-    }
+    try {
+      const res = await api.post('sign-in/verification-email', {
+        email,
+        confirm_code: checkEmail
+      })
 
-    successValidate('authCode', '이메일이 인증되었습니다.')
+      const status = {
+        'code is expired': false,
+        'input code is different': false,
+      }
+
+      // TODO: 인증코드 확인
+      if ('expired'.includes(res.data)) {
+        failValidate('authCode', '인증코드가 만료되었습니다.')
+        return;
+      }
+
+      if ('different'.includes(res.data)) {
+        failValidate('authCode', '인증코드가 일치하지 않습니다.')
+        return;
+      }
+
+      successValidate('authCode', '이메일이 인증되었습니다.')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   // 이용약관 동의
@@ -253,13 +273,13 @@ const JoinForm = () => {
 
     try {
       const res = await api.post('sign-up', {
-        username: name,
         email,
-        phoneNum: contact,
         password,
+        username: name,
+        phoneNum: contact,
       })
 
-      console.log(res)
+      console.log(res) // TODO: 쿠키에 사용자 정보 세팅
     } catch (error) {
       console.error(error)
     }
