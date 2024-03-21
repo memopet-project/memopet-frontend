@@ -40,6 +40,7 @@ const initValidate = {
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
 
 const JoinForm = () => {
+  // FIXME: 하나의 객체로 만들어서 관리 [참고](https://react.vlpt.us/basic/09-multiple-inputs.html)
   const [email, setEmail] = useState('')
   const [authCode, setAuthCode] = useState('')
   const [checkEmail, setCheckEmail] = useState('')
