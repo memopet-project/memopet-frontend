@@ -1,23 +1,19 @@
 import ValidationInput from '../input/validationInput'
-import { type ChangeEvent, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
-import ClipPopupLayout from './clipPopupLayout'
+import type { ValidateObj, ChangeEvt } from '@/app/types/common'
+import authEmail from '@/app/modules/authEmail'
+import checkDuplicateEmail from '@/app/modules/checkDuplicateEmail'
 
 type Validate = {
-  email: { msg: string, status: null | boolean },
-  authCode: { msg: string, status: null | boolean },
-  password: { msg: string, status: null | boolean },
-  checkPassword: { msg: string, status: null | boolean },
-  name: { msg: string, status: null | boolean },
-  contact: { msg: string, status: null | boolean },
+  email: ValidateObj,
+  authCode: ValidateObj,
+  password: ValidateObj,
+  checkPassword: ValidateObj,
+  name: ValidateObj,
+  contact: ValidateObj,
 }
-
-type Props = {
-  handleSignUp: (arg: boolean) => void
-}
-
-type ChangeEvt = ChangeEvent<HTMLInputElement>['target']['value']
 
 const initValidate = {
   email: { msg: '', status: null },
@@ -28,12 +24,11 @@ const initValidate = {
   contact: { msg: '', status: null },
 } as const
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
-const buttonClass = 'rounded-[999px] px-4 py-[5.5px] font-medium text-sm font-pretendard text-white whitespace-nowrap ml-2 bg-red05 disabled:bg-gray03'
 
-const SignUp = ({ handleSignUp }: Props) => {
+const JoinForm = () => {
   const [email, setEmail] = useState('')
   const [authCode, setAuthCode] = useState('')
-  const [checkEmail, setCheckEmail] = useState(false)
+  const [checkEmail, setCheckEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checkPassword, setCheckPassword] = useState('')
   const [name, setName] = useState('')
@@ -49,7 +44,6 @@ const SignUp = ({ handleSignUp }: Props) => {
     setValidate((prev) => ({ ...prev, [key]: { msg: '', status: null } }))
   }
 
-
   const inputs = [
     {
       label: '이메일',
@@ -61,7 +55,7 @@ const SignUp = ({ handleSignUp }: Props) => {
       onChange: (value: ChangeEvt) => {
         setEmail(value)
         setAuthCode('')
-        setCheckEmail(false)
+        setCheckEmail('')
       },
       onBlur: () => {
       }
@@ -69,12 +63,12 @@ const SignUp = ({ handleSignUp }: Props) => {
     {
       label: '입력하신 이메일로 인증코드를 보냈어요!',
       validate: validate.authCode,
-      placeholder: '영문, 숫자, 특수문자 혼합 8자 이상 입력',
+      placeholder: 'ABC123',
       type: 'text',
       value: authCode,
       name: 'authCode',
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
-      hide: checkEmail,
+      hide: !!checkEmail,
       onChange: (value: ChangeEvt) => {
         setAuthCode(value)
         if (value) {
@@ -145,29 +139,35 @@ const SignUp = ({ handleSignUp }: Props) => {
     !!email && !!validate.email.status && !!authCode && !!validate.authCode.status,
     [email, authCode, validate.email.status, validate.authCode.status])
 
-  const authEmail = async () => {
-    console.log('인증요청');
+  const checkAuthEmail = async () => {
     if (checkEmailType(email)) {
-      checkValidate('email', true, '이메일을 정확히 입력해주세요.')
-      return;
-    }
-
-    if (email === 'memopet@naver.com') { // test
-      setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
+      setValidate((prev) => ({ ...prev, email: { msg: '이메일을 정확히 입력해주세요.', status: false } }))
       return
     }
 
-    setValidate((prev) => ({
-      ...prev,
-      email: { msg: '', status: true },
-      authCode: { msg: '', status: null },
-    }))
-    setCheckEmail(true)
+    checkDuplicateEmail(email).then((res) => {
+      if (res.dsc_code !== '1') {
+        setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
+        return
+      }
+  
+      setValidate((prev) => ({ ...prev, email: { msg: '', status: null } }))
+
+      authEmail(email).then((res) => {
+        if (res) {
+          setCheckEmail(res)
+          setValidate((prev) => ({
+            ...prev,
+            email: { msg: '', status: true },
+            authCode: { msg: '', status: null },
+          }))
+        }
+      })
+    })
   }
 
   const checkAuthCode = async () => {
-    console.log('인증확인');
-    if (authCode === '1234') { // test
+    if (authCode !== checkEmail) {
       setValidate((prev) => ({ ...prev, authCode: { msg: '인증코드가 일치하지 않습니다.', status: false } }))
       return
     }
@@ -176,60 +176,58 @@ const SignUp = ({ handleSignUp }: Props) => {
   }
 
   return (
-    <ClipPopupLayout handleClose={handleSignUp} title='회원가입'>
-      <form className='flex flex-col gap-6'>
-        {inputs.map((input) => (
-          <ValidationInput
-            key={input.name}
-            label={input.label}
-            value={input.value}
-            placeholder={input.placeholder}
-            name={input.name}
-            type={input.type}
-            validate={input.validate}
-            labelClass={input?.labelClass}
-            hide={input?.hide}
-            description={input?.description}
-            onChange={input.onChange}
-            onBlur={input?.onBlur}
-          >
-            {input.name === 'email' &&
-              <button
-                type='button'
-                disabled={!input.value}
-                className={buttonClass}
-                onClick={authEmail}
-              >
-                {
-                  isConfirmed
-                    ? '이메일 변경'
-                    : email && validate.email.status && validate.authCode.status === false
-                      ? '다시 요청'
-                      : '인증 요청'
-                }
-              </button>}
-            {input.name === 'authCode' &&
-              <button
-                type='button'
-                disabled={!input.value || isConfirmed}
-                className={buttonClass}
-                onClick={checkAuthCode}
-              >
-                확인
-              </button>
-            }
-          </ValidationInput>
-        ))}
-        <fieldset className='py-2'>
-          <label className='block text-gray09 text-base h-6 font-normal'>
-            <input type='checkbox' />
-            <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
-          </label>
-        </fieldset>
-        <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
-      </form>
-    </ClipPopupLayout>
+    <form className='flex flex-col gap-6'>
+      {inputs.map((input) => (
+        <ValidationInput
+          key={input.name}
+          label={input.label}
+          value={input.value}
+          placeholder={input.placeholder}
+          name={input.name}
+          type={input.type}
+          validate={input.validate}
+          labelClass={input?.labelClass}
+          hide={input?.hide}
+          description={input?.description}
+          onChange={input.onChange}
+          onBlur={input?.onBlur}
+        >
+          {input.name === 'email' &&
+            <button
+              type='button'
+              disabled={!input.value}
+              className='auth-button'
+              onClick={checkAuthEmail}
+            >
+              {
+                isConfirmed
+                  ? '이메일 변경'
+                  : email && validate.email.status && validate.authCode.status === false
+                    ? '다시 요청'
+                    : '인증 요청'
+              }
+            </button>}
+          {input.name === 'authCode' &&
+            <button
+              type='button'
+              disabled={!input.value || isConfirmed}
+              className='auth-button'
+              onClick={checkAuthCode}
+            >
+              확인
+            </button>
+          }
+        </ValidationInput>
+      ))}
+      <fieldset className='pb-2'>
+        <label className='block text-gray09 text-base h-6 font-normal'>
+          <input type='checkbox' />
+          <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
+        </label>
+      </fieldset>
+      <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
+    </form>
   )
 }
 
-export default SignUp
+export default JoinForm
