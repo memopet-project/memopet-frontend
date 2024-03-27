@@ -7,6 +7,7 @@ import checkDuplicateEmail from '@/app/modules/checkDuplicateEmail'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import api from '@/app/api/axios'
+// import { setCookie } from '@/app/modules/authTokenCookie'
 
 const AgreeTerms = () => {
   return (
@@ -24,7 +25,21 @@ type Validate = {
   agree: ValidateObj;
 }
 
-type ValidateKey = keyof typeof initValidate
+type ValidateKey = keyof typeof initValidate;
+
+type JoinResponse = {
+  username: string;
+  user_status: string;
+  user_role: string;
+  login_fail_count: number;
+  access_token_expiry: number;
+  token: string;
+}
+
+type AuthResponseData = {
+  dsc_code: '0' | '1'
+  err_message: string
+}
 
 const initValidateObj = { msg: '', status: null }
 const initValidate = {
@@ -37,18 +52,21 @@ const initValidate = {
   agree: initValidateObj,
 } as const
 
+const initJoinForm = {
+  email: '',
+  authCode: '',
+  password: '',
+  checkPassword: '',
+  name: '',
+  contact: '',
+  agree: false,
+}
+
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
 
 const JoinForm = () => {
-  // FIXME: 하나의 객체로 만들어서 관리 [참고](https://react.vlpt.us/basic/09-multiple-inputs.html)
-  const [email, setEmail] = useState('')
-  const [authCode, setAuthCode] = useState('')
   const [checkEmail, setCheckEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
-  const [name, setName] = useState('')
-  const [contact, setContact] = useState('')
-  const [agree, setAgree] = useState(false)
+  const [joinForm, setJoinForm] = useState(initJoinForm)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
 
   // 유효성 검사 초기화
@@ -67,18 +85,17 @@ const JoinForm = () => {
 
   // 이메일, 인증코드 초기화
   const retryAuthEmail = (emailValue = '') => {
-    setEmail(emailValue)
-    setAuthCode('')
+    setJoinForm({ ...joinForm, email: emailValue, authCode: '' })
     setCheckEmail('')
     initializeValidate('email')
     initializeValidate('authCode')
   }
 
   const buttonLabel = useMemo(() =>
-    !!email && !!validate.email.status && !!authCode && !!validate.authCode.status
+    !!joinForm.email && !!validate.email.status && !!joinForm.authCode && !!validate.authCode.status
       ? '이메일 변경'
-      : !!email && validate.email.status ? '다시 요청' : '인증 요청',
-    [email, authCode, validate.email.status, validate.authCode.status])
+      : !!joinForm.email && validate.email.status ? '다시 요청' : '인증 요청',
+    [joinForm.email, joinForm.authCode, validate.email.status, validate.authCode.status])
 
   const inputs = [
     {
@@ -86,7 +103,7 @@ const JoinForm = () => {
       validate: validate.email,
       placeholder: 'sample@email.com',
       type: 'email',
-      value: email,
+      value: joinForm.email,
       name: 'email',
       hideButton: buttonLabel === '이메일 변경',
       disable: buttonLabel === '이메일 변경',
@@ -99,18 +116,15 @@ const JoinForm = () => {
       validate: validate.authCode,
       placeholder: 'ABC123',
       type: 'text',
-      value: authCode,
+      value: joinForm.authCode,
       name: 'authCode',
       hideButton: buttonLabel === '이메일 변경',
       disable: buttonLabel === '이메일 변경',
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
       hide: !!checkEmail,
       onChange: (value: ChangeEvt) => {
-        setAuthCode(value)
-
-        if (value) {
-          initializeValidate('authCode')
-        }
+        setJoinForm({ ...joinForm, authCode: value })
+        initializeValidate('authCode')
       },
     },
     {
@@ -118,15 +132,15 @@ const JoinForm = () => {
       validate: validate.password,
       placeholder: passwordPlaceholder,
       type: 'password',
-      value: password,
+      value: joinForm.password,
       name: 'password',
       onChange: (value: ChangeEvt) => {
-        setPassword(value)
+        setJoinForm({ ...joinForm, password: value })
         initializeValidate('password')
       },
       onBlur: () => {
         const regex = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/
-        if (regex.test(password)) {
+        if (regex.test(joinForm.password)) {
           successValidate('password')
           return
         }
@@ -139,14 +153,14 @@ const JoinForm = () => {
       validate: validate.checkPassword,
       placeholder: passwordPlaceholder,
       type: 'password',
-      value: checkPassword,
+      value: joinForm.checkPassword,
       name: 'checkPassword',
       onChange: (value: ChangeEvt) => {
-        setCheckPassword(value)
+        setJoinForm({ ...joinForm, checkPassword: value })
         initializeValidate('checkPassword')
       },
       onBlur: () => {
-        const condition = password !== checkPassword
+        const condition = joinForm.password !== joinForm.checkPassword
 
         if (!condition) {
           successValidate('checkPassword')
@@ -161,17 +175,16 @@ const JoinForm = () => {
       validate: validate.name,
       placeholder: '이름 입력',
       type: 'text',
-      value: name,
+      value: joinForm.name,
       name: 'name',
       onChange: (value: ChangeEvt) => {
-        console.log(value)
-        setName(value)
+        setJoinForm({ ...joinForm, name: value })
         initializeValidate('name')
       },
       onBlur: () => {
         const regex = /^[가-힣]+$/
 
-        if (regex.test(name)) {
+        if (regex.test(joinForm.name)) {
           successValidate('name')
           return
         }
@@ -184,15 +197,15 @@ const JoinForm = () => {
       validate: validate.contact,
       placeholder: '‘-’ 없이 숫자만 입력',
       type: 'tel',
-      value: contact,
+      value: joinForm.contact,
       name: 'contact',
       description: '*내 계정을 찾을 때 필요해요',
       onChange: (value: ChangeEvt) => {
-        setContact(value)
+        setJoinForm({ ...joinForm, contact: value })
         initializeValidate('contact')
       },
       onBlur: () => {
-        if (!checkContactNumber(contact)) {
+        if (!checkContactNumber(joinForm.contact)) {
           successValidate('contact')
           return
         }
@@ -204,12 +217,12 @@ const JoinForm = () => {
 
   // 이메일 인증코드 요청
   const checkAuthEmail = async () => {
-    if (checkEmailType(email)) {
+    if (checkEmailType(joinForm.email)) {
       failValidate('email', '이메일을 정확히 입력해주세요.')
       return
     }
 
-    checkDuplicateEmail(email).then((res) => {
+    checkDuplicateEmail(joinForm.email).then((res) => {
       if (res.dsc_code !== '1') {
         failValidate('email', '이미 가입한 계정입니다.')
         return
@@ -217,9 +230,9 @@ const JoinForm = () => {
 
       setValidate((prev) => ({ ...prev, email: initValidateObj }))
 
-      authEmail(email).then((res) => {
-        if (res) {
-          setCheckEmail(res)
+      authEmail(joinForm.email).then((res) => {
+        if (res.dsc_code) {
+          setCheckEmail(res.auth_code)
           successValidate('email')
           initializeValidate('authCode')
         }
@@ -230,24 +243,18 @@ const JoinForm = () => {
   // 인증코드 인증
   const checkAuthCode = async () => {
     try {
-      const res = await api.post('sign-in/verification-email', {
-        email,
+      const res = await api.post<AuthResponseData>('sign-in/verification-email', {
+        email: joinForm.email,
         confirm_code: checkEmail
       })
 
       const status = {
-        'code is expired': false,
-        'input code is different': false,
-      }
+        'expired': '인증코드가 만료되었습니다.',
+        'different': '인증코드가 일치하지 않습니다.',
+      } as Record<string, string>
 
-      // TODO: 인증코드 확인
-      if ('expired'.includes(res.data)) {
-        failValidate('authCode', '인증코드가 만료되었습니다.')
-        return;
-      }
-
-      if ('different'.includes(res.data)) {
-        failValidate('authCode', '인증코드가 일치하지 않습니다.')
+      if (res.data.dsc_code !== '1') {
+        failValidate('authCode', status[res.data.err_message])
         return;
       }
 
@@ -259,7 +266,7 @@ const JoinForm = () => {
 
   // 이용약관 동의
   const handleAgreeCheckbox = (val: boolean) => {
-    setAgree(val)
+    setJoinForm({ ...joinForm, agree: val })
 
     if (val) {
       successValidate('agree')
@@ -273,13 +280,16 @@ const JoinForm = () => {
     e.preventDefault()
 
     try {
-      const res = await api.post('sign-up', {
-        email,
-        password,
-        username: name,
-        phoneNum: contact,
+      const res = await api.post<JoinResponse>('sign-up', {
+        email: joinForm.email,
+        password: joinForm.password,
+        username: joinForm.name,
+        phoneNum: joinForm.contact,
       })
 
+      if (res.data.token) {
+        // setCookie(res.data.token, res.data.access_token_expiry)
+      }
       console.log(res) // TODO: 쿠키에 사용자 정보 세팅
     } catch (error) {
       console.error(error)
@@ -310,7 +320,7 @@ const JoinForm = () => {
               type='button'
               disabled={!input.value}
               className={`auth-button ${buttonLabel === '이메일 변경' && '!border !border-gray04 !bg-white !text-gray07'}`}
-              onClick={() => buttonLabel === '이메일 변경' ? retryAuthEmail('') : checkAuthEmail()}
+              onClick={() => buttonLabel === '이메일 변경' ? input.onChange('') : checkAuthEmail()}
             >{buttonLabel}
             </button>}
           {input.name === 'authCode' &&
@@ -328,7 +338,7 @@ const JoinForm = () => {
       <fieldset className='pb-2'>
         <CheckBtn
           name='agree'
-          checked={agree}
+          checked={joinForm.agree}
           children={<AgreeTerms />}
           onChange={handleAgreeCheckbox}
         />
