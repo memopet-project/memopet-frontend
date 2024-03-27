@@ -1,48 +1,101 @@
-import ValidationInput from '../input/validationInput'
-import { useMemo, useState } from 'react'
+import { type FormEvent, useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
 import type { ValidateObj, ChangeEvt } from '@/app/types/common'
 import authEmail from '@/app/modules/authEmail'
 import checkDuplicateEmail from '@/app/modules/checkDuplicateEmail'
+import ValidationInput from '../input/validationInput'
+import CheckBtn from '../button/checkBtn'
+import api from '@/app/api/axios'
+// import { setCookie } from '@/app/modules/authTokenCookie'
 
-type Validate = {
-  email: ValidateObj,
-  authCode: ValidateObj,
-  password: ValidateObj,
-  checkPassword: ValidateObj,
-  name: ValidateObj,
-  contact: ValidateObj,
+const AgreeTerms = () => {
+  return (
+    <span><a className='underline'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.</span>
+  )
 }
 
+type Validate = {
+  email: ValidateObj;
+  authCode: ValidateObj;
+  password: ValidateObj;
+  checkPassword: ValidateObj;
+  name: ValidateObj;
+  contact: ValidateObj;
+  agree: ValidateObj;
+}
+
+type ValidateKey = keyof typeof initValidate;
+
+type JoinResponse = {
+  username: string;
+  user_status: string;
+  user_role: string;
+  login_fail_count: number;
+  access_token_expiry: number;
+  token: string;
+}
+
+type AuthResponseData = {
+  dsc_code: '0' | '1'
+  err_message: string
+}
+
+const initValidateObj = { msg: '', status: null }
 const initValidate = {
-  email: { msg: '', status: null },
-  authCode: { msg: '', status: null },
-  password: { msg: '', status: null },
-  checkPassword: { msg: '', status: null },
-  name: { msg: '', status: null },
-  contact: { msg: '', status: null },
+  email: initValidateObj,
+  authCode: initValidateObj,
+  password: initValidateObj,
+  checkPassword: initValidateObj,
+  name: initValidateObj,
+  contact: initValidateObj,
+  agree: initValidateObj,
 } as const
+
+const initJoinForm = {
+  email: '',
+  authCode: '',
+  password: '',
+  checkPassword: '',
+  name: '',
+  contact: '',
+  agree: false,
+}
+
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
 
 const JoinForm = () => {
-  const [email, setEmail] = useState('')
-  const [authCode, setAuthCode] = useState('')
   const [checkEmail, setCheckEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [checkPassword, setCheckPassword] = useState('')
-  const [name, setName] = useState('')
-  const [contact, setContact] = useState('')
+  const [joinForm, setJoinForm] = useState(initJoinForm)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
 
-  const checkValidate = (key: keyof typeof initValidate, condition: boolean, errorMsg = '') => {
-    if (condition) {
-      setValidate((prev) => ({ ...prev, [key]: { msg: errorMsg, status: false } }))
-      return;
-    }
-
-    setValidate((prev) => ({ ...prev, [key]: { msg: '', status: null } }))
+  // 유효성 검사 초기화
+  const initializeValidate = (key: ValidateKey) => {
+    setValidate((prev) => ({ ...prev, [key]: initValidateObj }))
   }
+  // 유효성 검사 실패
+  const failValidate = (key: ValidateKey, msg: string) => {
+    setValidate((prev) => ({ ...prev, [key]: { msg: msg, status: false } }))
+  }
+
+  // 유효성 검사 성공
+  const successValidate = (key: ValidateKey, msg = '') => {
+    setValidate((prev) => ({ ...prev, [key]: { msg, status: true } }))
+  }
+
+  // 이메일, 인증코드 초기화
+  const retryAuthEmail = (emailValue = '') => {
+    setJoinForm({ ...joinForm, email: emailValue, authCode: '' })
+    setCheckEmail('')
+    initializeValidate('email')
+    initializeValidate('authCode')
+  }
+
+  const buttonLabel = useMemo(() =>
+    !!joinForm.email && !!validate.email.status && !!joinForm.authCode && !!validate.authCode.status
+      ? '이메일 변경'
+      : !!joinForm.email && validate.email.status ? '다시 요청' : '인증 요청',
+    [joinForm.email, joinForm.authCode, validate.email.status, validate.authCode.status])
 
   const inputs = [
     {
@@ -50,30 +103,28 @@ const JoinForm = () => {
       validate: validate.email,
       placeholder: 'sample@email.com',
       type: 'email',
-      value: email,
+      value: joinForm.email,
       name: 'email',
+      hideButton: buttonLabel === '이메일 변경',
+      disable: buttonLabel === '이메일 변경',
       onChange: (value: ChangeEvt) => {
-        setEmail(value)
-        setAuthCode('')
-        setCheckEmail('')
+        retryAuthEmail(value)
       },
-      onBlur: () => {
-      }
     },
     {
       label: '입력하신 이메일로 인증코드를 보냈어요!',
       validate: validate.authCode,
       placeholder: 'ABC123',
       type: 'text',
-      value: authCode,
+      value: joinForm.authCode,
       name: 'authCode',
+      hideButton: buttonLabel === '이메일 변경',
+      disable: buttonLabel === '이메일 변경',
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
       hide: !!checkEmail,
       onChange: (value: ChangeEvt) => {
-        setAuthCode(value)
-        if (value) {
-          checkValidate('authCode', false)
-        }
+        setJoinForm({ ...joinForm, authCode: value })
+        initializeValidate('authCode')
       },
     },
     {
@@ -81,13 +132,20 @@ const JoinForm = () => {
       validate: validate.password,
       placeholder: passwordPlaceholder,
       type: 'password',
-      value: password,
+      value: joinForm.password,
       name: 'password',
       onChange: (value: ChangeEvt) => {
-        setPassword(value)
+        setJoinForm({ ...joinForm, password: value })
+        initializeValidate('password')
       },
       onBlur: () => {
-        checkValidate('password', /* 비밀번호 특수문자 + 숫자 + 영어 + 8자 이상 체크 */ false, '영문, 숫자, 특수문자 혼합하여 8자 이상으로 설정해야 합니다.')
+        const regex = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/
+        if (regex.test(joinForm.password)) {
+          successValidate('password')
+          return
+        }
+
+        failValidate('password', '영문, 숫자, 특수문자 혼합하여 8자 이상으로 설정해야 합니다.')
       }
     },
     {
@@ -95,13 +153,21 @@ const JoinForm = () => {
       validate: validate.checkPassword,
       placeholder: passwordPlaceholder,
       type: 'password',
-      value: checkPassword,
+      value: joinForm.checkPassword,
       name: 'checkPassword',
       onChange: (value: ChangeEvt) => {
-        setCheckPassword(value)
+        setJoinForm({ ...joinForm, checkPassword: value })
+        initializeValidate('checkPassword')
       },
       onBlur: () => {
-        checkValidate('checkPassword', password === checkPassword, '비밀번호가 일치하지 않습니다.')
+        const condition = joinForm.password !== joinForm.checkPassword
+
+        if (!condition) {
+          successValidate('checkPassword')
+          return
+        }
+
+        failValidate('checkPassword', '비밀번호가 일치하지 않습니다.')
       }
     },
     {
@@ -109,13 +175,21 @@ const JoinForm = () => {
       validate: validate.name,
       placeholder: '이름 입력',
       type: 'text',
-      value: name,
+      value: joinForm.name,
       name: 'name',
       onChange: (value: ChangeEvt) => {
-        setName(value)
+        setJoinForm({ ...joinForm, name: value })
+        initializeValidate('name')
       },
       onBlur: () => {
-        checkValidate('name', /* 한글만 입력 체크 */ false, '한글만 입력해주세요. (영문, 특수기호 입력 불가)')
+        const regex = /^[가-힣]+$/
+
+        if (regex.test(joinForm.name)) {
+          successValidate('name')
+          return
+        }
+
+        failValidate('name', '한글만 입력해주세요. (영문, 특수기호 입력 불가)')
       }
     },
     {
@@ -123,60 +197,107 @@ const JoinForm = () => {
       validate: validate.contact,
       placeholder: '‘-’ 없이 숫자만 입력',
       type: 'tel',
-      value: contact,
+      value: joinForm.contact,
       name: 'contact',
       description: '*내 계정을 찾을 때 필요해요',
       onChange: (value: ChangeEvt) => {
-        setContact(value)
+        setJoinForm({ ...joinForm, contact: value })
+        initializeValidate('contact')
       },
       onBlur: () => {
-        checkValidate('contact', checkContactNumber(contact), '숫자만 입력해주세요.')
+        if (!checkContactNumber(joinForm.contact)) {
+          successValidate('contact')
+          return
+        }
+
+        failValidate('contact', '숫자만 입력해주세요.')
       }
     },
   ]
 
-  const isConfirmed = useMemo(() =>
-    !!email && !!validate.email.status && !!authCode && !!validate.authCode.status,
-    [email, authCode, validate.email.status, validate.authCode.status])
-
+  // 이메일 인증코드 요청
   const checkAuthEmail = async () => {
-    if (checkEmailType(email)) {
-      setValidate((prev) => ({ ...prev, email: { msg: '이메일을 정확히 입력해주세요.', status: false } }))
+    if (checkEmailType(joinForm.email)) {
+      failValidate('email', '이메일을 정확히 입력해주세요.')
       return
     }
 
-    checkDuplicateEmail(email).then((res) => {
+    checkDuplicateEmail(joinForm.email).then((res) => {
       if (res.dsc_code !== '1') {
-        setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
+        failValidate('email', '이미 가입한 계정입니다.')
         return
       }
-  
-      setValidate((prev) => ({ ...prev, email: { msg: '', status: null } }))
 
-      authEmail(email).then((res) => {
-        if (res) {
-          setCheckEmail(res)
-          setValidate((prev) => ({
-            ...prev,
-            email: { msg: '', status: true },
-            authCode: { msg: '', status: null },
-          }))
+      setValidate((prev) => ({ ...prev, email: initValidateObj }))
+
+      authEmail(joinForm.email).then((res) => {
+        if (res.dsc_code) {
+          setCheckEmail(res.auth_code)
+          successValidate('email')
+          initializeValidate('authCode')
         }
       })
     })
   }
 
+  // 인증코드 인증
   const checkAuthCode = async () => {
-    if (authCode !== checkEmail) {
-      setValidate((prev) => ({ ...prev, authCode: { msg: '인증코드가 일치하지 않습니다.', status: false } }))
+    try {
+      const res = await api.post<AuthResponseData>('sign-in/verification-email', {
+        email: joinForm.email,
+        confirm_code: checkEmail
+      })
+
+      const status = {
+        'expired': '인증코드가 만료되었습니다.',
+        'different': '인증코드가 일치하지 않습니다.',
+      } as Record<string, string>
+
+      if (res.data.dsc_code !== '1') {
+        failValidate('authCode', status[res.data.err_message])
+        return;
+      }
+
+      successValidate('authCode', '이메일이 인증되었습니다.')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  // 이용약관 동의
+  const handleAgreeCheckbox = (val: boolean) => {
+    setJoinForm({ ...joinForm, agree: val })
+
+    if (val) {
+      successValidate('agree')
       return
     }
 
-    setValidate((prev) => ({ ...prev, authCode: { msg: '이메일이 인증되었습니다.', status: true } }))
+    failValidate('agree', '')
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    try {
+      const res = await api.post<JoinResponse>('sign-up', {
+        email: joinForm.email,
+        password: joinForm.password,
+        username: joinForm.name,
+        phoneNum: joinForm.contact,
+      })
+
+      if (res.data.token) {
+        // setCookie(res.data.token, res.data.access_token_expiry)
+      }
+      console.log(res) // TODO: 쿠키에 사용자 정보 세팅
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
-    <form className='flex flex-col gap-6'>
+    <form className='flex flex-col gap-6' onSubmit={handleSubmit}>
       {inputs.map((input) => (
         <ValidationInput
           key={input.name}
@@ -191,26 +312,21 @@ const JoinForm = () => {
           description={input?.description}
           onChange={input.onChange}
           onBlur={input?.onBlur}
+          hideButton={input?.hideButton}
+          disable={input?.disable}
         >
           {input.name === 'email' &&
             <button
               type='button'
               disabled={!input.value}
-              className='auth-button'
-              onClick={checkAuthEmail}
-            >
-              {
-                isConfirmed
-                  ? '이메일 변경'
-                  : email && validate.email.status && validate.authCode.status === false
-                    ? '다시 요청'
-                    : '인증 요청'
-              }
+              className={`auth-button ${buttonLabel === '이메일 변경' && '!border !border-gray04 !bg-white !text-gray07'}`}
+              onClick={() => buttonLabel === '이메일 변경' ? input.onChange('') : checkAuthEmail()}
+            >{buttonLabel}
             </button>}
           {input.name === 'authCode' &&
             <button
               type='button'
-              disabled={!input.value || isConfirmed}
+              disabled={!input.value || buttonLabel === '이메일 변경'}
               className='auth-button'
               onClick={checkAuthCode}
             >
@@ -220,12 +336,20 @@ const JoinForm = () => {
         </ValidationInput>
       ))}
       <fieldset className='pb-2'>
-        <label className='block text-gray09 text-base h-6 font-normal'>
-          <input type='checkbox' />
-          <a className='underline ml-2'>이용약관</a> 및 <a className='underline'>개인정보 보호정책</a>에 동의합니다.
-        </label>
+        <CheckBtn
+          name='agree'
+          checked={joinForm.agree}
+          children={<AgreeTerms />}
+          onChange={handleAgreeCheckbox}
+        />
       </fieldset>
-      <button type='submit' className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4'>가입하기</button>
+      <button
+        disabled={Object.values(validate).some((val) => !val.status)}
+        type='submit'
+        className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4 disabled:bg-gray03'
+      >
+        가입하기
+      </button>
     </form>
   )
 }
