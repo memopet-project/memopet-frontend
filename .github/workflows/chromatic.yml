@@ -26,6 +26,8 @@ jobs:
       - uses: chromaui/action@v1
         name: deploy chromatic
         with:
+          # TODO: 추후 token env 변경 
+          # npx chromatic --project-token=chpt_2c3957bff739ef2
           #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
