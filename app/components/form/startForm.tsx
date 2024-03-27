@@ -1,9 +1,10 @@
 import { modalStatus } from '@/app/recoil/startModalStatus';
-import { FormEvent, Fragment } from 'react';
+import { Fragment } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Naver from '@/public/svg/naver.svg'
 import Image from 'next/image';
 import type { List } from '../modal/start';
+import api from '@/app/api/axios';
 
 type Props = {
   handleClick: (arg: List) => void
@@ -12,10 +13,6 @@ type Props = {
 const StartForm = ({ handleClick }: Props) => {
   const setModalStatus = useSetRecoilState(modalStatus);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setModalStatus('resettingPassword')
-  }
   const snsLogin = [
     {
       label: 'Google 계정으로 로그인',
@@ -29,13 +26,22 @@ const StartForm = ({ handleClick }: Props) => {
         className='p-1'
         alt='google'
       />,
-      classes: 'border border-gray02 text-gray09'
+      classes: 'border border-gray02 text-gray09',
+      onClick: () => {}
     },
     {
       label: '네이버 계정으로 로그인',
       value: 'naver',
       icon: <Naver />,
-      classes: 'bg-[#03C75A] text-white'
+      classes: 'bg-[#03C75A] text-white',
+      onClick: async () => {
+        try {
+          const res = await api.get('oauth2/callback/naver')
+          console.log(res)
+        } catch (error) {
+          
+        }
+      }
     },
   ]
 
@@ -55,9 +61,14 @@ const StartForm = ({ handleClick }: Props) => {
         간편하게 로그인하고 반려동물과의 소중한 추억을<br />
         기록하고 공유해보세요!
       </p>
-      <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
+      <form className='flex flex-col gap-3'>
         {snsLogin.map((btn) =>
-          <button key={btn.value} className={`inline-flex rounded-lg h-[52px] items-center justify-center gap-2 font-semibold -tracking-[0.25px] ${btn.classes}`}>
+          <button 
+            key={btn.value} 
+            type='button'
+            onClick={btn.onClick} 
+            className={`inline-flex rounded-lg h-[52px] items-center justify-center gap-2 font-semibold -tracking-[0.25px] ${btn.classes}`}
+          >
             {btn.icon}
             {btn.label}
           </button>
