@@ -21,6 +21,8 @@ type Props = {
   onBlur?: () => void;
   children?: ReactNode;
   fieldClass?: string;
+  hideButton?: boolean;
+  disable?: boolean;
 }
 
 const ValidationInput = ({ label, placeholder, validate, type, value, name, onChange, ...props }: Props) => {
@@ -28,21 +30,18 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
   const iconClass = 'mr-1 w-4 h-4'
 
   const [inputType, setInputType] = useState(type)
-  const [inputValue, setInputValue] = useState(value)
+  const [input, setInput] = useState('')
   const [validation, setValidation] = useState(validate)
   const [colors, setColors] = useState('text-statusGreen')
   const [borders, setBorders] = useState('border-gray07')
-  
-  const initValidate = { msg: '', status: null }
 
   function handleClick() {
     setInputType((val: string) => val === 'password' ? 'text' : 'password')
-    return;
   }
 
   function handleChange(val: ChangeEvent<HTMLInputElement>['target']['value']) {
     onChange(val)
-    setValidation(structuredClone(initValidate))
+    setInput(val)
     setColors('text-statusGreen')
     setBorders('border-gray07')
   }
@@ -61,7 +60,7 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
   }, [validate])
 
   useEffect(() => {
-    setInputValue(value)
+    setInput(value)
   }, [value])
 
   return (
@@ -79,16 +78,17 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
         <input
           placeholder={placeholder}
           type={inputType}
-          value={inputValue}
+          value={input}
           onChange={(e) => handleChange(e.target.value)}
           onBlur={props.onBlur}
           name={name}
+          disabled={props.disable}
           autoComplete={type === 'password' ? 'new-password' : type}
-          className='focus:border-none border-none focus:outline-none w-full disabled:text-gray04'
+          className='focus:border-none border-none focus:outline-none w-full disabled:!text-gray04 disabled:bg-white'
         />
         <div className='flex items-center'>
           {
-            type !== 'password' && inputValue &&
+            type !== 'password' && (value && !props.hideButton) &&
             <button 
               type='button'
               onClick={() => handleChange('')} 
@@ -99,7 +99,7 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
           }
           {props.children}
           {
-            type === 'password' && inputValue &&
+            type === 'password' && value &&
             <button 
               onClick={handleClick}
               type='button'

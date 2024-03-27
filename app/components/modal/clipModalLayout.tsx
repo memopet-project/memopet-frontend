@@ -1,6 +1,6 @@
 import ClipSVG from '@/public/svg/clipTop.svg'
-import Close from '@/public/svg/close_24.svg'
-import { ReactNode, useMemo } from 'react';
+import CloseSVG from '@/public/svg/close_24.svg'
+import { type ReactNode, useMemo } from 'react';
 
 type Props = {
   handleClose: (arg: boolean) => void;
@@ -17,7 +17,7 @@ const ClipModalLayout = ({ handleClose, title, children, maxWidth = '480px' }: P
       <aside className={`relative bg-white w-full ${useMaxWidth} h-fit max-h-[905px] min-h-fit rounded-2xl p-10 border border-gray07 shadow-[0px_4px_4px_0px_#00000040]`}>
         <ClipSVG className='absolute -top-[17px] -left-[14px]' />
         <button className='absolute w-6 h-6 top-4 right-4' onClick={() => handleClose(false)}>
-          <Close className='text-gray09' />
+          <CloseSVG className='text-gray09' />
         </button>
         <h1 className='text-gray09 text-[28px] font-medium leading-9 font-gothic mb-8'>{title}</h1>
         {children}

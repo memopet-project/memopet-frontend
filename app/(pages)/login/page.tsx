@@ -1,6 +1,5 @@
 import Header from '@/app/components/header/header'
 import Image from 'next/image'
-import React from 'react'
 
 const images = [
   {

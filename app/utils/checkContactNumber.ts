@@ -5,7 +5,7 @@
  */
 
 const checkContactNumber = (value: string): boolean => {
-  const contactRegex = new RegExp(/^[0-9]*$/)
+  const contactRegex = new RegExp(/^[0-9]{1,11}$/)
   
   return !contactRegex.test(value)
 }
