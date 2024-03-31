@@ -1,4 +1,4 @@
-import { getData } from '../api/api';
+import { getData } from '../api';
 
 type RequestData = { email: string }
 type ResponseType = {
