@@ -1,15 +1,20 @@
 'use client'
 
-import { Fragment, useState } from 'react'
-import type { ValidateObj, ChangeEvt } from '@/app/types/common'
+import { type FormEvent, Fragment, useEffect, useState } from 'react'
+import type { ChangeEvt } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import MainBtn from '../button/mainBtn'
 import type { List } from '../modal/start'
+import api from '@/app/api/axios'
+import { AxiosError } from 'axios'
+
+type ValidateType = 'email' | 'password' | null;
 
 type Validate = {
-  email: ValidateObj,
-  password: ValidateObj,
+  type: ValidateType;
+  status: boolean | null;
+  msg: string;
 }
 
 type Props = {
@@ -17,39 +22,63 @@ type Props = {
 }
 
 const initValidate = {
-  email: { msg: '', status: null },
-  password: { msg: '', status: null },
+  type: null,
+  status: null,
+  msg: '',
 } as const
 
+const initLoginInfo = {
+  email: '',
+  password: '',
+}
+
+interface LoginResponse {
+  username: string;
+  user_status: string;
+  user_role: string;
+  login_fail_count: number;
+  access_token: string;
+  access_token_expiry: number;
+}
+
+interface LoginError {
+  status: number;
+  timestamp: string;
+  message: string;
+}
 
 const EmailLoginForm = ({ handleClick }: Props) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [loginInfo, setLoginInfo] = useState(initLoginInfo)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [rememberEmail, setRememberEmail] = useState(false)
   const [count, setCount] = useState(0)
 
+  // 유효성 검사 초기화 && 성공
+  const initializeValidate = () => {
+    setValidate(initValidate)
+  }
+  // 유효성 검사 실패
+  const failValidate = (type: ValidateType, msg: string) => {
+    setValidate({ type, msg, status: false })
+  }
+
   const inputs = [
     {
-      validate: validate.email,
       placeholder: '이메일 입력',
       type: 'email',
-      value: email,
+      value: loginInfo.email,
       name: 'email',
       onChange: (value: ChangeEvt) => {
-        setEmail(value)
+        setLoginInfo({ ...loginInfo, email: value })
       },
-      onBlur: () => {
-      }
     },
     {
-      validate: validate.password,
       placeholder: '비밀번호 입력',
       type: 'password',
-      value: password,
+      value: loginInfo.password,
       name: 'password',
       onChange: (value: ChangeEvt) => {
-        setPassword(value)
+        setLoginInfo({ ...loginInfo, password: value })
       },
       onBlur: () => {
       }
@@ -71,9 +100,43 @@ const EmailLoginForm = ({ handleClick }: Props) => {
     },
   ]
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault()
+    try {
+      const res = await api.post<LoginResponse>('sign-in', loginInfo)
+      initializeValidate()
+      // TODO: 쿠키에 넣어주기
+    } catch (error) {
+      const errorMsg = {
+        '아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해 주세요.': '이메일 또는 비밀번호를 잘못 입력했습니다.',
+        '해당 고객은 존재하지 않습니다.': '등록되지 않은 이메일입니다.'
+      } as Record<string, string>
+      const { response } = error as unknown as AxiosError<LoginError>
 
+      if (!response) {
+        failValidate('email', '서버에러가 발생했습니다.')
+        return
+      }
+
+      const mappedMsg = errorMsg[response.data.message]
+
+      if (mappedMsg === '이메일 또는 비밀번호를 잘못 입력했습니다.') {
+        setCount(count + 1)
+        failValidate('password', mappedMsg)
+      } else if (mappedMsg) {
+        failValidate('email', mappedMsg)
+      }
+    }
   }
+
+  useEffect(() => {
+    // TODO: 로그인 실패모달로 이동
+  }, [count])
+
+  useEffect(() => {
+    // TODO: 이메일 기억하기 로컬스토리지에 이메일 넣기
+  }, [rememberEmail])
+
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
       {inputs.map((input) => (
@@ -83,17 +146,14 @@ const EmailLoginForm = ({ handleClick }: Props) => {
           placeholder={input.placeholder}
           name={input.name}
           type={input.type}
-          validate={input.validate}
           onChange={input.onChange}
           onBlur={input?.onBlur}
         />
       ))}
-      {count > 0 && <div className='error-box'>
-        등록되지 않은 이메일이거나<br />
-        이메일 또는 비밀번호를 잘못 입력했습니다. ({count}/5)
+      {validate.type && <div className='error-box'>
+        {validate.msg} {validate.type === 'password' && `(${count}/5)`}
       </div>}
       <fieldset>
-        {rememberEmail}
         <CheckBtn
           name='rememberEmail'
           checked={rememberEmail}
@@ -113,4 +173,5 @@ const EmailLoginForm = ({ handleClick }: Props) => {
     </form>
   )
 }
+
 export default EmailLoginForm
