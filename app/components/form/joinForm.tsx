@@ -7,7 +7,6 @@ import checkDuplicateEmail from '@/app/api/email/checkDuplicateEmail'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import api from '@/app/api/axios'
-// import { setCookie } from '@/app/modules/authTokenCookie'
 
 const AgreeTerms = () => {
   return (
