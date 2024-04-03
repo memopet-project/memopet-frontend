@@ -1,5 +1,5 @@
 import VerticalDotsSVG from '@/public/svg/verticalDots.svg'
-import CommentAction from '../comment/action';
+// import CommentAction from '../comment/action';
 import { commentInfoType } from '@/app/interfaces';
 
 interface CommentEach {
@@ -31,7 +31,9 @@ const ArticleCommentEach = ({
       <div className="flex items-center justify-center cursor-pointer rounded-full relative h-10 min-w-[40px] hover:bg-gray0.5" onClick={()=>clickDots(commentInfo.id)}>
         <VerticalDotsSVG />
         {
-          isSelected && <div className='absolute right-2 top-10 bg-grayBlur z-10'><CommentAction status={status} deleteComment={deleteComment}/></div>
+          isSelected && <div className='absolute right-2 top-10 bg-grayBlur z-10'>
+{/*             <CommentAction status={status} deleteComment={deleteComment}/> */}
+          </div>
         }
       </div>
     </div>
