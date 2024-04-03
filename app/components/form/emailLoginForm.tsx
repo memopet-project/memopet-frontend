@@ -8,6 +8,8 @@ import MainBtn from '../button/mainBtn'
 import type { List } from '../modal/start'
 import api from '@/app/api/axios'
 import { AxiosError } from 'axios'
+import { useSetRecoilState } from 'recoil'
+import { modalStatus } from '@/app/recoil/startModalStatus'
 
 type ValidateType = 'email' | 'password' | null;
 
@@ -52,6 +54,7 @@ const EmailLoginForm = ({ handleClick }: Props) => {
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [rememberEmail, setRememberEmail] = useState(false)
   const [count, setCount] = useState(0)
+  const setModalStatus = useSetRecoilState(modalStatus);
 
   // 유효성 검사 초기화 && 성공
   const initializeValidate = () => {
@@ -70,6 +73,7 @@ const EmailLoginForm = ({ handleClick }: Props) => {
       name: 'email',
       onChange: (value: ChangeEvt) => {
         setLoginInfo({ ...loginInfo, email: value })
+        initializeValidate()
       },
     },
     {
@@ -79,9 +83,8 @@ const EmailLoginForm = ({ handleClick }: Props) => {
       name: 'password',
       onChange: (value: ChangeEvt) => {
         setLoginInfo({ ...loginInfo, password: value })
+        initializeValidate()
       },
-      onBlur: () => {
-      }
     },
   ]
 
@@ -125,13 +128,12 @@ const EmailLoginForm = ({ handleClick }: Props) => {
         failValidate('password', mappedMsg)
       } else if (mappedMsg) {
         failValidate('email', mappedMsg)
+      } else {
+        // 어카운트가 5회 실패로 사용불가능 합니다.
+        setModalStatus('failLogin')
       }
     }
   }
-
-  useEffect(() => {
-    // TODO: 로그인 실패모달로 이동
-  }, [count])
 
   useEffect(() => {
     // TODO: 이메일 기억하기 로컬스토리지에 이메일 넣기
@@ -147,7 +149,6 @@ const EmailLoginForm = ({ handleClick }: Props) => {
           name={input.name}
           type={input.type}
           onChange={input.onChange}
-          onBlur={input?.onBlur}
         />
       ))}
       {validate.type && <div className='error-box'>
