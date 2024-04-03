@@ -7,6 +7,7 @@ import checkDuplicateEmail from '@/app/api/email/checkDuplicateEmail'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import api from '@/app/api/axios'
+import MainBtn from '../button/mainBtn'
 
 const AgreeTerms = () => {
   return (
@@ -349,13 +350,7 @@ const JoinForm = () => {
           onChange={handleAgreeCheckbox}
         />
       </fieldset>
-      <button
-        disabled={Object.values(validate).some((val) => !val.status)}
-        type='submit'
-        className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4 disabled:bg-gray03'
-      >
-        가입하기
-      </button>
+      <MainBtn text='가입하기' disabled={Object.values(validate).some((val) => !val.status)} />
     </form>
   )
 }
