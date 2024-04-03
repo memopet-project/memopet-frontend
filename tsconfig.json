@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@app/*" : ["./app/*"]
+      "@/app/*" : ["./app/*"],
+      "@/types/*" : ["./app/types/*"]
     }
   },
   "types": ["node", "jest", "@testing-library/jest-dom"],

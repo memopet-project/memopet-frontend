@@ -1,6 +1,6 @@
+import { commentInfoType } from '@/app/types/comment'
 import VerticalDotsSVG from '@/public/svg/verticalDots.svg'
 // import CommentAction from '../comment/action';
-import { commentInfoType } from '@/app/interfaces';
 
 interface CommentEach {
   commentInfo: commentInfoType

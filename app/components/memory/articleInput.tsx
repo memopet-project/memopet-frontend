@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import RoundedBtn from '../button/roundedBtn'
-import { commentInfoType, userInfoType } from '@/app/interfaces'
+import { userInfoType } from '@/app/types/common'
+import { commentInfoType } from '@/app/types/comment'
 
 interface InputProps {
   userInfo: userInfoType,
