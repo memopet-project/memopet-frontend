@@ -90,6 +90,7 @@ const JoinForm = () => {
     initializeValidate('authCode')
   }
 
+
   const buttonLabel = useMemo(() =>
     !!joinForm.email && !!validate.email.status && !!joinForm.authCode && !!validate.authCode.status
       ? '이메일 변경'
@@ -219,6 +220,12 @@ const JoinForm = () => {
     if (checkEmailType(joinForm.email)) {
       failValidate('email', '이메일을 정확히 입력해주세요.')
       return
+    }
+
+    // 다시 요청
+    if (!!joinForm.email && validate.email.status) {
+      setJoinForm({ ...joinForm, authCode: '' })
+      initializeValidate('authCode')
     }
 
     checkDuplicateEmail(joinForm.email).then((res) => {
