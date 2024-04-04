@@ -7,15 +7,19 @@ import { modalStatus } from '@/app/recoil/startModalStatus'
 import { useSetRecoilState } from 'recoil'
 import { initValidateObj } from '@/app/constants/login'
 
+type Props = {
+  handleClose: (arg: boolean) => void;
+}
+
 // FIXME: 중복코드
 interface ResponseType {
   dsc_code: '1' | '0';
-  err_message : string;
+  err_message: string;
 }
 
 type Result = ResponseType | null;
 
-const FailLoginForm = () => {
+const FailLoginForm = ({ handleClose }: Props) => {
   const [email, setEmail] = useState('')
   const [validate, setValidate] = useState<ValidateObj>({ ...initValidateObj })
   const [result, setResult] = useState<Result>(null)
@@ -38,11 +42,11 @@ const FailLoginForm = () => {
     setResult(null)
   }
 
-  async function handleSubmit (e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      const res = await api.post<ResponseType>('sign-in/password-reset', 
-      { email,})
+      const res = await api.post<ResponseType>('sign-in/password-reset',
+        { email, })
 
       const responseMsg = {
         'Email is not valid': '해당 이메일로 가입한 계정을 찾을 수 없습니다.'
@@ -55,7 +59,8 @@ const FailLoginForm = () => {
       }
 
       initializeValidate()
-      // TODO: 모달 닫기
+      handleClose(false)
+      // TODO:컨펌 모달 열기
     } catch (error) {
       console.error(error)
     }
@@ -89,7 +94,7 @@ const FailLoginForm = () => {
       <MainBtn
         className='mt-8'
         text='새로운 비밀번호 받기'
-        disabled={!email || validate.msg === '해당 이메일로 가입한 계정을 찾을 수 없습니다.'} 
+        disabled={!email || validate.msg === '해당 이메일로 가입한 계정을 찾을 수 없습니다.'}
       />
     </form>
   )

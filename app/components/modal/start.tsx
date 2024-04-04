@@ -31,7 +31,7 @@ const Start = ({ handleStart }: Props) => {
       {modal === 'findPassword' && <FindPasswordForm />}
       {modal === 'resettingPassword' && <ResettingPasswordForm />}
       {modal === 'emailLogin' && <EmailLoginForm />}
-      {modal === 'failLogin' && <FailLoginForm />}
+      {modal === 'failLogin' && <FailLoginForm handleClose={handleStart} />}
     </ClipModalLayout>
   )
 }
