@@ -1,7 +1,7 @@
 'use client'
 
 import { type FormEvent, Fragment, useEffect, useState } from 'react'
-import type { ChangeEvt } from '@/app/types/common'
+import type { ChangeEvt, ValidateObj } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import MainBtn from '../button/mainBtn'
@@ -10,16 +10,18 @@ import api from '@/app/api/axios'
 import { AxiosError } from 'axios'
 import { useSetRecoilState } from 'recoil'
 import { modalStatus } from '@/app/recoil/startModalStatus'
+import { initValidateObj } from '@/app/constants/login'
+import checkEmailType from '@/app/utils/checkEmail'
 
-type ValidateType = 'email' | 'password' | null;
+type ResultType = 'email' | 'password' | null;
 
-type Validate = {
-  type: ValidateType;
+type Result = {
+  type: ResultType;
   status: boolean | null;
   msg: string;
 }
 
-const initValidate = {
+const initResult = {
   type: null,
   status: null,
   msg: '',
@@ -29,6 +31,18 @@ const initLoginInfo = {
   email: '',
   password: '',
 }
+
+type Validate = {
+  email: ValidateObj,
+  password: ValidateObj,
+}
+
+const initValidate = {
+  email: { msg: '', status: null },
+  password: { msg: '', status: null },
+} as const
+
+type ValidateKey = keyof typeof initValidate;
 
 interface LoginResponse {
   username: string;
@@ -48,17 +62,34 @@ interface LoginError {
 const EmailLoginForm = () => {
   const [loginInfo, setLoginInfo] = useState(initLoginInfo)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
+  const [result, setResult] = useState<Result>({ ...initResult })
   const [rememberEmail, setRememberEmail] = useState(false)
   const [count, setCount] = useState(0)
   const setModalStatus = useSetRecoilState(modalStatus);
 
-  // 유효성 검사 초기화 && 성공
-  function initializeValidate() {
-    setValidate(initValidate)
+  // FIXME: 중복코드
+  function initializeValidate(key: ValidateKey) {
+    setValidate((prev) => ({ ...prev, [key]: initValidateObj }))
   }
+
   // 유효성 검사 실패
-  function failValidate(type: ValidateType, msg: string) {
-    setValidate({ type, msg, status: false })
+  function failValidate(key: ValidateKey, msg: string) {
+    setValidate((prev) => ({ ...prev, [key]: { msg: msg, status: false } }))
+  }
+
+  // 유효성 검사 성공
+  function successValidate(key: ValidateKey, msg = '') {
+    setValidate((prev) => ({ ...prev, [key]: { msg, status: true } }))
+  }
+
+  // 결과 초기화 && 성공
+  function initializeResult() {
+    setResult({ ...initResult })
+  }
+
+  // 결과 실패
+  function failResult(type: ResultType, msg: string) {
+    setResult({ type, msg, status: false })
   }
 
   const inputs = [
@@ -67,9 +98,12 @@ const EmailLoginForm = () => {
       type: 'email',
       value: loginInfo.email,
       name: 'email',
+      validate: validate.email,
       onChange: (value: ChangeEvt) => {
         setLoginInfo({ ...loginInfo, email: value })
-        initializeValidate()
+        initializeResult()
+        initializeValidate('email')
+        initializeValidate('password')
       },
     },
     {
@@ -77,9 +111,12 @@ const EmailLoginForm = () => {
       type: 'password',
       value: loginInfo.password,
       name: 'password',
+      validate: validate.password,
       onChange: (value: ChangeEvt) => {
         setLoginInfo({ ...loginInfo, password: value })
-        initializeValidate()
+        initializeResult()
+        initializeValidate('email')
+        initializeValidate('password')
       },
     },
   ]
@@ -101,9 +138,27 @@ const EmailLoginForm = () => {
 
   async function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault()
+    if (!loginInfo.email) {
+      failValidate('email', '이메일을 입력해주세요.')
+      return;
+    }
+
+    if (loginInfo.email && checkEmailType(loginInfo.email)) { 
+      failValidate('email', '이메일을 정확히 입력해주세요.')
+      return;
+    }
+
+    if (!loginInfo.password) {
+      failValidate('password', '비밀번호를 입력해주세요.')
+      return;
+    }
+
+    successValidate('email')
+    successValidate('password')
+
     try {
       const res = await api.post<LoginResponse>('sign-in', loginInfo)
-      initializeValidate()
+      initializeResult()
       // TODO: 쿠키에 넣어주기
     } catch (error) {
       const errorMsg = {
@@ -113,7 +168,7 @@ const EmailLoginForm = () => {
       const { response } = error as unknown as AxiosError<LoginError>
 
       if (!response) {
-        failValidate('email', '서버에러가 발생했습니다.')
+        failResult('email', '서버에러가 발생했습니다.')
         return
       }
 
@@ -121,9 +176,9 @@ const EmailLoginForm = () => {
 
       if (mappedMsg === '이메일 또는 비밀번호를 잘못 입력했습니다.') {
         setCount(count + 1)
-        failValidate('password', mappedMsg)
+        failResult('password', mappedMsg)
       } else if (mappedMsg) {
-        failValidate('email', mappedMsg)
+        failResult('email', mappedMsg)
       } else {
         // 어카운트가 5회 실패로 사용불가능 합니다.
         setModalStatus('failLogin')
@@ -131,8 +186,10 @@ const EmailLoginForm = () => {
     }
   }
 
+  // 이메일 기억하기 클릭 시
   useEffect(() => {
-    // TODO: 이메일 기억하기 로컬스토리지에 이메일 넣기
+    if (!rememberEmail) return
+    window.localStorage.setItem('email', loginInfo.email)
   }, [rememberEmail])
 
   function handleClick(item: List) {
@@ -144,14 +201,15 @@ const EmailLoginForm = () => {
         <ValidationInput
           key={input.name}
           value={input.value}
+          validate={input.validate}
           placeholder={input.placeholder}
           name={input.name}
           type={input.type}
           onChange={input.onChange}
         />
       ))}
-      {validate.type && <div className='error-box'>
-        {validate.msg} {validate.type === 'password' && `(${count}/5)`}
+      {result.type && <div className='error-box'>
+        {result.msg} {result.type === 'password' && `(${count}/5)`}
       </div>}
       <fieldset>
         <CheckBtn
