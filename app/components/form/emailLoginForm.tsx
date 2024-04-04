@@ -19,10 +19,6 @@ type Validate = {
   msg: string;
 }
 
-type Props = {
-  handleClick: (arg: List) => void
-}
-
 const initValidate = {
   type: null,
   status: null,
@@ -49,7 +45,7 @@ interface LoginError {
   message: string;
 }
 
-const EmailLoginForm = ({ handleClick }: Props) => {
+const EmailLoginForm = () => {
   const [loginInfo, setLoginInfo] = useState(initLoginInfo)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [rememberEmail, setRememberEmail] = useState(false)
@@ -57,11 +53,11 @@ const EmailLoginForm = ({ handleClick }: Props) => {
   const setModalStatus = useSetRecoilState(modalStatus);
 
   // 유효성 검사 초기화 && 성공
-  const initializeValidate = () => {
+  function initializeValidate() {
     setValidate(initValidate)
   }
   // 유효성 검사 실패
-  const failValidate = (type: ValidateType, msg: string) => {
+  function failValidate(type: ValidateType, msg: string) {
     setValidate({ type, msg, status: false })
   }
 
@@ -103,7 +99,7 @@ const EmailLoginForm = ({ handleClick }: Props) => {
     },
   ]
 
-  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault()
     try {
       const res = await api.post<LoginResponse>('sign-in', loginInfo)
@@ -139,6 +135,9 @@ const EmailLoginForm = ({ handleClick }: Props) => {
     // TODO: 이메일 기억하기 로컬스토리지에 이메일 넣기
   }, [rememberEmail])
 
+  function handleClick(item: List) {
+    setModalStatus(item.value)
+  }
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
       {inputs.map((input) => (

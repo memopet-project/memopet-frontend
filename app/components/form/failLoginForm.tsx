@@ -3,6 +3,8 @@ import ValidationInput from '../input/validationInput'
 import { ChangeEvt, ValidateObj } from '@/app/types/common'
 import MainBtn from '../button/mainBtn'
 import api from '@/app/api/axios'
+import { modalStatus } from '@/app/recoil/startModalStatus'
+import { useSetRecoilState } from 'recoil'
 
 const initValidateObj = { msg: '', status: null }
 
@@ -14,11 +16,12 @@ interface ResponseType {
 
 type Result = ResponseType | null;
 
-
 const FailLoginForm = () => {
   const [email, setEmail] = useState('')
   const [validate, setValidate] = useState<ValidateObj>({ ...initValidateObj })
   const [result, setResult] = useState<Result>(null)
+  const setModalStatus = useSetRecoilState(modalStatus);
+
   // FIXME: 중복코드
 
   // 유효성 검사 초기화 && 성공
@@ -59,7 +62,7 @@ const FailLoginForm = () => {
   }
 
   function handleClick() {
-    // TODO: 이메일 찾기
+    setModalStatus('findEmail')
   }
 
   return (

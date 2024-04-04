@@ -6,12 +6,12 @@ import Image from 'next/image';
 import type { List } from '../modal/start';
 import api from '@/app/api/axios';
 
-type Props = {
-  handleClick: (arg: List) => void
-}
 
-const StartForm = ({ handleClick }: Props) => {
+const StartForm = () => {
   const setModalStatus = useSetRecoilState(modalStatus);
+  function handleClick(item: List) {
+    setModalStatus(item.value)
+  }
 
   const snsLogin = [
     {
