@@ -6,12 +6,12 @@ import Start from '../modal/start'
 
 const Logout = () => {
   const textClass="text-base leading-4 px-5 py-3"
-  const [openSignup, setOpenSignup] = useState(false)
+  const [openJoin, setOpenJoin] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
   const resetModalStatus = useResetRecoilState(modalStatus);
   
   function handleJoin(state: boolean) {
-    setOpenSignup(state)
+    setOpenJoin(state)
   }
 
   function handleLogin(state: boolean) {
@@ -31,7 +31,7 @@ const Logout = () => {
           회원가입
         </button>
       </li>
-      {openSignup && <Join handleJoin={handleJoin} />}
+      {openJoin && <Join handleJoin={handleJoin} />}
       {openLogin && <Start handleStart={handleLogin} />}
     </>
   )
