@@ -7,6 +7,8 @@ import checkDuplicateEmail from '@/app/api/email/checkDuplicateEmail'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import api from '@/app/api/axios'
+import MainBtn from '../button/mainBtn'
+import { initValidateObj } from '@/app/constants/login'
 
 const AgreeTerms = () => {
   return (
@@ -40,7 +42,6 @@ type AuthResponseData = {
   err_message: string
 }
 
-const initValidateObj = { msg: '', status: null }
 const initValidate = {
   email: initValidateObj,
   authCode: initValidateObj,
@@ -68,27 +69,30 @@ const JoinForm = () => {
   const [joinForm, setJoinForm] = useState(initJoinForm)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
 
-  // 유효성 검사 초기화
-  const initializeValidate = (key: ValidateKey) => {
+  // FIXME: 중복코드
+  // 유효성 검사 초기화 && 성공
+  function initializeValidate(key: ValidateKey) {
     setValidate((prev) => ({ ...prev, [key]: initValidateObj }))
   }
+
   // 유효성 검사 실패
-  const failValidate = (key: ValidateKey, msg: string) => {
+  function failValidate(key: ValidateKey, msg: string) {
     setValidate((prev) => ({ ...prev, [key]: { msg: msg, status: false } }))
   }
 
   // 유효성 검사 성공
-  const successValidate = (key: ValidateKey, msg = '') => {
+  function successValidate(key: ValidateKey, msg = '') {
     setValidate((prev) => ({ ...prev, [key]: { msg, status: true } }))
   }
 
   // 이메일, 인증코드 초기화
-  const retryAuthEmail = (emailValue = '') => {
+  function retryAuthEmail(emailValue = '') {
     setJoinForm({ ...joinForm, email: emailValue, authCode: '' })
     setCheckEmail('')
     initializeValidate('email')
     initializeValidate('authCode')
   }
+
 
   const buttonLabel = useMemo(() =>
     !!joinForm.email && !!validate.email.status && !!joinForm.authCode && !!validate.authCode.status
@@ -215,10 +219,16 @@ const JoinForm = () => {
   ]
 
   // 이메일 인증코드 요청
-  const checkAuthEmail = async () => {
-    if (checkEmailType(joinForm.email)) {
+  async function checkAuthEmail() {
+    if (checkEmailType(joinForm.email)) { 
       failValidate('email', '이메일을 정확히 입력해주세요.')
       return
+    }
+
+    // 다시 요청
+    if (!!joinForm.email && validate.email.status) {
+      setJoinForm({ ...joinForm, authCode: '' })
+      initializeValidate('authCode')
     }
 
     checkDuplicateEmail(joinForm.email).then((res) => {
@@ -240,7 +250,7 @@ const JoinForm = () => {
   }
 
   // 인증코드 인증
-  const checkAuthCode = async () => {
+  async function checkAuthCode() {
     try {
       const res = await api.post<AuthResponseData>('sign-in/verification-email', {
         email: joinForm.email,
@@ -264,7 +274,7 @@ const JoinForm = () => {
   }
 
   // 이용약관 동의
-  const handleAgreeCheckbox = (val: boolean) => {
+  function handleAgreeCheckbox(val: boolean) {
     setJoinForm({ ...joinForm, agree: val })
 
     if (val) {
@@ -275,7 +285,7 @@ const JoinForm = () => {
     failValidate('agree', '')
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     try {
@@ -342,13 +352,7 @@ const JoinForm = () => {
           onChange={handleAgreeCheckbox}
         />
       </fieldset>
-      <button
-        disabled={Object.values(validate).some((val) => !val.status)}
-        type='submit'
-        className='bg-red05 text-white rounded-lg py-[18px] font-semibold text-base leading-4 disabled:bg-gray03'
-      >
-        가입하기
-      </button>
+      <MainBtn text='가입하기' disabled={Object.values(validate).some((val) => !val.status)} />
     </form>
   )
 }

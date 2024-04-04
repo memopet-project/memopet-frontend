@@ -12,7 +12,7 @@ type Props = {
   type: HTMLInputElement['type'];
   value: HTMLInputElement['value'];
   name: string;
-  validate: { msg: string; status: boolean | null };
+  validate?: { msg: string; status: boolean | null };
   label?: string;
   labelClass?: string;
   description?: string;
@@ -111,7 +111,7 @@ const ValidationInput = ({ label, placeholder, validate, type, value, name, onCh
       </label>
 
       {
-        validation?.status !== null && validation.msg &&
+        validation && validation?.status !== null && validation.msg &&
         <p className={`flex row flex-nowrap items-center justify-start mt-1 text-[13px] ${colors}`}>
           {validation?.status === false
             ? <Error className={`${textClass} ${iconClass}`} />

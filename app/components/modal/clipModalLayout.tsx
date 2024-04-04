@@ -19,7 +19,7 @@ const ClipModalLayout = ({ handleClose, title, children, maxWidth = '480px' }: P
         <button className='absolute w-6 h-6 top-4 right-4' onClick={() => handleClose(false)}>
           <CloseSVG className='text-gray09' />
         </button>
-        <h1 className='text-gray09 text-[28px] font-medium leading-9 font-gothic mb-8'>{title}</h1>
+        <h1 className='text-gray09 text-[28px] font-medium leading-9 font-gothic mb-4'>{title}</h1>
         {children}
       </aside>
     </section>

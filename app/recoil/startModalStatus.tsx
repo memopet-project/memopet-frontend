@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 
-export type Status = '' | 'findEmail' | 'findPassword' | 'join' | 'start' | 'resettingPassword' | 'emailLogin'
+export type Status = '' | 'findEmail' | 'findPassword' | 'join' | 'start' | 'resettingPassword' | 'emailLogin' | 'failLogin'
 
 export const modalStatus = atom<Status>({
   key: 'modalStatus',
@@ -18,6 +18,7 @@ export const modalTitle = selector({
       'start': '시작하기',
       'resettingPassword': '비밀번호 재설정',
       'emailLogin': '이메일 로그인',
+      'failLogin': '로그인 실패',
       '': ''
     }
     return titles[status]
