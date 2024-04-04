@@ -8,6 +8,7 @@ import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import api from '@/app/api/axios'
 import MainBtn from '../button/mainBtn'
+import { initValidateObj } from '@/app/constants/login'
 
 const AgreeTerms = () => {
   return (
@@ -41,7 +42,6 @@ type AuthResponseData = {
   err_message: string
 }
 
-const initValidateObj = { msg: '', status: null }
 const initValidate = {
   email: initValidateObj,
   authCode: initValidateObj,

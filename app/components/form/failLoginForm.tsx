@@ -5,8 +5,7 @@ import MainBtn from '../button/mainBtn'
 import api from '@/app/api/axios'
 import { modalStatus } from '@/app/recoil/startModalStatus'
 import { useSetRecoilState } from 'recoil'
-
-const initValidateObj = { msg: '', status: null }
+import { initValidateObj } from '@/app/constants/login'
 
 // FIXME: 중복코드
 interface ResponseType {
@@ -54,7 +53,7 @@ const FailLoginForm = () => {
         failValidate(responseMsg[res.data.err_message])
         return;
       }
-      
+
       initializeValidate()
       // TODO: 모달 닫기
     } catch (error) {
