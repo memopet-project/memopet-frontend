@@ -57,7 +57,7 @@ const StartForm = () => {
   ];
   return (
     <>
-      <p className='-tracking-[0.5px] leading-6 text-gray09 mb-8'>
+      <p className='-tracking-[0.5px] leading-6 text-gray07 mb-8'>
         간편하게 로그인하고 반려동물과의 소중한 추억을<br />
         기록하고 공유해보세요!
       </p>
@@ -82,8 +82,10 @@ const StartForm = () => {
           )}
         </ul>
       </form>
-      <p className='text-[13px] -tracking-[0.25px] mt-8'>
-        로그인은 <a className='text-gray05 underline'>개인 정보 보호 정책</a> 및 <a className='text-gray05 underline'>서비스 이용약관</a>에 동의하는 것을 의미하며, 서비스 이용을 위해 이메일과 이름을 수집합니다.
+      <p className='text-[13px] -tracking-[0.25px] mt-8 text-gray09'>
+        로그인은 <a className='text-gray05 underline'>개인 정보 보호 정책</a> 
+        및 <a className='text-gray05 underline'>서비스 이용약관</a>
+        에 동의하는 것을 의미하며, 서비스 이용을 위해 이메일과 이름을 수집합니다.
       </p>
     </>
   )
