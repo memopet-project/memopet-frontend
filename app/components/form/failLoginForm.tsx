@@ -25,11 +25,11 @@ const FailLoginForm = () => {
   // FIXME: 중복코드
 
   // 유효성 검사 초기화 && 성공
-  const initializeValidate = () => {
+  function initializeValidate() {
     setValidate({ ...initValidateObj })
   }
   // 유효성 검사 실패
-  const failValidate = (msg: string) => {
+  function failValidate(msg: string) {
     setValidate({ msg, status: false })
   }
 
@@ -54,6 +54,7 @@ const FailLoginForm = () => {
         failValidate(responseMsg[res.data.err_message])
         return;
       }
+      
       initializeValidate()
       // TODO: 모달 닫기
     } catch (error) {
@@ -67,11 +68,11 @@ const FailLoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul className='list-none p-0 m-0'>
-        <li className='-tracking-[0.5px] leading-6'><span className='text-red05'>5회 이상</span> 로그인 실패하여</li>
-        <li className='-tracking-[0.5px] leading-6'>보안을 위해 로그인을 제한합니다.</li>
-        <li className='-tracking-[0.5px] leading-6'>이메일 계정을 입력하시면 로그인 할 수 있는</li>
-        <li className='-tracking-[0.5px] leading-6'><span className='text-red05'>새로운 비밀번호</span>를 받을 수 있습니다.</li>
+      <ul className='list-none p-0 m-0 mb-8'>
+        <li className='-tracking-[0.5px] leading-6 text-gray07'><span className='text-red05'>5회 이상</span> 로그인 실패하여</li>
+        <li className='-tracking-[0.5px] leading-6 text-gray07'>보안을 위해 로그인을 제한합니다.</li>
+        <li className='-tracking-[0.5px] leading-6 text-gray07'>이메일 계정을 입력하시면 로그인 할 수 있는</li>
+        <li className='-tracking-[0.5px] leading-6 text-gray07'><span className='text-red05'>새로운 비밀번호</span>를 받을 수 있습니다.</li>
       </ul>
       <ValidationInput
         label='이메일'
