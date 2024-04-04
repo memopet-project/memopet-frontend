@@ -85,8 +85,8 @@ const FailLoginForm = () => {
       </div>}
       <MainBtn
         className='mt-8'
-        text='새로운 비밀번호 받기' 
-        disabled={!email && validate.msg === '해당 이메일로 가입한 계정을 찾을 수 없습니다.'} 
+        text='새로운 비밀번호 받기'
+        disabled={!email || validate.msg === '해당 이메일로 가입한 계정을 찾을 수 없습니다.'} 
       />
     </form>
   )
