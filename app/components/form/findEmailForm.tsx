@@ -2,31 +2,19 @@ import { type FormEvent, useMemo, useState } from 'react'
 import MainBtn from '../button/mainBtn'
 import ValidationInput from '../input/validationInput'
 import Google from '@/public/images/google.png'
-import type { ChangeEvt, ValidateObj } from '@/app/types/common'
+import type { ChangeEvt } from '@/app/types/common'
 import Image from 'next/image'
-
-type Validate = {
-  name: ValidateObj,
-  contact: ValidateObj,
-}
-
-const initValidate = {
-  name: { msg: '', status: null },
-  contact: { msg: '', status: null },
-} as const
 
 type Result = null | { dsc_code: '0' | '1' | '2', email: string }
 
 const FindEmailForm = () => {
   const [name, setName] = useState('')
   const [contact, setPassword] = useState('')
-  const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [result, setResult] = useState<Result>(null)
 
   const inputs = [
     {
       label: '이름',
-      validate: validate.name,
       placeholder: '이름 입력',
       type: 'name',
       value: name,
@@ -35,12 +23,9 @@ const FindEmailForm = () => {
         setName(value)
         setResult(null)
       },
-      onBlur: () => {
-      }
     },
     {
       label: '휴대폰번호',
-      validate: validate.contact,
       placeholder: "'-' 없이 숫자만 입력",
       type: 'contact',
       value: contact,
@@ -49,13 +34,11 @@ const FindEmailForm = () => {
         setPassword(value)
         setResult(null)
       },
-      onBlur: () => {
-      }
     },
   ]
 
   const disabled = useMemo(() => !(name && contact) || !!(name && contact && result?.dsc_code === '0'), [name, contact])
-  const buttonLabel = useMemo(() => result?.dsc_code === '1' ? '로그인하기' : result?.dsc_code === '2' ? '소셜 로그인하기' : '아이디 찾기', [name, contact])
+  const buttonLabel = useMemo(() => result?.dsc_code === '1' ? '로그인하기' : result?.dsc_code === '2' ? '소셜 로그인하기' : '이메일 찾기', [name, contact])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -73,9 +56,7 @@ const FindEmailForm = () => {
           placeholder={input.placeholder}
           name={input.name}
           type={input.type}
-          validate={input.validate}
           onChange={input.onChange}
-          onBlur={input?.onBlur}
         />
       ))}
       {result?.dsc_code && (result?.dsc_code === '0'
