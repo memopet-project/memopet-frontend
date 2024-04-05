@@ -1,16 +1,16 @@
-import ClipModalLayout from './clipModalLayout';
-import StartForm from '../form/startForm';
+import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { type Status, modalStatus, modalTitle } from '@/app/recoil/startModalStatus';
+import ClipModalLayout from './clipModalLayout';
+import StartForm from '../form/startForm';
 import FindEmailForm from '../form/findEmailForm'
 import FindPasswordForm from '../form/findPasswordForm'
 import ResettingPasswordForm from '../form/resettingPasswordForm'
 import EmailLoginForm from '../form/emailLoginForm';
 import FailLoginForm from '../form/failLoginForm';
-import { useMemo } from 'react';
 import JoinForm from '../form/joinForm';
 
-type Props = {
+interface Props {
   handleStart: (arg: boolean) => void
 }
 
@@ -25,7 +25,7 @@ const Start = ({ handleStart }: Props) => {
 
   return (
     <ClipModalLayout handleClose={handleStart} title={title} maxWidth={maxWidth}>
-      {modal === 'start' && <StartForm />}
+      {modal === 'start' && <StartForm />}      
       {modal === 'join' && <JoinForm />}
       {modal === 'findEmail' && <FindEmailForm />}
       {modal === 'findPassword' && <FindPasswordForm />}

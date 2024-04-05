@@ -195,6 +195,7 @@ const EmailLoginForm = () => {
   function handleClick(item: List) {
     setModalStatus(item.value)
   }
+
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
       {inputs.map((input) => (
