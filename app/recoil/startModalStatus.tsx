@@ -1,6 +1,7 @@
 import { atom, selector } from 'recoil';
 
 export type Status = '' | 'findEmail' | 'findPassword' | 'join' | 'start' | 'resettingPassword' | 'emailLogin' | 'failLogin'
+export type List = { label: string, value: Status }
 
 export const modalStatus = atom<Status>({
   key: 'modalStatus',

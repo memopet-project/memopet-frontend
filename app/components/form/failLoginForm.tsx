@@ -6,10 +6,9 @@ import { useSetRecoilState } from 'recoil'
 import { initValidateObj } from '@/app/constants/login'
 import ValidationInput from '../input/validationInput'
 import MainBtn from '../button/mainBtn'
-import Confirm from '../modal/confirm'
 
-type Props = {
-  handleClose: (arg: boolean) => void;
+interface Props {
+  handleClose: () => void;
 }
 
 // FIXME: 중복코드
@@ -60,8 +59,7 @@ const FailLoginForm = ({ handleClose }: Props) => {
       }
 
       initializeValidate()
-      // handleClose(false)
-      setOpen(true)
+      handleClose()
     } catch (error) {
       console.error(error)
     }
@@ -99,16 +97,6 @@ const FailLoginForm = ({ handleClose }: Props) => {
           disabled={!email || validate.msg === '해당 이메일로 가입한 계정을 찾을 수 없습니다.'}
         />
       </form>
-      <Confirm
-        open={open}
-        setOpen={setOpen}
-        handleOk={() => setModalStatus('emailLogin')} // TODO: 로그인 모달 open
-        buttons={[{ label: '닫기', useOk: false }, { label: '로그인 하기', useOk: true }]}
-      >
-        <p className='text-gray07 font-bold -tracking-[0.5px] text-base'>
-          재설정한 비밀번호로<br /> 로그인해주세요
-        </p>
-      </Confirm>
     </>
   )
 }
