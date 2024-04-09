@@ -1,15 +1,15 @@
 import { postData } from '../api';
 
-type RequestData = { email: string }
-type ResponseData = {
+interface AuthEmailRequestData { email: string }
+export interface AuthEmailResponseData {
   auth_code: string;
   dsc_code: '0' | '1'
   err_message: string
 }
 const authEmail = (
-  email: RequestData['email'],
+  email: AuthEmailRequestData['email'],
 ) => (
-  postData<ResponseData, RequestData>('sign-in/verification', { email }).then((res) => {
+  postData<AuthEmailResponseData, AuthEmailRequestData>('sign-in/verification', { email }).then((res) => {
     return res
   })
 )
