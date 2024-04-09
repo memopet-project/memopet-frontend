@@ -9,6 +9,7 @@ import CheckBtn from '../button/checkBtn'
 import api from '@/app/api/axios'
 import MainBtn from '../button/mainBtn'
 import { initValidateObj } from '@/app/constants/login'
+import checkName from '@/app/utils/checkName'
 
 const AgreeTerms = () => {
   return (
@@ -185,14 +186,12 @@ const JoinForm = () => {
         initializeValidate('name')
       },
       onBlur: () => {
-        const regex = /^[가-힣]+$/
-
-        if (regex.test(joinForm.name)) {
-          successValidate('name')
+        if (checkName(joinForm.name)) {
+          failValidate('name', '한글만 입력해주세요. (영문, 특수기호 입력 불가)')
           return
         }
-
-        failValidate('name', '한글만 입력해주세요. (영문, 특수기호 입력 불가)')
+        
+        successValidate('name')
       }
     },
     {
@@ -208,12 +207,12 @@ const JoinForm = () => {
         initializeValidate('contact')
       },
       onBlur: () => {
-        if (!checkContactNumber(joinForm.contact)) {
-          successValidate('contact')
+        if (checkContactNumber(joinForm.contact)) {
+          failValidate('contact', '숫자만 입력해주세요.')
           return
         }
-
-        failValidate('contact', '숫자만 입력해주세요.')
+        
+        successValidate('contact')
       }
     },
   ]
