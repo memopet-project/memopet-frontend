@@ -15,7 +15,7 @@ interface Props {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const Confirm = ({ handleCancel, handleOk, children, buttons, open, setOpen }: Props) => {
+const ConfirmModal = ({ handleCancel, handleOk, children, buttons, open, setOpen }: Props) => {
   if (!open) return null;
   
   // useEffect(() => {
@@ -59,4 +59,4 @@ const Confirm = ({ handleCancel, handleOk, children, buttons, open, setOpen }: P
   )
 }
 
-export default Confirm
+export default ConfirmModal
