@@ -20,7 +20,7 @@ const Popup = ({
     try {
       await navigator.clipboard.writeText(text)
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
