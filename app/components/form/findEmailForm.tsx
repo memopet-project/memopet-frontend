@@ -148,7 +148,7 @@ const FindEmailForm = () => {
         />
       ))}
       {result?.dsc_code && (result?.dsc_code === '0'
-        ? <div className='error-box -mb-2'>해당 이름과 휴대폰번호로 가입한 계정을 찾을 수 없습니다.</div>
+        ? <div className='error-box -mb-2'>입력하신 정보로 가입한 계정을 찾을 수 없습니다.</div>
         : (<div className='mb-2'>
           <p className='text-sm text-gray09 -tracking-[0.25px] leading-[21px] font-medium'>
             {result?.dsc_code === '1' ? '이메일' : '소셜 아이디로 가입한 계정입니다.'}
