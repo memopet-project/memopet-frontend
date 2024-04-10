@@ -1,4 +1,4 @@
-import { type FormEvent, useMemo, useState } from 'react'
+import { Dispatch, type FormEvent, SetStateAction, useMemo, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import ValidationInput from '../input/validationInput'
 import type { ChangeEvt, ValidateObj } from '@/app/types/common'
@@ -28,7 +28,7 @@ const initFindPasswordInfo = {
 
 type Result = null | AuthEmailResponseData
 
-const FindPasswordForm = () => {
+const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<string>> }) => {
   const [findPasswordInfo, setFindPasswordInfo] = useState(initFindPasswordInfo)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [result, setResult] = useState<Result>(null)
@@ -85,6 +85,7 @@ const FindPasswordForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setState(findPasswordInfo.email)
     setModalStatus('resettingPassword')
   }
 
