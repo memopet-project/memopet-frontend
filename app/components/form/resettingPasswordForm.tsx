@@ -2,7 +2,8 @@ import { ChangeEvt, ValidateObj } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import { useMemo, useState } from 'react'
 import MainBtn from '../button/mainBtn'
-type Validate = {
+
+interface Validate {
   password: ValidateObj,
   checkPassword: ValidateObj,
 }

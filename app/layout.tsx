@@ -16,6 +16,7 @@ export default function RootLayout({
       <body className='bg-surface'>
         <RecoilContextProvider>
           {children}
+          <div id="modal-root"></div>
         </RecoilContextProvider>
       </body>
     </html>

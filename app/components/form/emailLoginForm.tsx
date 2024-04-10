@@ -5,11 +5,10 @@ import type { ChangeEvt, ValidateObj } from '@/app/types/common'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
 import MainBtn from '../button/mainBtn'
-import type { List } from '../modal/start'
 import api from '@/app/api/axios'
 import { AxiosError } from 'axios'
 import { useSetRecoilState } from 'recoil'
-import { modalStatus } from '@/app/recoil/startModalStatus'
+import { type List, modalStatus } from '@/app/recoil/startModalStatus'
 import { initValidateObj } from '@/app/constants/login'
 import checkEmailType from '@/app/utils/checkEmail'
 
@@ -195,6 +194,7 @@ const EmailLoginForm = () => {
   function handleClick(item: List) {
     setModalStatus(item.value)
   }
+
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
       {inputs.map((input) => (

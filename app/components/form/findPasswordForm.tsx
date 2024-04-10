@@ -1,13 +1,15 @@
 import { type FormEvent, useMemo, useState } from 'react'
-import MainBtn from '../button/mainBtn'
+import { useSetRecoilState } from 'recoil'
 import ValidationInput from '../input/validationInput'
-import Google from '@/public/svg/google.svg'
 import type { ChangeEvt, ValidateObj } from '@/app/types/common'
 import checkEmailType from '@/app/utils/checkEmail'
-import { useSetRecoilState } from 'recoil'
 import { modalStatus } from '@/app/recoil/startModalStatus'
+import { initValidateObj } from '@/app/constants/login'
+import postAuthCode, { type AuthEmailResponseData } from '@/app/api/email/postAuthCode'
+import MainBtn from '../button/mainBtn'
+import checkAuthCode from '@/app/api/email/checkAuthCode'
 
-type Validate = {
+interface Validate {
   email: ValidateObj,
   authCode: ValidateObj,
 }
@@ -17,84 +19,94 @@ const initValidate = {
   authCode: { msg: '', status: null },
 } as const
 
-type Result = null | { dsc_code: '0' | '1', confirm_code: string }
+type ValidateKey = keyof typeof initValidate;
+
+const initFindPasswordInfo = {
+  email: '',
+  authCode: '',
+}
+
+type Result = null | AuthEmailResponseData
 
 const FindPasswordForm = () => {
-  const [email, setEmail] = useState('')
-  const [authCode, setAuthCode] = useState('')
+  const [findPasswordInfo, setFindPasswordInfo] = useState(initFindPasswordInfo)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [result, setResult] = useState<Result>(null)
   const [checkEmail, setCheckEmail] = useState(false)
   const setModalStatus = useSetRecoilState(modalStatus);
 
-  const checkValidate = (key: keyof typeof initValidate, condition: boolean, errorMsg = '') => {
-    if (condition) {
-      setValidate((prev) => ({ ...prev, [key]: { msg: errorMsg, status: false } }))
-      return;
-    }
-
-    setValidate((prev) => ({ ...prev, [key]: { msg: '', status: null } }))
+  // FIXME: 중복코드
+  function initializeValidate(key: ValidateKey) {
+    setValidate((prev) => ({ ...prev, [key]: initValidateObj }))
   }
+
+  // 유효성 검사 실패
+  function failValidate(key: ValidateKey, msg: string) {
+    setValidate((prev) => ({ ...prev, [key]: { msg: msg, status: false } }))
+  }
+
+  // 유효성 검사 성공
+  function successValidate(key: ValidateKey, msg = '') {
+    setValidate((prev) => ({ ...prev, [key]: { msg, status: true } }))
+  }
+  
   const inputs = [
     {
       label: '이메일',
       validate: validate.email,
       placeholder: 'sample@email.com',
       type: 'email',
-      value: email,
+      value: findPasswordInfo.email,
       name: 'email',
       onChange: (value: ChangeEvt) => {
-        setEmail(value)
-        setAuthCode('')
+        initializeValidate('email')
+        initializeValidate('authCode')
+        setFindPasswordInfo({ ...findPasswordInfo, email: value })
         setCheckEmail(false)
       },
-      onBlur: () => {
-      }
     },
     {
       label: '입력하신 이메일로 인증코드를 보냈어요!',
       validate: validate.authCode,
       placeholder: 'ABC123',
       type: 'text',
-      value: authCode,
+      value: findPasswordInfo.authCode,
       name: 'authCode',
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
       hide: checkEmail,
       onChange: (value: ChangeEvt) => {
-        setAuthCode(value)
-        if (value) {
-          checkValidate('authCode', false)
-        }
+        initializeValidate('authCode')
+        setFindPasswordInfo({ ...findPasswordInfo, authCode: value })
       },
     },
   ]
 
-  const disabled = useMemo(() => !email || !!(email && result?.dsc_code === '0'), [email])
+  const disabled = useMemo(() => !(validate.authCode.status && validate.email.status), [validate])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setModalStatus('resettingPassword')
-    // setResult({ dsc_code: '0', confirm_code: '1234' })
   }
 
-  const authEmail = async () => {
-    console.log('인증요청');
-    if (checkEmailType(email)) {
-      checkValidate('email', true, '이메일을 정확히 입력해주세요.')
+  async function checkAuthEmail() {
+    if (checkEmailType(findPasswordInfo.email)) {
+      failValidate('email', '이메일을 정확히 입력해주세요.')
       return;
     }
 
-    if (email === 'memopet@naver.com') { // test
-      setValidate((prev) => ({ ...prev, email: { msg: '이미 가입한 계정입니다.', status: false } }))
-      return
-    }
+    successValidate('email')
 
-    setValidate((prev) => ({
-      ...prev,
-      email: { msg: '', status: true },
-      authCode: { msg: '', status: null },
-    }))
-    setCheckEmail(true)
+    postAuthCode(findPasswordInfo.email).then((res) => {
+      if (!res.err_message) {
+        successValidate('email')
+        initializeValidate('authCode')
+        setCheckEmail(true)
+      }
+    })
+  }
+
+  function handleClick() {
+    setModalStatus('findEmail')
   }
 
   return (
@@ -112,14 +124,13 @@ const FindPasswordForm = () => {
           labelClass={input?.labelClass}
           hide={input?.hide}
           onChange={input.onChange}
-          onBlur={input?.onBlur}
         >
           {input.name === 'email' &&
             <button
               type='button'
               className='auth-button'
               disabled={!input.value}
-              onClick={authEmail}
+              onClick={checkAuthEmail}
             >
               인증 요청
             </button>}
@@ -128,13 +139,17 @@ const FindPasswordForm = () => {
               type='button'
               disabled={!input.value}
               className='auth-button'
+              onClick={() => checkAuthCode<Validate>({ email: findPasswordInfo.email, authCode: findPasswordInfo.authCode }, setValidate)}
             >
               확인
             </button>
           }
         </ValidationInput>
       ))}
-      {result?.dsc_code === '0' && <div className='other-options-box mt-4'><span>가입한 이메일이 생각나지 않나요?</span><button>이메일 찾기</button></div>}
+      {result?.dsc_code === '0' && <div className='other-options-box mt-4'>
+        <span>가입한 이메일이 생각나지 않나요?</span>
+        <button onClick={handleClick}>이메일 찾기</button>
+      </div>}
       <MainBtn text='비밀번호 재설정하기' disabled={disabled} />
     </form>
   )

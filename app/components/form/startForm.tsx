@@ -1,9 +1,8 @@
-import { modalStatus } from '@/app/recoil/startModalStatus';
+import { type List, modalStatus } from '@/app/recoil/startModalStatus';
 import { Fragment } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Naver from '@/public/svg/naver.svg'
 import Image from 'next/image';
-import type { List } from '../modal/start';
 import api from '@/app/api/axios';
 
 
