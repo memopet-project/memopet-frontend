@@ -19,6 +19,7 @@ const initFindEmailInfo = {
   name: '',
   contact: '',
 }
+
 interface Validate {
   name: ValidateObj,
   contact: ValidateObj,
@@ -28,8 +29,8 @@ const initValidate = {
   name: { msg: '', status: null },
   contact: { msg: '', status: null },
 } as const
-type ValidateKey = keyof typeof initValidate;
 
+type ValidateKey = keyof typeof initValidate;
 
 const FindEmailForm = () => {
   const [findEmailInfo, setFindEmailInfo] = useState(initFindEmailInfo)
