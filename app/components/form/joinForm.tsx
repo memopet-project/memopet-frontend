@@ -11,6 +11,7 @@ import MainBtn from '../button/mainBtn'
 import { initValidateObj } from '@/app/constants/login'
 import checkName from '@/app/utils/checkName'
 import checkAuthCode from '@/app/api/email/checkAuthCode'
+import checkPassword from '@/app/utils/checkPassword'
 
 const AgreeTerms = () => {
   return (
@@ -37,11 +38,6 @@ interface JoinResponse {
   login_fail_count: number;
   access_token_expiry: number;
   token: string;
-}
-
-interface AuthResponseData {
-  dsc_code: '0' | '1'
-  err_message: string
 }
 
 const initValidate = {
@@ -144,13 +140,12 @@ const JoinForm = () => {
         initializeValidate('password')
       },
       onBlur: () => {
-        const regex = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/
-        if (regex.test(joinForm.password)) {
-          successValidate('password')
+        if (checkPassword(joinForm.password)) {
+          failValidate('password', '영문, 숫자, 특수문자 혼합하여 8자 이상으로 설정해야 합니다.')
           return
         }
 
-        failValidate('password', '영문, 숫자, 특수문자 혼합하여 8자 이상으로 설정해야 합니다.')
+        successValidate('password')
       }
     },
     {
@@ -298,8 +293,8 @@ const JoinForm = () => {
 
       if (res.data.token) {
         // setCookie(res.data.token, res.data.access_token_expiry)
+        // TODO: 쿠키에 사용자 정보 세팅
       }
-      console.log(res) // TODO: 쿠키에 사용자 정보 세팅
     } catch (error) {
       console.error(error)
     }
