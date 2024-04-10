@@ -23,7 +23,6 @@ const FailLoginForm = ({ handleClose }: Props) => {
   const [email, setEmail] = useState('')
   const [validate, setValidate] = useState<ValidateObj>({ ...initValidateObj })
   const [result, setResult] = useState<Result>(null)
-  const [open, setOpen] = useState(false)
   const setModalStatus = useSetRecoilState(modalStatus);
   // FIXME: 중복코드
 
