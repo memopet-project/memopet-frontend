@@ -2,7 +2,7 @@ import { type FormEvent, useMemo, useState } from 'react'
 import checkEmailType from '@/app/utils/checkEmail'
 import checkContactNumber from '@/app/utils/checkContactNumber'
 import type { ValidateObj, ChangeEvt } from '@/app/types/common'
-import authEmail from '@/app/api/email/authEmail'
+import postAuthCode from '@/app/api/email/postAuthCode'
 import checkDuplicateEmail from '@/app/api/email/checkDuplicateEmail'
 import ValidationInput from '../input/validationInput'
 import CheckBtn from '../button/checkBtn'
@@ -10,6 +10,7 @@ import api from '@/app/api/axios'
 import MainBtn from '../button/mainBtn'
 import { initValidateObj } from '@/app/constants/login'
 import checkName from '@/app/utils/checkName'
+import checkAuthCode from '@/app/api/email/checkAuthCode'
 
 const AgreeTerms = () => {
   return (
@@ -17,7 +18,7 @@ const AgreeTerms = () => {
   )
 }
 
-type Validate = {
+interface Validate {
   email: ValidateObj;
   authCode: ValidateObj;
   password: ValidateObj;
@@ -29,7 +30,7 @@ type Validate = {
 
 type ValidateKey = keyof typeof initValidate;
 
-type JoinResponse = {
+interface JoinResponse {
   username: string;
   user_status: string;
   user_role: string;
@@ -38,7 +39,7 @@ type JoinResponse = {
   token: string;
 }
 
-type AuthResponseData = {
+interface AuthResponseData {
   dsc_code: '0' | '1'
   err_message: string
 }
@@ -238,7 +239,7 @@ const JoinForm = () => {
 
       setValidate((prev) => ({ ...prev, email: initValidateObj }))
 
-      authEmail(joinForm.email).then((res) => {
+      postAuthCode(joinForm.email).then((res) => {
         if (res.dsc_code) {
           setCheckEmail(res.auth_code)
           successValidate('email')
@@ -249,28 +250,28 @@ const JoinForm = () => {
   }
 
   // 인증코드 인증
-  async function checkAuthCode() {
-    try {
-      const res = await api.post<AuthResponseData>('sign-in/verification-email', {
-        email: joinForm.email,
-        confirm_code: checkEmail
-      })
+  // async function checkAuthCode() {
+  //   try {
+  //     const res = await api.post<AuthResponseData>('sign-in/verification-email', {
+  //       email: joinForm.email,
+  //       confirm_code: checkEmail
+  //     })
 
-      const status = {
-        'expired': '인증코드가 만료되었습니다.',
-        'different': '인증코드가 일치하지 않습니다.',
-      } as Record<string, string>
+  //     const status = {
+  //       'expired': '인증코드가 만료되었습니다.',
+  //       'different': '인증코드가 일치하지 않습니다.',
+  //     } as Record<string, string>
 
-      if (res.data.dsc_code !== '1') {
-        failValidate('authCode', status[res.data.err_message])
-        return;
-      }
+  //     if (res.data.dsc_code !== '1') {
+  //       failValidate('authCode', status[res.data.err_message])
+  //       return;
+  //     }
 
-      successValidate('authCode', '이메일이 인증되었습니다.')
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  //     successValidate('authCode', '이메일이 인증되었습니다.')
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
   // 이용약관 동의
   function handleAgreeCheckbox(val: boolean) {
@@ -336,7 +337,7 @@ const JoinForm = () => {
               type='button'
               disabled={!input.value || buttonLabel === '이메일 변경'}
               className='auth-button'
-              onClick={checkAuthCode}
+              onClick={() => checkAuthCode<Validate>({ email: joinForm.email, authCode: joinForm.authCode }, setValidate)}
             >
               확인
             </button>

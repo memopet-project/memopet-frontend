@@ -6,7 +6,7 @@ export interface AuthEmailResponseData {
   dsc_code: '0' | '1'
   err_message: string
 }
-const authEmail = (
+const postAuthCode = (
   email: AuthEmailRequestData['email'],
 ) => (
   postData<AuthEmailResponseData, AuthEmailRequestData>('sign-in/verification', { email }).then((res) => {
@@ -14,4 +14,4 @@ const authEmail = (
   })
 )
 
-export default authEmail
+export default postAuthCode
