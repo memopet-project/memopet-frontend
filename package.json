@@ -24,6 +24,7 @@
     "recoil": "^0.7.7",
     "swiper": "^11.0.5",
     "tailwindcss": "3.3.3",
+    "tailwindcss-animation-delay": "^1.2.0",
     "ts-node": "^10.9.1",
     "typescript": "5.2.2"
   },
