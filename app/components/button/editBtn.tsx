@@ -16,7 +16,7 @@ const EditBtn = ({ text, onClick, className, outline = false }: buttonType) => {
   }, [outline]);
   return (
     <button
-      className={`flex font-semibold text-base text-white bg-white px-5 py-2 flex-nowrap whitespace-nowrap rounded-full items-center justify-between ${className} ${buttonColor}`}
+      className={`flex font-semibold text-base text-[#525252] bg-white px-5 py-2 flex-nowrap whitespace-nowrap rounded-full items-center justify-between ${className} ${buttonColor}`}
       onClick={onClick}
     >
       <Edit className="w-6 h-6 text-[#525252] mr-2" /> {text}

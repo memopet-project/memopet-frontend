@@ -115,7 +115,7 @@ export default function Home() {
               img.left
             } p-20 overflow-hidden animate-fall animation-delay-[${
               idx * 0.1
-            }s]`}
+            }s] max-[768px]:animate-Mobilefall`}
             key={`login_${idx + 1}`}
           >
             <Image
