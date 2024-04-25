@@ -138,7 +138,7 @@ const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<stri
               type='button'
               disabled={!input.value}
               className='auth-button'
-              onClick={() => checkAuthCode<Validate>({ ...findPasswordInfo, id: checkEmail!  }, setValidate)}
+              onClick={() => checkAuthCode<Validate>({ ...findPasswordInfo, id: checkEmail! }, setValidate)}
             >
               확인
             </button>

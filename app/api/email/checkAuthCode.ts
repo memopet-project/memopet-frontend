@@ -1,9 +1,15 @@
 import type { Dispatch, SetStateAction } from 'react'
 import { postData } from '../api';
+import { AxiosError } from 'axios';
 
 interface AuthCodeResponseData {
   authCode: '0' | '1'
   verificationStatusId: number;
+}
+
+interface ResponseError {
+  code: 'bad_request'
+  message: 'different' | 'expired'
 }
 
 interface FormData {
@@ -20,7 +26,7 @@ interface AuthCodeRequestData {
 
 function checkAuthCode<T>(formData: FormData, setValidate: Dispatch<SetStateAction<T>>) {
   // FIXME: 중복코드
-  
+
   // 유효성 검사 실패
   function failValidate(key: string, msg: string) {
     setValidate((prev) => ({ ...prev, [key]: { msg: msg, status: false } }))
@@ -39,17 +45,17 @@ function checkAuthCode<T>(formData: FormData, setValidate: Dispatch<SetStateActi
     successValidate('authCode', '이메일이 인증되었습니다.')
     return res
   }).catch((error) => {
-    console.log(error)
+    console.error(error)
+    
+    const { response } = error as AxiosError<ResponseError>
     const status = {
       'expired': '인증코드가 만료되었습니다.',
       'different': '인증코드가 일치하지 않습니다.',
     } as Record<string, string>
 
-    if (error.dsc_code !== '1') {
-      failValidate('authCode', status[error.err_message])
-      return;
+    if (response?.data.message) {
+      failValidate('authCode', status[response.data.message])
     }
-    console.error(error)
   })
 }
 

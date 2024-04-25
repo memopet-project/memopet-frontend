@@ -227,14 +227,8 @@ const JoinForm = () => {
       initializeValidate('authCode')
     }
 
-    checkDuplicateEmail(joinForm.email).then((res) => {
-      if (res.dscCode !== '1') {
-        failValidate('email', '이미 가입한 계정입니다.')
-        return
-      }
-
-      setValidate((prev) => ({ ...prev, email: initValidateObj }))
-
+    checkDuplicateEmail(joinForm.email, setValidate).then((res) => {
+      if (!res) return
       postAuthCode<Validate>(joinForm.email, setValidate).then((res) => {
         if (res.authCode) {
           setCheckEmail(res.verificationStatusId)

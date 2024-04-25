@@ -10,17 +10,17 @@ export interface AuthEmailResponseData {
     verificationStatusId: number; // 유효기간 id
   }
 }
-async function postAuthCode<T>(
+const postAuthCode = async<T>(
   email: AuthEmailRequestData['email'],
   setValidate: Dispatch<SetStateAction<T>>
-) {
+) => {
   // FIXME: 중복코드
-  
+
   // 유효성 검사 초기화 && 성공
   function initializeValidate(key: keyof T) {
     setValidate((prev) => ({ ...prev, [key]: initValidateObj }))
   }
-  
+
   // 유효성 검사 성공
   function successValidate(key: string, msg = '') {
     setValidate((prev) => ({ ...prev, [key]: { msg, status: true } }))
