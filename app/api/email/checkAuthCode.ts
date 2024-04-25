@@ -2,21 +2,25 @@ import type { Dispatch, SetStateAction } from 'react'
 import { postData } from '../api';
 
 interface AuthCodeResponseData {
-  dsc_code: '0' | '1'
-  err_message: string
+  authCode: '0' | '1'
+  verificationStatusId: number;
 }
 
 interface FormData {
   email: string;
   authCode: string;
+  id: number
 }
 
 interface AuthCodeRequestData {
   email: string;
   code: string
+  verificationStatusId: string;
 }
 
-async function checkAuthCode<T>(formData: FormData, setValidate: Dispatch<SetStateAction<T>>) {
+function checkAuthCode<T>(formData: FormData, setValidate: Dispatch<SetStateAction<T>>) {
+  // FIXME: 중복코드
+  
   // 유효성 검사 실패
   function failValidate(key: string, msg: string) {
     setValidate((prev) => ({ ...prev, [key]: { msg: msg, status: false } }))
@@ -29,21 +33,22 @@ async function checkAuthCode<T>(formData: FormData, setValidate: Dispatch<SetSta
 
   postData<AuthCodeResponseData, AuthCodeRequestData>('sign-in/verification-email', {
     email: formData.email,
-    code: formData.authCode
+    code: formData.authCode,
+    verificationStatusId: String(formData.id)
   }).then((res) => {
+    successValidate('authCode', '이메일이 인증되었습니다.')
+    return res
+  }).catch((error) => {
+    console.log(error)
     const status = {
       'expired': '인증코드가 만료되었습니다.',
       'different': '인증코드가 일치하지 않습니다.',
     } as Record<string, string>
 
-    if (res.dsc_code !== '1') {
-      failValidate('authCode', status[res.err_message])
+    if (error.dsc_code !== '1') {
+      failValidate('authCode', status[error.err_message])
       return;
     }
-
-    successValidate('authCode', '이메일이 인증되었습니다.')
-    return res
-  }).catch((error) => {
     console.error(error)
   })
 }

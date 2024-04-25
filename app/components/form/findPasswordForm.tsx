@@ -26,13 +26,13 @@ const initFindPasswordInfo = {
   authCode: '',
 }
 
-type Result = null | AuthEmailResponseData
+type Result = null | AuthEmailResponseData['response']
 
 const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<string>> }) => {
   const [findPasswordInfo, setFindPasswordInfo] = useState(initFindPasswordInfo)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
   const [result, setResult] = useState<Result>(null)
-  const [checkEmail, setCheckEmail] = useState(false)
+  const [checkEmail, setCheckEmail] = useState<number | null>(null)
   const setModalStatus = useSetRecoilState(modalStatus);
 
   // FIXME: 중복코드
@@ -62,7 +62,7 @@ const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<stri
         initializeValidate('email')
         initializeValidate('authCode')
         setFindPasswordInfo({ ...findPasswordInfo, email: value })
-        setCheckEmail(false)
+        setCheckEmail(null)
       },
     },
     {
@@ -73,7 +73,7 @@ const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<stri
       value: findPasswordInfo.authCode,
       name: 'authCode',
       labelClass: '-mt-3 font-normal !text-[13px] !text-gray07',
-      hide: checkEmail,
+      hide: !!checkEmail,
       onChange: (value: ChangeEvt) => {
         initializeValidate('authCode')
         setFindPasswordInfo({ ...findPasswordInfo, authCode: value })
@@ -97,11 +97,9 @@ const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<stri
 
     successValidate('email')
 
-    postAuthCode(findPasswordInfo.email).then((res) => {
-      if (!res.err_message) {
-        successValidate('email')
-        initializeValidate('authCode')
-        setCheckEmail(true)
+    postAuthCode<Validate>(findPasswordInfo.email, setValidate).then((res) => {
+      if (res.authCode) {
+        setCheckEmail(res.verificationStatusId)
       }
     })
   }
@@ -112,7 +110,7 @@ const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<stri
 
   return (
     <form className='flex flex-col gap-6' onSubmit={handleSubmit}>
-      {(!result || (result?.dsc_code && result?.dsc_code === '0')) && inputs.map((input, idx) => (
+      {(!result || (result?.authCode && result?.authCode === '0')) && inputs.map((input, idx) => (
         <ValidationInput
           fieldClass={(idx === inputs.length - 1) ? 'mb-2' : ''}
           key={input.name}
@@ -140,14 +138,14 @@ const FindPasswordForm = ({ setState }: { setState: Dispatch<SetStateAction<stri
               type='button'
               disabled={!input.value}
               className='auth-button'
-              onClick={() => checkAuthCode<Validate>({ email: findPasswordInfo.email, authCode: findPasswordInfo.authCode }, setValidate)}
+              onClick={() => checkAuthCode<Validate>({ ...findPasswordInfo, id: checkEmail!  }, setValidate)}
             >
               확인
             </button>
           }
         </ValidationInput>
       ))}
-      {result?.dsc_code === '0' && <div className='other-options-box mt-4'>
+      {result?.authCode === '0' && <div className='other-options-box mt-4'>
         <span>가입한 이메일이 생각나지 않나요?</span>
         <button onClick={handleClick}>이메일 찾기</button>
       </div>}
