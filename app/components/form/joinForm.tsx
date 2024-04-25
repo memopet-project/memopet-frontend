@@ -57,13 +57,14 @@ const initJoinForm = {
   checkPassword: '',
   name: '',
   contact: '',
+  id: null,
   agree: false,
 }
 
 const passwordPlaceholder = '영문, 숫자, 특수문자 혼합 8자 이상 입력'
 
 const JoinForm = () => {
-  const [checkEmail, setCheckEmail] = useState('')
+  const [checkEmail, setCheckEmail] = useState<number | null>(null)
   const [joinForm, setJoinForm] = useState(initJoinForm)
   const [validate, setValidate] = useState<Validate>({ ...initValidate })
 
@@ -86,7 +87,7 @@ const JoinForm = () => {
   // 이메일, 인증코드 초기화
   function retryAuthEmail(emailValue = '') {
     setJoinForm({ ...joinForm, email: emailValue, authCode: '' })
-    setCheckEmail('')
+    setCheckEmail(null)
     initializeValidate('email')
     initializeValidate('authCode')
   }
@@ -226,47 +227,15 @@ const JoinForm = () => {
       initializeValidate('authCode')
     }
 
-    checkDuplicateEmail(joinForm.email).then((res) => {
-      if (res.dsc_code !== '1') {
-        failValidate('email', '이미 가입한 계정입니다.')
-        return
-      }
-
-      setValidate((prev) => ({ ...prev, email: initValidateObj }))
-
-      postAuthCode(joinForm.email).then((res) => {
-        if (res.dsc_code) {
-          setCheckEmail(res.auth_code)
-          successValidate('email')
-          initializeValidate('authCode')
+    checkDuplicateEmail(joinForm.email, setValidate).then((res) => {
+      if (!res) return
+      postAuthCode<Validate>(joinForm.email, setValidate).then((res) => {
+        if (res.authCode) {
+          setCheckEmail(res.verificationStatusId)
         }
       })
     })
   }
-
-  // 인증코드 인증
-  // async function checkAuthCode() {
-  //   try {
-  //     const res = await api.post<AuthResponseData>('sign-in/verification-email', {
-  //       email: joinForm.email,
-  //       confirm_code: checkEmail
-  //     })
-
-  //     const status = {
-  //       'expired': '인증코드가 만료되었습니다.',
-  //       'different': '인증코드가 일치하지 않습니다.',
-  //     } as Record<string, string>
-
-  //     if (res.data.dsc_code !== '1') {
-  //       failValidate('authCode', status[res.data.err_message])
-  //       return;
-  //     }
-
-  //     successValidate('authCode', '이메일이 인증되었습니다.')
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
 
   // 이용약관 동의
   function handleAgreeCheckbox(val: boolean) {
@@ -332,7 +301,7 @@ const JoinForm = () => {
               type='button'
               disabled={!input.value || buttonLabel === '이메일 변경'}
               className='auth-button'
-              onClick={() => checkAuthCode<Validate>({ email: joinForm.email, authCode: joinForm.authCode }, setValidate)}
+              onClick={() => checkAuthCode<Validate>({ ...joinForm, id: checkEmail! }, setValidate)}
             >
               확인
             </button>
