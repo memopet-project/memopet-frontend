@@ -53,7 +53,7 @@ const InfiniteScrollImage = ({ hoveredSrc, defaultSrc, tagsSrc, alt, width, heig
 
   return (
     <div
-      className="overflow-auto w-full h-[442px] relative"
+      className="overflow-hidden w-full h-[442px] relative"
       ref={containerRef}
     >
       <div className="h-full relative"
