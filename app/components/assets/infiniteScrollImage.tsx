@@ -1,17 +1,18 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type Props = {
-  hoveredSrc: string;
+  hoveredSrc?: string;
   defaultSrc: string;
   tagsSrc: string;
   alt: string;
   width: string;
   height: string;
+  isMobile?: boolean;
 };
 
-const InfiniteScrollImage = ({ hoveredSrc, defaultSrc, tagsSrc, alt, width, height }: Props) => {
+const InfiniteScrollImage = ({ hoveredSrc, defaultSrc, tagsSrc, alt, width, height, isMobile }: Props) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContentsRef = useRef<HTMLDivElement[]>([]);
@@ -20,15 +21,14 @@ const InfiniteScrollImage = ({ hoveredSrc, defaultSrc, tagsSrc, alt, width, heig
   useEffect(() => {
     if (!containerRef.current || !imageContentsRef.current) return;
 
-    const container = containerRef.current;
-    const imageContents = imageContentsRef.current;
-    const imageWidth = imageContents[0].offsetWidth;
+    const imageContents: HTMLDivElement[] = imageContentsRef.current;
+    const imageWidth: number = imageContents[0].offsetWidth;
     const duration = 10;
 
     let left = 0;
     let intervalId: number | null = null;
 
-    const animate = () => {
+    const animate = (): void => {
       left -= 1;
       if (left <= -imageWidth) {
         left = 0;
@@ -53,11 +53,10 @@ const InfiniteScrollImage = ({ hoveredSrc, defaultSrc, tagsSrc, alt, width, heig
 
   return (
     <div
-      className="overflow-hidden w-full h-[442px] relative"
+      className="overflow-hidden w-full h-[221px] md:h-[442px] relative"
       ref={containerRef}
     >
-      <div className="h-full relative"
-           style={{ display: 'flex', minWidth: '3596px' }}
+      <div className="h-full relative flex min-w-[1798px] md:min-w-[3596px]"
            onMouseEnter={() => setIsHovered(true)}
            onMouseLeave={() => setIsHovered(false)}>
         {
@@ -70,16 +69,21 @@ const InfiniteScrollImage = ({ hoveredSrc, defaultSrc, tagsSrc, alt, width, heig
               }}
               key={index}
             >
-              <img src={isHovered ? hoveredSrc : defaultSrc} alt={alt} width={width} height={height}
-                   className="absolute translate-x-0 w-fit"
-                   style={{ width: '100%', height: '100%' }} />
+              {isMobile ? (
+                <img src={defaultSrc} alt={alt} width={width} height={height}
+                     className="absolute w-full h-full"
+                />
+              ) : (
+                <img src={isHovered ? hoveredSrc : defaultSrc} alt={alt} width={width} height={height}
+                     className="absolute w-full h-full"
+                />
+              )}
               <img src={tagsSrc} alt={alt} width={width} height={height}
-                   className="absolute w-fit"
-                   style={{ width: '100%', height: '100%' }} />
+                   className="absolute w-full h-full"
+              />
             </div>
           ))
         }
-
       </div>
     </div>
   );
