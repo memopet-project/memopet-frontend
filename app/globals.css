@@ -9,6 +9,7 @@
 body {
     margin: 0;
     padding: 0;
+    background: #F7F5F1;
 }
 
 *::-webkit-scrollbar {

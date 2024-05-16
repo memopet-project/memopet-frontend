@@ -4,7 +4,7 @@ import { isMobileDevice } from '@/app/libs/responsive';
 import Link from 'next/link';
 
 export default function Home() {
-  const isMobile = isMobileDevice();
+  const isMobile: boolean = isMobileDevice();
   const isLogin = true;
   const nextPath = isLogin ? '/profile' : '/login';
 
@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       {isMobile && (
         <>
-          <div className="w-full h-screen flex flex-col gap-[64px] bg-white relative overflow-hidden items-center">
+          <div className="w-full h-screen flex flex-col gap-[64px] relative overflow-hidden items-center">
             <div className="mt-[84px] px-[20px] flex flex-col gap-4 text-center leading-normal">
               <span className="text-4xl font-[700]">환영합니다</span>
               <p className="text-[16px] font-[400] font-pretendard">
@@ -43,7 +43,7 @@ export default function Home() {
       )}
       {/* Desktop  */}
       {!isMobile && (
-        <section className="w-full h-screen flex flex-col gap-[120px] bg-white relative overflow-hidden items-center">
+        <section className="w-full h-screen flex flex-col gap-[120px] relative overflow-hidden items-center">
           <div className="w-[410px] mt-[58px] flex flex-col gap-4 text-center leading-normal">
             <span className="text-4xl font-[700]">환영합니다</span>
             <p className="text-[18px] font-[400] font-pretendard">
