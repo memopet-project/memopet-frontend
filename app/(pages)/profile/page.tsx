@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import ProfileSettingForm from '@/app/components/form/profileSettingForm';
 
 const Page = () => {
   return (
@@ -13,6 +14,7 @@ const Page = () => {
         className="mx-auto mt-[48px] mb-[36px]"
       />
       <section className="flex justify-center">
+        <ProfileSettingForm></ProfileSettingForm>
       </section>
     </main>
   );
