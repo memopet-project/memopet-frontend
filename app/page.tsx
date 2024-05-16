@@ -1,10 +1,12 @@
 import MainBtn from '@/app/components/button/mainBtn';
 import InfiniteScrollImage from '@/app/components/assets/infiniteScrollImage';
 import { isMobileDevice } from '@/app/libs/responsive';
-
+import Link from 'next/link';
 
 export default function Home() {
   const isMobile = isMobileDevice();
+  const isLogin = true;
+  const nextPath = isLogin ? '/profile' : '/login';
 
   return (
     <main>
@@ -29,10 +31,12 @@ export default function Home() {
               isMobile={isMobile}
             />
             <div className="w-full px-[20px] py-[40px] fixed bottom-0">
-              <MainBtn
-                text="프로필 만들기"
-                className="mx-auto mt-4"
-              />
+              <Link href={nextPath}>
+                <MainBtn
+                  text="프로필 만들기"
+                  className="mx-auto mt-4"
+                />
+              </Link>
             </div>
           </div>
         </>
@@ -47,10 +51,12 @@ export default function Home() {
               <br />
               간단히 프로필을 만들고 반려동물과의 추억을 공유해 보세요
             </p>
-            <MainBtn
-              text="프로필 만들기"
-              className="mx-auto mt-4"
-            />
+            <Link href={nextPath}>
+              <MainBtn
+                text="프로필 만들기"
+                className="mx-auto mt-4"
+              />
+            </Link>
           </div>
           <InfiniteScrollImage
             hoveredSrc="/images/slider/hover.png"
