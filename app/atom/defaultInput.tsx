@@ -8,6 +8,7 @@ type Props = {
   type: string;
   value: string;
   name: string;
+  isError?: boolean;
   onChange?: (value: string) => void;
   onBlur?: () => void;
 }
@@ -17,6 +18,7 @@ const DefaultInput = ({
                         type,
                         value,
                         name,
+                        isError = false,
                         onChange = (e) => {
                         },
                         onBlur = () => {
@@ -25,9 +27,23 @@ const DefaultInput = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const containerClass = (): string => {
-    let commonClass = 'h-[52px] w-full relative flex border border-[#525252] rounded-[6px] overflow-hidden px-3 py-[14px] gap-[10px]';
+    let commonClass = 'h-[52px] w-full relative flex border rounded-[6px] overflow-hidden px-3 py-[14px] gap-[10px]';
 
-    return isFocused ? `${commonClass} border-[#F15139]` : commonClass;
+    // 0 = default, 1 = focused, 2 = error
+    let state: number = 0;
+    if (isFocused) state = 1;
+    if (isError) state = 2;
+
+    switch (state) {
+      case 0:
+        return `${commonClass} border-[#525252]`;
+      case 1:
+        return `${commonClass} border-[#F15139]`;
+      case 2:
+        return `${commonClass} border-[#E43333]`;
+      default:
+        return `${commonClass} border-[#525252]`;
+    }
   };
 
   return (
