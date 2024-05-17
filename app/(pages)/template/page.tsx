@@ -8,7 +8,7 @@ const TemplatePage = () => {
   return (
     <div className="flex justify-center pt-20 bg-[#F7F5F1]">
       <Banner />
-      <div className="w-[1160px] px-4 z-10 text-[#171717] flex flex-col gap-10">
+      <div className="w-[1160px] px-4 py-[92px] z-10 text-[#171717] flex flex-col gap-10">
         <Profile />
         <Comments />
         <Devider />

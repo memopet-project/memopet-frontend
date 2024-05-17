@@ -1,4 +1,6 @@
+import Image from "next/image";
 import FavoriteTag from "../ui/profile/FavoriteTag";
+import LikeButton from "../ui/profile/LikeButon";
 
 const Profile = () => {
   return (
@@ -8,11 +10,16 @@ const Profile = () => {
           <div className="flex items-center gap-4">
             <span className="text-4xl font-bold">코코</span>
             <div className="flex items-center gap-2">
-              <button className="h-10 flex items-center gap-2 border border-white py-1 px-6 rounded-[999px]">
-                <span>icon</span>
-                <span>123</span>
+              <LikeButton amount={123} />
+              <button className="w-10 h-10 flex justify-center items-center">
+                <Image
+                  src="/svg/moreHorizontal.svg"
+                  alt="more"
+                  width={24}
+                  height={24}
+                  objectFit="contain"
+                />
               </button>
-              <button className="w-10 h-10">∙∙∙</button>
             </div>
           </div>
           <ul className="flex items-center gap-2 opacity-60">
@@ -39,7 +46,15 @@ const Profile = () => {
           </li>
         </ul>
       </div>
-      <div className="w-80 h-80 flex justify-center items-center">photo</div>
+      <div className="w-80 h-80 flex justify-center items-center">
+        <Image
+          src="/images/memory/1.png"
+          alt="profile"
+          width={220}
+          height={220}
+          className="w-[220px] h-[220px] border-[1.5px] border-[#171717] object-cover"
+        />
+      </div>
     </div>
   );
 };

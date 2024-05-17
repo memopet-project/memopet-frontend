@@ -1,3 +1,4 @@
+import BorderlessBtn from "../ui/button/BorderlessBtn";
 import CommentInput from "../ui/comment/CommentInput";
 import CommentItem from "../ui/comment/CommentItem";
 
@@ -6,10 +7,7 @@ const Comments = () => {
     <div className="flex flex-col gap-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">따뜻한 한마디</h2>
-        <button className="h-10 flex items-center gap-2 py-1 px-5 text-[#949494]">
-          <span>icon</span>
-          <span>모두 보기</span>
-        </button>
+        <BorderlessBtn icon="open" text="모두 보기" />
       </div>
       <ul className="flex gap-2">
         <li>
