@@ -17,9 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = headers().get('x-next-pathname');
-  const headerShown = headerWhiteList.includes(pathname ?? '');
-
-  console.log('headerShown', headerShown);
+  const headerShown = headerWhiteList.some((path) => pathname?.includes(path));
 
   return (
     <html lang="ko">

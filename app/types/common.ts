@@ -1,4 +1,4 @@
-import { type ChangeEvent } from "react";
+import React, { type ChangeEvent } from 'react';
 
 export interface ValidateObj {
   msg: string;
@@ -25,4 +25,15 @@ export interface userInfoType {
   id: number;
   nickname: string;
   profileImg: string;
+}
+
+export type TInputState = {
+  state: 'default' | 'warn' | 'error';
+  msg: null | string | React.ReactNode;
+};
+
+// indicator type
+export type TIndicatorStep = {
+  maxStep: number;
+  currentStep: number;
 }
