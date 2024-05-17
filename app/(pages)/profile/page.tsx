@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import ArrowLeftSVG from '@/public/svg/arrowLeft.svg';
 import DefaultInputField from '@/app/components/molecules/fieldset/defaultInputField';
+import PetTypeForm from '@/app/components/molecules/fieldset/petTypeForm';
 import regex from '@/app/constants/regex';
 import { TIndicatorStep, TInputState } from '@/types/common';
 import IconBase from '@/app/components/atom/icon/iconBase';
@@ -96,17 +97,20 @@ const Page = () => {
       <div className="flex flex-col gap-8 px-20">
         <h2 className="font-bold text-2xl inline-block mt-16">반려동물의 이름과 종류를 알려주세요</h2>
         {step.currentStep === 1 && (
-          <DefaultInputField
-            label="이름"
-            placeholder="한글 또는 영문만 입력해주세요."
-            value={val}
-            onChange={(value) => setVal(value)}
-            type={'text'}
-            name={'name'}
-            state={petNameValidate.state}
-            description={petNameValidate.msg}
-            onBlur={onBlur}
-          />
+          <>
+            <DefaultInputField
+              label="이름"
+              placeholder="한글 또는 영문만 입력해주세요."
+              value={val}
+              onChange={(value) => setVal(value)}
+              type={'text'}
+              name={'name'}
+              state={petNameValidate.state}
+              description={petNameValidate.msg}
+              onBlur={onBlur}
+            />
+            <PetTypeForm />
+          </>
         )}
       </div>
       <div className="w-full px-5 mt-12 flex">
