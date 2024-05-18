@@ -12,6 +12,7 @@ import FootPrintSVG from '@/public/svg/animal-type/foot_print.svg';
 import SelectBox from '@/app/components/atom/selectBox';
 import type { TPetType } from '@/app/constants/petType';
 import IconBase from '@/app/components/atom/icon/iconBase';
+import LabeledCheckBox from '@/app/components/molecules/labeledCheckBox';
 
 
 type TPetTypeParam = {
@@ -65,6 +66,7 @@ export const petTypes: TPetType[] = [
   },
 ];
 
+type Props = {}
 
 const PetTypeForm = () => {
   const [petTypeParam, setPetTypeParam] = useState<TPetTypeParam>({
@@ -73,6 +75,7 @@ const PetTypeForm = () => {
     pet_spec_s: '',
   });
   const [petTypeSpeciesError, setPetTypeSpeciesError] = useState<boolean>(false);
+  const [dontKnowPetType, setDontKnowPetType] = useState<boolean>(false);
 
   const iconColor = (color: string, returnType: 'hex' | 'class'): string => {
     if (returnType === 'hex') {
@@ -171,6 +174,23 @@ const PetTypeForm = () => {
           }
         }}
       />
+      <div>
+        <LabeledCheckBox
+          id="pet-type-unknown"
+          label="품종을 알 수 없어요!"
+          checked={dontKnowPetType}
+          onChange={(e) => {
+            setDontKnowPetType(e.target.checked);
+            if (e.target.checked) {
+              setPetTypeParam({
+                id: 0,
+                pet_spec_m: '',
+                pet_spec_s: '',
+              });
+            }
+          }}
+        />
+      </div>
     </fieldset>
   );
 };

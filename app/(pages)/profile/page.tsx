@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ArrowLeftSVG from '@/public/svg/arrowLeft.svg';
 import DefaultInputField from '@/app/components/molecules/fieldset/defaultInputField';
-import PetTypeForm from '@/app/components/molecules/fieldset/petTypeForm';
+import PetTypeForm from '@/app/components/organisms/petTypeForm';
 import regex from '@/app/constants/regex';
 import { TIndicatorStep, TInputState } from '@/types/common';
 import IconBase from '@/app/components/atom/icon/iconBase';
