@@ -10,16 +10,10 @@ import ReptileSVG from '@/public/svg/animal-type/reptile.svg';
 import AmphibianSVG from '@/public/svg/animal-type/amphibian.svg';
 import FootPrintSVG from '@/public/svg/animal-type/foot_print.svg';
 import SelectBox from '@/app/components/atom/selectBox';
-import type { TPetType } from '@/app/constants/petType';
+import { TPetType, TPetTypeParam } from '@/types/petProfile';
 import IconBase from '@/app/components/atom/icon/iconBase';
 import LabeledCheckBox from '@/app/components/molecules/labeledCheckBox';
 
-
-type TPetTypeParam = {
-  id: number;
-  pet_spec_m: string;
-  pet_spec_s: string;
-}
 
 export const petTypes: TPetType[] = [
   {
@@ -66,16 +60,13 @@ export const petTypes: TPetType[] = [
   },
 ];
 
-type Props = {}
+type Props = {
+  petTypeParam: TPetTypeParam;
+  setPetTypeParam: (param: TPetTypeParam) => void;
+}
 
-const PetTypeForm = () => {
-  const [petTypeParam, setPetTypeParam] = useState<TPetTypeParam>({
-    id: 0,
-    pet_spec_m: '',
-    pet_spec_s: '',
-  });
+const PetSpeciesForm = ({ petTypeParam, setPetTypeParam }: Props) => {
   const [petTypeSpeciesError, setPetTypeSpeciesError] = useState<boolean>(false);
-  const [dontKnowPetType, setDontKnowPetType] = useState<boolean>(false);
 
   const iconColor = (color: string, returnType: 'hex' | 'class'): string => {
     if (returnType === 'hex') {
@@ -115,27 +106,26 @@ const PetTypeForm = () => {
         <span>종류</span>
         <div className="grid grid-cols-4 grid-rows-2 gap-2">
           {
-            petTypes.map((petType) => (
+            petTypes.map((petType: TPetType) => (
               <label
                 htmlFor={'pet-type-' + petType.id}
                 key={petType.id}
-                className={iconColor(petTypeParam.id === petType.id ? 'black' : 'gray', 'class')}
+                className={iconColor(petTypeParam.pet_spec_m === petType.name ? 'black' : 'gray', 'class')}
               >
                 <input
                   type="radio"
                   id={'pet-type-' + petType.id}
                   name="petType"
                   value={petType.id}
-                  checked={petTypeParam.id === petType.id}
+                  checked={petTypeParam.pet_spec_m === petType.name}
                   onChange={() => setPetTypeParam({
                     ...petTypeParam,
-                    id: petType.id,
                     pet_spec_m: petType.name,
                   })}
                   className="hidden"
                 />
                 <div className="flex flex-col items-center gap-2">
-                  {petType.icon(iconColor(petTypeParam.id === petType.id ? 'black' : 'gray', 'hex'))}
+                  {petType.icon(iconColor(petTypeParam.pet_spec_m === petType.name ? 'black' : 'gray', 'hex'))}
                   <span>{petType.name}</span>
                 </div>
               </label>
@@ -157,7 +147,7 @@ const PetTypeForm = () => {
       )}
       <SelectBox
         id="pet-species"
-        options={petTypes.find((petType) => petType.id === petTypeParam.id)?.species || []}
+        options={petTypes.find((petType) => petTypeParam.pet_spec_m === petType.name)?.species || []}
         onSelect={(option) => setPetTypeParam({
           ...petTypeParam,
           pet_spec_s: option,
@@ -165,7 +155,7 @@ const PetTypeForm = () => {
         value={petTypeParam.pet_spec_s}
         placeholder="종류를 선택해주세요."
         canFocus={() => {
-          if (petTypeParam.id === 0) {
+          if (petTypeParam.pet_spec_m === '') {
             setPetTypeSpeciesError(true);
             return false;
           } else {
@@ -178,16 +168,13 @@ const PetTypeForm = () => {
         <LabeledCheckBox
           id="pet-type-unknown"
           label="품종을 알 수 없어요!"
-          checked={dontKnowPetType}
+          checked={petTypeParam.dont_know}
           onChange={(e) => {
-            setDontKnowPetType(e.target.checked);
-            if (e.target.checked) {
-              setPetTypeParam({
-                id: 0,
-                pet_spec_m: '',
-                pet_spec_s: '',
-              });
-            }
+            setPetTypeParam({
+              ...petTypeParam,
+              dont_know: e.target.checked,
+              pet_spec_s: e.target.checked ? '' : petTypeParam.pet_spec_s,
+            });
           }}
         />
       </div>
@@ -195,4 +182,4 @@ const PetTypeForm = () => {
   );
 };
 
-export default PetTypeForm;
+export default PetSpeciesForm;

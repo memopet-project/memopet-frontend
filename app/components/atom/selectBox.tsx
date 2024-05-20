@@ -103,6 +103,7 @@ const SelectBox = ({ id, value, placeholder, options, onSelect, canFocus = () =>
                 setIsFocused(false);
                 setIsOpenOptions(false);
               }}
+              tabIndex={-1}
             >
               <Image
                 src="/svg/close.svg"

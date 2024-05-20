@@ -75,6 +75,7 @@ const DefaultInput = ({
             onChange('');
             setIsFocused(false);
           }}
+          tabIndex={-1}
         >
           <Image
             src="/svg/close.svg"
