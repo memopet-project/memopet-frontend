@@ -1,4 +1,4 @@
-import ThumbIcon from "./ThumbIcon";
+import MemoryThumbIcon from "./MemoryThumbIcon";
 
 interface Props {
   thumb: string;
@@ -14,8 +14,8 @@ const MemoryItem = ({ thumb, date, title }: Props) => {
         <div className="flex justify-between items-center">
           <p className="text-[13px] text-[#737373]">{date}</p>
           <div className="flex gap-2">
-            <ThumbIcon type="flower" amount={45} />
-            <ThumbIcon type="comment" amount={8} />
+            <MemoryThumbIcon type="flower" amount={45} />
+            <MemoryThumbIcon type="comment" amount={8} />
           </div>
         </div>
         <p className="font-medium">{title}</p>

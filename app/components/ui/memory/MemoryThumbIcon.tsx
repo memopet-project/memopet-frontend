@@ -5,7 +5,7 @@ interface Props {
   amount: number;
 }
 
-const ThumbIcon = ({ type, amount }: Props) => {
+const MemoryThumbIcon = ({ type, amount }: Props) => {
   return (
     <div className="flex items-center gap-0.5 text-[#949494]">
       <Image
@@ -20,4 +20,4 @@ const ThumbIcon = ({ type, amount }: Props) => {
   );
 };
 
-export default ThumbIcon;
+export default MemoryThumbIcon;

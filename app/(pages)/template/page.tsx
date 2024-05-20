@@ -3,11 +3,13 @@ import Comments from "@/app/components/template/Comments";
 import Devider from "@/app/components/template/Devider";
 import Memories from "@/app/components/template/Memories";
 import Profile from "@/app/components/template/Profile";
+import MemoryPopup from "@/app/components/ui/memory/MemoryPopup";
 
 const TemplatePage = () => {
   return (
     <div className="flex justify-center pt-20 bg-[#F7F5F1]">
       <Banner />
+      <MemoryPopup open={true} />
       <div className="w-[1160px] px-4 py-[92px] z-10 text-[#171717] flex flex-col gap-10">
         <Profile />
         <Comments />

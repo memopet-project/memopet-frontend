@@ -6,7 +6,7 @@ interface Props {
 
 const IconBtn = ({ icon }: Props) => {
   return (
-    <button className="absolute top-2 right-1 w-10 h-10 flex justify-center items-center">
+    <button className="w-10 h-10 flex justify-center items-center">
       <Image
         src={`/svg/${icon}.svg`}
         alt={icon}

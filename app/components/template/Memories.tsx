@@ -1,4 +1,4 @@
-import MemoryItem from "../memory/MemoryItem";
+import MemoryItem from "../ui/memory/MemoryItem";
 import Timeline from "../ui/dropdown/Timeline";
 import Months from "./Months";
 
