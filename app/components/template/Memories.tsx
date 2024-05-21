@@ -1,10 +1,21 @@
+"use client";
+
 import MemoryItem from "../ui/memory/MemoryItem";
 import Timeline from "../ui/dropdown/Timeline";
 import Months from "./Months";
+import MemoryPopup from "../ui/memory/MemoryPopup";
+import { useState } from "react";
 
 const Memories = () => {
+  const [isOpenMemoryPopup, setIsOpenMomoryPopup] = useState(false);
+
+  const onToggleOpenMemoryPopup = () => {
+    setIsOpenMomoryPopup(!isOpenMemoryPopup);
+  };
+
   return (
     <div className="flex flex-col gap-6">
+      <MemoryPopup open={isOpenMemoryPopup} onClose={onToggleOpenMemoryPopup}/>
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold flex gap-2">
           <span>모든 추억</span>
@@ -14,7 +25,7 @@ const Memories = () => {
       </div>
       <div className="relative">
         <ul className="grid grid-cols-3 gap-6">
-          <li>
+          <li onClick={onToggleOpenMemoryPopup}>
             <MemoryItem
               thumb="/images/memory/1.png"
               date="2023. 05. 24."

@@ -9,17 +9,17 @@ interface Props {
 }
 
 const MemoryPopup = ({ open, onClose }: Props) => {
-  return (
+  return open ? (
     <div
-      // onClick={onClose}
+      onClick={onClose}
       className="z-[60] fixed top-0 left-0 w-screen h-screen bg-[#00000030] flex justify-center items-center"
     >
       <div
-        // onClick={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         className="w-[864px] h-[640px] bg-white border border-[#525252] rounded-2xl p-5 flex gap-6 relative"
       >
         <div className="absolute top-4 right-3">
-          <IconBtn icon="close" />
+          <IconBtn icon="close" onClick={onClose} />
         </div>
         <div className="w-[400px] flex items-center">
           <img
@@ -60,7 +60,7 @@ const MemoryPopup = ({ open, onClose }: Props) => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default MemoryPopup;

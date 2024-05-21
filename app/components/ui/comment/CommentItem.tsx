@@ -10,7 +10,9 @@ interface Props {
 const CommentItem = ({ name, time, comment }: Props) => {
   return (
     <div className="w-[360px] bg-white border border-[#525252] rounded-lg py-4 px-5 flex flex-col gap-3 relative">
-      <IconBtn icon="moreVertical" />
+      <div className="absolute top-1 right-0">
+        <IconBtn icon="moreVertical" />
+      </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-3">
           <Image
