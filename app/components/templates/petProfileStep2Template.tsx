@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { TPetTypeParam } from '@/types/petProfile';
-import Calendar from '@/app/components/atom/input/calendar';
+import Calendar from '@/app/components/atom/calendar';
 import LabeledCheckBox from '@/app/components/molecules/labeledCheckBox';
 
 type Props = {

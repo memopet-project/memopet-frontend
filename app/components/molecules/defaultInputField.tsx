@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultInput from '@/app/components/atom/input/defaultInput';
+import DefaultInput from '@/app/components/atom/defaultInput';
 import { TInputState } from '@/types/common';
 
 type Props = {

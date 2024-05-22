@@ -9,6 +9,7 @@ import { indicatorState, petTypeState } from '@/app/recoil/recoilContextProvider
 import PetProfileStep1Template from '@/app/components/templates/petProfileStep1Template';
 import PetProfileStep2Template from '@/app/components/templates/petProfileStep2Template';
 import { TPetTypeParam } from '@/types/petProfile';
+import PetProfileStep3Template from '@/app/components/templates/petProfileStep3Template';
 
 const Page = () => {
   // next 버튼 활성화 여부 useState
@@ -60,7 +61,6 @@ const Page = () => {
       <ClipSVG className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2/3" />
       {step.currentStep === 1 && (
         <PetProfileStep1Template
-          step={step}
           petTypeParam={petTypeParam}
           setPetTypeParam={setPetTypeParam}
           setNextBtnActive={setNextBtnActive}
@@ -68,7 +68,13 @@ const Page = () => {
       )}
       {step.currentStep === 2 && (
         <PetProfileStep2Template
-          step={step}
+          petTypeParam={petTypeParam}
+          setPetTypeParam={setPetTypeParam}
+          setNextBtnActive={setNextBtnActive}
+        />
+      )}
+      {step.currentStep === 3 && (
+        <PetProfileStep3Template
           petTypeParam={petTypeParam}
           setPetTypeParam={setPetTypeParam}
           setNextBtnActive={setNextBtnActive}

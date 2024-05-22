@@ -1,21 +1,20 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import DefaultInputField from '@/app/components/molecules/fieldset/defaultInputField';
+import DefaultInputField from '@/app/components/molecules/defaultInputField';
 import PetSpeciesForm from '@/app/components/organisms/petSpeciesForm';
-import { TIndicatorStep, TInputState } from '@/types/common';
+import { TInputState } from '@/types/common';
 import { TPetTypeParam } from '@/types/petProfile';
 import regex from '@/app/constants/regex';
 import IconBase from '@/app/components/atom/icon/iconBase';
 
 type Props = {
-  step: TIndicatorStep;
   petTypeParam: TPetTypeParam;
   setPetTypeParam: (param: TPetTypeParam) => void;
   setNextBtnActive: (active: boolean) => void;
 }
 
-const PetProfileStep1Template = ({ step, setPetTypeParam, petTypeParam, setNextBtnActive }: Props) => {
+const PetProfileStep1Template = ({ setPetTypeParam, petTypeParam, setNextBtnActive }: Props) => {
   const [petNameValidate, setPetNameValidate] = useState<TInputState>({ state: 'default', msg: '' });
 
   const onBlur = () => {
