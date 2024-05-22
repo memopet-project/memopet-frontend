@@ -19,7 +19,7 @@ const LabeledCheckBox = ({ id, label, checked, onChange }: Props) => {
         id={id}
         onChange={onChange}
       />
-      <span>{label}</span>
+      <span className="text-sm">{label}</span>
     </label>
   );
 };

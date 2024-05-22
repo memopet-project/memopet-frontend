@@ -17,7 +17,6 @@ type Props = {
 
 const PetProfileStep1Template = ({ step, setPetTypeParam, petTypeParam, setNextBtnActive }: Props) => {
   const [petNameValidate, setPetNameValidate] = useState<TInputState>({ state: 'default', msg: '' });
-  const [dontKnowPetType, setDontKnowPetType] = useState<boolean>(false);
 
   const onBlur = () => {
     const validate = regex.petName.test(petTypeParam.pet_nm);

@@ -10,6 +10,7 @@ export type TPetTypeParam = {
   pet_desc: string
   pet_spec_m: string
   pet_spec_s: string
+  is_dead: boolean
   dont_know: boolean
   pet_gender: string
   pet_profile_url: string

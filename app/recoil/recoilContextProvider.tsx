@@ -2,7 +2,7 @@
 
 import { atom, RecoilRoot, RecoilState } from 'recoil';
 import { TIndicatorStep } from '@/types/common';
-import { TPetTypeParam } from '@/types/petProfile';
+import type { TPetTypeParam } from '@/types/petProfile';
 
 export default function RecoilContextProvider({ children }: { children: React.ReactNode }) {
   return <RecoilRoot>{children}</RecoilRoot>;
@@ -39,6 +39,7 @@ export const petTypeState: RecoilState<TPetTypeParam> = persistAtom<TPetTypePara
   pet_desc: '',
   pet_spec_m: '',
   pet_spec_s: '',
+  is_dead: false,
   dont_know: false,
   pet_gender: '',
   pet_profile_url: '',
