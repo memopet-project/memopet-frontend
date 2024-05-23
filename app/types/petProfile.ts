@@ -19,3 +19,8 @@ export type TPetTypeParam = {
   death_dt: string
   like_behaviour: string[]
 }
+
+export type TTagColor = {
+  name: string;
+  className: string;
+}

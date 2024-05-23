@@ -124,6 +124,12 @@ module.exports = {
         statusRed: '#E73324',
 
         errorRed: '#E43333',
+
+        pink: '#FF91B9',
+        yellow: '#FFD223',
+        green: '#73E390',
+        skyblue: '#8CCAFF',
+        purple: '#C7A5FF',
       },
       transitionProperty: {
         height: 'height',

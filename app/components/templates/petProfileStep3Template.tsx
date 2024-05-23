@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import PetSpeciesForm from '@/app/components/organisms/petSpeciesForm';
 import { TPetTypeParam } from '@/types/petProfile';
 import TextareaField from '@/app/components/molecules/textareaField';
+import TagInput from '@/app/components/atom/tagInput';
 
 type Props = {
   petTypeParam: TPetTypeParam;
@@ -12,6 +12,7 @@ type Props = {
 }
 
 const PetProfileStep1Template = ({ setPetTypeParam, petTypeParam, setNextBtnActive }: Props) => {
+
   return (
     <div className="flex flex-col gap-8 px-20">
       <h2 className="font-bold text-2xl inline-block mt-16 text-center">반려동물의 이름과 종류를 알려주세요</h2>
@@ -28,10 +29,11 @@ const PetProfileStep1Template = ({ setPetTypeParam, petTypeParam, setNextBtnActi
           });
         }}
       />
-      <PetSpeciesForm
-        petTypeParam={petTypeParam}
-        setPetTypeParam={setPetTypeParam}
-      />
+
+      <div className="relative">
+        <TagInput />
+
+      </div>
     </div>
   );
 };

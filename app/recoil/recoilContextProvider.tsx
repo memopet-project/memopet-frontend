@@ -3,13 +3,14 @@
 import { atom, RecoilRoot, RecoilState } from 'recoil';
 import { TIndicatorStep } from '@/types/common';
 import type { TPetTypeParam } from '@/types/petProfile';
+import React from 'react';
 
 export default function RecoilContextProvider({ children }: { children: React.ReactNode }) {
   return <RecoilRoot>{children}</RecoilRoot>;
 }
 
 const persistAtom = <T extends unknown>(key: string, defaultValue: T) => {
-  const item = localStorage.getItem(key);
+  const item = typeof window !== 'undefined' ? localStorage.getItem(key) : null;
   return atom({
     key,
     default: item ? JSON.parse(item) : defaultValue,
@@ -21,7 +22,6 @@ const persistAtom = <T extends unknown>(key: string, defaultValue: T) => {
       },
     ],
   });
-
 };
 
 export const textState = atom({

@@ -10,6 +10,7 @@ import PetProfileStep1Template from '@/app/components/templates/petProfileStep1T
 import PetProfileStep2Template from '@/app/components/templates/petProfileStep2Template';
 import { TPetTypeParam } from '@/types/petProfile';
 import PetProfileStep3Template from '@/app/components/templates/petProfileStep3Template';
+import dynamic from 'next/dynamic';
 
 const Page = () => {
   // next 버튼 활성화 여부 useState
@@ -108,4 +109,6 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default dynamic(() => Promise.resolve(Page), {
+  ssr: false,
+});
