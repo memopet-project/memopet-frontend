@@ -60,8 +60,9 @@ const PetProfileStep1Template = ({ setPetTypeParam, petTypeParam, setNextBtnActi
   }, [petTypeParam.pet_nm, petTypeParam.pet_spec_m, petTypeParam.pet_spec_s, petTypeParam.dont_know]);
 
   return (
-    <div className="flex flex-col gap-8 px-20">
-      <h2 className="font-bold text-2xl inline-block mt-16 text-center">반려동물의 이름과 종류를 알려주세요</h2>
+    <div className="flex flex-col gap-8 xl:px-20 px-5 w-full">
+      <h2 className="font-bold text-2xl inline-block mt-16 text-start md:text-center break-keep">반려동물의 이름과 종류를
+        알려주세요</h2>
       <DefaultInputField
         label="이름"
         placeholder="한글 또는 영문만 입력해주세요."

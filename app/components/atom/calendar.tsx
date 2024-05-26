@@ -17,7 +17,7 @@ const Calendar = ({ id, error, value, onFocus, onBlur, placeholder, onChange, di
   const [focused, setFocused] = React.useState<boolean>(false);
 
   const containerClass = (): string => {
-    let commonClass = 'h-[52px] w-full relative flex outline-none border rounded-[6px] overflow-hidden px-3 py-[14px] gap-[10px] focus:border-[#F15139]';
+    let commonClass = 'h-[52px] md:w-full relative flex outline-none border rounded-[6px] overflow-hidden md:px-3 px-4 py-[14px] gap-[10px] focus:border-[#F15139]';
 
     // 0 = default, 1 = focused, 2 = error, 3 = disabled
     let inputState: number = 0;

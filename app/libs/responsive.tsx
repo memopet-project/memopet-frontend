@@ -12,4 +12,4 @@ export const isMobileDevice = (): boolean => {
   const device = new UAParser(ua || '').getDevice();
 
   return device.type === 'mobile';
-};
+}

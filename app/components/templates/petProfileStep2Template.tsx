@@ -49,8 +49,9 @@ const PetProfileStep1Template = ({ setPetTypeParam, petTypeParam, setNextBtnActi
   }, [petTypeParam.pet_gender]);
 
   return (
-    <div className="flex flex-col gap-8 px-20">
-      <h2 className="font-bold text-2xl inline-block mt-16 text-center">{petTypeParam.pet_nm}의 성별과 생일을 알려주세요</h2>
+    <div className="flex flex-col gap-8 xl:px-20 px-5 w-full">
+      <h2 className="font-bold text-2xl inline-block mt-16 text-start md:text-center break-keep">{petTypeParam.pet_nm}의
+        성별과 생일을 알려주세요</h2>
       <div className="flex flex-col gap-8">
         <div role="group" className="flex flex-col gap-1">
           <legend className="inline-block mb-1">성별</legend>

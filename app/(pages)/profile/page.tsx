@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import ArrowLeftSVG from '@/public/svg/arrowLeft.svg';
-import { TIndicatorStep } from '@/types/common';
 import ClipSVG from '@/public/svg/clip.svg';
+import { TIndicatorStep } from '@/types/common';
 import { useRecoilState } from 'recoil';
 import { indicatorState, petTypeState } from '@/app/recoil/recoilContextProvider';
 import PetProfileStep1Template from '@/app/components/templates/petProfileStep1Template';
@@ -58,8 +58,11 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-white border border-[#17171710] w-[520px] form-shadow rounded-2xl relative pb-8">
-      <ClipSVG className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2/3" />
+    <div
+      className="bg-white h-screen md:h-auto mx-auto md:border md:border-[#17171710] md:w-[520px] md:form-shadow md:rounded-2xl relative md:pb-8">
+      {window.innerWidth > 768 && (
+        <ClipSVG className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2/3" />
+      )}
       {step.currentStep === 1 && (
         <PetProfileStep1Template
           petTypeParam={petTypeParam}
@@ -81,7 +84,8 @@ const Page = () => {
           setNextBtnActive={setNextBtnActive}
         />
       )}
-      <div className="w-full px-5 mt-12 flex">
+      <div
+        className="h-[120px] fixed bottom-0 md:relative md:h-auto w-full px-5 md:mt-12 flex items-center justify-center">
         <button
           className="flex gap-2 items-center justify-center"
           onClick={() => handleCurrentStep('prev')}

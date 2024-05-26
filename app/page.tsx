@@ -43,8 +43,8 @@ export default function Home() {
       )}
       {/* Desktop  */}
       {!isMobile && (
-        <section className="w-full h-screen flex flex-col gap-[120px] relative overflow-hidden items-center">
-          <div className="w-[410px] mt-[58px] flex flex-col gap-4 text-center leading-normal">
+        <>
+          <div className="w-[410px] mt-[160px] mb-[120px] mx-auto flex flex-col gap-4 text-center leading-normal">
             <span className="text-4xl font-[700]">환영합니다</span>
             <p className="text-[18px] font-[400] font-pretendard">
               memopet의 소중한 회원이 되어주셔서 감사합니다!
@@ -66,7 +66,7 @@ export default function Home() {
             width="3596"
             height="442"
           />
-        </section>
+        </>
       )}
     </main>
   );
