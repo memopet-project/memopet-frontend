@@ -28,6 +28,7 @@ const CheckBtn = ({
 
   const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.checked)
+    console.log('test')
   }
 
   useEffect(() => {
