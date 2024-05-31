@@ -1,6 +1,12 @@
 {
-  "baseUrl": "./",
   "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/pages/*": ["pages/*"],
+      "@/styles/*": ["styles/*"],
+      "@/utils/*": ["utils/*"]
+    },
     "lib": [
       "dom",
       "dom.iterable",
@@ -25,8 +31,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "paths": {
-    "@/*": ["src/*"]
-  },
+  ]
 }
