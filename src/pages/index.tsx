@@ -1,21 +1,14 @@
-import styled from '@emotion/styled';
+import common from '@/styles/common';
 import { css } from '@emotion/react';
-
-const Div = styled.div`
-  color: red;
-`;
 
 export default function Home() {
   return (
-    <>
-      <div
-        css={css`
-          color: green;
-        `}
-      >
-        div01
-      </div>
-      <Div>div02</Div>
-    </>
+    <div
+      css={css`
+        color: ${common.colors.primary[600]};
+      `}
+    >
+      main page
+    </div>
   );
 }
