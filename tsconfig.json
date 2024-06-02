@@ -6,7 +6,7 @@
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["styles/*"],
       "@/utils/*": ["utils/*"],
-      "@/store/*": ["store/*"],
+      "@/recoil/*": ["recoil/*"],
       "@/types/*": ["types/*"],
       "@/constants/*": ["constants/*"]
     },
