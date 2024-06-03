@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
-import MemoryThumbIcon from '@/components/molecules/button/MemoryThumbIcon';
+import MemoryThumbIcon from '@/components/molecules/memory/MemoryThumbIcon';
 
 interface PropsType {
   thumbImg: string;

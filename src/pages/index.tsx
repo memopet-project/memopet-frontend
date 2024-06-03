@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import MemoryThumbItem from '@/components/molecules/memory/MemoryThumbItem';
 
 export default function Home() {
   return (

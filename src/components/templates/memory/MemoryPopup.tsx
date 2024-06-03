@@ -1,4 +1,4 @@
-import MemoryActionButton from '@/components/molecules/button/MemoryActionButton';
+import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import Popup from '@/components/molecules/Popup';
 import common from '@/styles/common';
 import { css } from '@emotion/react';
