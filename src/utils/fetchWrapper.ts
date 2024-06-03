@@ -6,7 +6,7 @@ const FETCH_METHODS = {
 };
 
 // const BASE_URL = process.env.BACKEND_URL || 'http://localhost:3000';
-const BASE_URL = 'https://jsonplaceholder.typicode.com/';
+// const BASE_URL = 'https://jsonplaceholder.typicode.com/';
 
 const defaultOptions = {
   method: FETCH_METHODS.GET,
@@ -21,7 +21,8 @@ const defaultOptions = {
 
 export const fetchWrapper = async (url: string, options?: RequestInit) => {
   try {
-    const urlWithBase = `${BASE_URL}${url}`;
+    // const urlWithBase = `${BASE_URL}${url}`;
+    const urlWithBase = `${url}`;
 
     const response = await fetch(urlWithBase, {
       ...defaultOptions,
