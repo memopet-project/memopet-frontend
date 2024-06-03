@@ -1,3 +1,5 @@
+import { NextURL } from 'next/dist/server/web/next-url';
+
 const FETCH_METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -5,8 +7,8 @@ const FETCH_METHODS = {
   DELETE: 'DELETE',
 };
 
-// const BASE_URL = process.env.BACKEND_URL || 'http://localhost:3000';
-// const BASE_URL = 'https://jsonplaceholder.typicode.com/';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const TEST_URL = 'https://jsonplaceholder.typicode.com';
 
 const defaultOptions = {
   method: FETCH_METHODS.GET,
@@ -19,12 +21,23 @@ const defaultOptions = {
   },
 };
 
+const isServer = typeof window === 'undefined';
+
+const rewrite = (url: string): string => {
+  if (url.startsWith('/api')) {
+    return `${BASE_URL}${url.replace('/api', '')}`;
+  }
+
+  if (url.startsWith('/todos')) {
+    return `${TEST_URL}${url}`;
+  }
+
+  return `${BASE_URL}/${url}`;
+}
+
 export const fetchWrapper = async (url: string, options?: RequestInit) => {
   try {
-    // const urlWithBase = `${BASE_URL}${url}`;
-    const urlWithBase = `${url}`;
-
-    const response = await fetch(urlWithBase, {
+    const response = await fetch(isServer ? rewrite(url) : `${url}`, {
       ...defaultOptions,
       headers: {
         ...(options?.headers || {}),

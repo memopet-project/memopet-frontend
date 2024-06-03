@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import fetchWrapper from '@/utils/fetchWrapper';
 
 export const getServerSideProps = async () => {
-  const res = await fetchWrapper('/api/login');
+  const res = await fetchWrapper('/todos/1');
 
   return {
     props: {
