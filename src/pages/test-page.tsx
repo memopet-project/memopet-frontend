@@ -2,13 +2,12 @@
 
 import React from 'react';
 import fetchWrapper from '@/utils/fetchWrapper';
+import { useQuery } from '@tanstack/react-query';
 
 export const getServerSideProps = async () => {
-  const res = await fetchWrapper('/todos/1');
 
   return {
     props: {
-      data: res,
     },
   };
 
@@ -16,6 +15,13 @@ export const getServerSideProps = async () => {
 
 const TestPage = props => {
   const [response, setResponse] = React.useState(null);
+
+  const { data, error } = useQuery({
+    queryKey: ['todos'],
+    queryFn: async () => await fetchWrapper('/todos/1'),
+  });
+
+  console.log(data);
 
   const fetch = async () => {
     try {

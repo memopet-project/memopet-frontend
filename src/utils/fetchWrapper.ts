@@ -54,6 +54,7 @@ export const fetchWrapper = async (url: string, options?: RequestInit) => {
     }
 
     // wrapping response.json() in await to catch json parsing errors
+    // return await response.json();
     return await response.json();
   } catch (error) {
     console.error('Fetch Wrapper Error:', error);
