@@ -21,7 +21,7 @@ const TestPage = props => {
     queryFn: async () => await fetchWrapper('/todos/1'),
   });
 
-  console.log(error);
+  console.log(data);
 
   const fetch = async () => {
     try {
