@@ -1,5 +1,3 @@
-import { NextURL } from 'next/dist/server/web/next-url';
-
 const FETCH_METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -15,9 +13,6 @@ const defaultOptions = {
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-    'credentials': 'include',
-    'cache': 'no-cache',
   },
 };
 
@@ -35,6 +30,15 @@ const rewrite = (url: string): string => {
   return `${BASE_URL}/${url}`;
 }
 
+
+/**
+ *
+ * @param url
+ * @param options
+ *
+ * @example await fetchWrapper(url, options);
+ *
+ */
 export const fetchWrapper = async (url: string, options?: RequestInit) => {
   try {
     const response = await fetch(isServer ? rewrite(url) : `${url}`, {
@@ -49,6 +53,7 @@ export const fetchWrapper = async (url: string, options?: RequestInit) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    // wrapping response.json() in await to catch json parsing errors
     return await response.json();
   } catch (error) {
     console.error('Fetch Wrapper Error:', error);
