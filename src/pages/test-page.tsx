@@ -1,65 +1,39 @@
 'use client';
 
 import React from 'react';
-import fetchWrapper from '@/utils/fetchWrapper';
-import { useQuery } from '@tanstack/react-query';
+import { convertUnit, copyToClipboard, validatePassword } from '@/utils/common';
 
 export const getServerSideProps = async () => {
 
   return {
-    props: {
-    },
+    props: {},
   };
 
-}
+};
 
-const TestPage = props => {
-  const [response, setResponse] = React.useState(null);
+const TestPage = () => {
+  const email = 'asdflk@ansdf.cas';
 
-  const { data, error } = useQuery({
-    queryKey: ['todos'],
-    queryFn: async () => await fetchWrapper('/todos/1'),
-  });
+  console.log(validatePassword(email));
 
-  console.log(data);
+  const test = async () => {
+    await copyToClipboard('test');
+  };
 
-  const fetch = async () => {
-    try {
-      const response = await fetchWrapper('/api/login', {
-        method: 'POST',
-        body: JSON.stringify({
-          email: '',
-          password: '',
-        }),
-      });
-      console.log('response', response);
-      setResponse(response);
-    } catch (error) {
-      console.error('Fetch Error:', error);
-    }
-  }
+  const testNum = 12345;
 
   return (
     <div>
       <button
         css={{
           color: 'red',
-          backgroundColor: 'blue'
+          backgroundColor: 'blue',
         }}
-        onClick={() => {
-          fetch();
-        }}
-      >Button</button>
+        onClick={test}
+      >Button
+      </button>
 
-      <div>
-        {response && (
-          <div>
-            <div>{response.id}</div>
-            <div>{response.title}</div>
-            <div>{response.completed}</div>
-          </div>
-        )}
-      </div>
+      <span>{convertUnit(testNum, 1, 'en')}</span>
     </div>
   );
 };
