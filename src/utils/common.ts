@@ -80,7 +80,11 @@ export function convertUnit(num: number, digits: number = 1, localization: TLoca
 
   // convertedNum 을 버림 처리하면서 unitIndex 를 증가시킵니다.
   while (convertedNum >= 10000) {
-    convertedNum /= 10000;
+    if (localization === 'kr') {
+      convertedNum /= 10000;
+    } else {
+      convertedNum /= 1000;
+    }
     unitIndex++;
   }
 
