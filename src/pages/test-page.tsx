@@ -30,7 +30,6 @@ const TestPage = () => {
         <button onClick={test}>Copy</button>
         <div>{convertUnit(testNum)}</div>
       </div>
-      <Footer />
     </>
   );
 };

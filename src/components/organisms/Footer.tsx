@@ -4,10 +4,19 @@ import Link from 'next/link';
 
 const footerStyles = {
   container: css`
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    height: 96px;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem 20px;
+      height: auto;
+      align-items: start;
+    }
   `,
   list: css`
       list-style: none;
@@ -15,13 +24,14 @@ const footerStyles = {
       display: flex;
       gap: 1rem;
       align-items: center;
+      flex-wrap: wrap;
   `,
   listItem: css`
       font-size: 14px;
       color: var(--gray-500);
-      padding: 0.5rem;
   `,
   listItemText: css`
+      white-space: nowrap;
       color: var(--gray-500);
   `,
   divide: css`
