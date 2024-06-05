@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { convertUnit, copyToClipboard, validatePassword } from '@/utils/common';
+import Footer from '@/components/organisms/Footer';
 
 export const getServerSideProps = async () => {
 
@@ -23,18 +24,13 @@ const TestPage = () => {
   const testNum = 12345;
 
   return (
-    <div>
-      <button
-        css={{
-          color: 'red',
-          backgroundColor: 'blue',
-        }}
-        onClick={test}
-      >Button
-      </button>
-
-      <span>{convertUnit(testNum, 1, 'en')}</span>
-    </div>
+    <>
+      <div>
+        <h1>Test Page</h1>
+        <button onClick={test}>Copy</button>
+        <div>{convertUnit(testNum)}</div>
+      </div>
+    </>
   );
 };
 
