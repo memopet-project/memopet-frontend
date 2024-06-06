@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { convertUnit, copyToClipboard, validatePassword } from '@/utils/common';
-import Footer from '@/components/organisms/Footer';
 
 export const getServerSideProps = async () => {
 

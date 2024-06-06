@@ -34,20 +34,20 @@ const styles = {
   `,
   listItem: css`
     font-size: 14px;
-    color: var(--gray-500);
+    color: var(--grey-500);
   `,
   listItemText: css`
     white-space: nowrap;
-    color: var(--gray-500);
+    color: var(--grey-500);
   `,
   divide: css`
     display: inline-block;
     height: 1rem;
-    border-right: 1px solid var(--gray-300);
+    border-right: 1px solid var(--grey-300);
   `,
   copyright: css`
     font-size: 14px;
-    color: var(--gray-500);
+    color: var(--grey-500);
   `,
 };
 

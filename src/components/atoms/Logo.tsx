@@ -1,12 +1,12 @@
 interface ILogoProps {
-  color: 'primary' | 'gray' | 'white';
+  color: 'primary' | 'grey' | 'white';
   size: 'sm' | 'md';
 }
 
 export default function Logo({ color = 'primary', size = 'md' }: ILogoProps) {
   const colors = {
     primary: '#F15139',
-    gray: '#525252',
+    grey: '#525252',
     white: '#FFFFFF',
   };
   const isMd = Boolean(size === 'md');
