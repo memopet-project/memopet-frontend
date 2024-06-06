@@ -1,12 +1,15 @@
-import { css } from '@emotion/react';
+import { css, Theme, useTheme } from '@emotion/react';
 import Link from 'next/link';
 
-const styles = {
+const footerStyles = (theme: Theme) => ({
   footer: css`
     height: 96px;
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 768px) {
+      height: auto;
+    }
   `,
   container: css`
     width: 100%;
@@ -33,7 +36,7 @@ const styles = {
     flex-wrap: wrap;
   `,
   listItem: css`
-    font-size: 14px;
+    font-size: ${theme.fontSizes.sm};
     color: var(--grey-500);
   `,
   listItemText: css`
@@ -46,12 +49,15 @@ const styles = {
     border-right: 1px solid var(--grey-300);
   `,
   copyright: css`
-    font-size: 14px;
+    font-size: ${theme.fontSizes.sm};
     color: var(--grey-500);
   `,
-};
+});
 
 const Footer = () => {
+  const theme = useTheme()
+  const styles = footerStyles(theme)
+
   return (
     <footer css={styles.footer}>
       <div css={styles.container}>
