@@ -1,51 +1,49 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov.min.css');
+
 :root {
-    /* Primary Colors */
-    --primary-50: #f8f6fe;
-    --primary-100: #efeafd;
-    --primary-200: #dcd0fb;
-    --primary-300: #cab9f8;
-    --primary-400: #b8a2f6;
-    --primary-500: #a386f4;
-    --primary-600: #7d55ef;
-    --primary-700: #643ad9;
-    --primary-800: #4b24b7;
-    --primary-900: #361c7d;
+  /* Primary Colors */
+  --main-red-0: #ffffff;
+  --main-red-50: #ffedea;
+  --main-red-100: #fcdcd7;
+  --main-red-200: #fab9b1;
+  --main-red-300: #f69888;
+  --main-red-400: #f47460;
+  --main-red-500: #f15139;
+  --main-red-600: #c2412e;
+  --main-red-700: #913121;
+  --main-red-800: #612017;
+  --main-red-900: #30100a;
 
-    /* Gray Colors */
-    --gray-0: #ffffff;
-    --gray-50: #f8f8fb;
-    --gray-100: #f4f2f5;
-    --gray-150: #eceaef;
-    --gray-200: #e3e1e8;
-    --gray-300: #d5d3db;
-    --gray-400: #d5d3db;
-    --gray-500: #adaab5;
-    --gray-600: #918d9c;
-    --gray-700: #74707f;
-    --gray-800: #57535f;
-    --gray-900: #3a3741;
-    --gray-1000: #232128;
+  /* Second Colors */
+  --second-yellow: #ffd223;
+  --second-sky: #8ccaff;
+  --second-green: #73e390;
+  --second-pink: #ff91b9;
+  --second-purple: #c7a5ff;
 
-    /* Secondary Colors */
-    --secondary-100: #ecff0d;
-    --secondary-200: #e0f308;
+  /* Grayscale */
+  --grey-0: #ffffff;
+  --grey-50: #fafafa;
+  --grey-100: #f2f2f2;
+  --grey-200: #e6e6e6;
+  --grey-300: #d4d4d4;
+  --grey-400: #b3b3b3;
+  --grey-500: #949494;
+  --grey-600: #757575;
+  --grey-700: #525252;
+  --grey-800: #333333;
+  --grey-900: #171717;
 
-    --main-red-500: #F15139;
+  /* Status Colors */
+  --success: #56bc44;
+  --danger: #e43333;
+  --warning: #f1b419;
+  --info: #129eed;
 
-    /* Status Colors */
-    --status-success: #6bbb5d;
-    --status-error: #e73324;
-    --status-notify: #f1b419;
-    --status-info: #36aaeb;
+  /* Background Colors */
+  --bg-default: #f7f5f1;
+  --bg-surface: #ffffff;
 
-    /* Accent Colors */
-    --accent-red-text: #e73324;
-    --accent-red-container: #fdf3f2;
-    --accent-orange-text: #fb9907;
-    --accent-orange-container: #fff7e2;
-    --accent-green-text: #6bbb5d;
-    --accent-green-container: #effced;
-    --accent-blue-text: #36aaeb;
-    --accent-blue-container: #f0f8fd;
+  /* font-family 가변 weight  */
+  font-family: 'Pretendard GOV Variable';
 }
-
