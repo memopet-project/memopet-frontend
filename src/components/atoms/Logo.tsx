@@ -1,22 +1,28 @@
+import { css } from '@emotion/react';
+
+type Color = 'red' | 'grey' | 'white';
 interface ILogoProps {
-  color: 'primary' | 'gray' | 'white';
+  color: Color;
   size: 'sm' | 'md';
 }
 
-export default function Logo({ color = 'primary', size = 'md' }: ILogoProps) {
-  const colors = {
-    primary: '#F15139',
-    gray: '#525252',
-    white: '#FFFFFF',
+export default function Logo({ color = 'red', size = 'md' }: ILogoProps) {
+  const colors: { [key in Color]: string } = {
+    red: 'var(--main-red-500)',
+    grey: 'var(--grey-700)',
+    white: 'var(--bg-surface)',
   };
+
   const isMd = Boolean(size === 'md');
 
   return (
     <svg
+      css={css`
+        fill: ${colors[color]};
+      `}
       width={isMd ? 120 : 96}
       height={isMd ? 40 : 32}
       viewBox='0 0 120 40'
-      fill={colors[color]}
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
