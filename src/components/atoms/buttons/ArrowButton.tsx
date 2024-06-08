@@ -86,19 +86,19 @@ export default function ArrowButton({
     <button
       disabled={disabled}
       css={css(
-        `
-        height: 40px;
-        padding: 8px 20px;
-        border-radius: 999px;
-        border: none;
-        outline: none;
-        font-weight: 600;
-        font-size: 1rem;
-        line-height: 1rem;
-        letter-spacing: -0.25px;
-        display: flex;
-        gap: 8px;
-        align-items: center;
+        css`
+          height: 40px;
+          padding: 8px 20px;
+          border-radius: 999px;
+          border: none;
+          outline: none;
+          font-weight: 600;
+          font-size: 1rem;
+          line-height: 1rem;
+          letter-spacing: -0.25px;
+          display: flex;
+          gap: 8px;
+          align-items: center;
         `,
         styles[type],
       )}

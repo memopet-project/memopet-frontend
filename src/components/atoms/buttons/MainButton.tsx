@@ -42,16 +42,16 @@ export default function MainButton({
     <button
       disabled={disabled}
       css={css(
-        `
-        width: 358px;
-        height: 52px;
-        border-radius: 8px;
-        outline: none;
-        border: none;
-        line-height: 1rem;
-        letter-spacing: -0.25px;
-        font-weight: 600;
-        font-size: 1rem;
+        css`
+          width: 358px;
+          height: 52px;
+          border-radius: 8px;
+          outline: none;
+          border: none;
+          line-height: 1rem;
+          letter-spacing: -0.25px;
+          font-weight: 600;
+          font-size: 1rem;
         `,
         styles[type],
       )}

@@ -65,21 +65,21 @@ export default function RoundButton({
     <button
       disabled={disabled}
       css={css(
-        `
-        width: 56px;
-        height: 32px;
-        padding: 5.5px 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 21px;
-        letter-spacing: -0.25px;
-        text-align: center;
-        border: none;
-        outline: none;
+        css`
+          width: 56px;
+          height: 32px;
+          padding: 5.5px 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 999px;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 21px;
+          letter-spacing: -0.25px;
+          text-align: center;
+          border: none;
+          outline: none;
         `,
         styles[type],
       )}
