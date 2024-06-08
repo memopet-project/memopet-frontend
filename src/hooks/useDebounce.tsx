@@ -5,6 +5,16 @@ type TUseDebounceProps<T> = {
   delay: number;
 };
 
+/**
+ * Debounce hook
+ * @param value
+ * @param delay
+ *
+ * @returns debouncedValue
+ *
+ * @example
+ * const { debouncedValue } = useDebounce({ value: search, delay: 500 });
+ */
 export const useDebounce = <T, >({ value, delay }:TUseDebounceProps<T>) => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
