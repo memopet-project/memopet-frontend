@@ -36,13 +36,13 @@ const TestPage = ({ todos }: Props) => {
     queryKey: ['todos'],
     queryFn: ({ pageParam }) => fetchWrapper(`/todos/${pageParam}`),
     initialPageParam: 2,
-    getNextPageParam: (_lastPage, allPages, lastPageParam) => {
+    getNextPageParam: (_lastPage, _allPages, lastPageParam) => {
       if (lastPageParam === maxPages) {
         return null;
       }
       return lastPageParam + 1;
     },
-    getPreviousPageParam: (_firstPage, allPages, firstPageParam) => {
+    getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
       if (firstPageParam === 2) {
         return null;
       }
