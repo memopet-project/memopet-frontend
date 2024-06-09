@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import AnimalIcon, { Animals } from '../icons/AnimalIcon';
+import AnimalIcon, { Animals } from '../AnimalIcon';
 import type { Dispatch, SetStateAction } from 'react';
 import type { Nullable } from '@/types/global';
 
