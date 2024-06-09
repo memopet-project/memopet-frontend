@@ -1,24 +1,37 @@
 import { css } from '@emotion/react';
 
-export default function ViewMoreButton() {
+interface IViewMoreButtonProps {
+  isMobile?: boolean;
+}
+
+export default function ViewMoreButton({
+  isMobile = false,
+}: IViewMoreButtonProps) {
   return (
     <button
       type='button'
-      css={css`
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        border: none;
-        background: transparent;
-        outline: none;
-        color: var(--grey-900);
-        &:hover {
-          background: #1717170d;
-        }
-      `}
+      css={css([
+        css`
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          border: none;
+          background: transparent;
+          outline: none;
+          color: var(--grey-900);
+          &:hover {
+            background: #1717170d;
+          }
+        `,
+        isMobile &&
+          css`
+            width: 32px;
+            height: 32px;
+          `,
+      ])}
     >
       <svg
         width='24'
