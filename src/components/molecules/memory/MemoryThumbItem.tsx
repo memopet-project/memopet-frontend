@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import common from '@/styles/common';
 import PlusIcon from '@/assets/icon/PlusIcon';
 import CloseIcon from '@/assets/icon/CloseIcon';
 
@@ -23,21 +22,21 @@ const MemoryThumbItem = ({ thumbImg, state }: PropsType) => {
         border-radius: 8px;
         border: 1px solid
           ${state === 'inactive'
-            ? common.colors.gray[900]
+            ? 'var(--grey-900)'
             : state === 'active'
-              ? common.colors.accent.red.text
-              : common.colors.gray[200]};
+              ? 'var(--main-red-500)'
+              : 'var(--grey-200)'};
         background: ${state === 'empty' ||
         state === 'add' ||
         state === 'disabled'
-          ? common.colors.gray[100]
+          ? 'var(--grey-100)'
           : 'none'};
         opacity: ${state === 'disabled' ? 0.5 : 1};
         cursor: ${state === 'inactive' || state === 'active' || state === 'add'
           ? 'pointer'
           : 'auto'};
         &:hover {
-          background: ${state === 'add' ? common.colors.gray[150] : ''};
+          background: ${state === 'add' ? 'var(--grey-150)' : ''};
           /* layer */
           & > div {
             display: block;
@@ -90,7 +89,7 @@ const MemoryThumbItem = ({ thumbImg, state }: PropsType) => {
             border-radius: 50%;
           `}
         >
-          <CloseIcon color={common.colors.gray[0]} size={8} />
+          <CloseIcon color={'var(--grey-0)'} size={8} />
         </button>
       ) : null}
       {state === 'add' || state === 'disabled' ? (
@@ -101,11 +100,11 @@ const MemoryThumbItem = ({ thumbImg, state }: PropsType) => {
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px dashed ${common.colors.gray[300]};
+            border: 1px dashed var(--grey-300);
             border-radius: 50%;
           `}
         >
-          <PlusIcon color={common.colors.gray[500]} />
+          <PlusIcon color={'var(--grey-500)'} />
         </span>
       ) : null}
     </div>

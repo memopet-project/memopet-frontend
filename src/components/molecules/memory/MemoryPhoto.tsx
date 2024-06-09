@@ -3,7 +3,6 @@ import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import { css } from '@emotion/react';
 import PhotoArrowButton from '@/components/atoms/button/PhotoArrowButton';
 import { useState } from 'react';
-import common from '@/styles/common';
 
 interface PropsType {
   thumbImgs: string[];
@@ -84,7 +83,7 @@ const MemoryPhoto = ({ thumbImgs }: PropsType) => {
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                background: ${common.colors.gray[200]};
+                background: var(--grey-200);
                 opacity: ${idx === curPhotoIdx ? 1 : 0.5};
                 @media screen and (max-width: 743px) {
                   width: 6px;

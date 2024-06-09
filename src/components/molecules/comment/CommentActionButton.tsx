@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -10,7 +9,7 @@ const CommentActionButton = ({ actions }: PropsType) => {
     <ul
       css={css`
         border-radius: 8px;
-        border: 1px solid ${common.colors.gray[500]};
+        border: 1px solid var(--grey-500);
         padding: 8px 12px;
         display: inline-flex;
         align-items: center;
@@ -35,7 +34,7 @@ const CommentActionButton = ({ actions }: PropsType) => {
               css={css`
                 width: 1px;
                 height: 12px;
-                background: ${common.colors.gray[300]};
+                background: var(--grey-300);
               `}
             ></li>
           )}

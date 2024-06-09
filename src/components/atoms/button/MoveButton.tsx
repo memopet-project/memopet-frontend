@@ -1,6 +1,5 @@
 import ArrowLeftIcon from '@/assets/icon/ArrowLeftIcon';
 import ArrowRightIcon from '@/assets/icon/ArrowRightIcon';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -18,7 +17,7 @@ const MoveButton = ({ type, state = 'enabled' }: PropsType) => {
         justify-content: center;
         align-items: center;
         border-radius: 16px;
-        border: 1px solid ${common.colors.gray[700]};
+        border: 1px solid var(--grey-700);
         opacity: ${state === 'disabled' ? 0.5 : 1};
         cursor: ${state === 'enabled' ? 'pointer' : 'auto'};
         &:hover {

@@ -1,5 +1,4 @@
 import CloseIcon from '@/assets/icon/CloseIcon';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 
@@ -28,9 +27,9 @@ const Popup = ({ children, onClose }: PropsType) => {
         css={css`
           max-height: 85%;
           border-radius: 16px;
-          border: 1px solid ${common.colors.gray[700]};
+          border: 1px solid var(--grey-700);
           padding: 20px;
-          background-color: ${common.colors.gray[0]};
+          background-color: var(--grey-0);
           position: relative;
           box-shadow: 0px 4px 4px 0px #00000040;
         `}

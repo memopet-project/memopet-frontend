@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import Image from 'next/image';
-import common from '@/styles/common';
 import IconButton from '@/components/atoms/button/IconButton';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
@@ -43,7 +42,7 @@ const UserItem = ({ name, intro, state = 'default' }: PropsType) => {
             height={32}
             css={css`
               border-radius: 50%;
-              border: 0.5px solid ${common.colors.gray[900]};
+              border: 0.5px solid var(--grey-900);
               object-fit: cover;
             `}
           />
@@ -66,7 +65,7 @@ const UserItem = ({ name, intro, state = 'default' }: PropsType) => {
           <p
             css={css`
               font-size: 12px;
-              color: ${common.colors.gray[400]};
+              color: var(--grey-400);
             `}
           >
             {intro}

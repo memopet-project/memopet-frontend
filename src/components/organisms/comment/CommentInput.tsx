@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 const CommentInput = () => {
@@ -7,7 +6,7 @@ const CommentInput = () => {
       css={css`
         width: 360px;
         border-radius: 8px;
-        border: 1px solid ${common.colors.gray[700]};
+        border: 1px solid var(--grey-700);
         padding: 12px;
         display: flex;
         flex-direction: column;

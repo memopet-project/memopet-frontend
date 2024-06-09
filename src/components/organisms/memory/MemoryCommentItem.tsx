@@ -3,7 +3,6 @@ import IconButton from '@/components/atoms/button/IconButton';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import common from '@/styles/common';
 
 interface PropsType {
   profileImg: string;
@@ -33,18 +32,14 @@ const MemoryCommentItem = ({
             ? '8px'
             : 0};
         background: ${type === 'reply'
-          ? common.colors.gray[100]
+          ? 'var(--grey-100)'
           : type === 'my'
-            ? common.colors.accent.red.container
+            ? 'var(--main-red-50)'
             : 'none'};
         border: ${type === 'default'
           ? 'none'
           : `1px solid
-          ${
-            type === 'reply'
-              ? common.colors.gray[200]
-              : common.colors.accent.red.text
-          };`};
+          ${type === 'reply' ? 'var(--grey-200)' : 'var(--main-red-500)'};`};
         border-radius: 6px;
       `}
     >
@@ -68,7 +63,7 @@ const MemoryCommentItem = ({
             height={32}
             css={css`
               border-radius: 50%;
-              border: 0.5px solid ${common.colors.gray[900]};
+              border: 0.5px solid var(--grey-900);
               object-fit: cover;
             `}
           />
@@ -98,7 +93,7 @@ const MemoryCommentItem = ({
             <span
               css={css`
                 font-size: 12px;
-                color: ${common.colors.gray[500]};
+                color: var(--grey-500);
               `}
             >
               {time}

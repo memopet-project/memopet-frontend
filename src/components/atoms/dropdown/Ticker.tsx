@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -27,7 +26,7 @@ const Ticker = ({
           css={css`
             width: 4px;
             height: 4px;
-            background: ${common.colors.accent.red.text};
+            background: var(--main-red-500);
             border-radius: 50%;
           `}
         ></span>
@@ -49,9 +48,9 @@ const Ticker = ({
             align-items: center;
             font-weight: 600;
             color: ${type === 'horizontal' && state === 'selected'
-              ? common.colors.gray[0]
+              ? 'var(--grey-0)'
               : state === 'disabled'
-                ? common.colors.gray[400]
+                ? 'var(--grey-400)'
                 : 'inherit'};
             width: ${type === 'horizontal' && state === 'selected'
               ? '40px'
@@ -60,7 +59,7 @@ const Ticker = ({
               ? '40px'
               : 'auto'};
             background: ${type === 'horizontal' && state === 'selected'
-              ? common.colors.accent.red.text
+              ? 'var(--main-red-500)'
               : 'none'};
             border-radius: 50%;
           `}
@@ -71,7 +70,7 @@ const Ticker = ({
           <span
             css={css`
               font-size: 12px;
-              color: ${common.colors.accent.red.text};
+              color: var(--main-red-500);
             `}
           >
             {year}

@@ -4,7 +4,6 @@ import FilledFlowerIcon from '@/assets/icon/FilledFlowerIcon';
 import FilledLikeIcon from '@/assets/icon/FilledLikeIcon';
 import FlowerIcon from '@/assets/icon/FlowerIcon';
 import LikeIcon from '@/assets/icon/LikeIcon';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -28,22 +27,22 @@ const MemoryActionButton = ({ type, state, amount, onClick }: PropsType) => {
         state ? (
           <FilledFlowerIcon />
         ) : (
-          <FlowerIcon color={common.colors.gray[700]} />
+          <FlowerIcon color={'var(--grey-700)'} />
         )
       ) : type === 'like' ? (
         state ? (
           <FilledLikeIcon />
         ) : (
-          <LikeIcon color={common.colors.gray[700]} />
+          <LikeIcon color={'var(--grey-700)'} />
         )
       ) : state ? (
         <FilledCommentIcon />
       ) : (
-        <CommentIcon color={common.colors.gray[700]} />
+        <CommentIcon color={'var(--grey-700)'} />
       )}
       <span
         css={css`
-          color: ${state ? 'inherit' : common.colors.gray[700]};
+          color: ${state ? 'inherit' : 'var(--grey-700)'};
           @media screen and (max-width: 743px) {
             font-size: 13px;
           }

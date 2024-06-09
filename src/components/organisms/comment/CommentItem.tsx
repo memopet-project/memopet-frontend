@@ -1,6 +1,5 @@
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import IconButton from '@/components/atoms/button/IconButton';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
@@ -23,11 +22,11 @@ const CommentItem = ({ profileImg, name, time, comment }: PropsType) => {
         flex-direction: column;
         gap: 12px;
         border-radius: 8px;
-        border: 1px solid ${common.colors.gray[700]};
-        background: ${common.colors.gray[50]};
+        border: 1px solid var(--grey-700);
+        background: var(--grey-50);
         &:hover {
           box-shadow: 0px 4px 0px 0px #171717;
-          background: ${common.colors.gray[100]};
+          background: var(--grey-100);
         }
       `}
     >
@@ -56,7 +55,7 @@ const CommentItem = ({ profileImg, name, time, comment }: PropsType) => {
           height={32}
           css={css`
             border-radius: 50%;
-            border: 0.5px solid ${common.colors.gray[900]};
+            border: 0.5px solid var(--grey-900);
             object-fit: cover;
           `}
         />
@@ -77,7 +76,7 @@ const CommentItem = ({ profileImg, name, time, comment }: PropsType) => {
           <span
             css={css`
               font-size: 13px;
-              color: ${common.colors.gray[500]};
+              color: var(--grey-500);
             `}
           >
             {time}

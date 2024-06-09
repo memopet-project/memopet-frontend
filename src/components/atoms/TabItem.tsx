@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -22,7 +21,7 @@ const TabItem = ({ state = 'selected', text, amount }: PropsType) => {
           ? '0px 0px 3px 0px #1717171A'
           : 'none'};
         font-weight: 600;
-        color: ${state === 'unselected' ? common.colors.gray[500] : 'inherit'};
+        color: ${state === 'unselected' ? 'var(--grey-500)' : 'inherit'};
         &:hover {
           background: ${state === 'unselected' ? '#1717170D' : 'none'};
         }

@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -13,12 +12,12 @@ const YearItem = ({ year, state = 'enabled' }: PropsType) => {
         font-weight: 700;
         font-size: 20px;
         color: ${state === 'selected'
-          ? common.colors.accent.red.text
+          ? 'var(--main-red-500)'
           : state === 'disabled'
-            ? common.colors.gray[400]
+            ? 'var(--grey-400)'
             : 'inherit'};
         &:hover {
-          color: ${common.colors.accent.red.text};
+          color: var(--main-red-500);
         }
         @media screen and (max-width: 743px) {
           font-weight: 600;

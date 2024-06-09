@@ -1,7 +1,6 @@
 import TrashIcon from '@/assets/icon/TrashIcon';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import IconButton from '@/components/atoms/button/IconButton';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 
@@ -16,12 +15,12 @@ const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
     <div
       css={css`
         border-radius: 8px;
-        border: 1px solid ${common.colors.gray[700]};
+        border: 1px solid var(--grey-700);
         padding: 12px;
         display: flex;
         align-items: center;
         gap: 8px;
-        background: ${common.colors.gray[50]};
+        background: var(--grey-50);
       `}
     >
       <Image
@@ -31,7 +30,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
         height={32}
         css={css`
           border-radius: 50%;
-          border: 0.5px solid ${common.colors.gray[900]};
+          border: 0.5px solid var(--grey-900);
           object-fit: cover;
         `}
       />
@@ -51,7 +50,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
         >
           <span
             css={css`
-              color: ${common.colors.gray[500]};
+              color: var(--grey-500);
             `}
           >
             {name}
@@ -67,7 +66,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
         </p>
       </div>
       <IconButton>
-        <TrashIcon color={common.colors.gray[400]} />
+        <TrashIcon color={'var(--grey-400)'} />
       </IconButton>
     </div>
   );

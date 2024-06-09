@@ -1,6 +1,5 @@
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import Popup from '@/components/molecules/Popup';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
@@ -8,9 +7,6 @@ import ShareIcon from '@/assets/icon/ShareIcon';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import { useState } from 'react';
 import InputComment from '@/components/organisms/comment/InputComment';
-import CommentInput from '@/components/organisms/comment/CommentInput';
-import CommentItem from '@/components/organisms/comment/CommentItem';
-import MemoryCommentItem from '@/components/organisms/memory/MemoryCommentItem';
 
 interface PropsType {
   thumbImg: string;
@@ -65,7 +61,7 @@ const MemoryPopup = ({
               height={32}
               css={css`
                 border-radius: 50%;
-                border: 0.5px solid ${common.colors.gray[900]};
+                border: 0.5px solid var(--grey-900);
                 object-fit: cover;
               `}
             />
@@ -121,7 +117,7 @@ const MemoryPopup = ({
                 <span
                   css={css`
                     font-size: 13px;
-                    color: ${common.colors.gray[500]};
+                    color: var(--grey-500);
                   `}
                 >
                   {date}
@@ -143,7 +139,7 @@ const MemoryPopup = ({
                 justify-content: space-between;
                 align-items: center;
                 padding-top: 8px;
-                border-top: 1px solid ${common.colors.gray[200]};
+                border-top: 1px solid var(--grey-200);
               `}
             >
               <div
@@ -160,7 +156,7 @@ const MemoryPopup = ({
                   onClick={handleToggleComment}
                 />
                 <button>
-                  <ShareIcon color={common.colors.gray[700]} />
+                  <ShareIcon color={'var(--grey-700)'} />
                 </button>
               </div>
               <button
@@ -172,7 +168,7 @@ const MemoryPopup = ({
                   align-items: center;
                 `}
               >
-                <MoreVerticalIcon color={common.colors.gray[400]} />
+                <MoreVerticalIcon color={'var(--grey-400)'} />
               </button>
             </div>
             {isOpenComment ? (
@@ -180,12 +176,12 @@ const MemoryPopup = ({
                 <ul
                   css={css`
                     border-radius: 6px;
-                    border: 1px solid ${common.colors.gray[100]};
+                    border: 1px solid var(--grey-100);
                     padding: 12px;
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
-                    background: ${common.colors.gray[50]};
+                    background: var(--grey-50);
                     height: 100%;
                     overflow-y: auto;
                   `}

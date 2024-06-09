@@ -1,5 +1,4 @@
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 
@@ -48,7 +47,7 @@ const MemorySquareThumb = ({ thumbImg, date, title }: PropsType) => {
           justify-content: end;
           gap: 4px;
           padding: 16px;
-          color: ${common.colors.gray[0]};
+          color: var(--grey-0);
         `}
       >
         <span

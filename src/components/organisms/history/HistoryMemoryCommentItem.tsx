@@ -3,7 +3,6 @@ import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import IconButton from '@/components/atoms/button/IconButton';
 import TrashIcon from '@/assets/icon/TrashIcon';
-import common from '@/styles/common';
 
 interface PropsType {
   thumbImg: string;
@@ -36,7 +35,7 @@ const HistoryMemoryCommentItem = ({ thumbImg, comment }: PropsType) => {
         {comment}
       </p>
       <IconButton>
-        <TrashIcon color={common.colors.gray[400]} />
+        <TrashIcon color={'var(--grey-400)'} />
       </IconButton>
     </div>
   );

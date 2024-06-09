@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail3.png';
@@ -34,16 +33,16 @@ const MemoryItem = ({
     <div
       css={css`
         border-radius: 12px;
-        border: 1px solid ${common.colors.gray[700]};
+        border: 1px solid var(--grey-700);
         padding: 8px;
-        background: ${common.colors.gray[0]};
+        background: var(--grey-0);
         width: fit-content;
         display: flex;
         flex-direction: column;
         gap: 8px;
         width: 360px;
         &:hover {
-          background: ${common.colors.gray[100]};
+          background: var(--grey-100);
         }
         @media screen and (max-width: 743px) {
           width: 343px;
@@ -72,7 +71,7 @@ const MemoryItem = ({
               height={32}
               css={css`
                 border-radius: 50%;
-                border: 0.5px solid ${common.colors.gray[900]};
+                border: 0.5px solid var(--grey-900);
                 object-fit: cover;
               `}
             />
@@ -94,7 +93,7 @@ const MemoryItem = ({
               align-items: center;
             `}
           >
-            <MoreVerticalIcon color={common.colors.gray[400]} />
+            <MoreVerticalIcon color={'var(--grey-400)'} />
           </button>
         </div>
       ) : null}
@@ -103,7 +102,7 @@ const MemoryItem = ({
         alt='썸네일 이미지'
         css={css`
           border-radius: 8px;
-          border: 1px solid ${common.colors.gray[700]};
+          border: 1px solid var(--grey-700);
           object-fit: cover;
           width: 100%;
           height: 100%;
@@ -131,7 +130,7 @@ const MemoryItem = ({
           <span
             css={css`
               font-size: 13px;
-              color: ${common.colors.gray[500]};
+              color: var(--grey-500);
             `}
           >
             {date}
@@ -161,7 +160,7 @@ const MemoryItem = ({
           css={css`
             display: none;
             font-size: 14px;
-            color: ${common.colors.gray[700]};
+            color: var(--grey-700);
             @media screen and (max-width: 743px) {
               display: block;
             }
@@ -176,7 +175,7 @@ const MemoryItem = ({
           justify-content: space-between;
           align-items: center;
           padding-top: 4px;
-          border-top: 1px solid ${common.colors.gray[200]};
+          border-top: 1px solid var(--grey-200);
           @media screen and (max-width: 743px) {
             display: flex;
           }
@@ -193,7 +192,7 @@ const MemoryItem = ({
           <MemoryActionButton type='comment' amount={commentAmount} />
         </div>
         <button>
-          <ShareIcon color={common.colors.gray[700]} />
+          <ShareIcon color={'var(--grey-700)'} />
         </button>
       </div>
     </div>

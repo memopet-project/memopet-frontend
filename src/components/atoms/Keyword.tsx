@@ -1,5 +1,4 @@
 import CloseIcon from '@/assets/icon/CloseIcon';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -17,14 +16,14 @@ const Keyword = ({ text }: PropsType) => {
         justify-content: center;
         align-items: center;
         gap: 6px;
-        background: ${common.colors.gray[100]};
+        background: var(--grey-100);
         &:hover {
-          background: ${common.colors.gray[200]};
+          background: var(--grey-200);
           & > span {
-            color: ${common.colors.gray[700]};
+            color: var(--grey-700);
           }
           & > svg path {
-            stroke: ${common.colors.gray[700]};
+            stroke: var(--grey-700);
           }
         }
       `}
@@ -33,12 +32,12 @@ const Keyword = ({ text }: PropsType) => {
         css={css`
           font-weight: 600;
           font-size: 14px;
-          color: ${common.colors.gray[500]};
+          color: var(--grey-500);
         `}
       >
         {text}
       </span>
-      <CloseIcon color={common.colors.gray[500]} size={16} />
+      <CloseIcon color={'var(--grey-500)'} size={16} />
     </button>
   );
 };

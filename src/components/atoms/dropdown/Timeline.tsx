@@ -1,6 +1,5 @@
 import ArrowDropdownIcon from '@/assets/icon/ArrowDropdownIcon';
 import ArrowDropdownUpIcon from '@/assets/icon/ArrowDropdownUpIcon';
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 import YearItem from './YearItem';
 
@@ -46,9 +45,7 @@ const Timeline = ({ color = 'white', open, selectedYear }: PropsType) => {
             flex-direction: column;
             gap: 12px;
             background-color: ${color === 'white' ? '#FFFFFFF2' : '#F7F5F1F2'};
-            border: ${color === 'white'
-              ? 'none'
-              : `1px solid ${common.colors.gray[700]}`};
+            border: ${color === 'white' ? 'none' : `1px solid var(--grey-700)`};
           `}
         >
           {YEAR_LIST.map((v) => (

@@ -1,4 +1,3 @@
-import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
@@ -12,9 +11,9 @@ const ResultItem = ({ state = 'default', text }: PropsType) => {
       css={css`
         width: 360px;
         padding: 8px 12px;
-        color: ${state === 'empty' ? common.colors.gray[400] : 'inherit'};
+        color: ${state === 'empty' ? 'var(--grey-400)' : 'inherit'};
         &:hover {
-          background: ${common.colors.accent.red.container};
+          background: var(--main-red-50);
         }
       `}
     >
