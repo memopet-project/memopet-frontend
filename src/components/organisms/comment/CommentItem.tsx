@@ -25,6 +25,10 @@ const CommentItem = ({ profileImg, name, time, comment }: PropsType) => {
         border-radius: 8px;
         border: 1px solid ${common.colors.gray[700]};
         background: ${common.colors.gray[50]};
+        &:hover {
+          box-shadow: 0px 4px 0px 0px #171717;
+          background: ${common.colors.gray[100]};
+        }
       `}
     >
       <div

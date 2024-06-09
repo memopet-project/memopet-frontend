@@ -9,6 +9,16 @@ import HistoryMemoryCommentItem from '@/components/organisms/history/HistoryMemo
 import HistoryCommentItem from '@/components/organisms/history/HistoryCommentItem';
 import SearchMemoryItem from '@/components/organisms/search/SearchMemoryItem';
 import HistorySquareTumnb from '@/components/molecules/history/HistorySquareThumb';
+import CommentInput from '@/components/organisms/comment/CommentInput';
+import InputComment from '@/components/organisms/comment/InputComment';
+import MoveButton from '@/components/atoms/button/MoveButton';
+import ResultItem from '@/components/atoms/ResultItem';
+import TabItem from '@/components/atoms/TabItem';
+import Keyword from '@/components/atoms/Keyword';
+import ScaleButton from '@/components/atoms/button/ScaleButton';
+import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
+import MemoryThumbIcon from '@/components/molecules/memory/MemoryThumbIcon';
+import MemoryPhoto from '@/components/molecules/memory/MemoryPhoto';
 
 export default function Home() {
   return (

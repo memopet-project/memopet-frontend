@@ -1,14 +1,19 @@
 import CommentIcon from '@/assets/icon/CommentIcon';
+import FilledCommentIcon from '@/assets/icon/FilledCommentIcon';
+import FilledFlowerIcon from '@/assets/icon/FilledFlowerIcon';
+import FilledLikeIcon from '@/assets/icon/FilledLikeIcon';
 import FlowerIcon from '@/assets/icon/FlowerIcon';
+import LikeIcon from '@/assets/icon/LikeIcon';
 import common from '@/styles/common';
 import { css } from '@emotion/react';
 
 interface PropsType {
-  type: 'flower' | 'comment';
+  type: 'flower' | 'like' | 'comment';
+  state?: boolean;
   amount: number;
 }
 
-const MemoryThumbIcon = ({ type, amount }: PropsType) => {
+const MemoryThumbIcon = ({ type, state, amount }: PropsType) => {
   return (
     <div
       css={css`
@@ -18,7 +23,19 @@ const MemoryThumbIcon = ({ type, amount }: PropsType) => {
       `}
     >
       {type === 'flower' ? (
-        <FlowerIcon color={common.colors.gray[500]} size={14} />
+        state ? (
+          <FilledFlowerIcon size={14} />
+        ) : (
+          <FlowerIcon color={common.colors.gray[500]} size={14} />
+        )
+      ) : type === 'like' ? (
+        state ? (
+          <FilledLikeIcon size={14} />
+        ) : (
+          <LikeIcon color={common.colors.gray[500]} size={14} />
+        )
+      ) : state ? (
+        <FilledCommentIcon size={14} />
       ) : (
         <CommentIcon color={common.colors.gray[500]} size={14} />
       )}
@@ -29,7 +46,7 @@ const MemoryThumbIcon = ({ type, amount }: PropsType) => {
         `}
       >
         {amount}
-      </span>{' '}
+      </span>
     </div>
   );
 };

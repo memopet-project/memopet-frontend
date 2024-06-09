@@ -10,14 +10,19 @@ const HistorySquareTumnb = ({ thumbImg }: PropsType) => {
   return (
     <div
       css={css`
-        display: flex;
+        position: relative;
+        width: 240px;
+        height: 240px;
+        @media screen and (max-width: 743px) {
+          width: 120px;
+          height: 120px;
+        }
       `}
     >
       <Image
         src={sampleMemoryThumbnail}
         alt='썸네일 이미지'
-        width={240}
-        height={240}
+        layout='fill'
         css={css`
           border-radius: 8px;
           object-fit: cover;

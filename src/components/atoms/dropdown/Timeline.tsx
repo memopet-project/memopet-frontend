@@ -2,6 +2,7 @@ import ArrowDropdownIcon from '@/assets/icon/ArrowDropdownIcon';
 import ArrowDropdownUpIcon from '@/assets/icon/ArrowDropdownUpIcon';
 import common from '@/styles/common';
 import { css } from '@emotion/react';
+import YearItem from './YearItem';
 
 interface PropsType {
   color?: 'white' | 'ivory';
@@ -51,25 +52,12 @@ const Timeline = ({ color = 'white', open, selectedYear }: PropsType) => {
           `}
         >
           {YEAR_LIST.map((v) => (
-            <li
-              key={v}
-              css={css`
-                display: flex;
-              `}
-            >
-              <button
-                css={css`
-                  font-weight: 700;
-                  font-size: 20px;
-                  color: ${v === selectedYear
-                    ? common.colors.accent.red.text
-                    : 'inherit'};
-                  &:hover {
-                    color: ${common.colors.accent.red.text};
-                  }
-                `}
-              >
-                {v}
+            <li key={v}>
+              <button>
+                <YearItem
+                  year={v}
+                  state={v === selectedYear ? 'selected' : 'enabled'}
+                />
               </button>
             </li>
           ))}

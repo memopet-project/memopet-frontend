@@ -26,11 +26,13 @@ const Popup = ({ children, onClose }: PropsType) => {
     >
       <div
         css={css`
+          max-height: 85%;
           border-radius: 16px;
           border: 1px solid ${common.colors.gray[700]};
           padding: 20px;
           background-color: ${common.colors.gray[0]};
           position: relative;
+          box-shadow: 0px 4px 4px 0px #00000040;
         `}
         onClick={(e) => e.stopPropagation()}
       >

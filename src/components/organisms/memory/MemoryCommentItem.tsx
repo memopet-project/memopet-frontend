@@ -24,8 +24,9 @@ const MemoryCommentItem = ({
     <div
       css={css`
         display: flex;
+        justify-content: space-between;
+        align-items: center;
         gap: 4px;
-        width: 344px;
         padding: ${type === 'reply'
           ? '8px 0 8px 16px'
           : type === 'my'
@@ -50,11 +51,13 @@ const MemoryCommentItem = ({
       <div
         css={css`
           display: flex;
+          align-items: center;
           gap: 8px;
         `}
       >
         <div
           css={css`
+            display: flex;
             padding: 4px 0;
           `}
         >

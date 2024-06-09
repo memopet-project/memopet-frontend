@@ -1,0 +1,44 @@
+import MaximizeIcon from '@/assets/icon/MaximizeIcon';
+import MinimizeIcon from '@/assets/icon/MinimizeIcon';
+import common from '@/styles/common';
+import { css } from '@emotion/react';
+
+interface PropsType {
+  type: 'maximize' | 'minimize';
+}
+
+const ScaleButton = ({ type }: PropsType) => {
+  return (
+    <button
+      css={css`
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background: ${common.colors.gray[900]};
+        opacity: 0.5;
+        @media screen and (max-width: 743px) {
+          width: 40px;
+          height: 40px;
+          & > svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        &:hover {
+          opacity: 0.7;
+        }
+      `}
+    >
+      {type === 'maximize' ? (
+        <MaximizeIcon color={common.colors.gray[0]} size={16} />
+      ) : (
+        <MinimizeIcon color={common.colors.gray[0]} size={16} />
+      )}
+    </button>
+  );
+};
+
+export default ScaleButton;
