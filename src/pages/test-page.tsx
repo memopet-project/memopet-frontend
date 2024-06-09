@@ -25,7 +25,6 @@ export const getServerSideProps = async () => {
       todos: [todos],
     },
   };
-
 };
 
 const TestPage = ({ todos }: Props) => {
