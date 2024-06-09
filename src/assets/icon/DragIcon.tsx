@@ -1,9 +1,4 @@
-import common from '@/styles/common';
-
-const DragIcon = ({
-  color = common.colors.gray[900],
-  size = 24,
-}: IconPropsType) => {
+const DragIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
   return (
     <svg
       width={size}

@@ -1,9 +1,4 @@
-import common from '@/styles/common';
-
-const EditIcon = ({
-  color = common.colors.gray[900],
-  size = 24,
-}: IconPropsType) => {
+const EditIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
   return (
     <svg
       width={size}

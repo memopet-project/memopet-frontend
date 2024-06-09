@@ -1,9 +1,4 @@
-import common from '@/styles/common';
-
-const ImgIcon = ({
-  color = common.colors.gray[900],
-  size = 24,
-}: IconPropsType) => {
+const ImgIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
   return (
     <svg
       width={size}

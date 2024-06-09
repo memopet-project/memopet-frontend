@@ -1,9 +1,4 @@
-import common from '@/styles/common';
-
-const TrashIcon = ({
-  color = common.colors.gray[900],
-  size = 24,
-}: IconPropsType) => {
+const TrashIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
   return (
     <svg
       width={size}

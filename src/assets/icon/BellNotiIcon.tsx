@@ -1,7 +1,5 @@
-import common from '@/styles/common';
-
 const BellNotiIcon = ({
-  color = common.colors.gray[900],
+  color = 'var(--grey-900)',
   size = 24,
 }: IconPropsType) => {
   return (
