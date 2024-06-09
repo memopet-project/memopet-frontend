@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div
       css={css`
-        color: var(--main-red-800);
+        color: var(--grey-900);
       `}
     >
       main page
