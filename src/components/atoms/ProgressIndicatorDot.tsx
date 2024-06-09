@@ -12,6 +12,7 @@ interface IProgressIndicatorDotProps {
   type: Types;
   top?: string;
   right?: string;
+  isMobile?: boolean;
 }
 
 const styles: { [key in Types]: SerializedStyles } = {
@@ -39,20 +40,26 @@ export default function ProgressIndicatorDot({
   type = 'primaryPresent',
   top = '0px',
   right = '0px',
+  isMobile = false,
 }: IProgressIndicatorDotProps) {
   return (
     <div
-      css={css(
-        `
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        position: absolute;
-        top: ${top};
-        right: ${right};
-      `,
+      css={css([
+        css`
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          position: absolute;
+          top: ${top};
+          right: ${right};
+        `,
+        isMobile &&
+          css`
+            width: 6px;
+            height: 6px;
+          `,
         styles[type],
-      )}
+      ])}
     />
   );
 }
