@@ -11,6 +11,7 @@ export default function Logo({ color = 'red', size = 'md' }: ILogoProps) {
     red: 'var(--main-red-500)',
     grey: 'var(--grey-700)',
     white: 'var(--bg-surface)',
+
   };
 
   const isMd = Boolean(size === 'md');
