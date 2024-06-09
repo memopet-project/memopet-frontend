@@ -1,45 +1,52 @@
+import { css } from '@emotion/react';
+
+type Color = 'red' | 'grey' | 'white';
 interface ILogoProps {
-  color: 'primary' | 'grey' | 'white';
+  color: Color;
   size: 'sm' | 'md';
 }
 
-export default function Logo({ color = 'primary', size = 'md' }: ILogoProps) {
-  const colors = {
-    primary: '#F15139',
-    grey: '#525252',
-    white: '#FFFFFF',
+export default function Logo({ color = 'red', size = 'md' }: ILogoProps) {
+  const colors: { [key in Color]: string } = {
+    red: 'var(--main-red-500)',
+    grey: 'var(--grey-700)',
+    white: 'var(--bg-surface)',
+
   };
+
   const isMd = Boolean(size === 'md');
 
   return (
     <svg
+      css={css`
+        fill: ${colors[color]};
+      `}
       width={isMd ? 120 : 96}
       height={isMd ? 40 : 32}
       viewBox='0 0 120 40'
-      fill={colors[color]}
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M114.086 25.11C117.036 22.9014 118 21.1112 118 20C118 18.8888 117.036 17.0986 114.086 14.89C111.262 12.7752 107.065 10.6222 101.745 8.69269C91.1223 4.84063 76.3549 2 60 2C43.6451 2 28.8777 4.84063 18.2554 8.69269C12.9348 10.6222 8.73816 12.7752 5.91385 14.89C2.96426 17.0986 2 18.8888 2 20C2 21.1112 2.96426 22.9014 5.91385 25.11C8.73816 27.2248 12.9348 29.3778 18.2554 31.3073C28.8777 35.1594 43.6451 38 60 38C76.3549 38 91.1223 35.1594 101.745 31.3073C107.065 29.3778 111.262 27.2248 114.086 25.11ZM60 40C93.1371 40 120 28.5 120 20C120 11.5 93.1371 0 60 0C26.8629 0 0 11.5 0 20C0 28.5 26.8629 40 60 40Z'
         fill='inherit'
       />
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M115 26.9211C118.216 24.5802 120 22.1904 120 19.9999C120 17.8093 118.216 15.4195 115 13.0786V26.9211Z'
         fill='inherit'
       />
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M107 30.5L107 9.5L109 9.5L109 30.5L107 30.5Z'
         fill='inherit'
       />
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M9 29.5L9 10.5L11 10.5L11 29.5L9 29.5Z'
         fill='inherit'
       />
