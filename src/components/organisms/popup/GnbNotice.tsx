@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import CommentItem from '../molecules/notice/CommentItem';
-import FollowItem from '../molecules/notice/FollowItem';
+import CommentItem from '@/components/molecules/notice/CommentItem';
+import FollowItem from '@/components/molecules/notice/FollowItem';
 import { useEffect, useState } from 'react';
 import type { Nullable } from '@/types/global';
 
