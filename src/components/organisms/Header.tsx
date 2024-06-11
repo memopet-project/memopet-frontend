@@ -2,7 +2,8 @@ import Logo from '@/components/atoms/Logo';
 import type { ExtractPropertyType } from '@/types/global';
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import React from 'react';
+import ProgressIndicatorDot from '@/components/atoms/ProgressIndicatorDot';
+import ProfileImage from '@/components/atoms/ProfileImage';
 
 type PageType =
   | 'profile-edit'
@@ -91,10 +92,7 @@ const styles: StylesType = {
   },
 };
 
-const Header: React.FC = <T extends PageType>({
-  type,
-  color,
-}: IHeaderProps<T>) => {
+const Header = <T extends PageType>({ type, color }: IHeaderProps<T>) => {
   const isDefault = Boolean(color === 'default');
 
   return (
@@ -115,6 +113,7 @@ const Header: React.FC = <T extends PageType>({
           display: flex;
           justify-content: space-between;
           align-items: center;
+          position: relative;
         `}
       >
         <Logo size='sm' color={isDefault ? 'grey' : 'white'} />
@@ -126,17 +125,7 @@ const Header: React.FC = <T extends PageType>({
         {(type === 'login' || type === 'home-login') && (
           <Login type={type} color={color} />
         )}
-        <div
-          css={css`
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 24px;
-            letter-spacing: -0.5px;
-            color: ${styles[type][color].color1};
-          `}
-        >
-          프로필 수정
-        </div>
+
         {type === 'profile-edit' && <ProfileEdit type={type} color={color} />}
       </div>
     </header>
@@ -185,131 +174,162 @@ const ProfileEdit = <T extends PageType>({ type, color }: IHeaderProps<T>) => {
 
 const Login = <T extends PageType>({ type, color }: IHeaderProps<T>) => {
   return (
-    <div
-      css={css([
-        css`
-          height: 52px;
-          font-weight: 600;
+    <>
+      <div
+        css={css`
           font-size: 1rem;
-          line-height: 1rem;
-          letter-spacing: -0.25px;
-          display: flex;
-          align-items: center;
-          border-radius: 99px;
-          padding: 6px;
-          background: ${styles[type][color]?.backgroundColor || 'transparent'};
-        `,
-      ])}
-    >
-      <div
-        css={css`
-          width: 56px;
-          display: flex;
-          justify-content: center;
+          font-weight: 400;
+          line-height: 24px;
+          letter-spacing: -0.5px;
+          color: ${styles[type][color].color1};
+          position: absolute;
+          top: 50%;
+          left: 48%;
+          transform: translate(-50%, -50%);
         `}
       >
-        <svg
-          width='40'
-          height='40'
-          viewBox='0 0 40 40'
-          fill='none'
-          stroke={styles[type][color]['color1']}
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            d='M25 25L30 30M27.5 18.75C27.5 23.5825 23.5825 27.5 18.75 27.5C13.9175 27.5 10 23.5825 10 18.75C10 13.9175 13.9175 10 18.75 10C23.5825 10 27.5 13.9175 27.5 18.75Z'
-            stroke='inherit'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </svg>
+        프로필 수정
       </div>
       <div
-        css={css`
-          width: 56px;
-          display: flex;
-          justify-content: center;
-        `}
-      >
-        <svg
-          width='40'
-          height='40'
-          viewBox='0 0 40 40'
-          fill='none'
-          stroke={styles[type][color]['color1']}
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            d='M13.6 17.458V16.4C13.6 12.8654 16.4654 10 20 10C23.5346 10 26.4 12.8654 26.4 16.4V17.458C26.4 19.7583 27.0649 22.0096 28.3146 23.9409L29 25H11L11.6854 23.9408C12.9351 22.0096 13.6 19.7583 13.6 17.458Z'
-            stroke='inherit'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-          <path
-            d='M19 28.8887C19.5344 29.4825 20.4656 29.4825 21 28.8887'
-            stroke='inherit'
-            strokeWidth='1.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </svg>
-      </div>
-      <div
-        css={css`
-          width: 56px;
-          display: flex;
-          justify-content: center;
-          margin-right: 12px;
-        `}
-      >
-        O{/* TODO: icon 추가 */}
-      </div>
-      <Link href='/'>
-        <button
-          type='button'
-          css={css`
-            background: ${styles[type][color].color2};
-            color: var(--grey-0);
-            font-size: 1rem;
+        css={css([
+          css`
+            height: 52px;
             font-weight: 600;
+            font-size: 1rem;
             line-height: 1rem;
             letter-spacing: -0.25px;
-            border: ${styles[type][color].border};
-            border-radius: 999px;
-            padding: 8px 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            border-radius: 99px;
+            padding: 6px;
+            background: ${styles[type][color]?.backgroundColor ||
+            'transparent'};
+          `,
+        ])}
+      >
+        <div
+          css={css`
+            width: 56px;
+            display: flex;
+            justify-content: center;
           `}
         >
           <svg
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
+            width='40'
+            height='40'
+            viewBox='0 0 40 40'
             fill='none'
+            stroke={styles[type][color]['color1']}
             xmlns='http://www.w3.org/2000/svg'
           >
             <path
-              d='M11 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V13'
-              stroke='white'
-              strokeWidth='1.5'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-            <path
-              d='M9.5 11.5002L17.5 3.50023C18.3284 2.6718 19.6716 2.6718 20.5 3.50023C21.3284 4.32866 21.3284 5.6718 20.5 6.50023L12.5 14.5002L8 16.0002L9.5 11.5002Z'
-              stroke='white'
+              d='M25 25L30 30M27.5 18.75C27.5 23.5825 23.5825 27.5 18.75 27.5C13.9175 27.5 10 23.5825 10 18.75C10 13.9175 13.9175 10 18.75 10C23.5825 10 27.5 13.9175 27.5 18.75Z'
+              stroke='inherit'
               strokeWidth='1.5'
               strokeLinecap='round'
               strokeLinejoin='round'
             />
           </svg>
-          추억 올리기
-        </button>
-      </Link>
-    </div>
+        </div>
+        <div
+          css={css`
+            width: 56px;
+            display: flex;
+            justify-content: center;
+          `}
+        >
+          <div
+            css={css`
+              position: relative;
+            `}
+          >
+            <svg
+              width='40'
+              height='40'
+              viewBox='0 0 40 40'
+              fill='none'
+              stroke={styles[type][color]['color1']}
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M13.6 17.458V16.4C13.6 12.8654 16.4654 10 20 10C23.5346 10 26.4 12.8654 26.4 16.4V17.458C26.4 19.7583 27.0649 22.0096 28.3146 23.9409L29 25H11L11.6854 23.9408C12.9351 22.0096 13.6 19.7583 13.6 17.458Z'
+                stroke='inherit'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+              <path
+                d='M19 28.8887C19.5344 29.4825 20.4656 29.4825 21 28.8887'
+                stroke='inherit'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+            <ProgressIndicatorDot
+              type='primaryPresent'
+              top='8px'
+              right='4px'
+              isMobile
+            />
+          </div>
+        </div>
+        <div
+          css={css`
+            width: 56px;
+            display: flex;
+            justify-content: center;
+            margin-right: 12px;
+          `}
+        >
+          {/* TODO: api 확인 */}
+          <ProfileImage url={null} size={40} color={color} />
+        </div>
+        <Link href='/'>
+          <button
+            type='button'
+            css={css`
+              background: ${styles[type][color].color2};
+              color: var(--grey-0);
+              font-size: 1rem;
+              font-weight: 600;
+              line-height: 1rem;
+              letter-spacing: -0.25px;
+              border: ${styles[type][color].border};
+              border-radius: 999px;
+              padding: 8px 20px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            `}
+          >
+            <svg
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M11 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V13'
+                stroke='white'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+              <path
+                d='M9.5 11.5002L17.5 3.50023C18.3284 2.6718 19.6716 2.6718 20.5 3.50023C21.3284 4.32866 21.3284 5.6718 20.5 6.50023L12.5 14.5002L8 16.0002L9.5 11.5002Z'
+                stroke='white'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+            추억 올리기
+          </button>
+        </Link>
+      </div>
+    </>
   );
 };
 
