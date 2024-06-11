@@ -51,9 +51,6 @@ const styles: { [key in Type]: SerializedStyles } = {
     &:hover:enabled {
       filter: brightness(90%);
     }
-    // &:disabled {
-    // TODO: state3?
-    // }
   `,
 };
 
