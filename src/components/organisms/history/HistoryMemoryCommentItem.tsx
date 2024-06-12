@@ -19,15 +19,22 @@ const HistoryMemoryCommentItem = ({ thumbImg, comment }: IProps) => {
         gap: 8px;
       `}
     >
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
-        width={64}
-        height={64}
+      <div
         css={css`
-          border-radius: 6px;
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='썸네일 이미지'
+          width={64}
+          height={64}
+          css={css`
+            object-fit: cover;
+            border-radius: 6px;
+          `}
+        />
+      </div>
       <p
         css={css`
           font-size: ${theme.fontSizes.sm};

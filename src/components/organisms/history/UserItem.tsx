@@ -4,14 +4,35 @@ import Image from 'next/image';
 import IconButton from '@/components/atoms/buttons/IconButton';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
+import RoundButton from '@/components/atoms/buttons/RoundButton';
 
 interface IProps {
+  profileImg: string;
   name: string;
   intro: string;
-  state?: 'default' | 'block';
+  type: 'like' | 'flower' | 'block' | 'skeleton';
+  amount?: number;
+  state?: boolean;
 }
 
-const UserItem = ({ name, intro, state = 'default' }: IProps) => {
+export const toEllipsisStyle = (line: number) => css`
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: ${line};
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
+`;
+
+const UserItem = ({
+  profileImg,
+  name,
+  intro,
+  type,
+  amount = 0,
+  state,
+}: IProps) => {
   const theme = useTheme();
   return (
     <div
@@ -25,6 +46,7 @@ const UserItem = ({ name, intro, state = 'default' }: IProps) => {
     >
       <div
         css={css`
+          width: 100%;
           display: flex;
           align-items: center;
           gap: 8px;
@@ -36,57 +58,95 @@ const UserItem = ({ name, intro, state = 'default' }: IProps) => {
             padding: 4px 0;
           `}
         >
-          <Image
-            src={sampleMemoryThumbnail}
-            alt='프로필 이미지'
-            width={32}
-            height={32}
-            css={css`
-              border-radius: 50%;
-              border: 0.5px solid ${theme.colors.grey[900]};
-              object-fit: cover;
-            `}
-          />
+          {type === 'skeleton' ? (
+            <div
+              css={css`
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: #1717171a;
+              `}
+            ></div>
+          ) : (
+            <Image
+              src={sampleMemoryThumbnail}
+              alt='프로필 이미지'
+              width={32}
+              height={32}
+              css={css`
+                border-radius: 50%;
+                border: 0.5px solid ${theme.colors.grey[900]};
+                object-fit: cover;
+              `}
+            />
+          )}
         </div>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-          `}
-        >
-          <span
+        {type === 'skeleton' ? (
+          <div
             css={css`
-              font-weight: ${theme.fontWeights.semibold};
-              font-size: ${theme.fontSizes.sm};
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
             `}
           >
-            {name}
-          </span>
-          <p
+            <div
+              css={css`
+                height: 16px;
+                border-radius: 4px;
+                background: #1717171a;
+              `}
+            ></div>
+            <div
+              css={css`
+                height: 16px;
+                border-radius: 4px;
+                background: #1717171a;
+              `}
+            ></div>
+          </div>
+        ) : (
+          <div
             css={css`
-              font-size: ${theme.fontSizes.xs};
-              color: ${theme.colors.grey[400]};
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
             `}
           >
-            {intro}
-          </p>
-        </div>
+            <span
+              css={css`
+                font-weight: ${theme.fontWeights.semibold};
+                font-size: ${theme.fontSizes.sm};
+              `}
+            >
+              {name}
+            </span>
+            <p
+              css={css`
+                font-size: ${theme.fontSizes.xs};
+                color: ${theme.colors.grey[400]};
+                ${toEllipsisStyle(1)}
+              `}
+            >
+              {intro}
+            </p>
+          </div>
+        )}
       </div>
-      {state === 'default' ? (
+      {type === 'skeleton' ? null : type === 'block' ? (
+        <RoundButton type='outline'>차단 해제</RoundButton>
+      ) : (
         <div
           css={css`
             display: flex;
             align-items: center;
           `}
         >
-          <MemoryActionButton type='like' amount={123} />
+          <MemoryActionButton type={type} state={state} amount={amount} />
           <IconButton>
             <MoreVerticalIcon />
           </IconButton>
         </div>
-      ) : (
-        <button>차단 해제</button>
       )}
     </div>
   );
