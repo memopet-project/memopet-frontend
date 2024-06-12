@@ -2,17 +2,28 @@ import ArrowDropdownIcon from '@/assets/icon/ArrowDropdownIcon';
 import ArrowDropdownUpIcon from '@/assets/icon/ArrowDropdownUpIcon';
 import { css, useTheme } from '@emotion/react';
 import YearItem from './YearItem';
+import { useState } from 'react';
 
 interface IProps {
   color?: 'white' | 'ivory';
-  open: boolean;
   selectedYear: number;
 }
 
-const YEAR_LIST = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016];
-
-const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
+const Timeline = ({ color = 'white', selectedYear }: IProps) => {
   const theme = useTheme();
+
+  const currentYear = new Date().getFullYear();
+  // 현재 년도를 기준으로 8개의 년도 전까지
+  const yearList = Array(8)
+    .fill(currentYear)
+    .map((v, i) => v - i);
+
+  const [isOpenYearList, setIsOpenYearList] = useState(false);
+
+  const handleToggleOpenYearList = () => {
+    setIsOpenYearList(!isOpenYearList);
+  };
+
   return (
     <div
       css={css`
@@ -20,6 +31,7 @@ const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
       `}
     >
       <button
+        onClick={handleToggleOpenYearList}
         css={css`
           width: 100%;
           padding: 8px 12px;
@@ -36,9 +48,9 @@ const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
         >
           {selectedYear}
         </span>
-        {open ? <ArrowDropdownUpIcon /> : <ArrowDropdownIcon />}
+        {isOpenYearList ? <ArrowDropdownUpIcon /> : <ArrowDropdownIcon />}
       </button>
-      {open ? (
+      {isOpenYearList ? (
         <ul
           css={css`
             padding: 16px 12px;
@@ -51,7 +63,7 @@ const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
               : `1px solid ${theme.colors.grey[700]}`};
           `}
         >
-          {YEAR_LIST.map((v) => (
+          {yearList.map((v) => (
             <li key={v}>
               <button>
                 <YearItem

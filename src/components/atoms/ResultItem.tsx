@@ -14,7 +14,7 @@ const ResultItem = ({ state = 'default', text }: IProps) => {
         padding: 8px 12px;
         color: ${state === 'empty' ? theme.colors.grey[400] : 'inherit'};
         &:hover {
-          background: ${theme.colors.primary[50]};
+          background: ${state === 'empty' ? 'none' : theme.colors.primary[50]};
         }
       `}
     >
