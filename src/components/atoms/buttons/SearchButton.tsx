@@ -12,6 +12,7 @@ const SearchButton: React.FC<ISearchButtonProps> = ({ color = 'default' }) => {
   function click() {
     setActive((prev) => !prev);
   }
+
   return (
     <>
       {!active ? (
