@@ -2,6 +2,7 @@ import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import { css, useTheme } from '@emotion/react';
 import { toEllipsisStyle } from '../history/UserItem';
+import Skeleton from '@/components/atoms/Skeleton';
 
 interface IProps {
   thumbImg: string;
@@ -31,14 +32,7 @@ const SearchMemoryItem = ({
         `}
       >
         {type === 'skeleton' ? (
-          <div
-            css={css`
-              width: 64px;
-              height: 64px;
-              border-radius: 50%;
-              background: #1717171a;
-            `}
-          ></div>
+          <Skeleton type='thumbnail' size={64} />
         ) : (
           <Image
             src={sampleMemoryThumbnail}
@@ -61,20 +55,8 @@ const SearchMemoryItem = ({
             gap: 8px;
           `}
         >
-          <div
-            css={css`
-              height: 16px;
-              border-radius: 4px;
-              background: #1717171a;
-            `}
-          ></div>
-          <div
-            css={css`
-              height: 16px;
-              border-radius: 4px;
-              background: #1717171a;
-            `}
-          ></div>
+          <Skeleton type='text' size={21} />
+          <Skeleton type='text' size={21} />
         </div>
       ) : (
         <div

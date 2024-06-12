@@ -5,6 +5,7 @@ import IconButton from '@/components/atoms/buttons/IconButton';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import RoundButton from '@/components/atoms/buttons/RoundButton';
+import Skeleton from '@/components/atoms/Skeleton';
 
 interface IProps {
   profileImg: string;
@@ -59,14 +60,7 @@ const UserItem = ({
           `}
         >
           {type === 'skeleton' ? (
-            <div
-              css={css`
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                background: #1717171a;
-              `}
-            ></div>
+            <Skeleton type='profile' size={32} />
           ) : (
             <Image
               src={sampleMemoryThumbnail}
@@ -90,20 +84,8 @@ const UserItem = ({
               gap: 4px;
             `}
           >
-            <div
-              css={css`
-                height: 16px;
-                border-radius: 4px;
-                background: #1717171a;
-              `}
-            ></div>
-            <div
-              css={css`
-                height: 16px;
-                border-radius: 4px;
-                background: #1717171a;
-              `}
-            ></div>
+            <Skeleton type='text' size={14} />
+            <Skeleton type='text' size={14} />
           </div>
         ) : (
           <div
