@@ -56,17 +56,23 @@ const MemoryPopup = ({
               gap: 8px;
             `}
           >
-            <Image
-              src={sampleMemoryThumbnail}
-              alt='프로필 이미지'
-              width={32}
-              height={32}
+            <div
               css={css`
-                border-radius: 50%;
-                border: 0.5px solid ${theme.colors.grey[900]};
-                object-fit: cover;
+                display: flex;
               `}
-            />
+            >
+              <Image
+                src={sampleMemoryThumbnail}
+                alt='프로필 이미지'
+                width={32}
+                height={32}
+                css={css`
+                  border-radius: 50%;
+                  border: 0.5px solid ${theme.colors.grey[900]};
+                  object-fit: cover;
+                `}
+              />
+            </div>
             <span
               css={css`
                 font-weight: ${theme.fontWeights.medium};
@@ -83,16 +89,22 @@ const MemoryPopup = ({
             gap: 24px;
           `}
         >
-          <Image
-            src={sampleMemoryThumbnail}
-            alt='썸네일 이미지'
-            width={400}
-            height={600}
+          <div
             css={css`
-              border-radius: 8px;
-              object-fit: contain;
+              display: flex;
             `}
-          />
+          >
+            <Image
+              src={sampleMemoryThumbnail}
+              alt='썸네일 이미지'
+              width={400}
+              height={600}
+              css={css`
+                border-radius: 8px;
+                object-fit: contain;
+              `}
+            />
+          </div>
           <div
             css={css`
               display: flex;

@@ -45,20 +45,26 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
       >
         <PhotoArrowButton direction='right' />
       </div>
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
+      <div
         css={css`
-          border-radius: 8px;
-          object-fit: contain;
-          width: 400px;
-          height: 600px;
-          @media ${theme.device.mobile} {
-            width: 335px;
-            height: 480px;
-          }
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='썸네일 이미지'
+          css={css`
+            border-radius: 8px;
+            object-fit: contain;
+            width: 400px;
+            height: 600px;
+            @media ${theme.device.mobile} {
+              width: 335px;
+              height: 480px;
+            }
+          `}
+        />
+      </div>
       <ul
         css={css`
           width: 100%;

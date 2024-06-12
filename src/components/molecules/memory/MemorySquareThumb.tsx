@@ -22,15 +22,21 @@ const MemorySquareThumb = ({ thumbImg, date, title }: IProps) => {
         }
       `}
     >
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
-        width={344}
-        height={344}
+      <div
         css={css`
-          object-fit: cover;
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='썸네일 이미지'
+          width={344}
+          height={344}
+          css={css`
+            object-fit: cover;
+          `}
+        />
+      </div>
       <div
         css={css`
           background: linear-gradient(

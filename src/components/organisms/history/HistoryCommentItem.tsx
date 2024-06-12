@@ -24,17 +24,23 @@ const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
         background: ${theme.colors.grey[50]};
       `}
     >
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='프로필 이미지'
-        width={32}
-        height={32}
+      <div
         css={css`
-          border-radius: 50%;
-          border: 0.5px solid ${theme.colors.grey[900]};
-          object-fit: cover;
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='프로필 이미지'
+          width={32}
+          height={32}
+          css={css`
+            border-radius: 50%;
+            border: 0.5px solid ${theme.colors.grey[900]};
+            object-fit: cover;
+          `}
+        />
+      </div>
       <div
         css={css`
           width: 100%;

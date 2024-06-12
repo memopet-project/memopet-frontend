@@ -2,7 +2,11 @@ import RoundButton from '@/components/atoms/buttons/RoundButton';
 import { css } from '@emotion/react';
 import { ChangeEvent, useState } from 'react';
 
-const InputComment = () => {
+interface IProps {
+  placeHolder?: string;
+}
+
+const InputComment = ({ placeHolder }: IProps) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +27,7 @@ const InputComment = () => {
       `}
     >
       <input
-        placeholder='댓글을 작성해 주세요'
+        placeholder={placeHolder}
         value={inputValue}
         onChange={handleChangeInputValue}
       />

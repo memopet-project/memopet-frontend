@@ -65,17 +65,23 @@ const MemoryItem = ({
               gap: 8px;
             `}
           >
-            <Image
-              src={sampleMemoryThumbnail}
-              alt='프로필 이미지'
-              width={32}
-              height={32}
+            <div
               css={css`
-                border-radius: 50%;
-                border: 0.5px solid ${theme.colors.grey[900]};
-                object-fit: cover;
+                display: flex;
               `}
-            />
+            >
+              <Image
+                src={sampleMemoryThumbnail}
+                alt='프로필 이미지'
+                width={32}
+                height={32}
+                css={css`
+                  border-radius: 50%;
+                  border: 0.5px solid ${theme.colors.grey[900]};
+                  object-fit: cover;
+                `}
+              />
+            </div>
             <span
               css={css`
                 font-weight: ${theme.fontWeights.medium};
@@ -98,21 +104,27 @@ const MemoryItem = ({
           </button>
         </div>
       ) : null}
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
+      <div
         css={css`
-          border-radius: 8px;
-          border: 1px solid ${theme.colors.grey[700]};
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-          @media ${theme.device.mobile} {
-            width: 327px;
-            height: 280px;
-          }
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='썸네일 이미지'
+          css={css`
+            border-radius: 8px;
+            border: 1px solid ${theme.colors.grey[700]};
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            @media ${theme.device.mobile} {
+              width: 327px;
+              height: 280px;
+            }
+          `}
+        />
+      </div>
       <div
         css={css`
           padding: 4px 8px;

@@ -49,18 +49,24 @@ const MemoryThumbItem = ({ thumbImg, state }: IProps) => {
         }
       `}
     >
-      {state === 'inactive' || state === 'active' ? (
-        <Image
-          src={sampleMemoryThumbnail}
-          alt='썸네일 이미지'
-          width={62}
-          height={62}
-          css={css`
-            border-radius: 8px;
-            object-fit: cover;
-          `}
-        />
-      ) : null}
+      <div
+        css={css`
+          display: flex;
+        `}
+      >
+        {state === 'inactive' || state === 'active' ? (
+          <Image
+            src={sampleMemoryThumbnail}
+            alt='썸네일 이미지'
+            width={62}
+            height={62}
+            css={css`
+              border-radius: 8px;
+              object-fit: cover;
+            `}
+          />
+        ) : null}
+      </div>
       {state === 'inactive' || state === 'active' ? (
         <div
           css={css`
