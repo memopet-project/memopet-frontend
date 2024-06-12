@@ -1,10 +1,19 @@
+import RoundButton from '@/components/atoms/buttons/RoundButton';
 import { css } from '@emotion/react';
+import { ChangeEvent, useState } from 'react';
 
-interface IProps {
-  placeHolder?: string;
-}
+const InputComment = () => {
+  const [inputValue, setInputValue] = useState('');
 
-const InputComment = ({ placeHolder }: IProps) => {
+  const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleClickCancelButton = () => {
+    setInputValue('');
+  };
+  const handleClickSubmitButton = () => {};
+
   return (
     <div
       css={css`
@@ -13,7 +22,11 @@ const InputComment = ({ placeHolder }: IProps) => {
         gap: 8px;
       `}
     >
-      <input placeholder={placeHolder} />
+      <input
+        placeholder='댓글을 작성해 주세요'
+        value={inputValue}
+        onChange={handleChangeInputValue}
+      />
       <div
         css={css`
           display: flex;
@@ -21,8 +34,10 @@ const InputComment = ({ placeHolder }: IProps) => {
           gap: 4px;
         `}
       >
-        <button>취소</button>
-        <button>등록</button>
+        <RoundButton type='outline'>취소</RoundButton>
+        <RoundButton type='filled' disabled={!inputValue}>
+          등록
+        </RoundButton>
       </div>
     </div>
   );

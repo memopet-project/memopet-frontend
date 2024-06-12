@@ -1,12 +1,28 @@
+import RoundButton from '@/components/atoms/buttons/RoundButton';
 import { css, useTheme } from '@emotion/react';
+import { ChangeEvent, useState } from 'react';
 
 const CommentInput = () => {
   const theme = useTheme();
+
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    if (inputValue.length >= 60) return;
+    setInputValue(e.target.value);
+  };
+
+  const handleClickCancelButton = () => {
+    setInputValue('');
+  };
+  const handleClickSubmitButton = () => {};
+
   return (
     <div
       css={css`
         width: 360px;
         border-radius: 8px;
+        background: ${theme.colors.grey[0]};
         border: 1px solid ${theme.colors.grey[700]};
         padding: 12px;
         display: flex;
@@ -17,7 +33,11 @@ const CommentInput = () => {
         }
       `}
     >
-      <input placeholder='따뜻한 한마디를 남겨주세요' />
+      <input
+        placeholder='따뜻한 한마디를 남겨주세요'
+        value={inputValue}
+        onChange={handleChangeInputValue}
+      />
       <div
         css={css`
           display: flex;
@@ -25,8 +45,10 @@ const CommentInput = () => {
           gap: 4px;
         `}
       >
-        <button>취소</button>
-        <button>남기기</button>
+        <RoundButton type='outline' disabled={!inputValue}>
+          취소
+        </RoundButton>
+        <RoundButton type='filled'>남기기</RoundButton>
       </div>
     </div>
   );
