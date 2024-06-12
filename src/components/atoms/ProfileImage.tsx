@@ -6,6 +6,7 @@ interface ProfileImageProps {
   size: 16 | 24 | 32 | 40 | 64;
   color: 'white' | 'default';
   useHover?: boolean;
+  useActive?: boolean;
 }
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
@@ -13,24 +14,34 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   size = 40,
   color = 'default',
   useHover = true,
+  useActive = false,
 }) => {
   const isDefault = Boolean(color === 'default');
   const is40 = Boolean(size === 40);
   return (
     <div
-      css={
+      css={css(
         useHover &&
-        css`
-          padding: ${size >= 40 ? (is40 ? '4px' : '8px') : '0px'};
-          width: fit-content;
-          border-radius: 50%;
-          &:hover {
+          css`
+            padding: ${size >= 40 ? (is40 ? '4px' : '8px') : '0px'};
+            width: fit-content;
+            border-radius: 50%;
+            &:hover {
+              background: ${isDefault
+                ? 'rgba(241, 81, 57, 0.2)'
+                : 'rgba(255, 255, 255, 0.2)'};
+            }
+          `,
+        useActive &&
+          css`
+            padding: ${size >= 40 ? (is40 ? '4px' : '8px') : '0px'};
+            width: fit-content;
+            border-radius: 50%;
             background: ${isDefault
               ? 'rgba(241, 81, 57, 0.2)'
               : 'rgba(255, 255, 255, 0.2)'};
-          }
-        `
-      }
+          `,
+      )}
     >
       <div
         css={css(css`
