@@ -1,6 +1,6 @@
 import ArrowDropdownIcon from '@/assets/icon/ArrowDropdownIcon';
 import ArrowDropdownUpIcon from '@/assets/icon/ArrowDropdownUpIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import YearItem from './YearItem';
 
 interface IProps {
@@ -12,6 +12,7 @@ interface IProps {
 const YEAR_LIST = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016];
 
 const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -45,7 +46,9 @@ const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
             flex-direction: column;
             gap: 12px;
             background-color: ${color === 'white' ? '#FFFFFFF2' : '#F7F5F1F2'};
-            border: ${color === 'white' ? 'none' : `1px solid var(--grey-700)`};
+            border: ${color === 'white'
+              ? 'none'
+              : `1px solid ${theme.colors.grey[700]}`};
           `}
         >
           {YEAR_LIST.map((v) => (

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import Image from 'next/image';
 import IconButton from '@/components/atoms/buttons/IconButton';
@@ -12,6 +12,7 @@ interface IProps {
 }
 
 const UserItem = ({ name, intro, state = 'default' }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -42,7 +43,7 @@ const UserItem = ({ name, intro, state = 'default' }: IProps) => {
             height={32}
             css={css`
               border-radius: 50%;
-              border: 0.5px solid var(--grey-900);
+              border: 0.5px solid ${theme.colors.grey[900]};
               object-fit: cover;
             `}
           />
@@ -65,7 +66,7 @@ const UserItem = ({ name, intro, state = 'default' }: IProps) => {
           <p
             css={css`
               font-size: 12px;
-              color: var(--grey-400);
+              color: ${theme.colors.grey[400]};
             `}
           >
             {intro}

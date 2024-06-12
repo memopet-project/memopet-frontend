@@ -1,4 +1,8 @@
-const SearchIcon = ({ color = 'var(--grey-900)', size = 24 }: IIconProps) => {
+import { useTheme } from '@emotion/react';
+
+const SearchIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -9,7 +13,7 @@ const SearchIcon = ({ color = 'var(--grey-900)', size = 24 }: IIconProps) => {
     >
       <path
         d='M17 17L22 22M19.5 10.75C19.5 15.5825 15.5825 19.5 10.75 19.5C5.91751 19.5 2 15.5825 2 10.75C2 5.91751 5.91751 2 10.75 2C15.5825 2 19.5 5.91751 19.5 10.75Z'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
         stroke-linejoin='round'

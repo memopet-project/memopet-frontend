@@ -1,4 +1,8 @@
-const LogoutIcon = ({ color = 'var(--grey-900)', size = 24 }: IIconProps) => {
+import { useTheme } from '@emotion/react';
+
+const LogoutIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -9,13 +13,13 @@ const LogoutIcon = ({ color = 'var(--grey-900)', size = 24 }: IIconProps) => {
     >
       <path
         d='M9 2H18C19.1046 2 20 2.89543 20 4V20C20 21.1046 19.1046 22 18 22H9'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
       />
       <path
         d='M3 12H13M13 12L9.11111 8M13 12L9.11111 16'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
         stroke-linejoin='round'

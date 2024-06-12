@@ -1,7 +1,4 @@
-const FilledLikeIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IIconProps) => {
+const FilledLikeIcon = ({ color, size = 24 }: IIconProps) => {
   return (
     <svg
       width={size}

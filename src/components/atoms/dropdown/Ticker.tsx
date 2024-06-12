@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   month: number;
@@ -13,6 +13,7 @@ const Ticker = ({
   year,
   type = 'vertical',
 }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -26,7 +27,7 @@ const Ticker = ({
           css={css`
             width: 4px;
             height: 4px;
-            background: var(--main-red-500);
+            background: ${theme.colors.primary[500]};
             border-radius: 50%;
           `}
         ></span>
@@ -48,9 +49,9 @@ const Ticker = ({
             align-items: center;
             font-weight: 600;
             color: ${type === 'horizontal' && state === 'selected'
-              ? 'var(--grey-0)'
+              ? theme.colors.grey[0]
               : state === 'disabled'
-                ? 'var(--grey-400)'
+                ? theme.colors.grey[400]
                 : 'inherit'};
             width: ${type === 'horizontal' && state === 'selected'
               ? '40px'
@@ -59,7 +60,7 @@ const Ticker = ({
               ? '40px'
               : 'auto'};
             background: ${type === 'horizontal' && state === 'selected'
-              ? 'var(--main-red-500)'
+              ? theme.colors.primary[500]
               : 'none'};
             border-radius: 50%;
           `}
@@ -70,7 +71,7 @@ const Ticker = ({
           <span
             css={css`
               font-size: 12px;
-              color: var(--main-red-500);
+              color: ${theme.colors.primary[500]};
             `}
           >
             {year}

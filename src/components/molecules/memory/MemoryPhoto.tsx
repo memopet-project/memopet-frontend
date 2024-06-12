@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import { useState } from 'react';
 import PhotoArrowButton from '@/components/atoms/buttons/PhotoArrowButton';
 
@@ -9,6 +9,8 @@ interface IProps {
 }
 
 const MemoryPhoto = ({ thumbImgs }: IProps) => {
+  const theme = useTheme();
+
   const [curPhotoIdx, setCurPhotoIdx] = useState(0);
 
   const handleClickPrevBtn = () => {};
@@ -83,7 +85,7 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                background: var(--grey-200);
+                background: ${theme.colors.grey[200]};
                 opacity: ${idx === curPhotoIdx ? 1 : 0.5};
                 @media screen and (max-width: 743px) {
                   width: 6px;

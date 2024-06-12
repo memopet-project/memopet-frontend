@@ -1,6 +1,6 @@
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import IconButton from '@/components/atoms/buttons/IconButton';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 
@@ -19,6 +19,7 @@ const MemoryCommentItem = ({
   comment,
   type = 'default',
 }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -32,14 +33,14 @@ const MemoryCommentItem = ({
             ? '8px'
             : 0};
         background: ${type === 'reply'
-          ? 'var(--grey-100)'
+          ? theme.colors.grey[100]
           : type === 'my'
-            ? 'var(--main-red-50)'
+            ? theme.colors.primary[50]
             : 'none'};
         border: ${type === 'default'
           ? 'none'
           : `1px solid
-          ${type === 'reply' ? 'var(--grey-200)' : 'var(--main-red-500)'};`};
+          ${type === 'reply' ? theme.colors.grey[200] : theme.colors.primary[500]};`};
         border-radius: 6px;
       `}
     >
@@ -63,7 +64,7 @@ const MemoryCommentItem = ({
             height={32}
             css={css`
               border-radius: 50%;
-              border: 0.5px solid var(--grey-900);
+              border: 0.5px solid ${theme.colors.grey[900]};
               object-fit: cover;
             `}
           />
@@ -93,7 +94,7 @@ const MemoryCommentItem = ({
             <span
               css={css`
                 font-size: 12px;
-                color: var(--grey-500);
+                color: ${theme.colors.grey[500]};
               `}
             >
               {time}

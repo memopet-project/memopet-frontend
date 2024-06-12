@@ -1,5 +1,5 @@
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 
 interface IProps {
@@ -9,6 +9,7 @@ interface IProps {
 }
 
 const MemorySquareThumb = ({ thumbImg, date, title }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -47,7 +48,7 @@ const MemorySquareThumb = ({ thumbImg, date, title }: IProps) => {
           justify-content: end;
           gap: 4px;
           padding: 16px;
-          color: var(--grey-0);
+          color: ${theme.colors.grey[0]};
         `}
       >
         <span

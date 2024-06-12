@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   state?: 'default' | 'empty';
@@ -6,14 +6,15 @@ interface IProps {
 }
 
 const ResultItem = ({ state = 'default', text }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
         width: 360px;
         padding: 8px 12px;
-        color: ${state === 'empty' ? 'var(--grey-400)' : 'inherit'};
+        color: ${state === 'empty' ? theme.colors.grey[400] : 'inherit'};
         &:hover {
-          background: var(--main-red-50);
+          background: ${theme.colors.primary[50]};
         }
       `}
     >

@@ -1,12 +1,13 @@
 import MaximizeIcon from '@/assets/icon/MaximizeIcon';
 import MinimizeIcon from '@/assets/icon/MinimizeIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   type: 'maximize' | 'minimize';
 }
 
 const ScaleButton = ({ type }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -16,7 +17,7 @@ const ScaleButton = ({ type }: IProps) => {
         justify-content: center;
         align-items: center;
         border-radius: 50%;
-        background: var(--grey-900);
+        background: ${theme.colors.grey[900]};
         opacity: 0.5;
         @media screen and (max-width: 743px) {
           width: 40px;
@@ -32,9 +33,9 @@ const ScaleButton = ({ type }: IProps) => {
       `}
     >
       {type === 'maximize' ? (
-        <MaximizeIcon color={'var(--grey-0)'} size={16} />
+        <MaximizeIcon color={theme.colors.grey[0]} size={16} />
       ) : (
-        <MinimizeIcon color={'var(--grey-0)'} size={16} />
+        <MinimizeIcon color={theme.colors.grey[0]} size={16} />
       )}
     </button>
   );

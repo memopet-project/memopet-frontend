@@ -4,7 +4,7 @@ import FilledFlowerIcon from '@/assets/icon/FilledFlowerIcon';
 import FilledLikeIcon from '@/assets/icon/FilledLikeIcon';
 import FlowerIcon from '@/assets/icon/FlowerIcon';
 import LikeIcon from '@/assets/icon/LikeIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   type: 'flower' | 'like' | 'comment';
@@ -13,6 +13,7 @@ interface IProps {
 }
 
 const MemoryThumbIcon = ({ type, state, amount }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -25,23 +26,23 @@ const MemoryThumbIcon = ({ type, state, amount }: IProps) => {
         state ? (
           <FilledFlowerIcon size={14} />
         ) : (
-          <FlowerIcon color={'var(--grey-500)'} size={14} />
+          <FlowerIcon color={theme.colors.grey[500]} size={14} />
         )
       ) : type === 'like' ? (
         state ? (
           <FilledLikeIcon size={14} />
         ) : (
-          <LikeIcon color={'var(--grey-500)'} size={14} />
+          <LikeIcon color={theme.colors.grey[500]} size={14} />
         )
       ) : state ? (
         <FilledCommentIcon size={14} />
       ) : (
-        <CommentIcon color={'var(--grey-500)'} size={14} />
+        <CommentIcon color={theme.colors.grey[500]} size={14} />
       )}
       <span
         css={css`
           font-size: 12px;
-          color: var(--grey-500);
+          color: ${theme.colors.grey[500]};
         `}
       >
         {amount}

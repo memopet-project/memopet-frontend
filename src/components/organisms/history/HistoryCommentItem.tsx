@@ -1,7 +1,7 @@
 import TrashIcon from '@/assets/icon/TrashIcon';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import IconButton from '@/components/atoms/buttons/IconButton';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 
 interface IProps {
@@ -11,16 +11,17 @@ interface IProps {
 }
 
 const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
         border-radius: 8px;
-        border: 1px solid var(--grey-700);
+        border: 1px solid ${theme.colors.grey[700]};
         padding: 12px;
         display: flex;
         align-items: center;
         gap: 8px;
-        background: var(--grey-50);
+        background: ${theme.colors.grey[50]};
       `}
     >
       <Image
@@ -30,7 +31,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
         height={32}
         css={css`
           border-radius: 50%;
-          border: 0.5px solid var(--grey-900);
+          border: 0.5px solid ${theme.colors.grey[900]};
           object-fit: cover;
         `}
       />
@@ -50,7 +51,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
         >
           <span
             css={css`
-              color: var(--grey-500);
+              color: ${theme.colors.grey[500]};
             `}
           >
             {name}
@@ -66,7 +67,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
         </p>
       </div>
       <IconButton>
-        <TrashIcon color={'var(--grey-400)'} />
+        <TrashIcon color={theme.colors.grey[400]} />
       </IconButton>
     </div>
   );

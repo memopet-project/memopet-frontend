@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import IconButton from '@/components/atoms/buttons/IconButton';
@@ -10,6 +10,7 @@ interface IProps {
 }
 
 const HistoryMemoryCommentItem = ({ thumbImg, comment }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -35,7 +36,7 @@ const HistoryMemoryCommentItem = ({ thumbImg, comment }: IProps) => {
         {comment}
       </p>
       <IconButton>
-        <TrashIcon color={'var(--grey-400)'} />
+        <TrashIcon color={theme.colors.grey[400]} />
       </IconButton>
     </div>
   );

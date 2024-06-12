@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import PlusIcon from '@/assets/icon/PlusIcon';
@@ -10,6 +10,7 @@ interface IProps {
 }
 
 const MemoryThumbItem = ({ thumbImg, state }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -22,21 +23,21 @@ const MemoryThumbItem = ({ thumbImg, state }: IProps) => {
         border-radius: 8px;
         border: 1px solid
           ${state === 'inactive'
-            ? 'var(--grey-900)'
+            ? theme.colors.grey[900]
             : state === 'active'
-              ? 'var(--main-red-500)'
-              : 'var(--grey-200)'};
+              ? theme.colors.primary[500]
+              : theme.colors.grey[200]};
         background: ${state === 'empty' ||
         state === 'add' ||
         state === 'disabled'
-          ? 'var(--grey-100)'
+          ? theme.colors.grey[100]
           : 'none'};
         opacity: ${state === 'disabled' ? 0.5 : 1};
         cursor: ${state === 'inactive' || state === 'active' || state === 'add'
           ? 'pointer'
           : 'auto'};
         &:hover {
-          background: ${state === 'add' ? 'var(--grey-150)' : ''};
+          background: ${state === 'add' ? theme.colors.grey[150] : ''};
           /* layer */
           & > div {
             display: block;
@@ -89,7 +90,7 @@ const MemoryThumbItem = ({ thumbImg, state }: IProps) => {
             border-radius: 50%;
           `}
         >
-          <CloseIcon color={'var(--grey-0)'} size={8} />
+          <CloseIcon color={theme.colors.grey[0]} size={8} />
         </button>
       ) : null}
       {state === 'add' || state === 'disabled' ? (
@@ -100,11 +101,11 @@ const MemoryThumbItem = ({ thumbImg, state }: IProps) => {
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px dashed var(--grey-300);
+            border: 1px dashed ${theme.colors.grey[300]};
             border-radius: 50%;
           `}
         >
-          <PlusIcon color={'var(--grey-500)'} />
+          <PlusIcon color={theme.colors.grey[500]} />
         </span>
       ) : null}
     </div>

@@ -1,7 +1,8 @@
-const ProfileChangeIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IIconProps) => {
+import { useTheme } from '@emotion/react';
+
+const ProfileChangeIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -14,12 +15,12 @@ const ProfileChangeIcon = ({
         cx='11.0002'
         cy='6.88889'
         r='4.13889'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
       />
       <path
         d='M19 19.7777V19.7777C19 15.8504 15.8162 12.6666 11.8889 12.6666H10.1111C6.18375 12.6666 3 15.8504 3 19.7777V19.7777'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
         stroke-linejoin='round'

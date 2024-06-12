@@ -1,12 +1,13 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 const CommentInput = () => {
+  const theme = useTheme();
   return (
     <div
       css={css`
         width: 360px;
         border-radius: 8px;
-        border: 1px solid var(--grey-700);
+        border: 1px solid ${theme.colors.grey[700]};
         padding: 12px;
         display: flex;
         flex-direction: column;

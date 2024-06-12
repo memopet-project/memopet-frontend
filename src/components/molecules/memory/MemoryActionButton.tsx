@@ -4,7 +4,7 @@ import FilledFlowerIcon from '@/assets/icon/FilledFlowerIcon';
 import FilledLikeIcon from '@/assets/icon/FilledLikeIcon';
 import FlowerIcon from '@/assets/icon/FlowerIcon';
 import LikeIcon from '@/assets/icon/LikeIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   type: 'flower' | 'like' | 'comment';
@@ -14,6 +14,7 @@ interface IProps {
 }
 
 const MemoryActionButton = ({ type, state, amount, onClick }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -27,22 +28,22 @@ const MemoryActionButton = ({ type, state, amount, onClick }: IProps) => {
         state ? (
           <FilledFlowerIcon />
         ) : (
-          <FlowerIcon color={'var(--grey-700)'} />
+          <FlowerIcon color={theme.colors.grey[700]} />
         )
       ) : type === 'like' ? (
         state ? (
           <FilledLikeIcon />
         ) : (
-          <LikeIcon color={'var(--grey-700)'} />
+          <LikeIcon color={theme.colors.grey[700]} />
         )
       ) : state ? (
         <FilledCommentIcon />
       ) : (
-        <CommentIcon color={'var(--grey-700)'} />
+        <CommentIcon color={theme.colors.grey[700]} />
       )}
       <span
         css={css`
-          color: ${state ? 'inherit' : 'var(--grey-700)'};
+          color: ${state ? 'inherit' : theme.colors.grey[700]};
           @media screen and (max-width: 743px) {
             font-size: 13px;
           }

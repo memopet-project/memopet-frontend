@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   year: number;
@@ -6,18 +6,19 @@ interface IProps {
 }
 
 const YearItem = ({ year, state = 'enabled' }: IProps) => {
+  const theme = useTheme();
   return (
     <span
       css={css`
         font-weight: 700;
         font-size: 20px;
         color: ${state === 'selected'
-          ? 'var(--main-red-500)'
+          ? theme.colors.primary[500]
           : state === 'disabled'
-            ? 'var(--grey-400)'
+            ? theme.colors.grey[400]
             : 'inherit'};
         &:hover {
-          color: var(--main-red-500);
+          color: ${theme.colors.primary[500]};
         }
         @media screen and (max-width: 743px) {
           font-weight: 600;

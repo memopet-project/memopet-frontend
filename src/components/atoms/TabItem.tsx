@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   state?: 'selected' | 'unselected';
@@ -7,6 +7,7 @@ interface IProps {
 }
 
 const TabItem = ({ state = 'selected', text, amount }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -21,7 +22,7 @@ const TabItem = ({ state = 'selected', text, amount }: IProps) => {
           ? '0px 0px 3px 0px #1717171A'
           : 'none'};
         font-weight: 600;
-        color: ${state === 'unselected' ? 'var(--grey-500)' : 'inherit'};
+        color: ${state === 'unselected' ? theme.colors.grey[500] : 'inherit'};
         &:hover {
           background: ${state === 'unselected' ? '#1717170D' : 'none'};
         }
