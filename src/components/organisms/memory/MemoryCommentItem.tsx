@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 
-interface PropsType {
+interface IProps {
   profileImg: string;
   name: string;
   time: string;
@@ -18,7 +18,7 @@ const MemoryCommentItem = ({
   time,
   comment,
   type = 'default',
-}: PropsType) => {
+}: IProps) => {
   return (
     <div
       css={css`

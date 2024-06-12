@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   actions: { name: string; onClick: () => void }[];
 }
 
-const CommentActionButton = ({ actions }: PropsType) => {
+const CommentActionButton = ({ actions }: IProps) => {
   return (
     <ul
       css={css`

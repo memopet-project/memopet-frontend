@@ -1,11 +1,11 @@
 import CloseIcon from '@/assets/icon/CloseIcon';
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   text: string;
 }
 
-const Keyword = ({ text }: PropsType) => {
+const Keyword = ({ text }: IProps) => {
   return (
     <button
       css={css`

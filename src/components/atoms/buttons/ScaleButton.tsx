@@ -2,11 +2,11 @@ import MaximizeIcon from '@/assets/icon/MaximizeIcon';
 import MinimizeIcon from '@/assets/icon/MinimizeIcon';
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   type: 'maximize' | 'minimize';
 }
 
-const ScaleButton = ({ type }: PropsType) => {
+const ScaleButton = ({ type }: IProps) => {
   return (
     <button
       css={css`

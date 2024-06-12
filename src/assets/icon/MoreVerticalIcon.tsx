@@ -1,7 +1,7 @@
 const MoreVerticalIcon = ({
   color = 'var(--grey-900)',
   size = 24,
-}: IconPropsType) => {
+}: IIconProps) => {
   return (
     <svg
       width={size}

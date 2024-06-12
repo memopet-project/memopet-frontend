@@ -5,13 +5,13 @@ import IconButton from '@/components/atoms/buttons/IconButton';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 
-interface PropsType {
+interface IProps {
   name: string;
   intro: string;
   state?: 'default' | 'block';
 }
 
-const UserItem = ({ name, intro, state = 'default' }: PropsType) => {
+const UserItem = ({ name, intro, state = 'default' }: IProps) => {
   return (
     <div
       css={css`

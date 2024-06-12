@@ -1,7 +1,7 @@
 const GoogleLoginIcon = ({
   color = 'var(--grey-900)',
   size = 24,
-}: IconPropsType) => {
+}: IIconProps) => {
   return (
     <svg
       width='40'

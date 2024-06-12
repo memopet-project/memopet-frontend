@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   state?: 'default' | 'empty';
   text: string;
 }
 
-const ResultItem = ({ state = 'default', text }: PropsType) => {
+const ResultItem = ({ state = 'default', text }: IProps) => {
   return (
     <div
       css={css`

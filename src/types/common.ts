@@ -1,4 +1,4 @@
-interface IconPropsType {
+interface IIconProps {
   color?: string;
   size?: number;
 }

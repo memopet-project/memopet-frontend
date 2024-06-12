@@ -4,12 +4,12 @@ import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import PlusIcon from '@/assets/icon/PlusIcon';
 import CloseIcon from '@/assets/icon/CloseIcon';
 
-interface PropsType {
+interface IProps {
   thumbImg?: string;
   state: 'empty' | 'inactive' | 'active' | 'add' | 'disabled';
 }
 
-const MemoryThumbItem = ({ thumbImg, state }: PropsType) => {
+const MemoryThumbItem = ({ thumbImg, state }: IProps) => {
   return (
     <div
       css={css`

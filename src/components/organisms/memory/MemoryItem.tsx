@@ -6,7 +6,7 @@ import MemoryThumbIcon from '@/components/molecules/memory/MemoryThumbIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import ShareIcon from '@/assets/icon/ShareIcon';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
   date: string;
   title: string;
@@ -28,7 +28,7 @@ const MemoryItem = ({
   isProfile,
   profileImg,
   name,
-}: PropsType) => {
+}: IProps) => {
   return (
     <div
       css={css`

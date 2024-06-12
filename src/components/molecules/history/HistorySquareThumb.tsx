@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
 }
 
-const HistorySquareTumnb = ({ thumbImg }: PropsType) => {
+const HistorySquareTumnb = ({ thumbImg }: IProps) => {
   return (
     <div
       css={css`

@@ -4,12 +4,12 @@ import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import IconButton from '@/components/atoms/buttons/IconButton';
 import TrashIcon from '@/assets/icon/TrashIcon';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
   comment: string;
 }
 
-const HistoryMemoryCommentItem = ({ thumbImg, comment }: PropsType) => {
+const HistoryMemoryCommentItem = ({ thumbImg, comment }: IProps) => {
   return (
     <div
       css={css`

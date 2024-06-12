@@ -1,7 +1,4 @@
-const SettingIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IconPropsType) => {
+const SettingIcon = ({ color = 'var(--grey-900)', size = 24 }: IIconProps) => {
   return (
     <svg
       width={size}

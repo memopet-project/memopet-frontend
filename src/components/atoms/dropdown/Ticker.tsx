@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   month: number;
   state?: 'enabled' | 'disabled' | 'selected' | 'withYear';
   year?: number;
@@ -12,7 +12,7 @@ const Ticker = ({
   state = 'enabled',
   year,
   type = 'vertical',
-}: PropsType) => {
+}: IProps) => {
   return (
     <div
       css={css`

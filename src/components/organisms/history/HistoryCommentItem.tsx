@@ -4,13 +4,13 @@ import IconButton from '@/components/atoms/buttons/IconButton';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 
-interface PropsType {
+interface IProps {
   profileImg: string;
   name: string;
   comment: string;
 }
 
-const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
+const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
   return (
     <div
       css={css`

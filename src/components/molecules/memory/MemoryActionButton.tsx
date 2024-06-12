@@ -6,14 +6,14 @@ import FlowerIcon from '@/assets/icon/FlowerIcon';
 import LikeIcon from '@/assets/icon/LikeIcon';
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   type: 'flower' | 'like' | 'comment';
   state?: boolean;
   amount: number;
   onClick?: () => void;
 }
 
-const MemoryActionButton = ({ type, state, amount, onClick }: PropsType) => {
+const MemoryActionButton = ({ type, state, amount, onClick }: IProps) => {
   return (
     <button
       css={css`

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   year: number;
   state?: 'enabled' | 'selected' | 'disabled';
 }
 
-const YearItem = ({ year, state = 'enabled' }: PropsType) => {
+const YearItem = ({ year, state = 'enabled' }: IProps) => {
   return (
     <span
       css={css`

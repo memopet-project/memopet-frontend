@@ -2,12 +2,12 @@ import CloseIcon from '@/assets/icon/CloseIcon';
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 
-interface PropsType {
+interface IProps {
   children: ReactNode;
   onClose: () => void;
 }
 
-const Popup = ({ children, onClose }: PropsType) => {
+const Popup = ({ children, onClose }: IProps) => {
   return (
     <div
       css={css`

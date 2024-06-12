@@ -4,11 +4,11 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import PhotoArrowButton from '@/components/atoms/buttons/PhotoArrowButton';
 
-interface PropsType {
+interface IProps {
   thumbImgs: string[];
 }
 
-const MemoryPhoto = ({ thumbImgs }: PropsType) => {
+const MemoryPhoto = ({ thumbImgs }: IProps) => {
   const [curPhotoIdx, setCurPhotoIdx] = useState(0);
 
   const handleClickPrevBtn = () => {};

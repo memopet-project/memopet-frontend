@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   state?: 'selected' | 'unselected';
   text: string;
   amount?: number;
 }
 
-const TabItem = ({ state = 'selected', text, amount }: PropsType) => {
+const TabItem = ({ state = 'selected', text, amount }: IProps) => {
   return (
     <button
       css={css`

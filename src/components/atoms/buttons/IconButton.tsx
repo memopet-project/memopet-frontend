@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 
-interface PropsType {
+interface IProps {
   children: ReactNode;
 }
 
-const IconButton = ({ children }: PropsType) => {
+const IconButton = ({ children }: IProps) => {
   return (
     <button
       css={css`

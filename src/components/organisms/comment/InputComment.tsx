@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   placeHolder?: string;
 }
 
-const InputComment = ({ placeHolder }: PropsType) => {
+const InputComment = ({ placeHolder }: IProps) => {
   return (
     <div
       css={css`

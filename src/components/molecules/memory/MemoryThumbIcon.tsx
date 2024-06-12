@@ -6,13 +6,13 @@ import FlowerIcon from '@/assets/icon/FlowerIcon';
 import LikeIcon from '@/assets/icon/LikeIcon';
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   type: 'flower' | 'like' | 'comment';
   state?: boolean;
   amount: number;
 }
 
-const MemoryThumbIcon = ({ type, state, amount }: PropsType) => {
+const MemoryThumbIcon = ({ type, state, amount }: IProps) => {
   return (
     <div
       css={css`

@@ -3,7 +3,7 @@ import ArrowDropdownUpIcon from '@/assets/icon/ArrowDropdownUpIcon';
 import { css } from '@emotion/react';
 import YearItem from './YearItem';
 
-interface PropsType {
+interface IProps {
   color?: 'white' | 'ivory';
   open: boolean;
   selectedYear: number;
@@ -11,7 +11,7 @@ interface PropsType {
 
 const YEAR_LIST = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016];
 
-const Timeline = ({ color = 'white', open, selectedYear }: PropsType) => {
+const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
   return (
     <div
       css={css`

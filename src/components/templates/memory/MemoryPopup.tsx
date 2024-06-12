@@ -8,7 +8,7 @@ import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import { useState } from 'react';
 import InputComment from '@/components/organisms/comment/InputComment';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
   date: string;
   title: string;
@@ -30,7 +30,7 @@ const MemoryPopup = ({
   isProfile,
   profileImg,
   name,
-}: PropsType) => {
+}: IProps) => {
   const [isOpenComment, setIsOpenComment] = useState(false);
 
   const handleToggleComment = () => {

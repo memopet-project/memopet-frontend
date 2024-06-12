@@ -2,13 +2,13 @@ import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
   title: string;
   content: string;
 }
 
-const SearchMemoryItem = ({ thumbImg, title, content }: PropsType) => {
+const SearchMemoryItem = ({ thumbImg, title, content }: IProps) => {
   return (
     <div
       css={css`

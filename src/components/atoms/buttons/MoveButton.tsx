@@ -2,12 +2,12 @@ import ArrowLeftIcon from '@/assets/icon/ArrowLeftIcon';
 import ArrowRightIcon from '@/assets/icon/ArrowRightIcon';
 import { css } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   type: 'before' | 'after';
   state: 'enabled' | 'disabled';
 }
 
-const MoveButton = ({ type, state = 'enabled' }: PropsType) => {
+const MoveButton = ({ type, state = 'enabled' }: IProps) => {
   return (
     <button
       css={css`
