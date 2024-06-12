@@ -1,6 +1,6 @@
 import TrashIcon from '@/assets/icon/TrashIcon';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import IconButton from '@/components/atoms/button/IconButton';
+import IconButton from '@/components/atoms/buttons/IconButton';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 

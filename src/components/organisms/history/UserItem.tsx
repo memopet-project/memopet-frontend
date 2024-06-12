@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import Image from 'next/image';
-import IconButton from '@/components/atoms/button/IconButton';
+import IconButton from '@/components/atoms/buttons/IconButton';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 

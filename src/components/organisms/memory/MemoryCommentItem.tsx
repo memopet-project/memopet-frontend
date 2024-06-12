@@ -1,5 +1,5 @@
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
-import IconButton from '@/components/atoms/button/IconButton';
+import IconButton from '@/components/atoms/buttons/IconButton';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';

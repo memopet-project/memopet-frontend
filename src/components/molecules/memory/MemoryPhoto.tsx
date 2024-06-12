@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import { css } from '@emotion/react';
-import PhotoArrowButton from '@/components/atoms/button/PhotoArrowButton';
 import { useState } from 'react';
+import PhotoArrowButton from '@/components/atoms/buttons/PhotoArrowButton';
 
 interface PropsType {
   thumbImgs: string[];
@@ -32,7 +32,7 @@ const MemoryPhoto = ({ thumbImgs }: PropsType) => {
           left: 0;
         `}
       >
-        <PhotoArrowButton type='prev' />
+        <PhotoArrowButton direction='left' />
       </div>
       <div
         css={css`
@@ -41,7 +41,7 @@ const MemoryPhoto = ({ thumbImgs }: PropsType) => {
           right: 0;
         `}
       >
-        <PhotoArrowButton type='next' />
+        <PhotoArrowButton direction='right' />
       </div>
       <Image
         src={sampleMemoryThumbnail}
