@@ -6,12 +6,14 @@ interface IProfileMenuItemProps {
   url: string;
   title: string;
   link: string;
+  isMobile?: boolean;
 }
 
 const ProfileMenuItem: React.FC<IProfileMenuItemProps> = ({
   url,
   title,
   link,
+  isMobile = false,
 }) => {
   return (
     <Link href={link}>
@@ -23,7 +25,7 @@ const ProfileMenuItem: React.FC<IProfileMenuItemProps> = ({
           display: flex;
           align-items: center;
           gap: 8px;
-          font-size: 14px;
+          font-size: ${isMobile ? '16px' : '14px'};
           font-weight: 600;
           line-height: 1em;
           letter-spacing: -0.25px;

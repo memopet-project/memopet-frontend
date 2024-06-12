@@ -6,11 +6,13 @@ import ViewMoreButton from '../atoms/buttons/ViewMoreButton';
 interface ISwitchAccountItemProps {
   data: any;
   isSelected: boolean;
+  isMobile?: boolean;
 }
 
 const SwitchAccountItem: React.FC<ISwitchAccountItemProps> = ({
   data,
   isSelected = false,
+  isMobile = false,
 }) => {
   return (
     <div
@@ -27,17 +29,17 @@ const SwitchAccountItem: React.FC<ISwitchAccountItemProps> = ({
       <div
         css={css`
           display: flex;
-          gap: 12px;
+          gap: ${isMobile ? '8px' : '12px'};
           align-items: center;
-          font-size: 18px;
-          font-weight: 700;
+          font-size: ${isMobile ? '1rem' : '18px'};
+          font-weight: ${isMobile ? '500' : '700'};
           line-height: 23.4px;
           letter-spacing: -0.5px;
           text-align: left;
         `}
       >
         <ProfileImage
-          size={64}
+          size={isMobile ? 40 : 64}
           color='default'
           url={data.url}
           useActive={isSelected}
@@ -53,7 +55,7 @@ const SwitchAccountItem: React.FC<ISwitchAccountItemProps> = ({
             css={css`
               display: -webkit-box;
               -webkit-box-orient: vertical;
-              -webkit-line-clamp: 2;
+              -webkit-line-clamp: 1;
               overflow: hidden;
               word-break: break-all;
             `}
