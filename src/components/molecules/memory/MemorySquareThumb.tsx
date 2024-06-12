@@ -60,7 +60,7 @@ const MemorySquareThumb = ({ thumbImg, date, title }: IProps) => {
         </span>
         <p
           css={css`
-            font-weight: 500;
+            font-weight: ${theme.fontWeights.medium};
           `}
         >
           {title}

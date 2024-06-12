@@ -85,7 +85,7 @@ const MemoryCommentItem = ({
           >
             <span
               css={css`
-                font-weight: 600;
+                font-weight: ${theme.fontWeights.semibold};
                 font-size: 14px;
               `}
             >

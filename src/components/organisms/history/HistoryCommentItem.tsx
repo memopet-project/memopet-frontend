@@ -45,7 +45,7 @@ const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
       >
         <div
           css={css`
-            font-weight: 500;
+            font-weight: ${theme.fontWeights.medium};
             font-size: 12px;
           `}
         >

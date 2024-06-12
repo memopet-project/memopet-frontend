@@ -78,7 +78,7 @@ const MemoryItem = ({
             />
             <span
               css={css`
-                font-weight: 500;
+                font-weight: ${theme.fontWeights.medium};
                 font-size: 14px;
               `}
             >
@@ -152,7 +152,7 @@ const MemoryItem = ({
         </div>
         <p
           css={css`
-            font-weight: 500;
+            font-weight: ${theme.fontWeights.medium};
           `}
         >
           {title}

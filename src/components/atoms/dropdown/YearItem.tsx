@@ -10,7 +10,7 @@ const YearItem = ({ year, state = 'enabled' }: IProps) => {
   return (
     <span
       css={css`
-        font-weight: 700;
+        font-weight: ${theme.fontWeights.bold};
         font-size: 20px;
         color: ${state === 'selected'
           ? theme.colors.primary[500]
@@ -21,7 +21,7 @@ const YearItem = ({ year, state = 'enabled' }: IProps) => {
           color: ${theme.colors.primary[500]};
         }
         @media screen and (max-width: 743px) {
-          font-weight: 600;
+          font-weight: ${theme.fontWeights.semibold};
           font-size: 18px;
         }
       `}

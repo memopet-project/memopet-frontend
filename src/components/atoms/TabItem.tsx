@@ -21,7 +21,7 @@ const TabItem = ({ state = 'selected', text, amount }: IProps) => {
         box-shadow: ${state === 'selected'
           ? '0px 0px 3px 0px #1717171A'
           : 'none'};
-        font-weight: 600;
+        font-weight: ${theme.fontWeights.semibold};
         color: ${state === 'unselected' ? theme.colors.grey[500] : 'inherit'};
         &:hover {
           background: ${state === 'unselected' ? '#1717170D' : 'none'};

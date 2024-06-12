@@ -47,7 +47,7 @@ const Ticker = ({
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: 600;
+            font-weight: ${theme.fontWeights.semibold};
             color: ${type === 'horizontal' && state === 'selected'
               ? theme.colors.grey[0]
               : state === 'disabled'

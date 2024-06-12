@@ -36,7 +36,7 @@ const SearchMemoryItem = ({ thumbImg, title, content }: IProps) => {
       >
         <p
           css={css`
-            font-weight: 500;
+            font-weight: ${theme.fontWeights.medium};
           `}
         >
           {title}

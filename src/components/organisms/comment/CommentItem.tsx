@@ -69,7 +69,7 @@ const CommentItem = ({ profileImg, name, time, comment }: IProps) => {
         >
           <span
             css={css`
-              font-weight: 700;
+              font-weight: ${theme.fontWeights.bold};
             `}
           >
             {name}
