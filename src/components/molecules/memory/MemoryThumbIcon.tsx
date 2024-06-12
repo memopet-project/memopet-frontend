@@ -41,7 +41,7 @@ const MemoryThumbIcon = ({ type, state, amount }: IProps) => {
       )}
       <span
         css={css`
-          font-size: 12px;
+          font-size: ${theme.fontSizes.xs};
           color: ${theme.colors.grey[500]};
         `}
       >

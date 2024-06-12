@@ -30,7 +30,7 @@ const HistoryMemoryCommentItem = ({ thumbImg, comment }: IProps) => {
       />
       <p
         css={css`
-          font-size: 14px;
+          font-size: ${theme.fontSizes.sm};
         `}
       >
         {comment}

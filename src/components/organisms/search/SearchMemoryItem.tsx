@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 interface IProps {
   thumbImg: string;
@@ -9,6 +9,7 @@ interface IProps {
 }
 
 const SearchMemoryItem = ({ thumbImg, title, content }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -31,7 +32,7 @@ const SearchMemoryItem = ({ thumbImg, title, content }: IProps) => {
         css={css`
           display: flex;
           flex-direction: column;
-          font-size: 14px;
+          font-size: ${theme.fontSizes.sm};
         `}
       >
         <p

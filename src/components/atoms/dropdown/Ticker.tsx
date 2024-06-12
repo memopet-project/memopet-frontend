@@ -70,7 +70,7 @@ const Ticker = ({
         {state === 'withYear' ? (
           <span
             css={css`
-              font-size: 12px;
+              font-size: ${theme.fontSizes.xs};
               color: ${theme.colors.primary[500]};
             `}
           >

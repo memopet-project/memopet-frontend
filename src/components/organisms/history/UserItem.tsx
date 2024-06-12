@@ -58,14 +58,14 @@ const UserItem = ({ name, intro, state = 'default' }: IProps) => {
           <span
             css={css`
               font-weight: ${theme.fontWeights.semibold};
-              font-size: 14px;
+              font-size: ${theme.fontSizes.sm};
             `}
           >
             {name}
           </span>
           <p
             css={css`
-              font-size: 12px;
+              font-size: ${theme.fontSizes.xs};
               color: ${theme.colors.grey[400]};
             `}
           >

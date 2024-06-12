@@ -31,7 +31,7 @@ const Timeline = ({ color = 'white', open, selectedYear }: IProps) => {
         <span
           css={css`
             font-weight: ${theme.fontWeights.bold};
-            font-size: 20px;
+            font-size: ${theme.fontSizes.xl};
           `}
         >
           {selectedYear}

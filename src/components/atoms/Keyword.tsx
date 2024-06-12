@@ -32,7 +32,7 @@ const Keyword = ({ text }: IProps) => {
       <span
         css={css`
           font-weight: ${theme.fontWeights.semibold};
-          font-size: 14px;
+          font-size: ${theme.fontSizes.sm};
           color: ${theme.colors.grey[500]};
         `}
       >

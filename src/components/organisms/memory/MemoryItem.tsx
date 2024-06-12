@@ -79,7 +79,7 @@ const MemoryItem = ({
             <span
               css={css`
                 font-weight: ${theme.fontWeights.medium};
-                font-size: 14px;
+                font-size: ${theme.fontSizes.sm};
               `}
             >
               {name}
@@ -160,7 +160,7 @@ const MemoryItem = ({
         <p
           css={css`
             display: none;
-            font-size: 14px;
+            font-size: ${theme.fontSizes.sm};
             color: ${theme.colors.grey[700]};
             @media screen and (max-width: 743px) {
               display: block;

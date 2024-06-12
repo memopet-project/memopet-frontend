@@ -70,7 +70,7 @@ const MemoryPopup = ({
             <span
               css={css`
                 font-weight: ${theme.fontWeights.medium};
-                font-size: 14px;
+                font-size: ${theme.fontSizes.sm};
               `}
             >
               {name}
