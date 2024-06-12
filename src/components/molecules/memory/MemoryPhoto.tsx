@@ -53,7 +53,7 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
           object-fit: contain;
           width: 400px;
           height: 600px;
-          @media screen and (max-width: 743px) {
+          @media ${theme.device.mobile} {
             width: 335px;
             height: 480px;
           }
@@ -67,7 +67,7 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
           gap: 8px;
           position: absolute;
           bottom: 16px;
-          @media screen and (max-width: 743px) {
+          @media ${theme.device.mobile} {
             position: static;
             gap: 6px;
           }
@@ -87,7 +87,7 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
                 border-radius: 50%;
                 background: ${theme.colors.grey[200]};
                 opacity: ${idx === curPhotoIdx ? 1 : 0.5};
-                @media screen and (max-width: 743px) {
+                @media ${theme.device.mobile} {
                   width: 6px;
                   height: 6px;
                 }

@@ -44,7 +44,7 @@ const MemoryActionButton = ({ type, state, amount, onClick }: IProps) => {
       <span
         css={css`
           color: ${state ? 'inherit' : theme.colors.grey[700]};
-          @media screen and (max-width: 743px) {
+          @media ${theme.device.mobile} {
             font-size: 13px;
           }
         `}

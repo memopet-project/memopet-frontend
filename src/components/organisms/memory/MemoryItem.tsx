@@ -45,7 +45,7 @@ const MemoryItem = ({
         &:hover {
           background: ${theme.colors.grey[100]};
         }
-        @media screen and (max-width: 743px) {
+        @media ${theme.device.mobile} {
           width: 343px;
         }
       `}
@@ -107,7 +107,7 @@ const MemoryItem = ({
           object-fit: cover;
           width: 100%;
           height: 100%;
-          @media screen and (max-width: 743px) {
+          @media ${theme.device.mobile} {
             width: 327px;
             height: 280px;
           }
@@ -141,7 +141,7 @@ const MemoryItem = ({
               display: flex;
               align-items: center;
               gap: 8px;
-              @media screen and (max-width: 743px) {
+              @media ${theme.device.mobile} {
                 display: none;
               }
             `}
@@ -162,7 +162,7 @@ const MemoryItem = ({
             display: none;
             font-size: ${theme.fontSizes.sm};
             color: ${theme.colors.grey[700]};
-            @media screen and (max-width: 743px) {
+            @media ${theme.device.mobile} {
               display: block;
             }
           `}
@@ -177,7 +177,7 @@ const MemoryItem = ({
           align-items: center;
           padding-top: 4px;
           border-top: 1px solid ${theme.colors.grey[200]};
-          @media screen and (max-width: 743px) {
+          @media ${theme.device.mobile} {
             display: flex;
           }
         `}

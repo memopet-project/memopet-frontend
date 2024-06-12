@@ -20,7 +20,7 @@ const YearItem = ({ year, state = 'enabled' }: IProps) => {
         &:hover {
           color: ${theme.colors.primary[500]};
         }
-        @media screen and (max-width: 743px) {
+        @media ${theme.device.mobile} {
           font-weight: ${theme.fontWeights.semibold};
           font-size: ${theme.fontSizes.lg};
         }

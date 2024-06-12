@@ -19,7 +19,7 @@ const ScaleButton = ({ type }: IProps) => {
         border-radius: 50%;
         background: ${theme.colors.grey[900]};
         opacity: 0.5;
-        @media screen and (max-width: 743px) {
+        @media ${theme.device.mobile} {
           width: 40px;
           height: 40px;
           & > svg {

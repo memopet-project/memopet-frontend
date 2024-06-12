@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 
@@ -7,13 +7,14 @@ interface IProps {
 }
 
 const HistorySquareTumnb = ({ thumbImg }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
         position: relative;
         width: 240px;
         height: 240px;
-        @media screen and (max-width: 743px) {
+        @media ${theme.device.mobile} {
           width: 120px;
           height: 120px;
         }
