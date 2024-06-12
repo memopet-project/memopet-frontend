@@ -2,36 +2,16 @@
   "compilerOptions": {
     "baseUrl": "./src/",
     "paths": {
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/pages/*": [
-        "pages/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/utils/*": [
-        "utils/*"
-      ],
-      "@/recoil/*": [
-        "recoil/*"
-      ],
-      "@/types/*": [
-        "types/*"
-      ],
-      "@/constants/*": [
-        "constants/*"
-      ],
-      "@/assets/*": [
-        "assets/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/pages/*": ["pages/*"],
+      "@/styles/*": ["styles/*"],
+      "@/utils/*": ["utils/*"],
+      "@/recoil/*": ["recoil/*"],
+      "@/types/*": ["types/*"],
+      "@/constants/*": ["constants/*"],
+      "@/assets/*": ["assets/*"]
     },
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -46,12 +26,6 @@
     "jsxImportSource": "@emotion/react",
     "strictNullChecks": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
