@@ -7,6 +7,7 @@ import ShareIcon from '@/assets/icon/ShareIcon';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import { useState } from 'react';
 import InputComment from '@/components/organisms/comment/InputComment';
+import MemoryPhoto from '@/components/molecules/memory/MemoryPhoto';
 
 interface IProps {
   thumbImg: string;
@@ -89,22 +90,7 @@ const MemoryPopup = ({
             gap: 24px;
           `}
         >
-          <div
-            css={css`
-              display: flex;
-            `}
-          >
-            <Image
-              src={sampleMemoryThumbnail}
-              alt='썸네일 이미지'
-              width={400}
-              height={600}
-              css={css`
-                border-radius: 8px;
-                object-fit: contain;
-              `}
-            />
-          </div>
+          <MemoryPhoto thumbImgs={[]} />
           <div
             css={css`
               display: flex;

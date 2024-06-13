@@ -5,9 +5,10 @@ import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryThumbIcon from '@/components/molecules/memory/MemoryThumbIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import ShareIcon from '@/assets/icon/ShareIcon';
+import ThumbMoreBadge from '@/components/atoms/ThumbMoreBadge';
 
 interface IProps {
-  thumbImg: string;
+  thumbImgs: string[];
   date: string;
   title: string;
   content: string;
@@ -19,7 +20,7 @@ interface IProps {
 }
 
 const MemoryItem = ({
-  thumbImg,
+  thumbImgs,
   date,
   title,
   content,
@@ -106,24 +107,43 @@ const MemoryItem = ({
       ) : null}
       <div
         css={css`
-          display: flex;
+          width: fit-content;
+          position: relative;
         `}
       >
-        <Image
-          src={sampleMemoryThumbnail}
-          alt='썸네일 이미지'
+        {thumbImgs.length > 1 ? (
+          <div
+            css={css`
+              z-index: 1;
+              position: absolute;
+              top: 8px;
+              right: 8px;
+            `}
+          >
+            <ThumbMoreBadge moreNum={thumbImgs.length - 1} />
+          </div>
+        ) : null}
+        <div
           css={css`
-            border-radius: 8px;
-            border: 1px solid ${theme.colors.grey[700]};
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            @media ${theme.device.mobile} {
-              width: 327px;
-              height: 280px;
-            }
+            display: flex;
           `}
-        />
+        >
+          <Image
+            src={sampleMemoryThumbnail}
+            alt='썸네일 이미지'
+            css={css`
+              border-radius: 8px;
+              border: 1px solid ${theme.colors.grey[700]};
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+              @media ${theme.device.mobile} {
+                width: 327px;
+                height: 280px;
+              }
+            `}
+          />
+        </div>
       </div>
       <div
         css={css`

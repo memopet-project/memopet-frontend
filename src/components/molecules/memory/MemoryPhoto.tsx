@@ -11,11 +11,17 @@ interface IProps {
 const MemoryPhoto = ({ thumbImgs }: IProps) => {
   const theme = useTheme();
 
-  const [curPhotoIdx, setCurPhotoIdx] = useState(0);
+  const [curIdx, setCurIdx] = useState(0);
 
-  const handleClickPrevBtn = () => {};
-  const handleClickNextBtn = () => {};
-  const handleClickIndicator = () => {};
+  const handleClickPrevBtn = () => {
+    setCurIdx(curIdx - 1);
+  };
+  const handleClickNextBtn = () => {
+    setCurIdx(curIdx + 1);
+  };
+  const handleClickIndicator = (idx: number) => {
+    setCurIdx(idx);
+  };
 
   return (
     <div
@@ -27,24 +33,30 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
         gap: 16px;
       `}
     >
-      <div
-        css={css`
-          position: absolute;
-          top: calc(50% - 20px);
-          left: 0;
-        `}
-      >
-        <PhotoArrowButton direction='left' />
-      </div>
-      <div
-        css={css`
-          position: absolute;
-          top: calc(50% - 20px);
-          right: 0;
-        `}
-      >
-        <PhotoArrowButton direction='right' />
-      </div>
+      {curIdx > 0 ? (
+        <button
+          onClick={handleClickPrevBtn}
+          css={css`
+            position: absolute;
+            top: calc(50% - 20px);
+            left: 0;
+          `}
+        >
+          <PhotoArrowButton direction='left' />
+        </button>
+      ) : null}
+      {curIdx < thumbImgs.length - 1 ? (
+        <button
+          onClick={handleClickNextBtn}
+          css={css`
+            position: absolute;
+            top: calc(50% - 20px);
+            right: 0;
+          `}
+        >
+          <PhotoArrowButton direction='right' />
+        </button>
+      ) : null}
       <div
         css={css`
           display: flex;
@@ -87,12 +99,13 @@ const MemoryPhoto = ({ thumbImgs }: IProps) => {
             `}
           >
             <button
+              onClick={() => handleClickIndicator(idx)}
               css={css`
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
                 background: ${theme.colors.grey[200]};
-                opacity: ${idx === curPhotoIdx ? 1 : 0.5};
+                opacity: ${idx === curIdx ? 1 : 0.5};
                 @media ${theme.device.mobile} {
                   width: 6px;
                   height: 6px;
