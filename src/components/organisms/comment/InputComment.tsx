@@ -38,8 +38,14 @@ const InputComment = ({ placeHolder }: IProps) => {
           gap: 4px;
         `}
       >
-        <RoundButton type='outline'>취소</RoundButton>
-        <RoundButton type='filled' disabled={!inputValue}>
+        <RoundButton type='outline' onClick={handleClickCancelButton}>
+          취소
+        </RoundButton>
+        <RoundButton
+          type='filled'
+          disabled={!inputValue}
+          onClick={handleClickSubmitButton}
+        >
           등록
         </RoundButton>
       </div>

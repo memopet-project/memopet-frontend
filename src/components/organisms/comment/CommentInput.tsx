@@ -45,10 +45,16 @@ const CommentInput = () => {
           gap: 4px;
         `}
       >
-        <RoundButton type='outline' disabled={!inputValue}>
+        <RoundButton
+          type='outline'
+          disabled={!inputValue}
+          onClick={handleClickCancelButton}
+        >
           취소
         </RoundButton>
-        <RoundButton type='filled'>남기기</RoundButton>
+        <RoundButton type='filled' onClick={handleClickSubmitButton}>
+          남기기
+        </RoundButton>
       </div>
     </div>
   );

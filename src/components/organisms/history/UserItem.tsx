@@ -116,7 +116,9 @@ const UserItem = ({
         )}
       </div>
       {type === 'skeleton' ? null : type === 'block' ? (
-        <RoundButton type='outline'>차단 해제</RoundButton>
+        <RoundButton type='outline' onClick={() => {}}>
+          차단 해제
+        </RoundButton>
       ) : (
         <div
           css={css`
