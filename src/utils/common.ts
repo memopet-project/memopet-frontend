@@ -1,17 +1,18 @@
 export const validateEmail = (email: string): boolean => {
   // .com, .co.kr, .org, .net 으로 끝나는 도메인
-  const emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.kr|org|net)$/;
+  const emailRegex: RegExp =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.kr|org|net)$/;
 
   return emailRegex.test(email);
 };
 
 export const validatePassword = (password: string): boolean => {
   // 8자 이상, 영문, 숫자, 특수문자 포함
-  const passwordRegex: RegExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+|<>?]).{8,}$/;
+  const passwordRegex: RegExp =
+    /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+|<>?]).{8,}$/;
 
   return passwordRegex.test(password);
 };
-
 
 /**
  * @description 객체를 깊은 복사합니다.
@@ -26,8 +27,7 @@ export const generateDeepCopiedObject = <T extends {}>(arg: T): T => {
   }
   // 객체를 깊은 복사 합니다.
   return JSON.parse(JSON.stringify(arg));
-}
-
+};
 
 /**
  * @description 클립보드에 텍스트를 복사합니다.
@@ -36,17 +36,17 @@ export const generateDeepCopiedObject = <T extends {}>(arg: T): T => {
  * @example copyToClipboard('test');
  */
 export const copyToClipboard = async (text: string): Promise<void> => {
-  if(navigator.clipboard && navigator.clipboard.writeText) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
       await navigator.clipboard.writeText(text);
-      return
+      return;
     } catch (err) {
       console.error('Failed to copy!', err);
     }
   }
 
   copyToClipboardFallback(text);
-}
+};
 
 const copyToClipboardFallback = (text: string): void => {
   const textArea = document.createElement('textarea');
@@ -55,8 +55,7 @@ const copyToClipboardFallback = (text: string): void => {
   textArea.select();
   document.execCommand('copy');
   document.body.removeChild(textArea);
-}
-
+};
 
 /**
  * @description 숫자를 소숫점 + 한글표기로 변경.
@@ -71,7 +70,11 @@ const copyToClipboardFallback = (text: string): void => {
 
 type TLocalization = 'kr' | 'en';
 
-export function convertUnit(num: number, digits: number = 1, localization: TLocalization = 'kr'): string {
+export function convertUnit(
+  num: number,
+  digits: number = 1,
+  localization: TLocalization = 'kr',
+): string {
   const unitsKR = ['', '만', '억', '조', '경', '해'];
   const unitsEN = ['', 'K', 'M', 'B', 'T', 'Q'];
 
@@ -99,4 +102,66 @@ export function convertUnit(num: number, digits: number = 1, localization: TLoca
   const unit = localization === 'kr' ? unitsKR : unitsEN;
 
   return `${convertedNum.toFixed(digits)}${unit[unitIndex]}`;
+}
+
+/**
+ * @description 단어에 한글 받침이 있는지 체크합니다. (이 함수는 조사를 구하는 등의 함수에서 사용합니다.)
+ *
+ * @param word 단어
+ * @returns {boolean}
+ *
+ * @example hasFinalConsonant("몽구")
+ */
+
+function hasFinalConsonant(word: string): boolean {
+  if (typeof word !== 'string') return false;
+
+  const lastLetter = word.charAt(word.length - 1);
+  const uni = lastLetter.charCodeAt(0);
+
+  const HANGUL_START = 0xac00;
+  const HANGUL_END = 0xd7a3;
+
+  if (uni < HANGUL_START || uni > HANGUL_END) return false;
+
+  return (uni - HANGUL_START) % 28 !== 0;
+}
+
+/**
+ * @description 단어에 알맞은 조사를 반환합니다.
+ *
+ * @param word 단어
+ * @returns {'와' | '과'}
+ *
+ * @example getKoreanConnectiveParticle("몽구")
+ */
+
+export function getKoreanConnectiveParticle(word: string): '와' | '과' {
+  return hasFinalConsonant(word) ? '과' : '와';
+}
+
+/**
+ * @description 단어에 알맞은 조사를 반환합니다.
+ *
+ * @param word 단어
+ * @returns {'이' | '가'}
+ *
+ * @example getKoreanSubjectMarker("몽구")
+ */
+
+export function getKoreanSubjectMarker(word: string): '이' | '가' {
+  return hasFinalConsonant(word) ? '이' : '가';
+}
+
+/**
+ * @description 단어에 알맞은 조사를 반환합니다.
+ *
+ * @param word 단어
+ * @returns {'을' | '를'}
+ *
+ * @example getKoreanObjectParticle("몽구")
+ */
+
+export function getKoreanObjectParticle(word: string): '을' | '를' {
+  return hasFinalConsonant(word) ? '을' : '를';
 }

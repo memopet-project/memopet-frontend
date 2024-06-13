@@ -5,6 +5,7 @@ type Type = 'filled' | 'outline' | 'white' | 'default';
 interface IRoundButtonProps {
   type: Type;
   disabled?: boolean;
+  onClick: Function;
   children: React.ReactNode;
 }
 
@@ -24,7 +25,7 @@ const styles: { [key in Type]: SerializedStyles } = {
     color: var(--grey-700);
     border: 1px solid var(--grey-400);
     &:hover:enabled {
-      filter: brightness(90%);
+      background: rgba(23, 23, 23, 0.05);
     }
     &:disabled {
       color: var(--grey-400);
@@ -50,24 +51,21 @@ const styles: { [key in Type]: SerializedStyles } = {
     &:hover:enabled {
       filter: brightness(90%);
     }
-    // &:disabled {
-    // TODO: state3?
-    // }
   `,
 };
 
 export default function RoundButton({
   type = 'default',
   disabled = false,
+  onClick,
   children,
 }: IRoundButtonProps) {
   return (
     <button
+      onClick={() => onClick()}
       disabled={disabled}
       css={css(
         css`
-          width: 56px;
-          height: 32px;
           padding: 5.5px 16px;
           display: flex;
           justify-content: center;
