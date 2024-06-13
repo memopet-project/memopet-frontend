@@ -1,7 +1,4 @@
-const GoogleLoginIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IconPropsType) => {
+const GoogleLoginIcon = ({ color, size = 24 }: IIconProps) => {
   return (
     <svg
       width='40'

@@ -1,7 +1,8 @@
-const MinimizeIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IconPropsType) => {
+import { useTheme } from '@emotion/react';
+
+const MinimizeIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -12,7 +13,7 @@ const MinimizeIcon = ({
     >
       <path
         d='M10.5 13.5L3 21M10.5 13.5V19.1M10.5 13.5H4.9'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-opacity='0.95'
         stroke-width='1.5'
         stroke-linecap='round'
@@ -20,7 +21,7 @@ const MinimizeIcon = ({
       />
       <path
         d='M13.5 10.5L21 3M13.5 10.5V4.84315M13.5 10.5H19.1568'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-opacity='0.95'
         stroke-width='1.5'
         stroke-linecap='round'

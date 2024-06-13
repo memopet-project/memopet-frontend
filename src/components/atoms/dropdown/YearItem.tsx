@@ -1,27 +1,28 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   year: number;
   state?: 'enabled' | 'selected' | 'disabled';
 }
 
-const YearItem = ({ year, state = 'enabled' }: PropsType) => {
+const YearItem = ({ year, state = 'enabled' }: IProps) => {
+  const theme = useTheme();
   return (
     <span
       css={css`
-        font-weight: 700;
-        font-size: 20px;
+        font-weight: ${theme.fontWeights.bold};
+        font-size: ${theme.fontSizes.xl};
         color: ${state === 'selected'
-          ? 'var(--main-red-500)'
+          ? theme.colors.primary[500]
           : state === 'disabled'
-            ? 'var(--grey-400)'
+            ? theme.colors.grey[400]
             : 'inherit'};
         &:hover {
-          color: var(--main-red-500);
+          color: ${theme.colors.primary[500]};
         }
-        @media screen and (max-width: 743px) {
-          font-weight: 600;
-          font-size: 18px;
+        @media ${theme.device.mobile} {
+          font-weight: ${theme.fontWeights.semibold};
+          font-size: ${theme.fontSizes.lg};
         }
       `}
     >

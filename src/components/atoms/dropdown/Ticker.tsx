@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   month: number;
   state?: 'enabled' | 'disabled' | 'selected' | 'withYear';
   year?: number;
@@ -12,7 +12,8 @@ const Ticker = ({
   state = 'enabled',
   year,
   type = 'vertical',
-}: PropsType) => {
+}: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -26,7 +27,7 @@ const Ticker = ({
           css={css`
             width: 4px;
             height: 4px;
-            background: var(--main-red-500);
+            background: ${theme.colors.primary[500]};
             border-radius: 50%;
           `}
         ></span>
@@ -46,11 +47,11 @@ const Ticker = ({
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: 600;
+            font-weight: ${theme.fontWeights.semibold};
             color: ${type === 'horizontal' && state === 'selected'
-              ? 'var(--grey-0)'
+              ? theme.colors.grey[0]
               : state === 'disabled'
-                ? 'var(--grey-400)'
+                ? theme.colors.grey[400]
                 : 'inherit'};
             width: ${type === 'horizontal' && state === 'selected'
               ? '40px'
@@ -59,7 +60,7 @@ const Ticker = ({
               ? '40px'
               : 'auto'};
             background: ${type === 'horizontal' && state === 'selected'
-              ? 'var(--main-red-500)'
+              ? theme.colors.primary[500]
               : 'none'};
             border-radius: 50%;
           `}
@@ -69,8 +70,8 @@ const Ticker = ({
         {state === 'withYear' ? (
           <span
             css={css`
-              font-size: 12px;
-              color: var(--main-red-500);
+              font-size: ${theme.fontSizes.xs};
+              color: ${theme.colors.primary[500]};
             `}
           >
             {year}

@@ -1,13 +1,14 @@
 import ArrowLeftIcon from '@/assets/icon/ArrowLeftIcon';
 import ArrowRightIcon from '@/assets/icon/ArrowRightIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   type: 'before' | 'after';
   state: 'enabled' | 'disabled';
 }
 
-const MoveButton = ({ type, state = 'enabled' }: PropsType) => {
+const MoveButton = ({ type, state = 'enabled' }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -17,7 +18,7 @@ const MoveButton = ({ type, state = 'enabled' }: PropsType) => {
         justify-content: center;
         align-items: center;
         border-radius: 16px;
-        border: 1px solid var(--grey-700);
+        border: 1px solid ${theme.colors.grey[700]};
         opacity: ${state === 'disabled' ? 0.5 : 1};
         cursor: ${state === 'enabled' ? 'pointer' : 'auto'};
         &:hover {

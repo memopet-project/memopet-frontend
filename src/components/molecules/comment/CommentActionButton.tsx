@@ -1,15 +1,16 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   actions: { name: string; onClick: () => void }[];
 }
 
-const CommentActionButton = ({ actions }: PropsType) => {
+const CommentActionButton = ({ actions }: IProps) => {
+  const theme = useTheme();
   return (
     <ul
       css={css`
         border-radius: 8px;
-        border: 1px solid var(--grey-500);
+        border: 1px solid ${theme.colors.grey[500]};
         padding: 8px 12px;
         display: inline-flex;
         align-items: center;
@@ -23,8 +24,8 @@ const CommentActionButton = ({ actions }: PropsType) => {
             onClick={v.onClick}
             css={css`
               padding: 2px 8px;
-              font-weight: 500;
-              font-size: 14px;
+              font-weight: ${theme.fontWeights.medium};
+              font-size: ${theme.fontSizes.sm};
             `}
           >
             {v.name}
@@ -34,7 +35,7 @@ const CommentActionButton = ({ actions }: PropsType) => {
               css={css`
                 width: 1px;
                 height: 12px;
-                background: var(--grey-300);
+                background: ${theme.colors.grey[300]};
               `}
             ></li>
           )}

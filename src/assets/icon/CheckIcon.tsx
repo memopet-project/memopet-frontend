@@ -1,4 +1,8 @@
-const CheckIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
+import { useTheme } from '@emotion/react';
+
+const CheckIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -7,10 +11,16 @@ const CheckIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <circle cx='12' cy='12' r='10.25' stroke={color} stroke-width='1.5' />
+      <circle
+        cx='12'
+        cy='12'
+        r='10.25'
+        stroke={color || defaultColor}
+        stroke-width='1.5'
+      />
       <path
         d='M7 12L10.3333 15L17 9'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
         stroke-linejoin='round'

@@ -1,12 +1,13 @@
 import MaximizeIcon from '@/assets/icon/MaximizeIcon';
 import MinimizeIcon from '@/assets/icon/MinimizeIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   type: 'maximize' | 'minimize';
 }
 
-const ScaleButton = ({ type }: PropsType) => {
+const ScaleButton = ({ type }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -16,9 +17,9 @@ const ScaleButton = ({ type }: PropsType) => {
         justify-content: center;
         align-items: center;
         border-radius: 50%;
-        background: var(--grey-900);
+        background: ${theme.colors.grey[900]};
         opacity: 0.5;
-        @media screen and (max-width: 743px) {
+        @media ${theme.device.mobile} {
           width: 40px;
           height: 40px;
           & > svg {
@@ -32,9 +33,9 @@ const ScaleButton = ({ type }: PropsType) => {
       `}
     >
       {type === 'maximize' ? (
-        <MaximizeIcon color={'var(--grey-0)'} size={16} />
+        <MaximizeIcon color={theme.colors.grey[0]} size={16} />
       ) : (
-        <MinimizeIcon color={'var(--grey-0)'} size={16} />
+        <MinimizeIcon color={theme.colors.grey[0]} size={16} />
       )}
     </button>
   );

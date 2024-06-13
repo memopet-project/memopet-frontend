@@ -72,6 +72,9 @@ export const theme = {
       '100%': { transform: 'rotate(360deg)' },
     },
   },
+  device: {
+    mobile: 'screen and (max-width: 768px)',
+  },
 };
 
 export type ThemeType = typeof theme;

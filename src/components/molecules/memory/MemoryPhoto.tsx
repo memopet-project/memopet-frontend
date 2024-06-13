@@ -1,19 +1,27 @@
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import { css } from '@emotion/react';
-import PhotoArrowButton from '@/components/atoms/button/PhotoArrowButton';
+import { css, useTheme } from '@emotion/react';
 import { useState } from 'react';
+import PhotoArrowButton from '@/components/atoms/buttons/PhotoArrowButton';
 
-interface PropsType {
+interface IProps {
   thumbImgs: string[];
 }
 
-const MemoryPhoto = ({ thumbImgs }: PropsType) => {
-  const [curPhotoIdx, setCurPhotoIdx] = useState(0);
+const MemoryPhoto = ({ thumbImgs }: IProps) => {
+  const theme = useTheme();
 
-  const handleClickPrevBtn = () => {};
-  const handleClickNextBtn = () => {};
-  const handleClickIndicator = () => {};
+  const [curIdx, setCurIdx] = useState(0);
+
+  const handleClickPrevBtn = () => {
+    setCurIdx(curIdx - 1);
+  };
+  const handleClickNextBtn = () => {
+    setCurIdx(curIdx + 1);
+  };
+  const handleClickIndicator = (idx: number) => {
+    setCurIdx(idx);
+  };
 
   return (
     <div
@@ -25,38 +33,50 @@ const MemoryPhoto = ({ thumbImgs }: PropsType) => {
         gap: 16px;
       `}
     >
+      {curIdx > 0 ? (
+        <button
+          onClick={handleClickPrevBtn}
+          css={css`
+            position: absolute;
+            top: calc(50% - 20px);
+            left: 0;
+          `}
+        >
+          <PhotoArrowButton direction='left' />
+        </button>
+      ) : null}
+      {curIdx < thumbImgs.length - 1 ? (
+        <button
+          onClick={handleClickNextBtn}
+          css={css`
+            position: absolute;
+            top: calc(50% - 20px);
+            right: 0;
+          `}
+        >
+          <PhotoArrowButton direction='right' />
+        </button>
+      ) : null}
       <div
         css={css`
-          position: absolute;
-          top: calc(50% - 20px);
-          left: 0;
+          display: flex;
         `}
       >
-        <PhotoArrowButton type='prev' />
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='썸네일 이미지'
+          css={css`
+            border-radius: 8px;
+            object-fit: contain;
+            width: 400px;
+            height: 600px;
+            @media ${theme.device.mobile} {
+              width: 335px;
+              height: 480px;
+            }
+          `}
+        />
       </div>
-      <div
-        css={css`
-          position: absolute;
-          top: calc(50% - 20px);
-          right: 0;
-        `}
-      >
-        <PhotoArrowButton type='next' />
-      </div>
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
-        css={css`
-          border-radius: 8px;
-          object-fit: contain;
-          width: 400px;
-          height: 600px;
-          @media screen and (max-width: 743px) {
-            width: 335px;
-            height: 480px;
-          }
-        `}
-      />
       <ul
         css={css`
           width: 100%;
@@ -65,7 +85,7 @@ const MemoryPhoto = ({ thumbImgs }: PropsType) => {
           gap: 8px;
           position: absolute;
           bottom: 16px;
-          @media screen and (max-width: 743px) {
+          @media ${theme.device.mobile} {
             position: static;
             gap: 6px;
           }
@@ -79,13 +99,14 @@ const MemoryPhoto = ({ thumbImgs }: PropsType) => {
             `}
           >
             <button
+              onClick={() => handleClickIndicator(idx)}
               css={css`
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                background: var(--grey-200);
-                opacity: ${idx === curPhotoIdx ? 1 : 0.5};
-                @media screen and (max-width: 743px) {
+                background: ${theme.colors.grey[200]};
+                opacity: ${idx === curIdx ? 1 : 0.5};
+                @media ${theme.device.mobile} {
                   width: 6px;
                   height: 6px;
                 }

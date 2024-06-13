@@ -1,14 +1,15 @@
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import Popup from '@/components/molecules/Popup';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
 import ShareIcon from '@/assets/icon/ShareIcon';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import { useState } from 'react';
 import InputComment from '@/components/organisms/comment/InputComment';
+import MemoryPhoto from '@/components/molecules/memory/MemoryPhoto';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
   date: string;
   title: string;
@@ -30,7 +31,9 @@ const MemoryPopup = ({
   isProfile,
   profileImg,
   name,
-}: PropsType) => {
+}: IProps) => {
+  const theme = useTheme();
+
   const [isOpenComment, setIsOpenComment] = useState(false);
 
   const handleToggleComment = () => {
@@ -54,21 +57,27 @@ const MemoryPopup = ({
               gap: 8px;
             `}
           >
-            <Image
-              src={sampleMemoryThumbnail}
-              alt='프로필 이미지'
-              width={32}
-              height={32}
+            <div
               css={css`
-                border-radius: 50%;
-                border: 0.5px solid var(--grey-900);
-                object-fit: cover;
+                display: flex;
               `}
-            />
+            >
+              <Image
+                src={sampleMemoryThumbnail}
+                alt='프로필 이미지'
+                width={32}
+                height={32}
+                css={css`
+                  border-radius: 50%;
+                  border: 0.5px solid ${theme.colors.grey[900]};
+                  object-fit: cover;
+                `}
+              />
+            </div>
             <span
               css={css`
-                font-weight: 500;
-                font-size: 14px;
+                font-weight: ${theme.fontWeights.medium};
+                font-size: ${theme.fontSizes.sm};
               `}
             >
               {name}
@@ -81,16 +90,7 @@ const MemoryPopup = ({
             gap: 24px;
           `}
         >
-          <Image
-            src={sampleMemoryThumbnail}
-            alt='썸네일 이미지'
-            width={400}
-            height={600}
-            css={css`
-              border-radius: 8px;
-              object-fit: contain;
-            `}
-          />
+          <MemoryPhoto thumbImgs={[]} />
           <div
             css={css`
               display: flex;
@@ -117,14 +117,14 @@ const MemoryPopup = ({
                 <span
                   css={css`
                     font-size: 13px;
-                    color: var(--grey-500);
+                    color: ${theme.colors.grey[500]};
                   `}
                 >
                   {date}
                 </span>
                 <p
                   css={css`
-                    font-weight: 700;
+                    font-weight: ${theme.fontWeights.bold};
                     font-weight: 18px;
                   `}
                 >
@@ -139,7 +139,7 @@ const MemoryPopup = ({
                 justify-content: space-between;
                 align-items: center;
                 padding-top: 8px;
-                border-top: 1px solid var(--grey-200);
+                border-top: 1px solid ${theme.colors.grey[200]};
               `}
             >
               <div
@@ -156,7 +156,7 @@ const MemoryPopup = ({
                   onClick={handleToggleComment}
                 />
                 <button>
-                  <ShareIcon color={'var(--grey-700)'} />
+                  <ShareIcon color={theme.colors.grey[700]} />
                 </button>
               </div>
               <button
@@ -168,7 +168,7 @@ const MemoryPopup = ({
                   align-items: center;
                 `}
               >
-                <MoreVerticalIcon color={'var(--grey-400)'} />
+                <MoreVerticalIcon color={theme.colors.grey[400]} />
               </button>
             </div>
             {isOpenComment ? (
@@ -176,12 +176,12 @@ const MemoryPopup = ({
                 <ul
                   css={css`
                     border-radius: 6px;
-                    border: 1px solid var(--grey-100);
+                    border: 1px solid ${theme.colors.grey[100]};
                     padding: 12px;
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
-                    background: var(--grey-50);
+                    background: ${theme.colors.grey[50]};
                     height: 100%;
                     overflow-y: auto;
                   `}

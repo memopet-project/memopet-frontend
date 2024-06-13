@@ -1,7 +1,4 @@
-const FilledCommentIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IconPropsType) => {
+const FilledCommentIcon = ({ color, size = 24 }: IIconProps) => {
   return (
     <svg
       width={size}
