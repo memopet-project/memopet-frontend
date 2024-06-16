@@ -1,4 +1,8 @@
-const PlusIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
+import { useTheme } from '@emotion/react';
+
+const PlusIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -9,7 +13,7 @@ const PlusIcon = ({ color = 'var(--grey-900)', size = 24 }: IconPropsType) => {
     >
       <path
         d='M12 4V20M4 12H20'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
         stroke-linejoin='round'

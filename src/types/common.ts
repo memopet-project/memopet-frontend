@@ -1,9 +1,10 @@
 import type { Dispatch, SetStateAction } from 'react';
 
-interface IconPropsType {
+export interface IIconProps {
   color?: string;
   size?: number;
 }
+
 export interface IInputItemProps {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;

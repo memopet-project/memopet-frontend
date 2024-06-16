@@ -1,39 +1,46 @@
 import TrashIcon from '@/assets/icon/TrashIcon';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import IconButton from '@/components/atoms/button/IconButton';
-import { css } from '@emotion/react';
+import IconButton from '@/components/atoms/buttons/IconButton';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 
-interface PropsType {
+interface IProps {
   profileImg: string;
   name: string;
   comment: string;
 }
 
-const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
+const HistoryCommentItem = ({ profileImg, name, comment }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
         border-radius: 8px;
-        border: 1px solid var(--grey-700);
+        border: 1px solid ${theme.colors.grey[700]};
         padding: 12px;
         display: flex;
         align-items: center;
         gap: 8px;
-        background: var(--grey-50);
+        background: ${theme.colors.grey[50]};
       `}
     >
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='프로필 이미지'
-        width={32}
-        height={32}
+      <div
         css={css`
-          border-radius: 50%;
-          border: 0.5px solid var(--grey-900);
-          object-fit: cover;
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='프로필 이미지'
+          width={32}
+          height={32}
+          css={css`
+            border-radius: 50%;
+            border: 0.5px solid ${theme.colors.grey[900]};
+            object-fit: cover;
+          `}
+        />
+      </div>
       <div
         css={css`
           width: 100%;
@@ -44,13 +51,13 @@ const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
       >
         <div
           css={css`
-            font-weight: 500;
-            font-size: 12px;
+            font-weight: ${theme.fontWeights.medium};
+            font-size: ${theme.fontSizes.xs};
           `}
         >
           <span
             css={css`
-              color: var(--grey-500);
+              color: ${theme.colors.grey[500]};
             `}
           >
             {name}
@@ -59,14 +66,14 @@ const HistoryCommentItem = ({ profileImg, name, comment }: PropsType) => {
         </div>
         <p
           css={css`
-            font-size: 14px;
+            font-size: ${theme.fontSizes.sm};
           `}
         >
           {comment}
         </p>
       </div>
       <IconButton>
-        <TrashIcon color={'var(--grey-400)'} />
+        <TrashIcon color={theme.colors.grey[400]} />
       </IconButton>
     </div>
   );

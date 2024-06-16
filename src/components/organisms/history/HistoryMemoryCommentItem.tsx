@@ -1,15 +1,16 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import IconButton from '@/components/atoms/button/IconButton';
+import IconButton from '@/components/atoms/buttons/IconButton';
 import TrashIcon from '@/assets/icon/TrashIcon';
 
-interface PropsType {
+interface IProps {
   thumbImg: string;
   comment: string;
 }
 
-const HistoryMemoryCommentItem = ({ thumbImg, comment }: PropsType) => {
+const HistoryMemoryCommentItem = ({ thumbImg, comment }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -18,24 +19,31 @@ const HistoryMemoryCommentItem = ({ thumbImg, comment }: PropsType) => {
         gap: 8px;
       `}
     >
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
-        width={64}
-        height={64}
+      <div
         css={css`
-          border-radius: 6px;
+          display: flex;
         `}
-      />
+      >
+        <Image
+          src={sampleMemoryThumbnail}
+          alt='썸네일 이미지'
+          width={64}
+          height={64}
+          css={css`
+            object-fit: cover;
+            border-radius: 6px;
+          `}
+        />
+      </div>
       <p
         css={css`
-          font-size: 14px;
+          font-size: ${theme.fontSizes.sm};
         `}
       >
         {comment}
       </p>
       <IconButton>
-        <TrashIcon color={'var(--grey-400)'} />
+        <TrashIcon color={theme.colors.grey[400]} />
       </IconButton>
     </div>
   );

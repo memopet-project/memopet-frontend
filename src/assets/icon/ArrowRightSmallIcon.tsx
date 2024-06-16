@@ -1,7 +1,8 @@
-const ArrowRightSmallIcon = ({
-  color = 'var(--grey-900)',
-  size = 24,
-}: IconPropsType) => {
+import { useTheme } from '@emotion/react';
+
+const ArrowRightSmallIcon = ({ color, size = 24 }: IIconProps) => {
+  const theme = useTheme();
+  const defaultColor = theme.colors.grey[900];
   return (
     <svg
       width={size}
@@ -12,7 +13,7 @@ const ArrowRightSmallIcon = ({
     >
       <path
         d='M10 8L14 12L10 16'
-        stroke={color}
+        stroke={color || defaultColor}
         stroke-width='1.5'
         stroke-linecap='round'
         stroke-linejoin='round'

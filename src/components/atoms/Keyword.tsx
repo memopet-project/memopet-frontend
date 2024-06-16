@@ -1,11 +1,12 @@
 import CloseIcon from '@/assets/icon/CloseIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   text: string;
 }
 
-const Keyword = ({ text }: PropsType) => {
+const Keyword = ({ text }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -16,28 +17,28 @@ const Keyword = ({ text }: PropsType) => {
         justify-content: center;
         align-items: center;
         gap: 6px;
-        background: var(--grey-100);
+        background: ${theme.colors.grey[100]};
         &:hover {
-          background: var(--grey-200);
+          background: ${theme.colors.grey[200]};
           & > span {
-            color: var(--grey-700);
+            color: ${theme.colors.grey[700]};
           }
           & > svg path {
-            stroke: var(--grey-700);
+            stroke: ${theme.colors.grey[700]};
           }
         }
       `}
     >
       <span
         css={css`
-          font-weight: 600;
-          font-size: 14px;
-          color: var(--grey-500);
+          font-weight: ${theme.fontWeights.semibold};
+          font-size: ${theme.fontSizes.sm};
+          color: ${theme.colors.grey[500]};
         `}
       >
         {text}
       </span>
-      <CloseIcon color={'var(--grey-500)'} size={16} />
+      <CloseIcon color={theme.colors.grey[500]} size={16} />
     </button>
   );
 };

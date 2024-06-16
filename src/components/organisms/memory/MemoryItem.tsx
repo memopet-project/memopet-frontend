@@ -1,13 +1,14 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail3.png';
 import MoreVerticalIcon from '@/assets/icon/MoreVerticalIcon';
 import MemoryThumbIcon from '@/components/molecules/memory/MemoryThumbIcon';
 import MemoryActionButton from '@/components/molecules/memory/MemoryActionButton';
 import ShareIcon from '@/assets/icon/ShareIcon';
+import ThumbMoreBadge from '@/components/atoms/ThumbMoreBadge';
 
-interface PropsType {
-  thumbImg: string;
+interface IProps {
+  thumbImgs: string[];
   date: string;
   title: string;
   content: string;
@@ -19,7 +20,7 @@ interface PropsType {
 }
 
 const MemoryItem = ({
-  thumbImg,
+  thumbImgs,
   date,
   title,
   content,
@@ -28,23 +29,24 @@ const MemoryItem = ({
   isProfile,
   profileImg,
   name,
-}: PropsType) => {
+}: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
         border-radius: 12px;
-        border: 1px solid var(--grey-700);
+        border: 1px solid ${theme.colors.grey[700]};
         padding: 8px;
-        background: var(--grey-0);
+        background: ${theme.colors.grey[0]};
         width: fit-content;
         display: flex;
         flex-direction: column;
         gap: 8px;
         width: 360px;
         &:hover {
-          background: var(--grey-100);
+          background: ${theme.colors.grey[100]};
         }
-        @media screen and (max-width: 743px) {
+        @media ${theme.device.mobile} {
           width: 343px;
         }
       `}
@@ -64,21 +66,27 @@ const MemoryItem = ({
               gap: 8px;
             `}
           >
-            <Image
-              src={sampleMemoryThumbnail}
-              alt='프로필 이미지'
-              width={32}
-              height={32}
+            <div
               css={css`
-                border-radius: 50%;
-                border: 0.5px solid var(--grey-900);
-                object-fit: cover;
+                display: flex;
               `}
-            />
+            >
+              <Image
+                src={sampleMemoryThumbnail}
+                alt='프로필 이미지'
+                width={32}
+                height={32}
+                css={css`
+                  border-radius: 50%;
+                  border: 0.5px solid ${theme.colors.grey[900]};
+                  object-fit: cover;
+                `}
+              />
+            </div>
             <span
               css={css`
-                font-weight: 500;
-                font-size: 14px;
+                font-weight: ${theme.fontWeights.medium};
+                font-size: ${theme.fontSizes.sm};
               `}
             >
               {name}
@@ -93,25 +101,50 @@ const MemoryItem = ({
               align-items: center;
             `}
           >
-            <MoreVerticalIcon color={'var(--grey-400)'} />
+            <MoreVerticalIcon color={theme.colors.grey[400]} />
           </button>
         </div>
       ) : null}
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
+      <div
         css={css`
-          border-radius: 8px;
-          border: 1px solid var(--grey-700);
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-          @media screen and (max-width: 743px) {
-            width: 327px;
-            height: 280px;
-          }
+          width: fit-content;
+          position: relative;
         `}
-      />
+      >
+        {thumbImgs.length > 1 ? (
+          <div
+            css={css`
+              z-index: 1;
+              position: absolute;
+              top: 8px;
+              right: 8px;
+            `}
+          >
+            <ThumbMoreBadge moreNum={thumbImgs.length - 1} />
+          </div>
+        ) : null}
+        <div
+          css={css`
+            display: flex;
+          `}
+        >
+          <Image
+            src={sampleMemoryThumbnail}
+            alt='썸네일 이미지'
+            css={css`
+              border-radius: 8px;
+              border: 1px solid ${theme.colors.grey[700]};
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+              @media ${theme.device.mobile} {
+                width: 327px;
+                height: 280px;
+              }
+            `}
+          />
+        </div>
+      </div>
       <div
         css={css`
           padding: 4px 8px;
@@ -130,7 +163,7 @@ const MemoryItem = ({
           <span
             css={css`
               font-size: 13px;
-              color: var(--grey-500);
+              color: ${theme.colors.grey[500]};
             `}
           >
             {date}
@@ -140,7 +173,7 @@ const MemoryItem = ({
               display: flex;
               align-items: center;
               gap: 8px;
-              @media screen and (max-width: 743px) {
+              @media ${theme.device.mobile} {
                 display: none;
               }
             `}
@@ -151,7 +184,7 @@ const MemoryItem = ({
         </div>
         <p
           css={css`
-            font-weight: 500;
+            font-weight: ${theme.fontWeights.medium};
           `}
         >
           {title}
@@ -159,9 +192,9 @@ const MemoryItem = ({
         <p
           css={css`
             display: none;
-            font-size: 14px;
-            color: var(--grey-700);
-            @media screen and (max-width: 743px) {
+            font-size: ${theme.fontSizes.sm};
+            color: ${theme.colors.grey[700]};
+            @media ${theme.device.mobile} {
               display: block;
             }
           `}
@@ -175,8 +208,8 @@ const MemoryItem = ({
           justify-content: space-between;
           align-items: center;
           padding-top: 4px;
-          border-top: 1px solid var(--grey-200);
-          @media screen and (max-width: 743px) {
+          border-top: 1px solid ${theme.colors.grey[200]};
+          @media ${theme.device.mobile} {
             display: flex;
           }
         `}
@@ -192,7 +225,7 @@ const MemoryItem = ({
           <MemoryActionButton type='comment' amount={commentAmount} />
         </div>
         <button>
-          <ShareIcon color={'var(--grey-700)'} />
+          <ShareIcon color={theme.colors.grey[700]} />
         </button>
       </div>
     </div>

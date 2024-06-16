@@ -1,12 +1,13 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
-interface PropsType {
+interface IProps {
   state?: 'selected' | 'unselected';
   text: string;
   amount?: number;
 }
 
-const TabItem = ({ state = 'selected', text, amount }: PropsType) => {
+const TabItem = ({ state = 'selected', text, amount }: IProps) => {
+  const theme = useTheme();
   return (
     <button
       css={css`
@@ -20,8 +21,8 @@ const TabItem = ({ state = 'selected', text, amount }: PropsType) => {
         box-shadow: ${state === 'selected'
           ? '0px 0px 3px 0px #1717171A'
           : 'none'};
-        font-weight: 600;
-        color: ${state === 'unselected' ? 'var(--grey-500)' : 'inherit'};
+        font-weight: ${theme.fontWeights.semibold};
+        color: ${state === 'unselected' ? theme.colors.grey[500] : 'inherit'};
         &:hover {
           background: ${state === 'unselected' ? '#1717170D' : 'none'};
         }

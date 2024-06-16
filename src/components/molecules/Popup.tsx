@@ -1,13 +1,14 @@
 import CloseIcon from '@/assets/icon/CloseIcon';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import { ReactNode } from 'react';
 
-interface PropsType {
+interface IProps {
   children: ReactNode;
   onClose: () => void;
 }
 
-const Popup = ({ children, onClose }: PropsType) => {
+const Popup = ({ children, onClose }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -27,9 +28,9 @@ const Popup = ({ children, onClose }: PropsType) => {
         css={css`
           max-height: 85%;
           border-radius: 16px;
-          border: 1px solid var(--grey-700);
+          border: 1px solid ${theme.colors.grey[700]};
           padding: 20px;
-          background-color: var(--grey-0);
+          background-color: ${theme.colors.grey[0]};
           position: relative;
           box-shadow: 0px 4px 4px 0px #00000040;
         `}

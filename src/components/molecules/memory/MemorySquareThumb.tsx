@@ -1,14 +1,16 @@
 import sampleMemoryThumbnail from '@/assets/images/sampleMemoryThumbnail.png';
-import { css } from '@emotion/react';
+import ThumbMoreBadge from '@/components/atoms/ThumbMoreBadge';
+import { css, useTheme } from '@emotion/react';
 import Image from 'next/image';
 
-interface PropsType {
-  thumbImg: string;
+interface IProps {
+  thumbImgs: string[];
   date: string;
   title: string;
 }
 
-const MemorySquareThumb = ({ thumbImg, date, title }: PropsType) => {
+const MemorySquareThumb = ({ thumbImgs, date, title }: IProps) => {
+  const theme = useTheme();
   return (
     <div
       css={css`
@@ -16,20 +18,45 @@ const MemorySquareThumb = ({ thumbImg, date, title }: PropsType) => {
         width: fit-content;
         display: flex;
         cursor: pointer;
-        &:hover > div {
+        &:hover > div:last-of-type {
           display: flex;
         }
       `}
     >
-      <Image
-        src={sampleMemoryThumbnail}
-        alt='썸네일 이미지'
-        width={344}
-        height={344}
+      <div
         css={css`
-          object-fit: cover;
+          width: fit-content;
+          position: relative;
         `}
-      />
+      >
+        {thumbImgs.length > 1 ? (
+          <div
+            css={css`
+              z-index: 1;
+              position: absolute;
+              top: 8px;
+              right: 8px;
+            `}
+          >
+            <ThumbMoreBadge moreNum={thumbImgs.length - 1} />
+          </div>
+        ) : null}
+        <div
+          css={css`
+            display: flex;
+          `}
+        >
+          <Image
+            src={sampleMemoryThumbnail}
+            alt='썸네일 이미지'
+            width={344}
+            height={344}
+            css={css`
+              object-fit: cover;
+            `}
+          />
+        </div>
+      </div>
       <div
         css={css`
           background: linear-gradient(
@@ -47,19 +74,20 @@ const MemorySquareThumb = ({ thumbImg, date, title }: PropsType) => {
           justify-content: end;
           gap: 4px;
           padding: 16px;
-          color: var(--grey-0);
         `}
       >
         <span
           css={css`
             font-size: 13px;
+            color: ${theme.colors.grey[0]};
           `}
         >
           {date}
         </span>
         <p
           css={css`
-            font-weight: 500;
+            font-weight: ${theme.fontWeights.medium};
+            color: ${theme.colors.grey[0]};
           `}
         >
           {title}
