@@ -3,18 +3,22 @@ import { SerializedStyles, css } from '@emotion/react';
 type Type = 'filled' | 'outline';
 
 interface IMainButtonProps {
-  type: Type;
+  type?: Type;
   disabled?: boolean;
   children: React.ReactNode;
+  css?: SerializedStyles;
+  onClick: () => void;
 }
 
 const styles: { [key in Type]: SerializedStyles } = {
   filled: css`
     background: var(--main-red-500);
     color: var(--grey-0);
+
     &:hover:enabled {
       filter: brightness(90%);
     }
+
     &:disabled {
       background: var(--grey-300);
     }
@@ -23,9 +27,11 @@ const styles: { [key in Type]: SerializedStyles } = {
     background: transparent;
     border: 1px solid var(--main-red-500);
     color: var(--main-red-500);
+
     &:hover:enabled {
       background: #f151391a;
     }
+
     &:disabled {
       color: var(--grey-400);
       border: 1px solid var(--grey-200);
@@ -33,11 +39,13 @@ const styles: { [key in Type]: SerializedStyles } = {
   `,
 };
 
-export default function MainButton({
-  type = 'filled',
-  disabled = false,
-  children,
-}: IMainButtonProps) {
+export default function MainButton(
+  {
+    type = 'filled',
+    disabled = false,
+    children,
+    onClick,
+  }: IMainButtonProps) {
   return (
     <button
       disabled={disabled}
@@ -55,6 +63,7 @@ export default function MainButton({
         `,
         styles[type],
       )}
+      onClick={onClick}
     >
       {children}
     </button>
