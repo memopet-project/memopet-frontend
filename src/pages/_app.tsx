@@ -18,18 +18,24 @@ const queryClient = new QueryClient({
   },
 });
 
-export const getServerSideProps = async ({}) => {
+export const getServerSideProps = async ({ req }) => {
+  const userAgent = req.headers['user-agent'];
 
+  return {
+    props: { userAgent },
+  };
 };
 
 export default function App({ Component, pageProps }: AppProps) {
+  const isMobile = /Mobile/.test(pageProps.userAgent);
+
   return (
     <>
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <Global styles={baseStyle} />
-            <MainLayout>
+            <MainLayout isMobile={isMobile}>
               <Component {...pageProps} />
             </MainLayout>
           </ThemeProvider>

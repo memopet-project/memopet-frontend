@@ -1,17 +1,26 @@
 import React from 'react';
 import Footer from '@/components/organisms/Footer';
+import { css } from '@emotion/react';
 
 type Props = {
+  isMobile?: boolean;
   children: React.ReactNode;
 };
 
-const MainLayout = ({ children }: Props) => {
+const MainLayout = ({ isMobile, children }: Props) => {
   return (
     <>
-      <main>
+      <main
+        css={css`
+          min-height: 100dvh;
+          position: relative;
+        `}
+      >
         {children}
       </main>
-      <Footer />
+      {
+        !isMobile && <Footer />
+      }
     </>
   );
 };

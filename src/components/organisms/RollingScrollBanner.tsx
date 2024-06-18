@@ -8,20 +8,27 @@ import BannerImage2 from '@/assets/images/slideBanner2.png';
 import BannerTags from '@/assets/images/slideBannerTags.png';
 
 export type RollingScrollBannerProps = React.HTMLAttributes<HTMLDivElement> & {
+  isMobile?: boolean;
   children?: React.ReactNode;
 }
 
-const RollingScrollBanner = ({ children, ...rest }: RollingScrollBannerProps) => {
+const RollingScrollBanner = ({ children, isMobile, ...rest }: RollingScrollBannerProps) => {
   const [isHover, setIsHover] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContentsRef = useRef<HTMLDivElement[]>([]);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // rolling animation
   useEffect(() => {
-    if (!containerRef.current || !imageContentsRef.current) return;
+    if (!containerRef.current || !imageContentsRef.current || !imageRef.current) return;
 
     const imageContents: HTMLDivElement[] = imageContentsRef.current;
-    const imageWidth: number = imageContents[0].offsetWidth;
+    const imageWidth: number = imageRef.current.getBoundingClientRect().width;
+
+    imageContents.forEach((el) => {
+      el.style.width = `${imageWidth}px`;
+    })
+
     const duration = 10;
 
     let left = 0;
@@ -53,22 +60,22 @@ const RollingScrollBanner = ({ children, ...rest }: RollingScrollBannerProps) =>
   return (
     <div
       css={css`
-        overflow: hidden;
+        overflow: auto;
         width: 100%;
-        height: 442px;
         position: relative;
       `}
-      {...rest}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      onMouseEnter={() => !isMobile && setIsHover(true)}
+      onMouseLeave={() => !isMobile && setIsHover(false)}
       ref={containerRef}
+      {...rest}
     >
       <div
         css={css`
           height: 100%;
           position: relative;
           display: flex;
-          min-width: 3596px;
+          width: fit-content;
+          flex-wrap: nowrap;
         `}
       >
         {
@@ -77,36 +84,32 @@ const RollingScrollBanner = ({ children, ...rest }: RollingScrollBannerProps) =>
               css={css`
                 position: relative;
                 flex-shrink: 0;
-                width: 100%;
                 height: 100%;
               `}
+              key={index}
               ref={(el) => {
                 if (el) {
                   imageContentsRef.current.push(el);
                 }
               }}
-              key={index}
             >
               <Image
                 css={css`
                   height: 100%;
-                  width: 100%;
+                  width: auto;
                   position: absolute;
                 `}
-                width={3596}
-                height={442}
                 src={isHover ? BannerImage2 : BannerImage}
+                ref={imageRef}
                 alt="banner"
               />
               <Image
                 css={css`
                   height: 100%;
-                  width: 100%;
+                  width: auto;
                   position: absolute;
                 `}
                 src={BannerTags}
-                width={3596}
-                height={442}
                 alt="banner"
               />
             </div>
