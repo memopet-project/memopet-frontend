@@ -97,6 +97,11 @@ const baseStyle = css`
     font: inherit;
     vertical-align: baseline;
   }
+  
+  html {
+    background: #F7F5F1;
+    font-size: 16px;
+  }
 
   /* HTML5 display-role reset for older browsers */
 
