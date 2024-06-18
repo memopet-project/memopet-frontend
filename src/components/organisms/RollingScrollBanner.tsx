@@ -53,7 +53,7 @@ const RollingScrollBanner = ({ children, ...rest }: RollingScrollBannerProps) =>
   return (
     <div
       css={css`
-        overflow: auto;
+        overflow: hidden;
         width: 100%;
         height: 442px;
         position: relative;
