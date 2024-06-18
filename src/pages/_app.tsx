@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <Global styles={baseStyle} />
-            <MainLayout isMobile={isMobile}>
+            <MainLayout footerShown={!isMobile}>
               <Component {...pageProps} />
             </MainLayout>
           </ThemeProvider>

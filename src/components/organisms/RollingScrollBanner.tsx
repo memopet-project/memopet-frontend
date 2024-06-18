@@ -60,7 +60,7 @@ const RollingScrollBanner = ({ children, isMobile, ...rest }: RollingScrollBanne
   return (
     <div
       css={css`
-        overflow: auto;
+        overflow: hidden;
         width: 100%;
         position: relative;
       `}

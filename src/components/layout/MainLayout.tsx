@@ -1,26 +1,34 @@
 import React from 'react';
 import Footer from '@/components/organisms/Footer';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 type Props = {
   isMobile?: boolean;
+  footerShown?: boolean;
   children: React.ReactNode;
 };
 
-const MainLayout = ({ isMobile, children }: Props) => {
+const MainLayout = ({ footerShown, children }: Props) => {
+  const theme = useTheme()
+
   return (
     <>
       <main
         css={css`
-          min-height: 100dvh;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
           position: relative;
+          @media ${theme.device.mobile} {
+            
+          }
         `}
       >
         {children}
-      </main>
       {
-        !isMobile && <Footer />
+        footerShown && <Footer />
       }
+      </main>
     </>
   );
 };

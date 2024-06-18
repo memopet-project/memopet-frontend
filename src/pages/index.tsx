@@ -77,14 +77,19 @@ export default function Home({ userAgent }) {
           </div>
         </>
       ) : (
-        <>
+        <div css={css`
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          gap: 120px;
+          padding-top: 120px;
+        `}>
           <section css={css`
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 40px;
-            padding: 160px 0 0;
             margin: 0 auto;
           `}>
             <div css={css`
@@ -121,11 +126,10 @@ export default function Home({ userAgent }) {
             <RollingScrollBanner
               css={css`
                 height: 442px;
-                margin-top: 120px;
               `}
             />
           </section>
-        </>
+        </div>
       )}
     </>
   )
