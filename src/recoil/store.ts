@@ -1,4 +1,4 @@
-import { atom, RecoilState } from 'recoil';
+import { atom, RecoilState, selector } from 'recoil';
 
 export type TPostProfileStep = {
   maxStep: number;
@@ -17,22 +17,50 @@ export type TPostProfileStep = {
   };
 }
 
-export const postProfileStepState:RecoilState<TPostProfileStep> = atom({
+export const postProfileStepState: RecoilState<TPostProfileStep> = atom({
   key: 'postProfileStep',
   default: {
     maxStep: 4,
     step: 1,
     data: {
       email: "",
-      petName:"",
-      petDesc:"",
-      petSpecM:"",
-      petSpecS:"",
-      petProfileFrame:"",
-      petGender:"",
-      birthDate:"",
-      deathDate:"",
-      petFavs:[],
+      petName: "",
+      petDesc: "",
+      petSpecM: "",
+      petSpecS: "",
+      petProfileFrame: "",
+      petGender: "",
+      birthDate: "",
+      deathDate: "",
+      petFavs: [],
     },
+  },
+});
+
+type FirstStepData = {
+  petName: string;
+  petSpecM: string;
+  petSpecS: string;
+};
+
+export const firstStep = selector<FirstStepData>({
+  key: 'firstStep',
+  get: ({ get }) => {
+    const { data } = get(postProfileStepState);
+    return {
+      petName: data.petName,
+      petSpecM: data.petSpecM,
+      petSpecS: data.petSpecS,
+    };
+  },
+  set: ({ set, get }, newValue) => {
+    const currentState = get(postProfileStepState);
+    set(postProfileStepState, {
+      ...currentState,
+      data: {
+        ...currentState.data,
+        ...newValue,
+      },
+    });
   },
 });
