@@ -60,7 +60,7 @@ export default function ProfileMoveButton({
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
         css={css`
-          transform: rotateY(180deg);
+          transform: ${isNext ? 'rotate(180deg)' : 'rotate(0)'};
         `}
       >
         <path

@@ -160,7 +160,6 @@ const baseStyle = css`
   * {
     box-sizing: border-box;
     text-decoration: none;
-    color: #232128;
   }
 
   button {
