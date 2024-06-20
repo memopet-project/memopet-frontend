@@ -1,3 +1,5 @@
+import { IIconProps } from '@/types/common';
+
 const FilledFlowerIcon = ({ color, size = 24 }: IIconProps) => {
   return (
     <svg
