@@ -18,10 +18,6 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
     setValue(e.target.value);
   };
 
-  useEffect(() => {
-    validate();
-  }, [value, validate]);
-
   return (
     <>
       <div
@@ -46,7 +42,7 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
             outline: none;
             padding: 14px 12px;
             border: 1px solid
-              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${!validate && errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -66,11 +62,11 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
         css={css`
           margin-top: 4px;
           display: flex;
-          justify-content: ${errorMessage ? 'space-between' : 'flex-end'};
+          justify-content: ${!validate && errorMessage ? 'space-between' : 'flex-end'};
           align-items: center;
         `}
       >
-        {errorMessage && (
+        {!validate && errorMessage && (
           <span
             css={css`
               display: flex;

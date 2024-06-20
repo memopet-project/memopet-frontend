@@ -20,9 +20,6 @@ const InputCalendarItem: React.FC<IInputItemProps> = ({
     setValue(e.target.value);
     onFocus();
   };
-  useEffect(() => {
-    validate();
-  }, [value, validate]);
 
   return (
     <>
@@ -55,7 +52,7 @@ const InputCalendarItem: React.FC<IInputItemProps> = ({
                 : '44px'
               : '12px'};
             border: 1px solid
-              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${!validate && errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             color: ${value ? 'var(--grey-900)' : 'var(--grey-400)'};
             &:focus {
@@ -118,7 +115,7 @@ const InputCalendarItem: React.FC<IInputItemProps> = ({
         </button>
       </div>
 
-      {errorMessage && (
+      {(!validate && errorMessage) && (
         <div
           css={css`
             margin-top: 4px;

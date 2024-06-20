@@ -23,10 +23,6 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
   const preventEventHandler = (e: MouseEvent<HTMLButtonElement>) =>
     e.preventDefault();
 
-  useEffect(() => {
-    validate();
-  }, [value, validate]);
-
   return (
     <>
       <div
@@ -80,7 +76,7 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
             padding-left: 44px;
             padding-right: ${focus && Boolean(value) ? '108px' : '76px'};
             border: 1px solid
-              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${!validate && errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -134,7 +130,7 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
           </RoundButton>
         </div>
       </div>
-      {errorMessage && (
+      {!validate && errorMessage && (
         <div
           css={css`
             margin-top: 4px;
