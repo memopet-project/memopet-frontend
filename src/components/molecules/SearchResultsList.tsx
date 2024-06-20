@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { IInputItemProps } from '@/types/common';
 import InputSearchItem from '@/components/atoms/input/InputSearchItem';
 import { css, useTheme } from '@emotion/react';
@@ -19,12 +19,26 @@ const SearchResultsList = (
   }: Props) => {
   const theme = useTheme();
   const [searchText, setSearchText] = useState<string>(value);
+  const [filteredList, setFilteredList] = useState<string[]>(searchResults);
+  const [isListOpen, setIsListOpen] = useState<boolean>(false);
 
   const { debouncedValue } = useDebounce({ value: searchText, delay: 500 });
 
-  const listOpen = useCallback(() => {
-    return value !== debouncedValue && debouncedValue.length > 0;
-  }, [value, debouncedValue]);
+  useEffect(() => {
+    setIsListOpen(searchText !== value && debouncedValue.length > 0 && searchText.length > 0);
+  }, [searchText, value, debouncedValue]);
+
+  useEffect(() => {
+    if (searchText.length === 0) {
+      setFilteredList(searchResults);
+    } else {
+      setFilteredList(
+        searchResults.filter((result) =>
+          result.toLowerCase().includes(searchText.toLowerCase()),
+        ),
+      );
+    }
+  }, [searchText, searchResults]);
 
   return (
     <div css={css`
@@ -37,7 +51,7 @@ const SearchResultsList = (
         errorMessage={''}
         validate={true}
       />
-      {listOpen() && (
+      {isListOpen && (
         <ul css={css`
           padding: 8px 0;
           background: ${theme.colors.grey[0]};
@@ -45,12 +59,24 @@ const SearchResultsList = (
           z-index: 1;
           top: calc(100% + 4px);
           width: 100%;
-          border: 1px solid rgba(82, 82, 82, 1);
+          border: 1px solid ${theme.colors.grey[700]};
           border-radius: 6px;
           display: flex;
           flex-direction: column;
         `}>
-          {searchResults.map((result, index) => (
+          {
+            filteredList.length === 0 && (
+              <li css={css`
+                width: 100%;
+                padding: 8px 12px 8px 12px;
+                line-height: 24px;
+                color: ${theme.colors.grey[500]};
+              `}>
+                검색 결과가 없습니다.
+              </li>
+            )
+          }
+          {filteredList.map((result, index) => (
             <li
               key={index}
               css={css`

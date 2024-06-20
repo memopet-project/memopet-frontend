@@ -17,7 +17,8 @@ export type Animals =
   | 'hedgehog'
   | 'frog'
   | 'hamster'
-  | 'other';
+  | 'other'
+  ;
 
 interface IAnimalIconProps {
   type: Animals;

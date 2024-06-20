@@ -1,4 +1,6 @@
 import { atom, RecoilState, selector } from 'recoil';
+import { Animals } from '@/components/atoms/AnimalIcon';
+import { Nullable } from '@/types/global';
 
 export type TPostProfileStep = {
   maxStep: number;
@@ -23,15 +25,15 @@ export const postProfileStepState: RecoilState<TPostProfileStep> = atom({
     maxStep: 4,
     step: 1,
     data: {
-      email: "",
-      petName: "",
-      petDesc: "",
-      petSpecM: "",
-      petSpecS: "",
-      petProfileFrame: "",
-      petGender: "",
-      birthDate: "",
-      deathDate: "",
+      email: '',
+      petName: '',
+      petDesc: '',
+      petSpecM: '',
+      petSpecS: '',
+      petProfileFrame: '',
+      petGender: '',
+      birthDate: '',
+      deathDate: '',
       petFavs: [],
     },
   },
@@ -39,7 +41,7 @@ export const postProfileStepState: RecoilState<TPostProfileStep> = atom({
 
 type FirstStepData = {
   petName: string;
-  petSpecM: string;
+  petSpecM: string
   petSpecS: string;
 };
 
