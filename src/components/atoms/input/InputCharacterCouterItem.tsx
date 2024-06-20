@@ -7,7 +7,7 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
   value,
   setValue,
   validate,
-  erorrMessage,
+  errorMessage,
   disabled = false,
   placeholder,
 }) => {
@@ -46,7 +46,7 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
             outline: none;
             padding: 14px 12px;
             border: 1px solid
-              ${erorrMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -66,11 +66,11 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
         css={css`
           margin-top: 4px;
           display: flex;
-          justify-content: ${erorrMessage ? 'space-between' : 'flex-end'};
+          justify-content: ${errorMessage ? 'space-between' : 'flex-end'};
           align-items: center;
         `}
       >
-        {erorrMessage && (
+        {errorMessage && (
           <span
             css={css`
               display: flex;
@@ -91,7 +91,7 @@ const InputCharacterCounterItem: React.FC<IInputItemProps> = ({
               height={16}
               alt='icon-error'
             />
-            {erorrMessage}
+            {errorMessage}
           </span>
         )}
         <span

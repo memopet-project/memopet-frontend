@@ -8,7 +8,7 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
   value,
   setValue,
   validate,
-  erorrMessage,
+  errorMessage,
   disabled = false,
   placeholder,
 }) => {
@@ -80,7 +80,7 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
             padding-left: 44px;
             padding-right: ${focus && Boolean(value) ? '108px' : '76px'};
             border: 1px solid
-              ${erorrMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -134,7 +134,7 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
           </RoundButton>
         </div>
       </div>
-      {erorrMessage && (
+      {errorMessage && (
         <div
           css={css`
             margin-top: 4px;
@@ -154,7 +154,7 @@ const InputWithButtonItem: React.FC<IInputItemProps> = ({
             height={16}
             alt='icon-error'
           />
-          {erorrMessage}
+          {errorMessage}
         </div>
       )}
     </>

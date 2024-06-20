@@ -9,7 +9,7 @@ export interface IInputItemProps {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   validate: () => void;
-  erorrMessage: string;
+  errorMessage: string;
   disabled?: boolean;
   placeholder?: string;
 }

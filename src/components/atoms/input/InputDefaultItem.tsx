@@ -7,7 +7,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
   value,
   setValue,
   validate,
-  erorrMessage,
+  errorMessage,
   disabled = false,
   placeholder,
 }) => {
@@ -53,7 +53,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
             padding: 14px 12px;
             padding-right: ${focus ? '46px' : '12px'};
             border: 1px solid
-              ${erorrMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -90,7 +90,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
           </button>
         )}
       </div>
-      {erorrMessage && (
+      {errorMessage && (
         <div
           css={css`
             margin-top: 4px;
@@ -110,7 +110,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
             height={16}
             alt='icon-error'
           />
-          {erorrMessage}
+          {errorMessage}
         </div>
       )}
     </>

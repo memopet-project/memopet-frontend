@@ -7,7 +7,7 @@ const InputSearchItem: React.FC<IInputItemProps> = ({
   value,
   setValue,
   validate,
-  erorrMessage,
+  errorMessage,
   disabled = false,
   placeholder,
 }) => {
@@ -57,7 +57,7 @@ const InputSearchItem: React.FC<IInputItemProps> = ({
                 : '44px'
               : '12px'};
             border: 1px solid
-              ${erorrMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -111,7 +111,7 @@ const InputSearchItem: React.FC<IInputItemProps> = ({
         </button>
       </div>
 
-      {erorrMessage && (
+      {errorMessage && (
         <div
           css={css`
             margin-top: 4px;
@@ -131,7 +131,7 @@ const InputSearchItem: React.FC<IInputItemProps> = ({
             height={16}
             alt='icon-error'
           />
-          {erorrMessage}
+          {errorMessage}
         </div>
       )}
     </>

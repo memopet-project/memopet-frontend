@@ -11,7 +11,7 @@ import ThemedText from '@/components/atoms/ThemedText';
 
 const headerText = {
   1: '반려동물의 이름과 종류를 알려주세요',
-}
+};
 
 const PostProfile = () => {
   const [postProfileStep, setPostProfileStep] = useRecoilState(postProfileStepState);
@@ -33,8 +33,10 @@ const PostProfile = () => {
         align-items: center;
         gap: 2rem;
       `}>
-      <ThemedText type={'titleMedium'}>{headerText[postProfileStep.step]}</ThemedText>
+        <ThemedText type={'titleMedium'}>{headerText[postProfileStep.step]}</ThemedText>
       </div>
+
+      {postProfileStep.step === 1}
 
 
       <div css={css`
@@ -46,13 +48,19 @@ const PostProfile = () => {
         <div css={css`
           flex: 1;
           position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
         `}>
           {Array.from({ length: postProfileStep.maxStep }).map((_, index) => (
             <ProgressIndicatorDot
-              type={'primaryPresent'}
+              type={index + 1 === postProfileStep.step ? 'primaryPresent' : (index + 1 < postProfileStep.step ? 'primaryAfter' : 'greyAfter')}
               key={index}
+              cssStyle={css`
+                position: relative;
+              `}
             />
-            // <span key={index}>{index}</span>
           ))}
         </div>
         <ProfileMoveButton type={'next'} disabled={true} />
