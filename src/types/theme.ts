@@ -1,4 +1,6 @@
-export const theme = {
+import { Theme } from '@emotion/react';
+
+export const theme: Theme = {
   colors: {
     primary: {
       0: '#ffffff',
@@ -45,20 +47,24 @@ export const theme = {
     surface: '#ffffff',
   },
   fontFamily: {
-    body: "'Pretendard GOV Variable'",
+    body: '\'Pretendard GOV Variable\'',
   },
   fontSizes: {
-    base: '16px',
-    xs: '12px',
-    sm: '14px',
-    md: '16px',
-    lg: '18px',
-    xl: '20px',
-    '2xl': '24px',
-    '3xl': '30px',
-    '4xl': '36px',
-    '5xl': '48px',
-    '6xl': '64px',
+    xs: 11,
+    sm: 12,
+    ls: 13,
+    md: 14,
+    base: 16,
+    lg: 18,
+    xl: 20,
+    '2xl': 24,
+    '3xl': 28,
+    '4xl': 32,
+    '5xl': 36,
+    '6xl': 40,
+    '7xl': 48,
+    '8xl': 56,
+    '9xl': 64,
   },
   fontWeights: {
     normal: 400,

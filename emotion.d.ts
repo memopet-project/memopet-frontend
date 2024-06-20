@@ -4,27 +4,52 @@ import { ThemeType } from '@/types/theme';
 declare module '@emotion/react' {
   export interface Theme extends ThemeType {
     // Add your custom theme types
+    colors: {
+      [key: string]: {
+        [key: string]: string;
+      }
+    },
+    statusColors: {
+      [key: string]: string;
+    },
+    backgroundColors: {
+      [key: string]: string;
+    },
+    fontFamily: {
+      [key: string]: string;
+    },
     fontSizes: {
-      base: string;
-      xs: string;
-      sm: string;
-      md: string;
-      lg: string;
-      xl: string;
-      '2xl': string;
-      '3xl': string;
-      '4xl': string;
-      '5xl': string;
-      '6xl': string;
-    };
+      xs: string | number,
+      sm: string | number,
+      ls: string | number,
+      md: string | number,
+      base: string | number,
+      lg: string | number,
+      xl: string | number,
+      '2xl': string | number,
+      '3xl': string | number,
+      '4xl': string | number,
+      '5xl': string | number,
+      '6xl': string | number,
+      '7xl': string | number,
+      '8xl': string | number,
+      '9xl': string | number,
+    },
     fontWeights: {
-      normal: number;
-      medium: number;
-      semibold: number;
-      bold: number;
-    };
+      normal: number,
+      medium: number,
+      semibold: number,
+      bold: number,
+    },
+    keyframes: {
+      rotation: {
+        [key: string]: {
+          transform: string;
+        }
+      },
+    },
     device: {
-      mobile: string;
-    };
+      mobile: string,
+    },
   }
 }

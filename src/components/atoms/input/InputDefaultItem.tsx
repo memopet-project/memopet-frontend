@@ -7,11 +7,12 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
   value,
   setValue,
   validate,
-  erorrMessage,
+  errorMessage,
   disabled = false,
   placeholder,
 }) => {
   const [focus, setFocus] = useState(false);
+  const [errorState, setErrorState] = useState(false);
 
   const onFocus = () => setFocus(true);
   const onBlur = () => setFocus(false);
@@ -21,10 +22,6 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
   };
   const mouseDownHandler = (e: MouseEvent<HTMLButtonElement>) =>
     e.preventDefault();
-
-  useEffect(() => {
-    validate();
-  }, [value, validate]);
 
   return (
     <>
@@ -53,7 +50,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
             padding: 14px 12px;
             padding-right: ${focus ? '46px' : '12px'};
             border: 1px solid
-              ${erorrMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${!validate && errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -90,7 +87,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
           </button>
         )}
       </div>
-      {erorrMessage && (
+      {!validate && errorMessage && (
         <div
           css={css`
             margin-top: 4px;
@@ -110,7 +107,7 @@ const InputDefaultItem: React.FC<IInputItemProps> = ({
             height={16}
             alt='icon-error'
           />
-          {erorrMessage}
+          {errorMessage}
         </div>
       )}
     </>

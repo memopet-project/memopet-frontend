@@ -7,7 +7,7 @@ const InputPasswordItem: React.FC<IInputItemProps> = ({
   value,
   setValue,
   validate,
-  erorrMessage,
+  errorMessage,
   disabled = false,
   placeholder,
 }) => {
@@ -32,10 +32,6 @@ const InputPasswordItem: React.FC<IInputItemProps> = ({
       }
     });
   };
-
-  useEffect(() => {
-    validate();
-  }, [value, validate]);
 
   return (
     <>
@@ -69,7 +65,7 @@ const InputPasswordItem: React.FC<IInputItemProps> = ({
                 : '44px'
               : '12px'};
             border: 1px solid
-              ${erorrMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
+              ${!validate && errorMessage ? 'var(--main-red-500)' : 'var(--grey-700)'};
             border-radius: 6px;
             &:focus {
               border: 1px solid var(--main-red-500);
@@ -126,7 +122,7 @@ const InputPasswordItem: React.FC<IInputItemProps> = ({
         )}
       </div>
 
-      {erorrMessage && (
+      {!validate && errorMessage && (
         <div
           css={css`
             margin-top: 4px;
@@ -146,7 +142,7 @@ const InputPasswordItem: React.FC<IInputItemProps> = ({
             height={16}
             alt='icon-error'
           />
-          {erorrMessage}
+          {errorMessage}
         </div>
       )}
     </>

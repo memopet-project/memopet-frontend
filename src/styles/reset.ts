@@ -97,6 +97,21 @@ const baseStyle = css`
     font: inherit;
     vertical-align: baseline;
   }
+  
+  html {
+    background: #F7F5F1;
+    font-size: 16px;
+    height: 100%;
+    position: relative;
+  }
+  
+  body {
+    height: 100%;
+  }
+
+  div#__next {
+    height: 100%;
+  }
 
   /* HTML5 display-role reset for older browsers */
 
@@ -145,7 +160,6 @@ const baseStyle = css`
   * {
     box-sizing: border-box;
     text-decoration: none;
-    color: #232128;
   }
 
   button {

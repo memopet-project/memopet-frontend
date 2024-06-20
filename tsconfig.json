@@ -9,7 +9,8 @@
       "@/recoil/*": ["recoil/*"],
       "@/types/*": ["types/*"],
       "@/constants/*": ["constants/*"],
-      "@/assets/*": ["assets/*"]
+      "@/assets/*": ["assets/*"],
+      "@/hooks/*": ["hooks/*"],
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

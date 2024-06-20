@@ -13,6 +13,7 @@ interface IProgressIndicatorDotProps {
   top?: string;
   right?: string;
   isMobile?: boolean;
+  cssStyle?: ReturnType<typeof css>;
 }
 
 const styles: { [key in Types]: SerializedStyles } = {
@@ -41,6 +42,7 @@ export default function ProgressIndicatorDot({
   top = '0px',
   right = '0px',
   isMobile = false,
+  cssStyle
 }: IProgressIndicatorDotProps) {
   return (
     <div
@@ -59,6 +61,7 @@ export default function ProgressIndicatorDot({
             height: 6px;
           `,
         styles[type],
+        cssStyle
       ])}
     />
   );

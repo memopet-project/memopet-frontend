@@ -6,10 +6,10 @@ import type { Nullable } from '@/types/global';
 interface ISegmentedAnimalItemProps {
   type: Animals;
   selected: Nullable<Animals>;
-  setSelcted: Dispatch<SetStateAction<Nullable<Animals>>>;
+  setSelected: Dispatch<SetStateAction<Nullable<Animals>>>;
 }
 
-const i18n: { [key in Animals]: { ko: string; en?: string } } = {
+export const i18n: { [key in Animals]: { ko: string; en?: string } } = {
   dog: { ko: '개' },
   dog2: { ko: '개' },
   cat: { ko: '고양이' },
@@ -30,7 +30,7 @@ const i18n: { [key in Animals]: { ko: string; en?: string } } = {
 export default function SegmentedAnimalItem({
   type,
   selected,
-  setSelcted,
+  setSelected,
 }: ISegmentedAnimalItemProps) {
   const isSelected = Boolean(type === selected);
 
@@ -39,7 +39,7 @@ export default function SegmentedAnimalItem({
       <input
         onChange={(e) => {
           const value = e.target.value as Nullable<Animals>;
-          setSelcted(value);
+          setSelected(value);
         }}
         type='radio'
         name='animalType'
