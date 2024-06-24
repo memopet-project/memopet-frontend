@@ -47,6 +47,26 @@ declare module '@emotion/react' {
           transform: string;
         }
       },
+      slideDown: {
+        from: {
+          height: string | number;
+          overflow: string;
+        },
+        to: {
+          height: string | number;
+          overflow: string;
+        }
+      },
+      slideUp: {
+        from: {
+          height: string | number;
+          overflow: string;
+        },
+        to: {
+          height: string | number;
+          overflow: string;
+        }
+      }
     },
     device: {
       mobile: string,

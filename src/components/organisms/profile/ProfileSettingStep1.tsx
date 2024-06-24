@@ -11,6 +11,8 @@ import SearchResultsList from '@/components/molecules/SearchResultsList';
 import SegmentedAnimalItem, { i18n } from '@/components/atoms/buttons/SegmentedAnimalItem';
 import { Animals } from '@/components/atoms/AnimalIcon';
 import { Nullable } from '@/types/global';
+import CheckButton from '@/components/atoms/buttons/CheckButton';
+import CheckBoxWithLabel from '@/components/molecules/CheckBoxWithLabel';
 
 const petSpecs: Animals[] = [
   'dog2',
@@ -24,10 +26,9 @@ const petSpecs: Animals[] = [
 
 const ProfileSettingStep1 = () => {
   const [obj, setObj] = useRecoilState(firstStep);
-  const [petKind, setPetKind] = useState<Nullable<Animals>>(null);
   const { debouncedValue } = useDebounce({ value: obj.petName, delay: 500 });
 
-  const setter = (str: string) => {
+  const setPetName = (str: string) => {
     setObj({
       ...obj,
       petName: str,
@@ -59,7 +60,7 @@ const ProfileSettingStep1 = () => {
         <ThemedText type={'labelLarge'}>이름</ThemedText>
         <InputDefaultItem
           value={obj.petName}
-          setValue={setter}
+          setValue={setPetName}
           errorMessage={'한글 또는 영문만 입력할 수 있어요.'}
           validate={validatePetName(debouncedValue)}
           placeholder={'이름을 입력해주세요'}
@@ -75,31 +76,27 @@ const ProfileSettingStep1 = () => {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           grid-template-rows: repeat(2, 1fr);
-          // vertical gap
           gap: 0.25rem;
-          // horizontal gap
           column-gap: 0.5rem;
         `}>
           {petSpecs.map((petSpec, index) => (
-            <>
+            <React.Fragment key={index}>
               <SegmentedAnimalItem
                 type={petSpec}
-                selected={petKind}
+                selected={obj.petSpecM === i18n[petSpec].ko}
                 setSelected={(str: Animals) => {
-                  setPetKind(str);
                   setObj({
                     ...obj,
                     petSpecM: i18n[str].ko,
                   });
                 }}
-                key={index}
               />
-            </>
+            </React.Fragment>
           ))}
         </div>
         <SearchResultsList
           searchResults={['품종1', '품종2', '품종3']}
-          value={obj.petSpecS}
+          value={obj.petSpecS === '알수없음' ? '' : obj.petSpecS}
           setValue={(str: string) => {
             setObj({
               ...obj,
@@ -109,6 +106,19 @@ const ProfileSettingStep1 = () => {
           placeholder={'품종을 입력해주세요'}
           errorMessage={''}
           validate={true}
+          isShown={obj.petSpecS !== '알수없음'}
+          disabled={obj.petSpecM === ''}
+        />
+        <CheckBoxWithLabel
+          name={'petSpecM'}
+          value={obj.petSpecS === '알수없음'}
+          onChange={(e) => {
+            setObj({
+              ...obj,
+              petSpecS: e.target.checked ? '알수없음' : '',
+            });
+          }}
+          label={'품종을 알 수 없어요!'}
         />
       </div>
     </div>

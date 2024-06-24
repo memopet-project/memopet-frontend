@@ -5,6 +5,7 @@ type Types = 'prev' | 'next';
 interface IProfileMoveButtonProps {
   type: Types;
   disabled?: boolean;
+  onClick: () => void;
 }
 
 const styles: { [key in Types]: SerializedStyles } = {
@@ -26,6 +27,7 @@ const styles: { [key in Types]: SerializedStyles } = {
 export default function ProfileMoveButton({
   type = 'next',
   disabled = false,
+  onClick,
 }: IProfileMoveButtonProps) {
   const isNext = Boolean(type === 'next');
 
@@ -52,6 +54,7 @@ export default function ProfileMoveButton({
         `,
         styles[type],
       )}
+      onClick={onClick}
     >
       <svg
         width='24'

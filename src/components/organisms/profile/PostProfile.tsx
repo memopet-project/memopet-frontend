@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { postProfileStepState } from '@/recoil/store';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { firstStep, postProfileStepState } from '@/recoil/store';
 import ProgressIndicatorDot from '@/components/atoms/ProgressIndicatorDot';
 import ProfileMoveButton from '@/components/atoms/buttons/ProfileMoveButton';
 import { css } from '@emotion/react';
@@ -16,20 +16,18 @@ const headerText = {
 
 const PostProfile = () => {
   const [postProfileStep, setPostProfileStep] = useRecoilState(postProfileStepState);
+  const firstStepState = useRecoilValue(firstStep);
 
   const buttonDisabled = (type: 'prev' | 'next') => {
     if (type === 'prev') {
-      // true 인 경우
-      // 1. step 이 1인 경우
-
       return postProfileStep.step === 1;
     } else {
-      // true 인 경우
-      // 1. step 이 maxStep인 경우
-      // 2. step 이 maxStep보다 작은 경우
+      if (postProfileStep.step === 1) {
+        return !firstStepState.petName || !firstStepState.petSpecM || !firstStepState.petSpecS;
+      }
       return postProfileStep.step === postProfileStep.maxStep;
     }
-  }
+  };
 
   return (
     <div css={css`
@@ -58,7 +56,16 @@ const PostProfile = () => {
         justify-content: space-between;
         width: 100%;
       `}>
-        <ProfileMoveButton type={'prev'} disabled={buttonDisabled('prev')} />
+        <ProfileMoveButton
+          type={'prev'}
+          disabled={buttonDisabled('prev')}
+          onClick={() => {
+            setPostProfileStep({
+              ...postProfileStep,
+              step: postProfileStep.step - 1,
+            });
+          }}
+        />
         <div css={css`
           flex: 1;
           position: relative;
@@ -77,7 +84,16 @@ const PostProfile = () => {
             />
           ))}
         </div>
-        <ProfileMoveButton type={'next'} disabled={buttonDisabled('next')} />
+        <ProfileMoveButton
+          type={'next'}
+          disabled={buttonDisabled('next')}
+          onClick={() => {
+            setPostProfileStep({
+              ...postProfileStep,
+              step: postProfileStep.step + 1,
+            });
+          }}
+        />
       </div>
 
     </div>

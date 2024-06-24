@@ -4,7 +4,7 @@ import { Nullable } from '@/types/global';
 
 export type TPostProfileStep = {
   maxStep: number;
-  step: 1 | 2 | 3 | 4;
+  step: number;
   data: {
     email: string;
     petName: string;
