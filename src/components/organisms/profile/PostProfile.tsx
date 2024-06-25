@@ -13,6 +13,7 @@ import { theme } from '@/types/theme';
 
 const headerText = {
   1: '반려동물의 이름과 종류를 알려주세요',
+  2: ''
 };
 
 const PostProfile = () => {
