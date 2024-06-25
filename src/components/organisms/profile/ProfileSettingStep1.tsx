@@ -13,6 +13,12 @@ import { Animals } from '@/components/atoms/AnimalIcon';
 import { Nullable } from '@/types/global';
 import CheckButton from '@/components/atoms/buttons/CheckButton';
 import CheckBoxWithLabel from '@/components/molecules/CheckBoxWithLabel';
+import { theme } from '@/types/theme';
+
+type Props = {
+  isMobile: boolean;
+
+}
 
 const petSpecs: Animals[] = [
   'dog2',
@@ -24,7 +30,7 @@ const petSpecs: Animals[] = [
   'other',
 ];
 
-const ProfileSettingStep1 = () => {
+const ProfileSettingStep1 = ({ isMobile }: Props) => {
   const [obj, setObj] = useRecoilState(firstStep);
   const { debouncedValue } = useDebounce({ value: obj.petName, delay: 500 });
 
@@ -51,13 +57,16 @@ const ProfileSettingStep1 = () => {
       flex-direction: column;
       padding: 0 60px;
       gap: 2rem;
+      @media ${theme.device.mobile} {
+        padding: 0;
+      }
     `}>
       <div css={css`
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
       `}>
-        <ThemedText type={'labelLarge'}>이름</ThemedText>
+        <ThemedText type={isMobile ? 'labelMedium' : 'labelLarge'}>이름</ThemedText>
         <InputDefaultItem
           value={obj.petName}
           setValue={setPetName}
@@ -71,7 +80,7 @@ const ProfileSettingStep1 = () => {
         flex-direction: column;
         gap: 0.25rem;
       `}>
-        <ThemedText type={'labelLarge'}>품종</ThemedText>
+        <ThemedText type={isMobile ? 'labelMedium' : 'labelLarge'}>종류</ThemedText>
         <div css={css`
           display: grid;
           grid-template-columns: repeat(4, 1fr);

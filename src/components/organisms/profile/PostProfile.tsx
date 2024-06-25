@@ -8,13 +8,17 @@ import ProfileMoveButton from '@/components/atoms/buttons/ProfileMoveButton';
 import { css } from '@emotion/react';
 import ThemedText from '@/components/atoms/ThemedText';
 import ProfileSettingStep1 from '@/components/organisms/profile/ProfileSettingStep1';
+import { theme } from '@/types/theme';
 
+type Props = {
+  isMobile: boolean;
+}
 
 const headerText = {
   1: '반려동물의 이름과 종류를 알려주세요',
 };
 
-const PostProfile = () => {
+const PostProfile = ({ isMobile }: Props) => {
   const [postProfileStep, setPostProfileStep] = useRecoilState(postProfileStepState);
   const firstStepState = useRecoilValue(firstStep);
 
@@ -38,23 +42,37 @@ const PostProfile = () => {
       height: 100%;
       width: 100%;
       gap: 3rem;
+      @media ${theme.device.mobile} {
+        padding: 4rem 20px 0 20px;
+        gap: 2rem;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
     `}>
       <div css={css`
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 2rem;
+        @media ${theme.device.mobile} {
+          align-items: flex-start;
+        }
       `}>
         <ThemedText type={'titleMedium'}>{headerText[postProfileStep.step]}</ThemedText>
       </div>
 
-      {postProfileStep.step === 1 && <ProfileSettingStep1 />}
-
+      {postProfileStep.step === 1 && <ProfileSettingStep1 isMobile={isMobile} />}
 
       <div css={css`
         display: flex;
         justify-content: space-between;
         width: 100%;
+        @media ${theme.device.mobile} {
+          width: 100%;
+          position: fixed;
+          left: 0;
+          bottom: 40px;
+        }
       `}>
         <ProfileMoveButton
           type={'prev'}
