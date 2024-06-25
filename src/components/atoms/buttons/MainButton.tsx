@@ -6,7 +6,7 @@ interface IMainButtonProps {
   type?: Type;
   disabled?: boolean;
   children: React.ReactNode;
-  css?: SerializedStyles;
+  style?: SerializedStyles;
   onClick: () => void | Promise<void>;
 }
 
@@ -45,6 +45,7 @@ export default function MainButton(
     disabled = false,
     children,
     onClick,
+    style,
   }: IMainButtonProps) {
   return (
     <button
@@ -62,6 +63,7 @@ export default function MainButton(
           font-size: 1rem;
         `,
         styles[type],
+        style,
       )}
       onClick={onClick}
     >

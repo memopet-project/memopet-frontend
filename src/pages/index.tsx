@@ -57,14 +57,15 @@ export default function Home() {
             position: fixed;
             bottom: 0;
             padding: 40px 20px;
+            width: 100%;
           `}>
             <MainButton
               type={'filled'}
               onClick={() => {
                 router.push('/profile/post');
               }}
-              css={css`
-                width: 320px;
+              style={css`
+                width: 100%;
               `}
             >
               프로필 만들기
@@ -110,7 +111,7 @@ export default function Home() {
               onClick={() => {
                 router.push('/profile/post');
               }}
-              css={css`
+              style={css`
                 width: 320px;
               `}
             >
