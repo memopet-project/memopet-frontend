@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Global, ThemeProvider } from '@emotion/react';
 import MainLayout from '@/components/layout/MainLayout';
 import { theme } from '@/types/theme';
-import { DeviceProvider } from '@/context/DeviceContext';
+import { DeviceProvider, useDevice } from '@/context/DeviceContext';
 
 
 const queryClient = new QueryClient({
@@ -28,7 +28,6 @@ export const getServerSideProps = async ({ req }) => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
-  const isMobile = /Mobile/.test(pageProps.userAgent);
 
   return (
     <>
@@ -37,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <ThemeProvider theme={theme}>
             <Global styles={baseStyle} />
             <DeviceProvider userAgent={pageProps.userAgent}>
-              <MainLayout footerShown={!isMobile}>
+              <MainLayout>
                 <Component {...pageProps} />
               </MainLayout>
             </DeviceProvider>

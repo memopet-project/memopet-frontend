@@ -10,15 +10,12 @@ import ThemedText from '@/components/atoms/ThemedText';
 import ProfileSettingStep1 from '@/components/organisms/profile/ProfileSettingStep1';
 import { theme } from '@/types/theme';
 
-type Props = {
-  isMobile: boolean;
-}
 
 const headerText = {
   1: '반려동물의 이름과 종류를 알려주세요',
 };
 
-const PostProfile = ({ isMobile }: Props) => {
+const PostProfile = () => {
   const [postProfileStep, setPostProfileStep] = useRecoilState(postProfileStepState);
   const firstStepState = useRecoilValue(firstStep);
 
@@ -61,7 +58,7 @@ const PostProfile = ({ isMobile }: Props) => {
         <ThemedText type={'titleMedium'}>{headerText[postProfileStep.step]}</ThemedText>
       </div>
 
-      {postProfileStep.step === 1 && <ProfileSettingStep1 isMobile={isMobile} />}
+      {postProfileStep.step === 1 && <ProfileSettingStep1 />}
 
       <div css={css`
         display: flex;

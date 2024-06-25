@@ -1,15 +1,17 @@
 import React from 'react';
 import Footer from '@/components/organisms/Footer';
 import { css, useTheme } from '@emotion/react';
+import { useDevice } from '@/context/DeviceContext';
 
 type Props = {
   isMobile?: boolean;
-  footerShown?: boolean;
   children: React.ReactNode;
 };
 
-const MainLayout = ({ footerShown, children }: Props) => {
+const MainLayout = ({ children }: Props) => {
   const theme = useTheme()
+
+  const { isMobile } = useDevice();
 
   return (
     <>
@@ -26,7 +28,7 @@ const MainLayout = ({ footerShown, children }: Props) => {
       >
         {children}
       {
-        footerShown && <Footer />
+        !isMobile && <Footer />
       }
       </main>
     </>

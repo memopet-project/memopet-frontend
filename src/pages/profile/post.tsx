@@ -4,19 +4,13 @@ import ClipSVG from '@/assets/images/clip.svg';
 import { css, useTheme } from '@emotion/react';
 import Logo from '@/components/atoms/Logo';
 import PostProfile from '@/components/organisms/profile/PostProfile';
-
-export const getServerSideProps = async ({ req }) => {
-  const userAgent = req.headers['user-agent'];
-
-  return {
-    props: { userAgent },
-  };
-};
+import { useDevice } from '@/context/DeviceContext';
 
 
-const Post = ({ userAgent }) => {
+const Post = () => {
   const theme = useTheme();
-  const isMobile = /Mobile/.test(userAgent);
+  const { isMobile } = useDevice();
+
   return (
     <div css={css`
       height: 100%;
@@ -66,9 +60,7 @@ const Post = ({ userAgent }) => {
             priority={true}
           />
         )}
-        <PostProfile
-          isMobile={isMobile}
-        />
+        <PostProfile />
       </section>
     </div>
   );

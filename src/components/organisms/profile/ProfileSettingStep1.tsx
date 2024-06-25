@@ -12,11 +12,7 @@ import SegmentedAnimalItem, { i18n } from '@/components/atoms/buttons/SegmentedA
 import { Animals } from '@/components/atoms/AnimalIcon';
 import CheckBoxWithLabel from '@/components/molecules/CheckBoxWithLabel';
 import { theme } from '@/types/theme';
-
-type Props = {
-  isMobile: boolean;
-
-}
+import { useDevice } from '@/context/DeviceContext';
 
 const petSpecs: Animals[] = [
   'dog2',
@@ -28,9 +24,10 @@ const petSpecs: Animals[] = [
   'other',
 ];
 
-const ProfileSettingStep1 = ({ isMobile }: Props) => {
+const ProfileSettingStep1 = () => {
   const [obj, setObj] = useRecoilState(firstStep);
   const { debouncedValue } = useDebounce({ value: obj.petName, delay: 500 });
+  const { isMobile } = useDevice();
 
   const setPetName = (str: string) => {
     setObj({
