@@ -1,6 +1,6 @@
 'use recoil';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
 import ThemedText from '@/components/atoms/ThemedText';
 import InputDefaultItem from '@/components/atoms/input/InputDefaultItem';
@@ -10,8 +10,6 @@ import { useDebounce } from '@/hooks/useDebounce';
 import SearchResultsList from '@/components/molecules/SearchResultsList';
 import SegmentedAnimalItem, { i18n } from '@/components/atoms/buttons/SegmentedAnimalItem';
 import { Animals } from '@/components/atoms/AnimalIcon';
-import { Nullable } from '@/types/global';
-import CheckButton from '@/components/atoms/buttons/CheckButton';
 import CheckBoxWithLabel from '@/components/molecules/CheckBoxWithLabel';
 import { theme } from '@/types/theme';
 

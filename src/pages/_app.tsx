@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Global, ThemeProvider } from '@emotion/react';
 import MainLayout from '@/components/layout/MainLayout';
 import { theme } from '@/types/theme';
+import { DeviceProvider } from '@/context/DeviceContext';
 
 
 const queryClient = new QueryClient({
@@ -35,9 +36,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
             <Global styles={baseStyle} />
-            <MainLayout footerShown={!isMobile}>
-              <Component {...pageProps} />
-            </MainLayout>
+            <DeviceProvider userAgent={pageProps.userAgent}>
+              <MainLayout footerShown={!isMobile}>
+                <Component {...pageProps} />
+              </MainLayout>
+            </DeviceProvider>
           </ThemeProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

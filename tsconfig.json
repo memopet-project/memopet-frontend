@@ -11,6 +11,7 @@
       "@/constants/*": ["constants/*"],
       "@/assets/*": ["assets/*"],
       "@/hooks/*": ["hooks/*"],
+      "@/context/*": ["context/*"],
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
