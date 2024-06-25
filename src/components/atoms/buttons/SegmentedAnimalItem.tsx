@@ -5,7 +5,7 @@ import type { Nullable } from '@/types/global';
 
 interface ISegmentedAnimalItemProps {
   type: Animals;
-  selected: Nullable<Animals>;
+  selected: boolean;
   setSelected: Dispatch<SetStateAction<Nullable<Animals>>>;
 }
 
@@ -32,7 +32,6 @@ export default function SegmentedAnimalItem({
   selected,
   setSelected,
 }: ISegmentedAnimalItemProps) {
-  const isSelected = Boolean(type === selected);
 
   return (
     <>
@@ -45,6 +44,7 @@ export default function SegmentedAnimalItem({
         name='animalType'
         id={type}
         value={type}
+        checked={selected}
         css={css`
           display: none;
           &:checked {
@@ -81,7 +81,7 @@ export default function SegmentedAnimalItem({
         ]}
       >
         <span>
-          <AnimalIcon type={type} selected={isSelected} />
+          <AnimalIcon type={type} selected={selected} />
         </span>
         <span>{i18n[type].ko}</span>
       </label>

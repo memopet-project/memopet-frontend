@@ -4,8 +4,12 @@ import ClipSVG from '@/assets/images/clip.svg';
 import { css, useTheme } from '@emotion/react';
 import Logo from '@/components/atoms/Logo';
 import PostProfile from '@/components/organisms/profile/PostProfile';
+import { useDevice } from '@/context/DeviceContext';
+
 
 const Post = () => {
+  const theme = useTheme();
+  const { isMobile } = useDevice();
 
   return (
     <div css={css`
@@ -15,8 +19,13 @@ const Post = () => {
       align-items: center;
       padding-top: 48px;
       gap: 72px;
+      @media ${theme.device.mobile} {
+        padding-top: 0;
+      }
     `}>
-      <Logo color={'grey'} size={'md'} />
+      {!isMobile && (
+        <Logo color={'grey'} size={'md'} />
+      )}
       <section css={css`
         display: flex;
         flex-direction: column;
@@ -29,18 +38,28 @@ const Post = () => {
         background: #ffffff;
         align-items: center;
         min-width: 520px;
+        @media ${theme.device.mobile} {
+          min-width: 0;
+          width: 100%;
+          padding: 0;
+          box-shadow: none;
+          border: none;
+          height: 100%;
+        }
       `}>
-        <Image
-          src={ClipSVG}
-          alt={'clip image'}
-          css={css`
-            left: 50%;
-            transform: translateX(-50%);
-            position: absolute;
-            top: -36px;
-          `}
-          priority={true}
-        />
+        {!isMobile && (
+          <Image
+            src={ClipSVG}
+            alt={'clip image'}
+            css={css`
+              left: 50%;
+              transform: translateX(-50%);
+              position: absolute;
+              top: -36px;
+            `}
+            priority={true}
+          />
+        )}
         <PostProfile />
       </section>
     </div>

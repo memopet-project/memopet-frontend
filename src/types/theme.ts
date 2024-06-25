@@ -77,6 +77,14 @@ export const theme: Theme = {
       '0%': { transform: 'rotate(0deg)' },
       '100%': { transform: 'rotate(360deg)' },
     },
+    slideDown: {
+      from: { height: 0, overflow: 'hidden'},
+      to: { height: '52px', overflow: 'visible' },
+    },
+    slideUp: {
+      from: { height: '52px', overflow: 'hidden' },
+      to: { height: 0, overflow: 'hidden' },
+    },
   },
   device: {
     mobile: 'screen and (max-width: 768px)',

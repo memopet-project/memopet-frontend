@@ -3,21 +3,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { IInputItemProps } from '@/types/common';
 import InputSearchItem from '@/components/atoms/input/InputSearchItem';
-import { css, useTheme } from '@emotion/react';
+import { css, keyframes, useTheme } from '@emotion/react';
 import { useDebounce } from '@/hooks/useDebounce';
 
 interface Props extends IInputItemProps {
   searchResults: string[];
+  isShown?: boolean;
+  disabled?: boolean;
 }
 
 const SearchResultsList = (
   {
     searchResults,
+    isShown = true,
     value,
     setValue,
     placeholder,
+    disabled = false,
   }: Props) => {
   const theme = useTheme();
+  const [firstRender, setFirstRender] = useState<boolean>(true);
   const [searchText, setSearchText] = useState<string>(value);
   const [filteredList, setFilteredList] = useState<string[]>(searchResults);
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
@@ -25,8 +30,11 @@ const SearchResultsList = (
   const { debouncedValue } = useDebounce({ value: searchText, delay: 500 });
 
   useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false);
+    }
     setIsListOpen(searchText !== value && debouncedValue.length > 0 && searchText.length > 0);
-  }, [searchText, value, debouncedValue]);
+  }, [searchText, value, debouncedValue, firstRender]);
 
   useEffect(() => {
     if (searchText.length === 0) {
@@ -43,6 +51,8 @@ const SearchResultsList = (
   return (
     <div css={css`
       position: relative;
+      height: 100%;
+      animation: ${isShown ? keyframes`${theme.keyframes.slideDown}` : keyframes`${theme.keyframes.slideUp}`} 0.2s linear forwards;
     `}>
       <InputSearchItem
         value={searchText}
@@ -50,6 +60,7 @@ const SearchResultsList = (
         placeholder={placeholder}
         errorMessage={''}
         validate={true}
+        disabled={!isShown || disabled}
       />
       {isListOpen && (
         <ul css={css`

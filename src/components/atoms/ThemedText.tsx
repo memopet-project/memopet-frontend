@@ -24,6 +24,7 @@ const ThemedText = ({
   return (
     <span
       css={css`
+        word-break: keep-all;
         color: ${lightColor};
         ${type === 'default' ? `font-size: ${theme.fontSizes['base']}px` : ''}
         ${type === 'displayLarge' ? `font-size: ${theme.fontSizes['9xl']}px; line-height: 120%; font-weight: ${theme.fontWeights.medium}` : ''}
